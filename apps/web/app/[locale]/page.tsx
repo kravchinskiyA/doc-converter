@@ -49,6 +49,14 @@ export default async function HomePage({
               </p>
             </div>
 
+            {/* Кнопка ручного выбора файлов */}
+            <div className="mt-6 flex justify-end">
+              <Button variant="floating-cta">
+                Выбрать файлы
+                <ArrowRight className="h-3.5 w-3.5 text-signal-blue" />
+              </Button>
+            </div>
+
             {/* Быстрые чипы направлений */}
             <div className="mt-8 flex flex-wrap items-center gap-2">
               <span className="text-[13px] font-book text-steel-gray mr-2">Популярные направления:</span>
