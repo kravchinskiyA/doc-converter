@@ -1,5 +1,30 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-04] Документирование каталога страниц и их наполнения в docs/design.md
+
+### Суть задачи
+
+В документ спецификации дизайна [`docs/design.md`](file:///Applications/ServBay/www/files-converter/docs/design.md) добавлен исчерпывающий каталог всех страниц проекта согласно техническому заданию ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md)) с детальным описанием функциональных блоков, состояний и элементов интерфейса в рамках дизайн-системы Augen Pro. Каталог включает:
+- Главную страницу (`/` или `/[locale]`) с единым блоком загрузки «Документы» и преимуществами;
+- Страницы направлений конвертации (`/[locale]/convert/[direction]`);
+- Страницу ожидания и результатов (`/[locale]/results/[jobId]`);
+- Набор экранов аутентификации и восстановления (`/[locale]/auth/*`);
+- Личный кабинет с 8 ключевыми секциями (`/[locale]/account`);
+- Тарифы и шлюз оплаты Stripe (`/[locale]/pricing`);
+- Разделы закрытой административной панели с TOTP (`/[locale]/admin/*`);
+- Документацию API и системные страницы (`/api-docs`, `/terms`, `/privacy`, 404, 500).
+
+### Измененные и созданные файлы
+
+- [`docs/design.md`](file:///Applications/ServBay/www/files-converter/docs/design.md): Добавлен Раздел 7 с полным реестром и описанием всех страниц.
+- [`docs/progress.md`](file:///Applications/ServBay/www/files-converter/docs/progress.md): Зафиксирован прогресс выполнения задачи.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
 ## [2026-11-02] Инициализация структуры монорепозитория и установка базовых npm-пакетов
 
 ### Суть задачи
