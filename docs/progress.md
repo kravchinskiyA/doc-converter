@@ -1,5 +1,88 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-04] Реализация дизайн-системы Augen Pro и базовых UI-компонентов (Пункт 1.1)
+
+### Суть задачи
+
+Выполнен первый пункт плана разработки ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.1) — развернута дизайн-система Augen Pro и базовый UI-кит приложения:
+- Настроена конфигурация Tailwind CSS (`tailwind.config.ts`, `postcss.config.mjs`) с палитрой Augen Pro (`#0f1012`, `#f2f2f4`, `#fdfdfd`, акцентный `#0071e3`), начертанием 350, радиусами `54px`, `26px`, `10px`, `9999px` и глобальным запретом теней (`zero-shadows`).
+- Создан глобальный файл стилей `apps/web/src/_app/styles/globals.css`.
+- Разработаны базовые компоненты в `apps/web/src/shared/ui/`:
+  - `Button` (варианты `floating-cta`, `ghost`, `link`, `outline`, `secondary`);
+  - `Card` (контентные карточки со скруглением `54px`, padding 69px, hairline-рамкой 0.5px);
+  - `Badge` (чипы `Pill Tag Chip` 9999px с цветом Signal Blue и нейтральными вариантами);
+  - `Input` (инпуты с фокусом Signal Blue и валидацией ошибок);
+  - `Checkbox` (минималистичный чекбокс с иконкой Check);
+  - `Dialog` (модальные окна без размытия/теней);
+  - `Navbar` (плавающее верхнее меню `Floating Pill Navbar` 10px);
+  - `Footer` (полноэкранный темный подвал `Dark Band Footer` `#0f1012`).
+- Обновлен глобальный App Router лейаут `apps/web/app/[locale]/layout.tsx` и демонстрационная стартовая страница.
+- Успешно пройдены `npm run typecheck` и `npm run build -w @doc-converter/web`.
+
+### Измененные и созданные файлы
+
+- `apps/web/package.json`: Добавлена зависимость `class-variance-authority`.
+- `apps/web/tailwind.config.ts`, `apps/web/postcss.config.mjs`: Конфигурация дизайн-токенов Tailwind.
+- `apps/web/src/shared/lib/utils.ts`, `index.ts`: Утилита объединения классов `cn`.
+- `apps/web/src/_app/styles/globals.css`: Глобальные стили, переменные палитры и строгий запрет `box-shadow`.
+- `apps/web/src/shared/ui/`: Компоненты `Button`, `Card`, `Badge`, `Input`, `Checkbox`, `Dialog`, `Navbar`, `Footer` и barrel-экспорт `index.ts`.
+- `apps/web/app/[locale]/layout.tsx`: Подключение глобальных стилей, Navbar и Footer.
+- `apps/web/app/[locale]/page.tsx`: Демонстрация карточки 54px, чипов и компонентов на главной.
+- `docs/implementation-plan.md`: Отмечен пункт 1.1 как выполненный.
+- `docs/progress.md`: Зафиксирован прогресс выполнения задачи.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
+## [2026-11-04] Создание плана реализации проекта (docs/implementation-plan.md)
+
+### Суть задачи
+
+На основе технического задания ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md)), архитектурных стандартов ([`docs/architecture.md`](file:///Applications/ServBay/www/files-converter/docs/architecture.md)) и дизайна ([`docs/design.md`](file:///Applications/ServBay/www/files-converter/docs/design.md)) сформирован пошаговый план реализации в файле [`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md).
+План выстроен в строгой последовательности:
+1. **Этап 1: Frontend** (дизайн-система Augen Pro, i18n, главная страница, направления конвертации, результаты, авторизация, личный кабинет, тарифы и закрытая админка);
+2. **Этап 2: База данных и хранилище** (Prisma ORM модели пользователей, квот, подписок, транзакций и Outbox, миграции, S3 SSE-KMS в ЕС);
+3. **Этап 3: Backend, очереди и конвертеры** (NestJS, Better Auth, Stripe, SES, ClamAV до обработки, BullMQ/Redis, движки Sharp/pdf-lib/PDFium/LibreOffice/PaddleOCR, публичный API).
+
+### Измененные и созданные файлы
+
+- [`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md): Создан структурированный план реализации работ по этапам.
+- [`docs/progress.md`](file:///Applications/ServBay/www/files-converter/docs/progress.md): Зафиксирован прогресс выполнения задачи.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
+## [2026-11-04] Документирование каталога страниц и их наполнения в docs/design.md
+
+### Суть задачи
+
+В документ спецификации дизайна [`docs/design.md`](file:///Applications/ServBay/www/files-converter/docs/design.md) добавлен исчерпывающий каталог всех страниц проекта согласно техническому заданию ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md)) с детальным описанием функциональных блоков, состояний и элементов интерфейса в рамках дизайн-системы Augen Pro. Каталог включает:
+- Главную страницу (`/` или `/[locale]`) с единым блоком загрузки «Документы» и преимуществами;
+- Страницы направлений конвертации (`/[locale]/convert/[direction]`);
+- Страницу ожидания и результатов (`/[locale]/results/[jobId]`);
+- Набор экранов аутентификации и восстановления (`/[locale]/auth/*`);
+- Личный кабинет с 8 ключевыми секциями (`/[locale]/account`);
+- Тарифы и шлюз оплаты Stripe (`/[locale]/pricing`);
+- Разделы закрытой административной панели с TOTP (`/[locale]/admin/*`);
+- Документацию API и системные страницы (`/api-docs`, `/terms`, `/privacy`, 404, 500).
+
+### Измененные и созданные файлы
+
+- [`docs/design.md`](file:///Applications/ServBay/www/files-converter/docs/design.md): Добавлен Раздел 7 с полным реестром и описанием всех страниц.
+- [`docs/progress.md`](file:///Applications/ServBay/www/files-converter/docs/progress.md): Зафиксирован прогресс выполнения задачи.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
 ## [2026-11-02] Инициализация структуры монорепозитория и установка базовых npm-пакетов
 
 ### Суть задачи
