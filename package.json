@@ -1,0 +1,23 @@
+{
+  "name": "doc-converter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SaaS document and image converter monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w @doc-converter/web",
+    "dev:api": "npm run dev -w @doc-converter/api",
+    "dev:worker": "npm run dev -w @doc-converter/worker",
+    "dev:maintenance": "npm run dev -w @doc-converter/maintenance",
+    "build": "npm run --workspaces --if-present build",
+    "typecheck": "npm run --workspaces --if-present typecheck",
+    "lint": "npm run --workspaces --if-present lint"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15",
+    "typescript": "^5.7.3"
+  }
+}
