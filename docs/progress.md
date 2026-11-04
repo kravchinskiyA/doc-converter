@@ -1,5 +1,26 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-04] Создание плана реализации проекта (docs/implementation-plan.md)
+
+### Суть задачи
+
+На основе технического задания ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md)), архитектурных стандартов ([`docs/architecture.md`](file:///Applications/ServBay/www/files-converter/docs/architecture.md)) и дизайна ([`docs/design.md`](file:///Applications/ServBay/www/files-converter/docs/design.md)) сформирован пошаговый план реализации в файле [`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md).
+План выстроен в строгой последовательности:
+1. **Этап 1: Frontend** (дизайн-система Augen Pro, i18n, главная страница, направления конвертации, результаты, авторизация, личный кабинет, тарифы и закрытая админка);
+2. **Этап 2: База данных и хранилище** (Prisma ORM модели пользователей, квот, подписок, транзакций и Outbox, миграции, S3 SSE-KMS в ЕС);
+3. **Этап 3: Backend, очереди и конвертеры** (NestJS, Better Auth, Stripe, SES, ClamAV до обработки, BullMQ/Redis, движки Sharp/pdf-lib/PDFium/LibreOffice/PaddleOCR, публичный API).
+
+### Измененные и созданные файлы
+
+- [`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md): Создан структурированный план реализации работ по этапам.
+- [`docs/progress.md`](file:///Applications/ServBay/www/files-converter/docs/progress.md): Зафиксирован прогресс выполнения задачи.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
 ## [2026-11-04] Документирование каталога страниц и их наполнения в docs/design.md
 
 ### Суть задачи
