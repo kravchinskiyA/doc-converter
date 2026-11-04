@@ -79,3 +79,4 @@ export function Navbar({ locale = 'uk', isLoggedIn = false, className }: NavbarP
     </header>
   );
 }
+

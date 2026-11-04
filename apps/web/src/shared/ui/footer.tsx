@@ -114,3 +114,4 @@ export function Footer({ locale = 'uk', className }: FooterProps) {
     </footer>
   );
 }
+
