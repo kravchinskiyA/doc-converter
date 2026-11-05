@@ -92,3 +92,62 @@ export const ConversionOptionsSchema = z.union([
 ]);
 export type ConversionOptions = z.infer<typeof ConversionOptionsSchema>;
 
+/**
+ * Статус выполнения общего задания конвертации (ТЗ §5.2, §9.1).
+ */
+export const JobStatusSchema = z.enum([
+  'queued',
+  'processing',
+  'completed',
+  'partial',
+  'failed',
+]);
+export type JobStatus = z.infer<typeof JobStatusSchema>;
+
+/**
+ * Статус конвертации отдельного файла в составе задания.
+ */
+export const FileConversionStatusSchema = z.enum([
+  'queued',
+  'processing',
+  'completed',
+  'failed',
+]);
+export type FileConversionStatus = z.infer<typeof FileConversionStatusSchema>;
+
+/**
+ * Результат обработки отдельного выходного файла.
+ */
+export const OutputFileResultSchema = z.object({
+  id: z.string(),
+  originalFileName: z.string(),
+  resultFileName: z.string(),
+  outputFormat: z.string(),
+  sizeBytes: z.number().int().nonnegative(),
+  status: FileConversionStatusSchema,
+  errorMessage: z.string().optional(),
+  downloadUrl: z.string().optional(),
+});
+export type OutputFileResult = z.infer<typeof OutputFileResultSchema>;
+
+/**
+ * Полные сведения о задании конвертации и его результатах.
+ */
+export const JobResultSchema = z.object({
+  jobId: z.string(),
+  status: JobStatusSchema,
+  direction: ConversionDirectionSchema,
+  createdAt: z.string(),
+  completedAt: z.string().optional(),
+  /** Срок доступности скачивания: 12 часов для гостя, 6 месяцев для аккаунта (ТЗ §10.1) */
+  expiresAt: z.string(),
+  isGuest: z.boolean().default(true),
+  totalFiles: z.number().int().nonnegative(),
+  completedFiles: z.number().int().nonnegative(),
+  failedFiles: z.number().int().nonnegative(),
+  files: z.array(OutputFileResultSchema),
+  zipDownloadUrl: z.string().optional(),
+});
+export type JobResult = z.infer<typeof JobResultSchema>;
+
+

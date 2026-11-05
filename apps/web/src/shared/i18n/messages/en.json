@@ -525,6 +525,75 @@
       "dispatching": "Dispatching job to BullMQ queue…",
       "ready": "Job accepted. Redirecting to status…"
     }
+  },
+  "results": {
+    "metadata": {
+      "title": "Conversion Results | doc-converter",
+      "description": "Waiting and download page for file conversion results in doc-converter."
+    },
+    "badge": {
+      "queued": "Queued",
+      "processing": "Processing",
+      "completed": "Completed",
+      "partial": "Partially Completed",
+      "failed": "Failed"
+    },
+    "status": {
+      "title": "Job Status",
+      "queuedDesc": "The job has been queued in BullMQ and is waiting for an available worker slot in the EU region.",
+      "processingDesc": "Files are being converted by isolated conversion engines. This usually takes from a few seconds to a minute.",
+      "completedDesc": "Conversion completed successfully. All files are ready for secure download.",
+      "partialDesc": "Some files were successfully converted, while others encountered errors.",
+      "failedDesc": "Unable to convert files. Please review the reasons provided."
+    },
+    "summary": {
+      "jobId": "Job ID",
+      "direction": "Direction",
+      "createdAt": "Created",
+      "total": "Total Files",
+      "ready": "Ready",
+      "failed": "Errors"
+    },
+    "ttl": {
+      "badge": "EU Storage (GDPR)",
+      "guestBadge": "Guest Access",
+      "accountBadge": "Saved in Account",
+      "guestWarning": "For guest users, results are stored strictly for 12 hours from readiness, after which they are permanently deleted.",
+      "accountBenefit": "Log in or register to automatically keep your conversion results in your personal dashboard for 6 months.",
+      "timeRemaining": "Time remaining until auto-deletion:",
+      "hours": "h",
+      "minutes": "min",
+      "seconds": "sec",
+      "expired": "Storage period has expired. Files have been safely deleted in accordance with GDPR."
+    },
+    "files": {
+      "title": "Job Files",
+      "original": "Original File",
+      "result": "Result",
+      "size": "Size",
+      "status": "Status",
+      "action": "Action",
+      "download": "Download",
+      "downloadZip": "Download ZIP",
+      "noFiles": "No files found",
+      "inQueue": "Waiting in queue…",
+      "processing": "Converting document…"
+    },
+    "actions": {
+      "downloadAllZip": "Download All in single ZIP",
+      "generatingZip": "Generating ZIP…",
+      "newConversion": "New Conversion",
+      "goToAccount": "To Personal Account",
+      "signUpToSave": "Sign up to keep files"
+    },
+    "reasons": {
+      "passwordProtected": "File is password protected or encrypted",
+      "unpackLimitExceeded": "Safe unpacking limit exceeded (500 MB)",
+      "corruptedFile": "File structure is corrupted or invalid",
+      "unsupportedFormat": "Unsupported internal document format",
+      "ocrFailed": "Text not detected or scan quality is too low",
+      "timeout": "Processing timeout exceeded (10 minutes)",
+      "genericError": "Conversion failure without disclosing private data"
+    }
   }
 }
-
