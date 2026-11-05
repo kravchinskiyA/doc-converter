@@ -1,5 +1,56 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-05] Реализация страниц направлений конвертации (Пункт 1.4)
+
+### Суть задачи
+
+Выполнен пункт 1.4 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.4) — разработаны все специализированные страницы и формы направлений конвертации в соответствии со спецификацией ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§2, 3.4–3.6), стандартами архитектуры FSD, дизайном Augen Pro (zero-shadows, начертание 350, радиусы 54px/26px/9999px, акцент Signal Blue) и полной поддержкой мультиязычности (`uk`, `ru`, `en`):
+
+1. **Контракты и схемы параметров конвертации (`packages/contracts/src/conversion.ts`, `index.ts`):**
+   - Описаны строгие схемы Zod: `ConversionDirectionSchema`, `OcrLanguageSchema` (`uk`, `ru`, `en`, `fr`, `de`, `pl`), `PdfRasterDpiSchema` (72, 150, 300 DPI), `ImageQualitySchema` (1–100, default 85), `ImageOutputFormatSchema` (`jpg`, `webp`), `PdfToDocxOptionsSchema`, `DocxToPdfOptionsSchema`, `ImagesToPdfOptionsSchema`, `PdfToImagesOptionsSchema`.
+2. **Слайс интерактивных сценариев (`apps/web/src/features/conversion-directions/`):**
+   - `DirectionNav`: адаптивное pill-меню быстрого переключения между направлениями конвертации.
+   - `PageThumbnailGrid`: интерактивная сетка миниатюр страниц PDF с мультивыбором чекбоксами, кнопками «Выбрать все» / «Снять выбор», визуализацией карточек формата A4 и счетчиком выбранных страниц.
+   - `PdfToDocxForm`: форма загрузки PDF, интерактивный выбор страниц для OCR, мультиселектор 6 языков распознавания текста (ТЗ §2.3), гарантии сохранения структуры (абзацы, заголовки, списки, таблицы по ТЗ §2.4, CER ≤ 2%).
+   - `DocxToPdfForm`: форма загрузки DOCX, инспектор проверки распаковки (до 500 МБ и 10 000 файлов по ТЗ §3.6), инфо о headless-движке LibreOffice в ЕС.
+   - `ImagesToPdfForm`: загрузка JPG, PNG, статического WebP, Drag-and-drop перетаскивание и кнопки перемещения порядка страниц, тумблер «Объединить в один PDF» (по умолчанию выключен по ТЗ §2.1) со спецификацией A4, полей 10 мм, белого фона и авто-ориентации.
+   - `PdfToImagesForm`: форма конвертации PDF в JPG / WebP, селектор разрешения (72 / 150 / 300 DPI), ползунок качества сжатия (1–100, default 85) с едиными параметрами операции и выбором страниц.
+3. **Слайс композиции страниц (`apps/web/src/_pages/convert/`):**
+   - `ConvertPage`: композиция выбранного направления, информационные карточки юрисдикции ЕС, ClamAV-сканирования и 12-часового TTL.
+4. **Маршрутизация Next.js App Router (`apps/web/app/[locale]/convert/`):**
+   - `app/[locale]/convert/page.tsx`: редирект на `/convert/pdf-to-docx`.
+   - `app/[locale]/convert/[direction]/page.tsx`: статическая генерация `generateStaticParams` для всех комбинаций локалей и направлений (48 страниц), динамические метаданные `generateMetadata` и строгая валидация маршрутов.
+5. **Интернационализация и навигация:**
+   - Добавлен раздел `"convert"` в словари `uk.json`, `ru.json`, `en.json`.
+   - В выпадающем dev-меню `Navbar` для всех направлений конвертации статус обновлен на `ready`.
+6. **Верификация качества:**
+   - Полная проверка типов `npm run typecheck` пройдена без ошибок по всему монорепозиторию.
+   - Линтинг `npm run lint` пройден без предупреждений.
+   - Продакшен-сборка `npm run build -w @doc-converter/web` завершилась успешно со всеми 48 SSG-страницами.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/conversion.ts`: Zod-схемы и типы параметров направлений конвертации.
+- `packages/contracts/src/index.ts`: Экспорт схем конвертации.
+- `apps/web/src/features/conversion-directions/model/types.ts`: Модели данных, конфигурации лимитов и направлений.
+- `apps/web/src/features/conversion-directions/ui/direction-nav.tsx`: Навигационный переключатель направлений.
+- `apps/web/src/features/conversion-directions/ui/page-thumbnail-grid.tsx`: Интерактивная сетка миниатюр страниц PDF.
+- `apps/web/src/features/conversion-directions/ui/pdf-to-docx-form.tsx`: Форма PDF → DOCX с OCR и выбором страниц/языков.
+- `apps/web/src/features/conversion-directions/ui/docx-to-pdf-form.tsx`: Форма DOCX → PDF с инспектором лимита распаковки.
+- `apps/web/src/features/conversion-directions/ui/images-to-pdf-form.tsx`: Форма Images → PDF с сортировкой и тумблером объединения.
+- `apps/web/src/features/conversion-directions/ui/pdf-to-images-form.tsx`: Форма PDF → Images с селектором DPI/качества.
+- `apps/web/src/features/conversion-directions/index.ts`: Публичный API слайса features.
+- `apps/web/src/_pages/convert/convert-page.tsx`: Композиция страницы конвертации.
+- `apps/web/src/_pages/convert/index.ts`: Экспорт страницы конвертации.
+- `apps/web/src/_pages/index.ts`: Реэкспорт страниц конвертации.
+- `apps/web/app/[locale]/convert/page.tsx`: Редирект корневого маршрута `/convert`.
+- `apps/web/app/[locale]/convert/[direction]/page.tsx`: Локализованный динамический маршрут с SSG и метаданными.
+- `apps/web/src/shared/i18n/messages/uk.json`: Переводы раздела `"convert"` на украинский.
+- `apps/web/src/shared/i18n/messages/ru.json`: Переводы раздела `"convert"` на русский.
+- `apps/web/src/shared/i18n/messages/en.json`: Переводы раздела `"convert"` на английский.
+- `apps/web/src/shared/ui/navbar.tsx`: Обновление статусов пунктов конвертеров на `ready`.
+- `docs/implementation-plan.md`: Отметка о выполнении пункта 1.4.
+
 ## [2026-11-05] Добавление метаданных правил Antigravity (.agents/rules)
 
 ### Суть задачи
@@ -101,8 +152,6 @@
 - Не добавлялись.
 
 ---
-
-# Прогресс разработки doc-converter
 
 ## [2026-11-05] Интернационализация (i18n) на базе next-intl и словари переводов (Пункт 1.2)
 

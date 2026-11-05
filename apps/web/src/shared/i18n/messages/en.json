@@ -424,6 +424,107 @@
       "backToLogin": "Back to standard sign in",
       "demoSuccess": "Account recovered successfully! Now sign in with your new email and password."
     }
+  },
+  "convert": {
+    "badge": "Documents & Images Converter",
+    "switchDirection": "Conversion directions:",
+    "directions": {
+      "pdfToDocx": {
+        "nav": "PDF → DOCX (OCR)",
+        "title": "Convert PDF to DOCX",
+        "subtitle": "High-accuracy optical character recognition (OCR) hosted on proprietary EU servers, preserving headings, lists, tables, and layout."
+      },
+      "docxToPdf": {
+        "nav": "DOCX → PDF",
+        "title": "Convert DOCX to PDF",
+        "subtitle": "Reliable Word document export to standardized PDF via headless LibreOffice with exact typographic fidelity."
+      },
+      "imagesToPdf": {
+        "nav": "Images → PDF",
+        "title": "Convert Images to PDF",
+        "subtitle": "Merge or convert JPG, PNG, and static WebP images into standardized A4 sheets with 10 mm margins and automatic orientation."
+      },
+      "pdfToImages": {
+        "nav": "PDF → Images (JPG/WebP)",
+        "title": "Rasterize PDF to Images",
+        "subtitle": "Page-by-page rendering to JPG or WebP on clean white backgrounds with customizable 72, 150, or 300 DPI and quality controls."
+      }
+    },
+    "features": {
+      "clamav": "ClamAV Verified",
+      "eu": "EU Servers",
+      "ttl": "12h Auto-cleanup",
+      "a4": "A4 Standard (10 mm)",
+      "cer": "OCR Accuracy CER ≤ 2%",
+      "dpi": "72 / 150 / 300 DPI"
+    },
+    "dropzone": {
+      "pdfTitle": "Drag & drop PDF file here or browse from disk",
+      "docxTitle": "Drag & drop DOCX file here or browse from disk",
+      "imagesTitle": "Drag & drop images here (JPG, PNG, WebP)",
+      "hint": "Maximum size: {maxMb} MB per file (up to {maxFiles} files for guests)",
+      "chooseFile": "Browse file",
+      "chooseFiles": "Browse images"
+    },
+    "pdfToDocx": {
+      "pagesTitle": "Select pages for OCR processing",
+      "pagesHint": "Select specific pages to OCR. All pages are selected by default.",
+      "selectAll": "Select all",
+      "deselectAll": "Deselect all",
+      "pageCard": "Page {number}",
+      "selectedCount": "Selected pages: {count} of {total}",
+      "ocrLanguagesTitle": "Printed text OCR languages",
+      "ocrLanguagesHint": "Auto-detection optimized for mandatory languages (Spec §2.3):",
+      "languages": {
+        "uk": "Ukrainian",
+        "ru": "Russian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "pl": "Polish"
+      },
+      "layoutInfoTitle": "Layout Preservation Guarantee (Spec §2.4)",
+      "layoutInfoDesc": "Reading order, paragraphs, headings, bullet lists, figures, and simple tables are fully preserved. Strict threshold: CER ≤ 2%.",
+      "submit": "Convert to DOCX ({count} pages)"
+    },
+    "docxToPdf": {
+      "inspectorTitle": "DOCX Safety Inspection (Spec §3.6)",
+      "unpackInfo": "Unpack volume limit check: up to 500 MB and max 10,000 internal files to prevent Zip-bomb vulnerabilities.",
+      "engineInfo": "Automated export runs in a sandboxed headless LibreOffice worker strictly within the EU jurisdiction.",
+      "submit": "Convert to PDF"
+    },
+    "imagesToPdf": {
+      "orderTitle": "Page sequence in output document",
+      "orderHint": "Drag images or use arrow buttons to arrange the page order in the generated PDF.",
+      "mergeToggle": "Merge all images into a single PDF document",
+      "mergeHint": "Default is off (generates individual PDFs per image). Turn on to merge all uploaded images into a single multi-page PDF.",
+      "a4StandardInfo": "Each image is placed on an individual A4 sheet with 10 mm margins. Proportions are preserved and transparency is filled with pure white.",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "remove": "Remove",
+      "submitMerge": "Merge into 1 PDF ({count} images)",
+      "submitSeparate": "Convert to separate PDFs ({count} files)"
+    },
+    "pdfToImages": {
+      "formatTitle": "Output image format",
+      "formatJpg": "JPG (universal bitmap, white background)",
+      "formatWebp": "WebP (modern high-efficiency compression)",
+      "dpiTitle": "Rasterization resolution (DPI)",
+      "dpi72": "72 DPI — fast web/screen viewing",
+      "dpi150": "150 DPI — standard document quality (default)",
+      "dpi300": "300 DPI — high resolution for printing",
+      "dpiInfo": "Selected DPI and quality apply uniformly to all selected pages in the batch.",
+      "qualityTitle": "Compression quality",
+      "qualityDesc": "Value: {quality} (default 85 — optimal balance between quality and file size)",
+      "pagesTitle": "Select pages to rasterize",
+      "whiteBgNotice": "Rendered on a clean white background per Spec §2.2.",
+      "submit": "Convert to {format} ({count} pages)"
+    },
+    "flow": {
+      "scanning": "ClamAV virus scan (EU)…",
+      "dispatching": "Dispatching job to BullMQ queue…",
+      "ready": "Job accepted. Redirecting to status…"
+    }
   }
 }
 

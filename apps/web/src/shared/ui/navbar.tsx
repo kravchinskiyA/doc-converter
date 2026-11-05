@@ -61,10 +61,10 @@ const PAGE_GROUPS: PageCategory[] = [
   {
     category: 'converters',
     items: [
-      { key: 'pdfToDocx', href: '/convert/pdf-to-docx', status: 'planned', step: '1.4' },
-      { key: 'docxToPdf', href: '/convert/docx-to-pdf', status: 'planned', step: '1.4' },
-      { key: 'imagesToPdf', href: '/convert/images-to-pdf', status: 'planned', step: '1.4' },
-      { key: 'pdfToImages', href: '/convert/pdf-to-images', status: 'planned', step: '1.4' },
+      { key: 'pdfToDocx', href: '/convert/pdf-to-docx', status: 'ready' },
+      { key: 'docxToPdf', href: '/convert/docx-to-pdf', status: 'ready' },
+      { key: 'imagesToPdf', href: '/convert/images-to-pdf', status: 'ready' },
+      { key: 'pdfToImages', href: '/convert/pdf-to-images', status: 'ready' },
     ],
   },
   {
