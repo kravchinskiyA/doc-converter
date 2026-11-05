@@ -1,12 +1,17 @@
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import { cn } from '../lib/utils';
+import { Link } from '../i18n';
 
 export interface FooterProps {
-  locale?: string;
   className?: string;
 }
 
-export function Footer({ locale = 'uk', className }: FooterProps) {
+const LINK_CLASS = 'hover:text-pure-white transition-colors';
+
+export function Footer({ className }: FooterProps) {
+  const t = useTranslations('footer');
+
   return (
     <footer
       className={cn(
@@ -23,35 +28,35 @@ export function Footer({ locale = 'uk', className }: FooterProps) {
               <span>doc-converter</span>
             </div>
             <p className="text-[14px] font-book text-ash-gray leading-relaxed">
-              Безопасный SaaS-конвертер документов и изображений. Серверная инфраструктура строго в регионе ЕС.
+              {t('tagline')}
             </p>
           </div>
 
           {/* Колонка 2: Конвертеры */}
           <div className="space-y-3">
             <h4 className="text-[12px] font-regular uppercase tracking-wider text-ash-gray">
-              Конвертеры
+              {t('converters.title')}
             </h4>
             <ul className="space-y-2 text-[14px] font-book text-ash-gray">
               <li>
-                <a href={`/${locale}/convert/pdf-to-docx`} className="hover:text-pure-white transition-colors">
-                  PDF в DOCX (OCR)
-                </a>
+                <Link href="/convert/pdf-to-docx" className={LINK_CLASS}>
+                  {t('converters.pdfToDocx')}
+                </Link>
               </li>
               <li>
-                <a href={`/${locale}/convert/docx-to-pdf`} className="hover:text-pure-white transition-colors">
-                  DOCX в PDF
-                </a>
+                <Link href="/convert/docx-to-pdf" className={LINK_CLASS}>
+                  {t('converters.docxToPdf')}
+                </Link>
               </li>
               <li>
-                <a href={`/${locale}/convert/images-to-pdf`} className="hover:text-pure-white transition-colors">
-                  Изображения в PDF
-                </a>
+                <Link href="/convert/images-to-pdf" className={LINK_CLASS}>
+                  {t('converters.imagesToPdf')}
+                </Link>
               </li>
               <li>
-                <a href={`/${locale}/convert/pdf-to-images`} className="hover:text-pure-white transition-colors">
-                  PDF в JPG / WEBP
-                </a>
+                <Link href="/convert/pdf-to-images" className={LINK_CLASS}>
+                  {t('converters.pdfToImages')}
+                </Link>
               </li>
             </ul>
           </div>
@@ -59,23 +64,23 @@ export function Footer({ locale = 'uk', className }: FooterProps) {
           {/* Колонка 3: Сервис и API */}
           <div className="space-y-3">
             <h4 className="text-[12px] font-regular uppercase tracking-wider text-ash-gray">
-              Сервис
+              {t('service.title')}
             </h4>
             <ul className="space-y-2 text-[14px] font-book text-ash-gray">
               <li>
-                <a href={`/${locale}/pricing`} className="hover:text-pure-white transition-colors">
-                  Тарифы и подписка
-                </a>
+                <Link href="/pricing" className={LINK_CLASS}>
+                  {t('service.pricing')}
+                </Link>
               </li>
               <li>
-                <a href={`/${locale}/api-docs`} className="hover:text-pure-white transition-colors">
-                  REST API документация
-                </a>
+                <Link href="/api-docs" className={LINK_CLASS}>
+                  {t('service.apiDocs')}
+                </Link>
               </li>
               <li>
-                <a href={`/${locale}/admin/login`} className="hover:text-pure-white transition-colors">
-                  Служебный вход
-                </a>
+                <Link href="/admin/login" className={LINK_CLASS}>
+                  {t('service.staffLogin')}
+                </Link>
               </li>
             </ul>
           </div>
@@ -83,22 +88,22 @@ export function Footer({ locale = 'uk', className }: FooterProps) {
           {/* Колонка 4: Юридическая информация */}
           <div className="space-y-3">
             <h4 className="text-[12px] font-regular uppercase tracking-wider text-ash-gray">
-              Безопасность
+              {t('security.title')}
             </h4>
             <ul className="space-y-2 text-[14px] font-book text-ash-gray">
               <li>
-                <a href={`/${locale}/privacy`} className="hover:text-pure-white transition-colors">
-                  Конфиденциальность (GDPR)
-                </a>
+                <Link href="/privacy" className={LINK_CLASS}>
+                  {t('security.privacy')}
+                </Link>
               </li>
               <li>
-                <a href={`/${locale}/terms`} className="hover:text-pure-white transition-colors">
-                  Условия обслуживания
-                </a>
+                <Link href="/terms" className={LINK_CLASS}>
+                  {t('security.terms')}
+                </Link>
               </li>
               <li>
                 <span className="text-[12px] text-ash-gray/80 inline-block border-[0.5px] border-white/10 rounded-pill px-2.5 py-0.5">
-                  100% EU Data Isolation
+                  {t('security.euIsolation')}
                 </span>
               </li>
             </ul>
@@ -107,11 +112,10 @@ export function Footer({ locale = 'uk', className }: FooterProps) {
 
         {/* Нижняя строчка копирайта */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] font-book text-ash-gray">
-          <p>© {new Date().getFullYear()} doc-converter. Все права защищены.</p>
-          <p className="text-[12px]">Шифрование SSE-KMS • Антивирус ClamAV • Без передачи данных сторонним AI</p>
+          <p>{t('copyright', { year: new Date().getFullYear() })}</p>
+          <p className="text-[12px]">{t('bottomNote')}</p>
         </div>
       </div>
     </footer>
   );
 }
-

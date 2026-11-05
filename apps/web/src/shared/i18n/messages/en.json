@@ -1,0 +1,429 @@
+{
+  "metadata": {
+    "title": "doc-converter | Private document and image converter",
+    "description": "Convert PDF, DOCX and images on our own servers in the EU"
+  },
+  "common": {
+    "brand": "doc-converter",
+    "languages": {
+      "uk": "Українська",
+      "ru": "Русский",
+      "en": "English"
+    },
+    "fileSize": {
+      "bytes": "{value} B",
+      "kilobytes": "{value} KB",
+      "megabytes": "{value} MB"
+    },
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "close": "Close",
+      "back": "Back",
+      "continue": "Continue",
+      "delete": "Delete",
+      "download": "Download",
+      "downloadZip": "Download ZIP",
+      "copy": "Copy",
+      "retry": "Try again",
+      "resendCode": "Resend code",
+      "newConversion": "New conversion",
+      "toHome": "Go to home page"
+    },
+    "states": {
+      "loading": "Loading…",
+      "saving": "Saving…",
+      "processing": "Processing…"
+    }
+  },
+  "navigation": {
+    "ariaLabel": "Main navigation",
+    "links": {
+      "pdfToDocx": "PDF → DOCX",
+      "docxToPdf": "DOCX → PDF",
+      "imagesToPdf": "Images → PDF",
+      "pricing": "Pricing"
+    },
+    "login": "Sign in",
+    "account": "Account",
+    "localeSwitcher": {
+      "label": "Interface language"
+    },
+    "devMenu": {
+      "trigger": "Pages",
+      "title": "Page navigator",
+      "badge": "dev menu",
+      "ready": "Ready",
+      "categories": {
+        "main": "Main",
+        "converters": "Converters (step 1.4)",
+        "results": "Results (step 1.5)",
+        "auth": "Authentication (step 1.6)",
+        "service": "Account and service (1.7, 1.9)"
+      },
+      "items": {
+        "home": "Home page (step 1.3)",
+        "pricing": "Pricing and subscription",
+        "pdfToDocx": "PDF → DOCX (OCR with thumbnails)",
+        "docxToPdf": "DOCX → PDF (LibreOffice)",
+        "imagesToPdf": "Images → PDF (A4, 10 mm)",
+        "pdfToImages": "PDF → Images (DPI / WebP)",
+        "results": "Job status and ZIP download",
+        "login": "Sign in",
+        "register": "Sign up",
+        "verifyEmail": "Email verification (6 digits)",
+        "forgotPassword": "Password reset",
+        "resetPassword": "Set new password",
+        "recoveryCode": "Recovery code",
+        "account": "User account",
+        "adminLogin": "Staff sign-in (TOTP 2FA)",
+        "adminDashboard": "Admin dashboard",
+        "apiDocs": "API documentation",
+        "terms": "Terms of service",
+        "privacy": "Privacy policy (GDPR)"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "A secure SaaS converter for documents and images. Server infrastructure is located strictly in the EU.",
+    "converters": {
+      "title": "Converters",
+      "pdfToDocx": "PDF to DOCX (OCR)",
+      "docxToPdf": "DOCX to PDF",
+      "imagesToPdf": "Images to PDF",
+      "pdfToImages": "PDF to JPG / WEBP"
+    },
+    "service": {
+      "title": "Service",
+      "pricing": "Pricing and subscription",
+      "apiDocs": "REST API documentation",
+      "staffLogin": "Staff sign-in"
+    },
+    "security": {
+      "title": "Security",
+      "privacy": "Privacy (GDPR)",
+      "terms": "Terms of service",
+      "euIsolation": "100% EU data isolation"
+    },
+    "copyright": "© {year} doc-converter. All rights reserved.",
+    "bottomNote": "SSE-KMS encryption • ClamAV antivirus • No data shared with third-party AI"
+  },
+  "home": {
+    "badge": "Augen Pro • 100% EU data jurisdiction",
+    "title": "Private document and image conversion",
+    "subtitle": "Accurate OCR for printed text, DOCX to PDF export and image processing on our own isolated servers in the EU.",
+    "features": {
+      "eu": {
+        "title": "100% isolation in the EU",
+        "text": "Files are never sent to third-party AI services. All processing runs on our own hardware in EU data centres."
+      },
+      "ocr": {
+        "title": "OCR accuracy up to 98%",
+        "text": "PaddleOCR models deliver a CER of 2% or less on clear scans while preserving tables, lists and paragraphs."
+      },
+      "cleanup": {
+        "title": "Auto-cleanup after 12 h",
+        "text": "Guest session files are guaranteed to be deleted 12 hours after completion. Results are encrypted with SSE-KMS keys."
+      }
+    }
+  },
+  "quickConverter": {
+    "title": "Document converter",
+    "description": "Fast private PDF and DOCX conversion with OCR for printed text",
+    "guestAttempts": "Guest: {count} of {total} attempts",
+    "dropzone": {
+      "title": "Drag files here or click to choose",
+      "hint": "PDF and DOCX up to {maxMb} MB are supported (up to {maxFiles} files for guests)",
+      "chooseFiles": "Choose files"
+    },
+    "list": {
+      "selected": "Files selected: {count} of {max}",
+      "totalSize": "(total size: {size})",
+      "addMore": "Add more",
+      "clear": "Clear"
+    },
+    "fileStatus": {
+      "tooLarge": "Exceeds {maxMb} MB",
+      "invalidFormat": "Unsupported format",
+      "ready": "Ready for processing"
+    },
+    "aria": {
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "remove": "Remove file"
+    },
+    "direction": {
+      "label": "Direction:",
+      "pdfToDocx": "PDF → DOCX (OCR)",
+      "docxToPdf": "DOCX → PDF"
+    },
+    "convert": "Convert ({count})",
+    "steps": {
+      "antivirus": "ClamAV antivirus check (EU)…",
+      "queue": "Adding the job to the queue…",
+      "redirect": "Opening the result…"
+    },
+    "limits": {
+      "reached": "Guest limit reached: up to {max, plural, one {# file} other {# files}}.",
+      "partiallyAdded": "Added {added} of {total}. Guest limit: {max, plural, one {# file} other {# files}}."
+    },
+    "attemptsExhausted": {
+      "text": "You have used all guest attempts ({total}). Sign up to continue without limits.",
+      "cta": "Create an account"
+    },
+    "modes": {
+      "label": "Specialised modes:",
+      "pdfPages": "PDF page selection → DOCX",
+      "docxToPdf": "DOCX → PDF",
+      "imagesToPdf": "Images → PDF"
+    }
+  },
+  "forms": {
+    "labels": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Repeat password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "code": "Verification code",
+      "recoveryCode": "Recovery code",
+      "totpCode": "Authenticator code",
+      "rememberMe": "Remember me",
+      "acceptTerms": "I accept the terms of service and the privacy policy"
+    },
+    "placeholders": {
+      "email": "name@example.com",
+      "password": "••••••••",
+      "code": "000000",
+      "recoveryCode": "XXXX-XXXX-XXXX"
+    },
+    "hints": {
+      "passwordLength": "From {min} to {max} characters",
+      "codeSent": "We have sent a 6-digit code to your email",
+      "codeExpires": "The code is valid for {minutes, plural, one {# minute} other {# minutes}}",
+      "resendIn": "Resend available in {seconds} s",
+      "attemptsLeft": "Attempts left: {count}"
+    },
+    "submit": {
+      "login": "Sign in",
+      "register": "Sign up",
+      "verify": "Verify",
+      "sendCode": "Send code",
+      "resetPassword": "Set new password",
+      "save": "Save changes"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidType": "Invalid value type",
+    "invalidEmail": "Enter a valid email address",
+    "invalidUrl": "Enter a valid link",
+    "invalidFormat": "Invalid format",
+    "invalidEnum": "Choose one of the available options",
+    "invalidDate": "Invalid date",
+    "stringTooShort": "At least {minimum, plural, one {# character} other {# characters}}",
+    "stringTooLong": "At most {maximum, plural, one {# character} other {# characters}}",
+    "stringExact": "Exactly {length, plural, one {# character} other {# characters}} required",
+    "numberTooSmall": "The value must be at least {minimum}",
+    "numberTooBig": "The value must be at most {maximum}",
+    "arrayTooSmall": "Select at least {minimum}",
+    "arrayTooBig": "You can select at most {maximum}",
+    "notInteger": "A whole number is required",
+    "passwordLength": "The password must be 8 to 128 characters long",
+    "passwordsMismatch": "Passwords do not match",
+    "codeFormat": "The code consists of 6 digits",
+    "recoveryCodeFormat": "Invalid recovery code format",
+    "totpFormat": "Enter the 6 digits from your authenticator",
+    "termsRequired": "You must accept the terms",
+    "fileRequired": "Add at least one file",
+    "fileTooLarge": "The file size exceeds {maxMb} MB",
+    "fileType": "Unsupported file format",
+    "fileCountExceeded": "Maximum number of files: {max}",
+    "pagesRequired": "Select at least one page",
+    "dpiInvalid": "Allowed DPI values: 72, 150 or 300",
+    "qualityRange": "Quality must be between 1 and 100",
+    "default": "Invalid value"
+  },
+  "errors": {
+    "requestId": "Request ID: {requestId}",
+    "codes": {
+      "UNKNOWN": "An unexpected error occurred. Please try again.",
+      "NETWORK_ERROR": "Unable to reach the server. Check your connection and try again.",
+      "BAD_REQUEST": "Invalid request. Please check the data you entered.",
+      "UNAUTHORIZED": "Authentication required. Please sign in.",
+      "FORBIDDEN": "You do not have permission to perform this action.",
+      "NOT_FOUND": "The item was not found or its retention period has expired.",
+      "PAYLOAD_TOO_LARGE": "The file exceeds the allowed size.",
+      "UNSUPPORTED_MEDIA_TYPE": "Unsupported file type.",
+      "UNPROCESSABLE_CONTENT": "The file content could not be processed.",
+      "RATE_LIMITED": "Too many requests. Please wait a moment and try again.",
+      "SERVICE_UNAVAILABLE": "The service is temporarily unavailable. Please try later.",
+      "INTERNAL_ERROR": "Service error. We are already working on a fix.",
+      "SESSION_EXPIRED": "Your session has ended. Please sign in again.",
+      "INVALID_CREDENTIALS": "Incorrect email or password.",
+      "EMAIL_NOT_VERIFIED": "Verify your email to continue.",
+      "EMAIL_TAKEN": "This email is already registered.",
+      "CODE_INVALID": "Incorrect verification code.",
+      "CODE_EXPIRED": "The code has expired. Request a new one.",
+      "CODE_ATTEMPTS_EXCEEDED": "No attempts left for this code. Request a new one.",
+      "CODE_RESEND_COOLDOWN": "You can request a new code in a minute.",
+      "RECOVERY_CODE_INVALID": "The recovery code is invalid or has already been used.",
+      "TOTP_INVALID": "Incorrect authenticator code.",
+      "GUEST_ATTEMPTS_EXHAUSTED": "Guest attempts are used up. Sign up to continue.",
+      "QUOTA_EXCEEDED": "Your plan limit has been reached.",
+      "STORAGE_FULL": "Storage is full. Free up space to save new results.",
+      "FILE_INFECTED": "The file failed the antivirus check and was rejected.",
+      "FILE_CORRUPTED": "The file is damaged or unreadable.",
+      "FILE_ENCRYPTED": "The file is password-protected. Remove the protection and upload it again.",
+      "DECOMPRESSION_LIMIT": "The document exceeds the allowed size after decompression.",
+      "CONVERSION_TIMEOUT": "Processing took too long and was stopped.",
+      "CONVERSION_FAILED": "The file could not be converted.",
+      "SERVICE_PAUSED": "New conversions are temporarily paused.",
+      "API_KEY_INVALID": "The API key is invalid or has been revoked.",
+      "PAYMENT_FAILED": "The payment failed. Please try another payment method."
+    }
+  },
+  "system": {
+    "toasts": {
+      "saved": "Changes saved",
+      "copied": "Copied to clipboard",
+      "codeSent": "The code has been sent to your email",
+      "passwordChanged": "Password changed",
+      "emailChanged": "Email changed",
+      "fileDeleted": "File deleted",
+      "storageCleared": "Storage cleared",
+      "apiKeyCreated": "API key created",
+      "subscriptionUpdated": "Subscription updated"
+    },
+    "jobStatus": {
+      "queued": "Queued",
+      "scanning": "Antivirus check",
+      "processing": "Processing",
+      "completed": "Done",
+      "failed": "Failed",
+      "expired": "Retention period expired"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "text": "The link may be outdated or the page may have moved."
+    },
+    "serverError": {
+      "title": "Something went wrong",
+      "text": "We have been notified about the error. Please try refreshing the page."
+    },
+    "offline": "No internet connection",
+    "maintenance": "Maintenance in progress. The service will be back shortly."
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in to account",
+      "subtitle": "Sign in to access your personal storage, API key and remove guest conversion limits.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "name@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "rememberMe": "Remember me for 30 days",
+      "forgotPassword": "Forgot password?",
+      "recoveryCode": "Lost access to email? Account recovery with backup code",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "demoSuccess": "Signed in successfully. Redirecting…"
+    },
+    "register": {
+      "title": "Create an account",
+      "subtitle": "Get personal storage and full conversion quotas on our own servers in the EU.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "name@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "confirmPasswordLabel": "Repeat password",
+      "confirmPasswordPlaceholder": "••••••••",
+      "passwordHint": "From 8 to 128 characters. Spaces and special characters are permitted.",
+      "acceptTerms": "I accept the Terms of Service and Privacy Policy",
+      "termsLink": "Terms of Service",
+      "privacyLink": "Privacy Policy",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "demoSuccess": "Account created. A verification code has been sent to your email…"
+    },
+    "verifyEmail": {
+      "title": "Verify your email",
+      "subtitle": "Enter the 6-digit code sent to",
+      "emailNotice": "A code was sent to your email address.",
+      "codeLabel": "6-digit code from email",
+      "codePlaceholder": "000000",
+      "codeHint": "The code consists of 6 digits.",
+      "expiresIn": "Code expires in {time}",
+      "expired": "The code has expired. Please request a new code.",
+      "attemptsLeft": "Attempts left: {count}",
+      "attemptsExhausted": "Maximum of 5 attempts reached. Please request a new code.",
+      "resendCooldown": "Resend available in {seconds} s",
+      "resendButton": "Resend code",
+      "resendSuccess": "A new code has been sent to your email",
+      "changeEmail": "Change email or go back",
+      "submit": "Verify email",
+      "backToLogin": "Back to sign in",
+      "demoSuccess": "Email verified successfully! Redirecting…"
+    },
+    "forgotPassword": {
+      "title": "Reset password",
+      "subtitle": "Enter your account email and we will send a 6-digit code to set a new password.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "name@example.com",
+      "notice": "For security reasons, if an account exists, a 6-digit single-use code will be sent to that address.",
+      "submit": "Send reset code",
+      "rememberPassword": "Remember your password?",
+      "signIn": "Sign in",
+      "lostEmail": "No access to email?",
+      "recoveryLink": "Recovery with backup code",
+      "demoSuccess": "Reset code sent to your email…"
+    },
+    "resetPassword": {
+      "title": "Set new password",
+      "subtitle": "Enter the 6-digit code you received and a new password to secure your account.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "name@example.com",
+      "codeLabel": "6-digit code from email",
+      "codePlaceholder": "000000",
+      "newPasswordLabel": "New password",
+      "newPasswordPlaceholder": "••••••••",
+      "confirmPasswordLabel": "Confirm new password",
+      "confirmPasswordPlaceholder": "••••••••",
+      "securityNotice": "Notice: resetting your password will terminate all sessions across all devices (including this one) and revoke your API key. You will need to sign in again.",
+      "submit": "Set new password",
+      "backToLogin": "Back to sign in",
+      "demoSuccess": "Password updated successfully. Please sign in with your new password."
+    },
+    "recoveryCode": {
+      "title": "Account recovery with backup code",
+      "subtitle": "Special recovery procedure used when you have permanently lost access to your registered email.",
+      "warning": "Important per TS §6.5: using a backup code will invalidate the current set of backup codes, revoke all sessions, disable your old API key and unbind the bot. You have 20 minutes to complete the procedure.",
+      "step1": "1. Backup code",
+      "step2": "2. New email",
+      "step3": "3. New password",
+      "codeLabel": "Single-use backup code",
+      "codePlaceholder": "XXXX-XXXX-XXXX",
+      "codeHint": "One of the 10 codes saved during account setup.",
+      "newEmailLabel": "New available email",
+      "newEmailPlaceholder": "new-email@example.com",
+      "newEmailHint": "Specify an address not currently registered with the service.",
+      "sendEmailCode": "Send code",
+      "emailCodeLabel": "6-digit code sent to new email",
+      "emailCodePlaceholder": "000000",
+      "newPasswordLabel": "New password (8–128 characters)",
+      "newPasswordPlaceholder": "••••••••",
+      "confirmPasswordLabel": "Confirm new password",
+      "confirmPasswordPlaceholder": "••••••••",
+      "attemptsLimit": "Brute-force protection: maximum 5 attempts per 15 minutes.",
+      "submit": "Recover account and update credentials",
+      "backToLogin": "Back to standard sign in",
+      "demoSuccess": "Account recovered successfully! Now sign in with your new email and password."
+    }
+  }
+}
+

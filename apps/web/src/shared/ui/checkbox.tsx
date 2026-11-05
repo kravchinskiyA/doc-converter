@@ -4,7 +4,7 @@ import { cn } from '../lib/utils';
 
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
-  label?: string;
+  label?: React.ReactNode;
 }
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(

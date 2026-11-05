@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import {
   FileUp,
   FileText,
@@ -23,6 +23,7 @@ import {
   Button,
   Badge,
 } from '@/shared/ui';
+import { Link, useFormatFileSize, useRouter } from '@/shared/i18n';
 import {
   type ConverterFile,
   type ConversionDirection,
@@ -31,17 +32,13 @@ import {
   INITIAL_GUEST_ATTEMPTS,
 } from '../types';
 
-interface QuickConverterProps {
-  locale: string;
-}
+type ConversionStep = 'antivirus' | 'queue' | 'redirect';
 
-function formatFileSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
+const MAX_FILE_SIZE_MB = MAX_FILE_SIZE_BYTES / (1024 * 1024);
 
-export function QuickConverter({ locale }: QuickConverterProps) {
+export function QuickConverter() {
+  const t = useTranslations('quickConverter');
+  const formatFileSize = useFormatFileSize();
   const router = useRouter();
   const [files, setFiles] = React.useState<ConverterFile[]>([]);
   const [direction, setDirection] = React.useState<ConversionDirection>('pdf-to-docx');
@@ -62,7 +59,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
     return INITIAL_GUEST_ATTEMPTS;
   });
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
-  const [conversionStep, setConversionStep] = React.useState<string | null>(null);
+  const [conversionStep, setConversionStep] = React.useState<ConversionStep | null>(null);
 
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -73,13 +70,17 @@ export function QuickConverter({ locale }: QuickConverterProps) {
 
     const availableSlots = GUEST_MAX_FILES - files.length;
     if (availableSlots <= 0) {
-      setErrorMessage(`Достигнут гостевой лимит: максимум ${GUEST_MAX_FILES} файлов.`);
+      setErrorMessage(t('limits.reached', { max: GUEST_MAX_FILES }));
       return;
     }
 
     if (arrayFiles.length > availableSlots) {
       setErrorMessage(
-        `Добавлено ${availableSlots} из ${arrayFiles.length} файлов. Гостевой лимит: ${GUEST_MAX_FILES} файлов.`
+        t('limits.partiallyAdded', {
+          added: availableSlots,
+          total: arrayFiles.length,
+          max: GUEST_MAX_FILES,
+        })
       );
     }
 
@@ -194,15 +195,15 @@ export function QuickConverter({ locale }: QuickConverterProps) {
     }
 
     // Этапы конвертации для демонстрации надежного пайплайна
-    setConversionStep('Антивирусная верификация ClamAV (ЕС)...');
+    setConversionStep('antivirus');
 
     setTimeout(() => {
-      setConversionStep('Постановка задачи в очередь BullMQ...');
+      setConversionStep('queue');
       setTimeout(() => {
-        setConversionStep('Перенаправление в результат...');
+        setConversionStep('redirect');
         setTimeout(() => {
           const fakeJobId = `job-${Date.now().toString().slice(-6)}`;
-          router.push(`/${locale}/results/${fakeJobId}`);
+          router.push(`/results/${fakeJobId}`);
         }, 600);
       }, 700);
     }, 800);
@@ -213,9 +214,9 @@ export function QuickConverter({ locale }: QuickConverterProps) {
       <CardHeader className="pb-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
-            <CardTitle>Конвертер документов</CardTitle>
+            <CardTitle>{t('title')}</CardTitle>
             <CardDescription>
-              Быстрая приватная конвертация PDF и DOCX с OCR печатного текста
+              {t('description')}
             </CardDescription>
           </div>
           <div className="flex items-center gap-2">
@@ -223,7 +224,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
               variant={guestAttempts > 0 ? 'neutral' : 'signal-chip'}
               className="text-[12px]"
             >
-              Гость: {guestAttempts} из {INITIAL_GUEST_ATTEMPTS} попыток
+              {t('guestAttempts', { count: guestAttempts, total: INITIAL_GUEST_ATTEMPTS })}
             </Badge>
           </div>
         </div>
@@ -262,10 +263,10 @@ export function QuickConverter({ locale }: QuickConverterProps) {
               <FileUp className="h-6 w-6 stroke-[1.5]" />
             </div>
             <p className="text-[15px] font-book text-off-black mb-1">
-              Перетащите файлы сюда или нажмите для выбора
+              {t('dropzone.title')}
             </p>
             <p className="text-[13px] font-book text-ash-gray">
-              Поддерживаются PDF и DOCX до 25 МБ (до {GUEST_MAX_FILES} файлов для гостя)
+              {t('dropzone.hint', { maxMb: MAX_FILE_SIZE_MB, maxFiles: GUEST_MAX_FILES })}
             </p>
 
             <div className="mt-5">
@@ -278,7 +279,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                   fileInputRef.current?.click();
                 }}
               >
-                Выбрать файлы
+                {t('dropzone.chooseFiles')}
                 <ArrowRight className="h-3.5 w-3.5 text-signal-blue" />
               </Button>
             </div>
@@ -289,11 +290,12 @@ export function QuickConverter({ locale }: QuickConverterProps) {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="text-[14px] font-book text-off-black">
-                  Выбрано файлов: {files.length} из {GUEST_MAX_FILES}
+                  {t('list.selected', { count: files.length, max: GUEST_MAX_FILES })}
                 </span>
                 <span className="text-[12px] font-book text-ash-gray">
-                  (общий размер:{' '}
-                  {formatFileSize(files.reduce((acc, f) => acc + f.size, 0))})
+                  {t('list.totalSize', {
+                    size: formatFileSize(files.reduce((acc, f) => acc + f.size, 0)),
+                  })}
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -305,7 +307,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                     onClick={() => fileInputRef.current?.click()}
                   >
                     <Plus className="h-3.5 w-3.5 mr-1" />
-                    Добавить еще
+                    {t('list.addMore')}
                   </Button>
                 )}
                 <Button
@@ -314,7 +316,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                   className="text-[13px] text-steel-gray hover:text-off-black"
                   onClick={handleClearAll}
                 >
-                  Очистить
+                  {t('list.clear')}
                 </Button>
               </div>
             </div>
@@ -346,19 +348,19 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                         {file.isTooLarge && (
                           <span className="text-[11px] font-book text-red-600 flex items-center gap-1">
                             <AlertCircle className="h-3 w-3" />
-                            Превышает 25 МБ
+                            {t('fileStatus.tooLarge', { maxMb: MAX_FILE_SIZE_MB })}
                           </span>
                         )}
                         {file.isInvalidFormat && (
                           <span className="text-[11px] font-book text-red-600 flex items-center gap-1">
                             <AlertCircle className="h-3 w-3" />
-                            Недопустимый формат
+                            {t('fileStatus.invalidFormat')}
                           </span>
                         )}
                         {!file.isTooLarge && !file.isInvalidFormat && (
                           <span className="text-[11px] font-book text-emerald-600 flex items-center gap-1">
                             <CheckCircle2 className="h-3 w-3" />
-                            Готов к обработке
+                            {t('fileStatus.ready')}
                           </span>
                         )}
                       </div>
@@ -369,7 +371,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                   <div className="flex items-center gap-1 shrink-0">
                     <button
                       type="button"
-                      aria-label="Переместить вверх"
+                      aria-label={t('aria.moveUp')}
                       disabled={idx === 0}
                       onClick={() => handleMoveUp(idx)}
                       className="h-7 w-7 rounded-[8px] flex items-center justify-center text-steel-gray hover:text-off-black hover:bg-black/5 disabled:opacity-30 disabled:pointer-events-none transition-colors"
@@ -378,7 +380,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                     </button>
                     <button
                       type="button"
-                      aria-label="Переместить вниз"
+                      aria-label={t('aria.moveDown')}
                       disabled={idx === files.length - 1}
                       onClick={() => handleMoveDown(idx)}
                       className="h-7 w-7 rounded-[8px] flex items-center justify-center text-steel-gray hover:text-off-black hover:bg-black/5 disabled:opacity-30 disabled:pointer-events-none transition-colors"
@@ -387,7 +389,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                     </button>
                     <button
                       type="button"
-                      aria-label="Удалить файл"
+                      aria-label={t('aria.remove')}
                       onClick={() => handleRemove(file.id)}
                       className="h-7 w-7 rounded-[8px] flex items-center justify-center text-steel-gray hover:text-red-600 hover:bg-red-50 transition-colors ml-1"
                     >
@@ -402,7 +404,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
             <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-black/[0.06]">
               <div className="flex items-center gap-2">
                 <span className="text-[13px] font-book text-steel-gray">
-                  Направление:
+                  {t('direction.label')}
                 </span>
                 <div className="inline-flex rounded-button p-0.5 border border-black/10 bg-black/[0.02]">
                   <button
@@ -414,7 +416,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                         : 'text-steel-gray hover:text-off-black'
                     }`}
                   >
-                    PDF → DOCX (OCR)
+                    {t('direction.pdfToDocx')}
                   </button>
                   <button
                     type="button"
@@ -425,7 +427,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                         : 'text-steel-gray hover:text-off-black'
                     }`}
                   >
-                    DOCX → PDF
+                    {t('direction.docxToPdf')}
                   </button>
                 </div>
               </div>
@@ -435,7 +437,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                 {conversionStep ? (
                   <div className="flex items-center gap-2 text-[13px] text-signal-blue font-book">
                     <RefreshCw className="h-4 w-4 animate-spin" />
-                    <span>{conversionStep}</span>
+                    <span>{t(`steps.${conversionStep}`)}</span>
                   </div>
                 ) : (
                   <Button
@@ -443,7 +445,7 @@ export function QuickConverter({ locale }: QuickConverterProps) {
                     disabled={!canConvert}
                     onClick={handleStartConversion}
                   >
-                    Конвертировать ({files.length})
+                    {t('convert', { count: files.length })}
                     <ArrowRight className="h-3.5 w-3.5 text-signal-blue" />
                   </Button>
                 )}
@@ -464,40 +466,40 @@ export function QuickConverter({ locale }: QuickConverterProps) {
         {guestAttempts === 0 && (
           <div className="rounded-[14px] border border-signal-blue/20 bg-signal-blue/[0.03] p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[13px]">
             <span className="text-off-black font-book">
-              Вы использовали все 3 гостевые попытки. Зарегистрируйтесь, чтобы продолжить без ограничений.
+              {t('attemptsExhausted.text', { total: INITIAL_GUEST_ATTEMPTS })}
             </span>
-            <a href={`/${locale}/auth/register`}>
+            <Link href="/auth/register">
               <Button size="sm" variant="floating-cta">
-                Создать аккаунт
+                {t('attemptsExhausted.cta')}
                 <ArrowRight className="h-3 w-3 text-signal-blue" />
               </Button>
-            </a>
+            </Link>
           </div>
         )}
 
         {/* Быстрые чипы направлений */}
         <div className="mt-4 pt-4 border-t border-black/[0.06] flex flex-wrap items-center gap-2">
           <span className="text-[13px] font-book text-steel-gray mr-2">
-            Специализированные режимы:
+            {t('modes.label')}
           </span>
-          <a href={`/${locale}/convert/pdf-to-docx`}>
+          <Link href="/convert/pdf-to-docx">
             <Badge
               variant="signal-chip"
               className="hover:bg-signal-blue/5 cursor-pointer"
             >
-              Выбор страниц PDF → DOCX
+              {t('modes.pdfPages')}
             </Badge>
-          </a>
-          <a href={`/${locale}/convert/docx-to-pdf`}>
+          </Link>
+          <Link href="/convert/docx-to-pdf">
             <Badge variant="neutral" className="hover:border-black/20 cursor-pointer">
-              DOCX → PDF
+              {t('modes.docxToPdf')}
             </Badge>
-          </a>
-          <a href={`/${locale}/convert/images-to-pdf`}>
+          </Link>
+          <Link href="/convert/images-to-pdf">
             <Badge variant="neutral" className="hover:border-black/20 cursor-pointer">
-              Изображения → PDF
+              {t('modes.imagesToPdf')}
             </Badge>
-          </a>
+          </Link>
         </div>
       </CardContent>
     </Card>
