@@ -69,7 +69,7 @@ const PAGE_GROUPS: PageCategory[] = [
   },
   {
     category: 'results',
-    items: [{ key: 'results', href: '/results/demo-job-1', status: 'planned', step: '1.5' }],
+    items: [{ key: 'results', href: '/results/demo-job-1', status: 'ready', step: '1.5' }],
   },
   {
     category: 'auth',

@@ -1,6 +1,53 @@
 # Прогресс разработки doc-converter
 
-## [2026-11-05] Реализация страниц направлений конвертации (Пункт 1.4)
+## [2026-11-05] Реализация страницы ожидания и результатов конвертации (Пункт 1.5)
+
+### Суть задачи
+
+Выполнен пункт 1.5 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.5) — разработана страница ожидания и скачивания результатов конвертации (`/[locale]/results/[jobId]/`) в соответствии со спецификацией ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§5.2, 9.1, 10.1, 10.2), правилами архитектуры Feature-Sliced Design (FSD), стандартами дизайна Augen Pro (zero-shadows, начертание 350, радиусы 54px/28px/24px/9999px, акцент Signal Blue) и полной мультиязычностью (`uk`, `ru`, `en`):
+
+1. **Контракты и схемы результатов конвертации (`packages/contracts/src/conversion.ts`):**
+   - Добавлены строгие схемы Zod: `JobStatusSchema` (`queued`, `processing`, `completed`, `partial`, `failed`), `FileConversionStatusSchema`, `OutputFileResultSchema`, `JobResultSchema`.
+2. **Слайс пользовательских сценариев (`apps/web/src/features/job-results/`):**
+   - `model/types.ts`: типы для представления задачи, файлов, обратного отсчета `CountdownState` и состояния генерации ZIP.
+   - `model/use-job-results.ts`: хук жизненного цикла задания с динамическим вычислением оставшегося срока доступности файлов (12 часов для гостя, ТЗ §10.1), симуляцией перехода из очереди/обработки в готовое состояние, скачиванием отдельных файлов и единого ZIP-архива.
+   - `ui/job-countdown-timer.tsx`: интерактивный блок обратного отсчета доступности файлов (ч:мин:сек), бейджи европейской юрисдикции хранения данных (ЕС, GDPR), предупреждение об автоматическом удалении через 12 часов и призыв зарегистрироваться/войти для бессрочного сохранения до 6 месяцев в Личном кабинете.
+   - `ui/job-status-card.tsx`: карточка статуса задачи в стиле Augen Pro (скругление 54px, hairline-рамка 0.5px, zero-shadows) с бейджами состояний, кнопкой копирования Job ID, сводными метриками (всего/готово/ошибок) и анимированным прогресс-баром при обработке.
+   - `ui/job-files-list.tsx`: список исходных и сконвертированных файлов с индикацией формата, форматированным размером (`useFormatFileSize`), кнопками индивидуального скачивания и выводом понятных причин отказов без раскрытия PII (`passwordProtected`, `unpackLimitExceeded`, `corruptedFile`, `ocrFailed`, `timeout`).
+   - `ui/job-results-view.tsx`: объединяющая карточка с кнопкой скачивания единого архива («Скачать все в едином ZIP»), кнопкой перехода к новой конвертации и ссылкой в кабинет.
+   - `index.ts`: Public API слайса.
+3. **Слайс композиции страниц (`apps/web/src/_pages/results/`):**
+   - `ResultsPage`: композиция страницы с бейджами безопасности `EU Region (GDPR)` и `ClamAV Clean`, центрированной сеткой и адаптивным контейнером.
+   - `index.ts`: Public API слайса страниц.
+4. **Маршрутизация Next.js App Router (`apps/web/app/[locale]/results/[jobId]/`):**
+   - `page.tsx`: серверный компонент с валидацией `jobId`, динамической генерацией заголовка вкладки `generateMetadata` и вызовом `setRequestLocale`.
+5. **Интернационализация и UI:**
+   - Добавлен раздел переводов `"results"` во все словари (`uk.json`, `ru.json`, `en.json`).
+   - В навигационном меню `Navbar` статус маршрута `results` обновлен с `planned` на `ready`.
+6. **Верификация качества:**
+   - Полная проверка типов `npm run typecheck` пройдена без ошибок по всем пакетам монорепозитория.
+   - Полная сборка `npm run build -w @doc-converter/web` завершилась успешно.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/conversion.ts`: добавлены Zod-схемы `JobStatusSchema`, `FileConversionStatusSchema`, `OutputFileResultSchema`, `JobResultSchema`.
+- `apps/web/src/features/job-results/model/types.ts`: типы для представления результатов конвертации.
+- `apps/web/src/features/job-results/model/use-job-results.ts`: хук управления состоянием задания, таймером и скачиванием.
+- `apps/web/src/features/job-results/ui/job-countdown-timer.tsx`: компонент обратного отсчета 12 часов с баннером сохранения в аккаунт.
+- `apps/web/src/features/job-results/ui/job-status-card.tsx`: карточка общего статуса задачи и метрик файлов.
+- `apps/web/src/features/job-results/ui/job-files-list.tsx`: интерактивный список файлов с кнопками скачивания и причинами ошибок.
+- `apps/web/src/features/job-results/ui/job-results-view.tsx`: объединяющий контейнер результатов с кнопкой единого ZIP.
+- `apps/web/src/features/job-results/index.ts`: Public API слайса `features/job-results`.
+- `apps/web/src/_pages/results/results-page.tsx`: страница результатов конвертации.
+- `apps/web/src/_pages/results/index.ts`: Public API слайса `_pages/results`.
+- `apps/web/src/_pages/index.ts`: реэкспорт `ResultsPage`.
+- `apps/web/app/[locale]/results/[jobId]/page.tsx`: маршрут Next.js App Router с динамическими метаданными.
+- `apps/web/src/shared/i18n/messages/uk.json`: переводы раздела `"results"` на украинский язык.
+- `apps/web/src/shared/i18n/messages/ru.json`: переводы раздела `"results"` на русский язык.
+- `apps/web/src/shared/i18n/messages/en.json`: переводы раздела `"results"` на английский язык.
+- `apps/web/src/shared/ui/navbar.tsx`: обновление статуса ссылки результатов в dev-меню.
+- `docs/implementation-plan.md`: отметка о выполнении пункта 1.5 плана.
+
 
 ### Суть задачи
 
