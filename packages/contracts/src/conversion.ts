@@ -91,3 +91,4 @@ export const ConversionOptionsSchema = z.union([
   PdfToImagesOptionsSchema,
 ]);
 export type ConversionOptions = z.infer<typeof ConversionOptionsSchema>;
+

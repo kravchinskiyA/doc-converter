@@ -11,3 +11,4 @@ export default async function ConvertRootPage({
 
   redirect({ href: '/convert/pdf-to-docx', locale });
 }
+

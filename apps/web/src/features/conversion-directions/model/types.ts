@@ -71,3 +71,4 @@ export const DIRECTION_CONFIGS: Record<ConversionDirection, DirectionMeta> = {
 
 export const SUPPORTED_OCR_LANGUAGES: OcrLanguage[] = ['uk', 'ru', 'en', 'fr', 'de', 'pl'];
 export const SUPPORTED_DPIS: PdfRasterDpi[] = [72, 150, 300];
+
