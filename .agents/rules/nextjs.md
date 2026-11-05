@@ -1,3 +1,9 @@
+---
+trigger: glob
+globs: "apps/web/**"
+description: "Стандарты Next.js (App Router, React 19+), Server Components (RSC), client boundaries, streaming и оптимизация веб-интерфейса."
+---
+
 # Стандарты разработки Next.js (nextjs.md)
 
 Данный документ регламентирует лучшие практики разработки клиентской и серверной части в приложении `apps/web` на базе фреймворка Next.js (App Router, React 19+).

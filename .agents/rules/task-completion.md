@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Регламент завершения задач: обязательная фиксация в docs/progress.md, актуализация docs/db-schema.md и docs/project-structure.md."
+---
+
 # 9. Завершение задач и память проекта (task-completion.md)
 
 ## Обязательный регламент завершения задач

@@ -1,3 +1,9 @@
+---
+trigger: glob
+globs: "packages/infrastructure/src/converters/**, apps/worker/**"
+description: "Движки конвертации, обязательный антивирусный пре-скан ClamAV, Sharp, pdf-lib (A4, 10 мм), LibreOffice и PaddleOCR."
+---
+
 # 6. Движки конвертации, OCR и антивирус (converters-ocr.md)
 
 ## Стек движков обработки

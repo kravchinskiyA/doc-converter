@@ -1,3 +1,9 @@
+---
+trigger: glob
+globs: "apps/web/**"
+description: "Архитектура фронтенда Feature-Sliced Design (FSD), правила слоев, React Hook Form, Zod и i18n в apps/web."
+---
+
 # 3. Стандарты Frontend и Feature-Sliced Design (frontend-fsd.md)
 
 ## Стек Frontend (`apps/web`)

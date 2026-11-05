@@ -1,3 +1,9 @@
+---
+trigger: glob
+globs: "apps/api/**, packages/contracts/**"
+description: "Серверная логика NestJS, REST API, потоковая передача файлов, Stripe биллинг, Amazon SESv2 и асинхронные задачи (202 Accepted)."
+---
+
 # 4. Backend и REST API (backend-api.md)
 
 ## Стек Backend (`apps/api`)

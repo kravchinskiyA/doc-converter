@@ -1,5 +1,26 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-05] Добавление метаданных правил Antigravity (.agents/rules)
+
+### Суть задачи
+
+В соответствии со спецификацией Antigravity Rules ([https://antigravity.google/docs/rules/](https://antigravity.google/docs/rules/)) все файлы правил в `.agents/rules/*.md` дополнены блоками YAML frontmatter (`trigger`, `globs`, `description`). Это обеспечивает корректную автоматическую активацию правил при обращении к соответствующим файлам и поддиректориям (`glob`), постоянный контроль кодовых стандартов (`always_on`) и динамическую загрузку архитектурных регламентов (`model_decision`).
+
+### Измененные файлы
+
+- `.agents/rules/architecture-monorepo.md`: добавлен frontmatter (`trigger: model_decision`).
+- `.agents/rules/backend-api.md`: добавлен frontmatter (`trigger: glob`, `globs: "apps/api/**, packages/contracts/**"`).
+- `.agents/rules/coding-standards.md`: добавлен frontmatter (`trigger: always_on`).
+- `.agents/rules/converters-ocr.md`: добавлен frontmatter (`trigger: glob`, `globs: "packages/infrastructure/src/converters/**, apps/worker/**"`).
+- `.agents/rules/design-system.md`: добавлен frontmatter (`trigger: glob`, `globs: "apps/web/**"`).
+- `.agents/rules/frontend-fsd.md`: добавлен frontmatter (`trigger: glob`, `globs: "apps/web/**"`).
+- `.agents/rules/git-flow.md`: добавлен frontmatter (`trigger: model_decision`).
+- `.agents/rules/nextjs.md`: добавлен frontmatter (`trigger: glob`, `globs: "apps/web/**"`).
+- `.agents/rules/project-overview.md`: добавлен frontmatter (`trigger: model_decision`).
+- `.agents/rules/queues-workers.md`: добавлен frontmatter (`trigger: glob`, `globs: "apps/worker/**, apps/maintenance/**"`).
+- `.agents/rules/security-auth.md`: добавлен frontmatter (`trigger: glob`, `globs: "apps/api/**, packages/infrastructure/prisma/**"`).
+- `.agents/rules/task-completion.md`: добавлен frontmatter (`trigger: always_on`).
+
 ## [2026-11-05] Реализация экранов аутентификации и восстановления (Пункт 1.6)
 
 ### Суть задачи
