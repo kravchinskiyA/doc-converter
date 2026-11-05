@@ -23,3 +23,4 @@ export interface CountdownState {
 }
 
 export type ZipGenerationState = 'idle' | 'generating' | 'ready' | 'error';
+

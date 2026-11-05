@@ -284,3 +284,4 @@ export function useJobResults(jobId: string) {
     handleDownloadAllZip,
   };
 }
+
