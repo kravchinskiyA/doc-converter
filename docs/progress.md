@@ -1,5 +1,61 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-05] Интернационализация (i18n) на базе next-intl и словари переводов (Пункт 1.2)
+
+### Суть задачи
+
+Выполнен пункт 1.2 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.2) — интегрирована система интернационализации `next-intl` в Next.js 15 App Router в соответствии со слоями Feature-Sliced Design:
+- **Маршрутизация и навигация (`apps/web/src/shared/i18n/`, `apps/web/middleware.ts`, `apps/web/next.config.ts`):**
+  - Сконфигурирован `defineRouting` (`locales: ['uk', 'ru', 'en']`, `defaultLocale: 'uk'`, `localePrefix: 'always'`);
+  - Созданы локализованные обёртки навигации `createNavigation` (`Link`, `redirect`, `usePathname`, `useRouter`, `getPathname`);
+  - Настроен `middleware.ts` для автоматического определения локали и редиректа без затрагивания `/api/*`, `/_next/*` и статики;
+  - Подключен плагин `createNextIntlPlugin('./src/_app/i18n/request.ts')` в `next.config.ts`.
+- **Серверная конфигурация и провайдер (`apps/web/src/_app/i18n/`):**
+  - Реализован `getRequestConfig` (`request.ts`) с валидацией `requestLocale` и загрузкой словарей;
+  - Создан серверный провайдер `IntlProvider` (`NextIntlClientProvider`) для клиентских компонентов;
+  - В `apps/web/app/[locale]/layout.tsx` добавлены `generateStaticParams`, локализованный `generateMetadata`, проверка локали через `notFound()` и `setRequestLocale(locale)`.
+- **Словари переводов и строгая типизация (`apps/web/src/shared/i18n/messages/`):**
+  - Созданы полные словари `uk.json`, `ru.json`, `en.json` со строгой проверкой совпадения структуры через TypeScript (`Record<Locale, () => Promise<{ default: Messages }>>` и глобальный `IntlMessages` в `global.d.ts`);
+  - Охвачены разделы: `metadata`, `common`, `navigation` (включая dev-меню страниц), `footer`, `home`, `quickConverter`, `forms`, `validation`, `errors` (стабильные машинные коды ошибок API без утечки серверных исключений), `system` (тосты, статусы заданий, 404/500).
+- **Валидация Zod и хуки i18n (`zod-error-map.ts`, `hooks.ts`):**
+  - Реализованы `createZodErrorMap`, `useZodErrorMap` и хелпер `i18nIssue` для локализации стандартных и кастомных ошибок Zod в формах React Hook Form;
+  - Добавлены хуки `useErrorMessage` (безопасный перевод машинных кодов ошибок API с фолбэком на `UNKNOWN`) и `useFormatFileSize` (форматирование размеров файлов Б/КБ/МБ по текущей локали).
+- **Перевод существующих компонентов и переключатель языка:**
+  - Создан компонент `LocaleSwitcher` (`apps/web/src/shared/ui/locale-switcher.tsx`) для переключения языка (`uk`/`ru`/`en`) с сохранением текущего маршрута;
+  - Полностью переведены на словари `next-intl` главная страница (`app/[locale]/page.tsx`), `Navbar`, `Footer` и интерактивный `QuickConverter`.
+
+### Измененные и созданные файлы
+
+- `apps/web/src/shared/i18n/routing.ts`: Конфигурация локалей (`uk`, `ru`, `en`) и префиксов маршрутов.
+- `apps/web/src/shared/i18n/navigation.ts`: Локализованные обёртки навигации (`Link`, `useRouter`, `usePathname`, `redirect`).
+- `apps/web/src/shared/i18n/messages/uk.json`: Эталонный словарь украинского языка.
+- `apps/web/src/shared/i18n/messages/ru.json`: Словарь русского языка.
+- `apps/web/src/shared/i18n/messages/en.json`: Словарь английского языка.
+- `apps/web/src/shared/i18n/messages.ts`: Типизированный загрузчик словарей `loadMessages` и тип `Messages`.
+- `apps/web/src/shared/i18n/zod-error-map.ts`: Карта ошибок Zod (`createZodErrorMap`, `useZodErrorMap`, `i18nIssue`).
+- `apps/web/src/shared/i18n/hooks.ts`: Хуки `useErrorMessage` и `useFormatFileSize`.
+- `apps/web/src/shared/i18n/index.ts`: Public API сегмента `shared/i18n`.
+- `apps/web/src/_app/i18n/request.ts`: Серверная конфигурация `getRequestConfig`.
+- `apps/web/src/_app/i18n/intl-provider.tsx`, `index.ts`: Серверная обёртка `NextIntlClientProvider`.
+- `apps/web/middleware.ts`: Middleware маршрутизации локалей `next-intl`.
+- `apps/web/next.config.ts`: Подключение `createNextIntlPlugin`.
+- `apps/web/global.d.ts`: Декларация `IntlMessages` для автодополнения и проверки ключей переводов.
+- `apps/web/src/shared/ui/locale-switcher.tsx`, `index.ts`: Компонент переключения языка интерфейса.
+- `apps/web/src/shared/ui/navbar.tsx`: Перевод навигации и dev-меню, подключение `LocaleSwitcher` и локализованного `Link`.
+- `apps/web/src/shared/ui/footer.tsx`: Перевод всех секций подвала через `next-intl`.
+- `apps/web/app/[locale]/layout.tsx`: Интеграция `IntlProvider`, `generateMetadata`, `generateStaticParams`, `setRequestLocale`.
+- `apps/web/app/[locale]/page.tsx`: Локализация Hero-секции и карточек преимуществ главной страницы.
+- `apps/web/src/features/quick-converter/ui/quick-converter.tsx`: Локализация интерактивного конвертера документов и размеров файлов.
+- `docs/implementation-plan.md`: Отмечен пункт 1.2 как выполненный.
+- `docs/project-structure.md`: Отражены файлы i18n и middleware в структуре `apps/web`.
+- `docs/progress.md`: Зафиксирован прогресс выполнения задачи.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
 ## [2026-11-05] Реализация интерактивной главной страницы (Пункт 1.3) и меню навигации "Страницы"
 
 ### Суть задачи

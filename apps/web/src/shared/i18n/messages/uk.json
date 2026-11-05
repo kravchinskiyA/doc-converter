@@ -1,0 +1,320 @@
+{
+  "metadata": {
+    "title": "doc-converter | Приватний конвертер документів і зображень",
+    "description": "Конвертація PDF, DOCX і зображень на власних серверах у ЄС"
+  },
+  "common": {
+    "brand": "doc-converter",
+    "languages": {
+      "uk": "Українська",
+      "ru": "Русский",
+      "en": "English"
+    },
+    "fileSize": {
+      "bytes": "{value} Б",
+      "kilobytes": "{value} КБ",
+      "megabytes": "{value} МБ"
+    },
+    "actions": {
+      "save": "Зберегти",
+      "cancel": "Скасувати",
+      "confirm": "Підтвердити",
+      "close": "Закрити",
+      "back": "Назад",
+      "continue": "Продовжити",
+      "delete": "Видалити",
+      "download": "Завантажити",
+      "downloadZip": "Завантажити ZIP",
+      "copy": "Копіювати",
+      "retry": "Спробувати ще раз",
+      "resendCode": "Надіслати код повторно",
+      "newConversion": "Нова конвертація",
+      "toHome": "На головну"
+    },
+    "states": {
+      "loading": "Завантаження…",
+      "saving": "Збереження…",
+      "processing": "Обробка…"
+    }
+  },
+  "navigation": {
+    "ariaLabel": "Головна навігація",
+    "links": {
+      "pdfToDocx": "PDF → DOCX",
+      "docxToPdf": "DOCX → PDF",
+      "imagesToPdf": "Зображення → PDF",
+      "pricing": "Тарифи"
+    },
+    "login": "Увійти",
+    "account": "Кабінет",
+    "localeSwitcher": {
+      "label": "Мова інтерфейсу"
+    },
+    "devMenu": {
+      "trigger": "Сторінки",
+      "title": "Навігатор сторінками",
+      "badge": "dev-меню",
+      "ready": "Готово",
+      "categories": {
+        "main": "Головні",
+        "converters": "Конвертери (пункт 1.4)",
+        "results": "Результати (пункт 1.5)",
+        "auth": "Авторизація (пункт 1.6)",
+        "service": "Кабінет і службові (1.7, 1.9)"
+      },
+      "items": {
+        "home": "Головна сторінка (пункт 1.3)",
+        "pricing": "Тарифи та підписка",
+        "pdfToDocx": "PDF → DOCX (OCR з мініатюрами)",
+        "docxToPdf": "DOCX → PDF (LibreOffice)",
+        "imagesToPdf": "Зображення → PDF (A4, 10 мм)",
+        "pdfToImages": "PDF → Зображення (DPI / WebP)",
+        "results": "Статус завдання та завантаження ZIP",
+        "login": "Вхід до акаунта",
+        "register": "Реєстрація",
+        "verifyEmail": "Підтвердження email (6 цифр)",
+        "forgotPassword": "Скидання пароля",
+        "recoveryCode": "Резервний код відновлення",
+        "account": "Особистий кабінет",
+        "adminLogin": "Вхід для персоналу (TOTP 2FA)",
+        "adminDashboard": "Дашборд адміністратора",
+        "apiDocs": "Документація API",
+        "terms": "Умови використання",
+        "privacy": "Політика конфіденційності (GDPR)"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Безпечний SaaS-конвертер документів і зображень. Серверна інфраструктура — виключно в регіоні ЄС.",
+    "converters": {
+      "title": "Конвертери",
+      "pdfToDocx": "PDF у DOCX (OCR)",
+      "docxToPdf": "DOCX у PDF",
+      "imagesToPdf": "Зображення у PDF",
+      "pdfToImages": "PDF у JPG / WEBP"
+    },
+    "service": {
+      "title": "Сервіс",
+      "pricing": "Тарифи та підписка",
+      "apiDocs": "Документація REST API",
+      "staffLogin": "Службовий вхід"
+    },
+    "security": {
+      "title": "Безпека",
+      "privacy": "Конфіденційність (GDPR)",
+      "terms": "Умови обслуговування",
+      "euIsolation": "100% ізоляція даних у ЄС"
+    },
+    "copyright": "© {year} doc-converter. Усі права захищено.",
+    "bottomNote": "Шифрування SSE-KMS • Антивірус ClamAV • Без передачі даних стороннім AI"
+  },
+  "home": {
+    "badge": "Augen Pro • 100% юрисдикція даних ЄС",
+    "title": "Приватна конвертація документів і зображень",
+    "subtitle": "Точний OCR друкованого тексту, експорт DOCX у PDF та обробка зображень на власних ізольованих серверах у ЄС.",
+    "features": {
+      "eu": {
+        "title": "100% ізоляція в ЄС",
+        "text": "Файли ніколи не передаються стороннім AI-сервісам. Уся обробка виконується на власних потужностях у дата-центрах ЄС."
+      },
+      "ocr": {
+        "title": "Точність OCR до 98%",
+        "text": "Моделі PaddleOCR забезпечують CER не більше 2% на чітких сканах зі збереженням структури таблиць, списків і абзаців."
+      },
+      "cleanup": {
+        "title": "Автоочищення через 12 год",
+        "text": "Файли гостьових сесій гарантовано видаляються через 12 годин після готовності. Результати шифруються ключами SSE-KMS."
+      }
+    }
+  },
+  "quickConverter": {
+    "title": "Конвертер документів",
+    "description": "Швидка приватна конвертація PDF і DOCX з OCR друкованого тексту",
+    "guestAttempts": "Гість: {count} з {total} спроб",
+    "dropzone": {
+      "title": "Перетягніть файли сюди або натисніть, щоб вибрати",
+      "hint": "Підтримуються PDF і DOCX до {maxMb} МБ (до {maxFiles} файлів для гостя)",
+      "chooseFiles": "Вибрати файли"
+    },
+    "list": {
+      "selected": "Вибрано файлів: {count} з {max}",
+      "totalSize": "(загальний розмір: {size})",
+      "addMore": "Додати ще",
+      "clear": "Очистити"
+    },
+    "fileStatus": {
+      "tooLarge": "Перевищує {maxMb} МБ",
+      "invalidFormat": "Недопустимий формат",
+      "ready": "Готовий до обробки"
+    },
+    "aria": {
+      "moveUp": "Перемістити вгору",
+      "moveDown": "Перемістити вниз",
+      "remove": "Видалити файл"
+    },
+    "direction": {
+      "label": "Напрям:",
+      "pdfToDocx": "PDF → DOCX (OCR)",
+      "docxToPdf": "DOCX → PDF"
+    },
+    "convert": "Конвертувати ({count})",
+    "steps": {
+      "antivirus": "Антивірусна перевірка ClamAV (ЄС)…",
+      "queue": "Постановка завдання в чергу…",
+      "redirect": "Перехід до результату…"
+    },
+    "limits": {
+      "reached": "Досягнуто гостьового ліміту: максимум {max, plural, one {# файл} few {# файли} many {# файлів} other {# файла}}.",
+      "partiallyAdded": "Додано {added} з {total}. Гостьовий ліміт: {max, plural, one {# файл} few {# файли} many {# файлів} other {# файла}}."
+    },
+    "attemptsExhausted": {
+      "text": "Ви використали всі гостьові спроби ({total}). Зареєструйтеся, щоб продовжити без обмежень.",
+      "cta": "Створити акаунт"
+    },
+    "modes": {
+      "label": "Спеціалізовані режими:",
+      "pdfPages": "Вибір сторінок PDF → DOCX",
+      "docxToPdf": "DOCX → PDF",
+      "imagesToPdf": "Зображення → PDF"
+    }
+  },
+  "forms": {
+    "labels": {
+      "email": "Email",
+      "password": "Пароль",
+      "confirmPassword": "Повторіть пароль",
+      "currentPassword": "Поточний пароль",
+      "newPassword": "Новий пароль",
+      "firstName": "Ім’я",
+      "lastName": "Прізвище",
+      "code": "Код підтвердження",
+      "recoveryCode": "Резервний код",
+      "totpCode": "Код з автентифікатора",
+      "rememberMe": "Запам’ятати мене",
+      "acceptTerms": "Я приймаю умови обслуговування та політику конфіденційності"
+    },
+    "placeholders": {
+      "email": "name@example.com",
+      "password": "••••••••",
+      "code": "000000",
+      "recoveryCode": "XXXX-XXXX-XXXX"
+    },
+    "hints": {
+      "passwordLength": "Від {min} до {max} символів",
+      "codeSent": "Ми надіслали 6-значний код на вашу пошту",
+      "codeExpires": "Код дійсний {minutes, plural, one {# хвилину} few {# хвилини} many {# хвилин} other {# хвилини}}",
+      "resendIn": "Повторне надсилання через {seconds} с",
+      "attemptsLeft": "Залишилось спроб: {count}"
+    },
+    "submit": {
+      "login": "Увійти",
+      "register": "Зареєструватися",
+      "verify": "Підтвердити",
+      "sendCode": "Надіслати код",
+      "resetPassword": "Встановити новий пароль",
+      "save": "Зберегти зміни"
+    }
+  },
+  "validation": {
+    "required": "Обов’язкове поле",
+    "invalidType": "Некоректний тип значення",
+    "invalidEmail": "Введіть коректну адресу email",
+    "invalidUrl": "Введіть коректне посилання",
+    "invalidFormat": "Некоректний формат",
+    "invalidEnum": "Виберіть одне з доступних значень",
+    "invalidDate": "Некоректна дата",
+    "stringTooShort": "Мінімум {minimum, plural, one {# символ} few {# символи} many {# символів} other {# символу}}",
+    "stringTooLong": "Максимум {maximum, plural, one {# символ} few {# символи} many {# символів} other {# символу}}",
+    "stringExact": "Потрібно рівно {length, plural, one {# символ} few {# символи} many {# символів} other {# символу}}",
+    "numberTooSmall": "Значення має бути не менше {minimum}",
+    "numberTooBig": "Значення має бути не більше {maximum}",
+    "arrayTooSmall": "Виберіть щонайменше {minimum}",
+    "arrayTooBig": "Можна вибрати не більше {maximum}",
+    "notInteger": "Потрібне ціле число",
+    "passwordLength": "Пароль має містити від 8 до 128 символів",
+    "passwordsMismatch": "Паролі не збігаються",
+    "codeFormat": "Код складається з 6 цифр",
+    "recoveryCodeFormat": "Некоректний формат резервного коду",
+    "totpFormat": "Введіть 6 цифр з автентифікатора",
+    "termsRequired": "Необхідно прийняти умови",
+    "fileRequired": "Додайте хоча б один файл",
+    "fileTooLarge": "Розмір файлу перевищує {maxMb} МБ",
+    "fileType": "Непідтримуваний формат файлу",
+    "fileCountExceeded": "Максимальна кількість файлів: {max}",
+    "pagesRequired": "Виберіть хоча б одну сторінку",
+    "dpiInvalid": "Допустимі значення DPI: 72, 150 або 300",
+    "qualityRange": "Якість — від 1 до 100",
+    "default": "Некоректне значення"
+  },
+  "errors": {
+    "requestId": "Ідентифікатор запиту: {requestId}",
+    "codes": {
+      "UNKNOWN": "Сталася непередбачена помилка. Спробуйте ще раз.",
+      "NETWORK_ERROR": "Немає з’єднання з сервером. Перевірте інтернет і спробуйте ще раз.",
+      "BAD_REQUEST": "Некоректний запит. Перевірте введені дані.",
+      "UNAUTHORIZED": "Потрібна авторизація. Увійдіть до акаунта.",
+      "FORBIDDEN": "Недостатньо прав для цієї дії.",
+      "NOT_FOUND": "Об’єкт не знайдено або термін його зберігання минув.",
+      "PAYLOAD_TOO_LARGE": "Файл перевищує допустимий розмір.",
+      "UNSUPPORTED_MEDIA_TYPE": "Непідтримуваний тип файлу.",
+      "UNPROCESSABLE_CONTENT": "Вміст файлу не вдалося обробити.",
+      "RATE_LIMITED": "Забагато запитів. Зачекайте трохи й повторіть.",
+      "SERVICE_UNAVAILABLE": "Сервіс тимчасово недоступний. Спробуйте пізніше.",
+      "INTERNAL_ERROR": "Помилка сервісу. Ми вже працюємо над її усуненням.",
+      "SESSION_EXPIRED": "Сесія завершилась. Увійдіть знову.",
+      "INVALID_CREDENTIALS": "Невірний email або пароль.",
+      "EMAIL_NOT_VERIFIED": "Підтвердьте email, щоб продовжити.",
+      "EMAIL_TAKEN": "Цей email уже зареєстровано.",
+      "CODE_INVALID": "Невірний код підтвердження.",
+      "CODE_EXPIRED": "Термін дії коду минув. Запросіть новий код.",
+      "CODE_ATTEMPTS_EXCEEDED": "Вичерпано спроби введення коду. Запросіть новий код.",
+      "CODE_RESEND_COOLDOWN": "Новий код можна запросити через хвилину.",
+      "RECOVERY_CODE_INVALID": "Резервний код недійсний або вже використаний.",
+      "TOTP_INVALID": "Невірний код автентифікатора.",
+      "GUEST_ATTEMPTS_EXHAUSTED": "Гостьові спроби вичерпано. Зареєструйтеся, щоб продовжити.",
+      "QUOTA_EXCEEDED": "Ліміт вашого тарифу вичерпано.",
+      "STORAGE_FULL": "Сховище заповнене. Звільніть місце, щоб зберігати нові результати.",
+      "FILE_INFECTED": "Файл не пройшов антивірусну перевірку й був відхилений.",
+      "FILE_CORRUPTED": "Файл пошкоджений або не читається.",
+      "FILE_ENCRYPTED": "Файл захищено паролем. Зніміть захист і завантажте знову.",
+      "DECOMPRESSION_LIMIT": "Документ перевищує допустимий обсяг після розпакування.",
+      "CONVERSION_TIMEOUT": "Обробка зайняла надто багато часу та була зупинена.",
+      "CONVERSION_FAILED": "Не вдалося конвертувати файл.",
+      "SERVICE_PAUSED": "Прийом нових конвертацій тимчасово призупинено.",
+      "API_KEY_INVALID": "API-ключ недійсний або відкликаний.",
+      "PAYMENT_FAILED": "Оплата не пройшла. Спробуйте інший спосіб оплати."
+    }
+  },
+  "system": {
+    "toasts": {
+      "saved": "Зміни збережено",
+      "copied": "Скопійовано в буфер обміну",
+      "codeSent": "Код надіслано на вашу пошту",
+      "passwordChanged": "Пароль змінено",
+      "emailChanged": "Email змінено",
+      "fileDeleted": "Файл видалено",
+      "storageCleared": "Сховище очищено",
+      "apiKeyCreated": "API-ключ створено",
+      "subscriptionUpdated": "Підписку оновлено"
+    },
+    "jobStatus": {
+      "queued": "У черзі",
+      "scanning": "Антивірусна перевірка",
+      "processing": "Обробка",
+      "completed": "Готово",
+      "failed": "Помилка",
+      "expired": "Термін зберігання минув"
+    },
+    "notFound": {
+      "title": "Сторінку не знайдено",
+      "text": "Можливо, посилання застаріло або сторінку було переміщено."
+    },
+    "serverError": {
+      "title": "Щось пішло не так",
+      "text": "Ми вже отримали сповіщення про помилку. Спробуйте оновити сторінку."
+    },
+    "offline": "Немає з’єднання з інтернетом",
+    "maintenance": "Тривають технічні роботи. Сервіс незабаром відновить роботу."
+  }
+}
+

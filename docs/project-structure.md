@@ -18,16 +18,18 @@ files-converter/
 │   │   │       ├── account/              # Личный кабинет, квоты, история
 │   │   │       ├── pricing/              # Страница тарифов и подписок
 │   │   │       └── admin/                # Закрытая панель управления (Этап 1)
+│   │   ├── middleware.ts                 # Middleware локализации next-intl (uk по умолчанию, ru, en)
+│   │   ├── global.d.ts                   # Типизация IntlMessages для next-intl
 │   │   ├── src/                          # Feature-Sliced Design (FSD)
 │   │   │   ├── _app/                     # Провайдеры, стили, инициализация UI
-│   │   │   │   └── i18n/                 # Серверная интеграция next-intl
+│   │   │   │   └── i18n/                 # Серверная интеграция next-intl (request.ts, IntlProvider)
 │   │   │   ├── _pages/                   # UI страниц и их композиция
 │   │   │   ├── features/                 # Переиспользуемые сценарии действий
 │   │   │   ├── entities/                 # Бизнес-сущности интерфейса
 │   │   │   └── shared/                   # Общий UI (shadcn/ui), API-клиент, утилиты
 │   │   │       ├── ui/
 │   │   │       ├── api/
-│   │   │       ├── i18n/
+│   │   │       ├── i18n/                 # routing, navigation, messages (uk/ru/en), zod-error-map, hooks
 │   │   │       └── lib/
 │   │   └── public/                       # Публичная статика
 │   ├── api/                              # NestJS 10 + Express — API, авторизация, биллинг, шлюз
