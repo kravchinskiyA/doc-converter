@@ -24,7 +24,10 @@ files-converter/
 │   │   │   ├── _app/                     # Провайдеры, стили, инициализация UI
 │   │   │   │   └── i18n/                 # Серверная интеграция next-intl (request.ts, IntlProvider)
 │   │   │   ├── _pages/                   # UI страниц и их композиция
+│   │   │   │   └── auth/                 # Композиция страниц авторизации (login, register, verify, reset, recovery)
 │   │   │   ├── features/                 # Переиспользуемые сценарии действий
+│   │   │   │   ├── quick-converter/      # Быстрая конвертация файлов на главной
+│   │   │   │   └── auth/                 # Формы аутентификации (login, register, verify-email, reset, recovery-code)
 │   │   │   ├── entities/                 # Бизнес-сущности интерфейса
 │   │   │   └── shared/                   # Общий UI (shadcn/ui), API-клиент, утилиты
 │   │   │       ├── ui/
@@ -75,6 +78,7 @@ files-converter/
 │   │       └── payments/                 # Stripe SDK
 │   ├── contracts/                        # DTO, схемы Zod, общие контракты API
 │   │   └── src/
+│   │       ├── auth.ts                   # Валидация форм авторизации, паролей, кодов OTP и резервных кодов
 │   │       └── index.ts
 │   └── config/                           # Валидация переменных окружения через Zod
 │       └── src/

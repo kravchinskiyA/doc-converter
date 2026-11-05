@@ -1,5 +1,88 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-05] Реализация экранов аутентификации и восстановления (Пункт 1.6)
+
+### Суть задачи
+
+Выполнен пункт 1.6 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.6) — разработаны все экраны и интерактивные формы аутентификации, подтверждения и восстановления аккаунта в соответствии со спецификацией ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§6.1, 6.3, 6.5), стандартами архитектуры FSD, дизайном Augen Pro (zero-shadows, начертание 350/400, радиусы 32px/44px, акцент Signal Blue) и строгой типизацией Zod:
+
+1. **Контракты и схемы валидации (`packages/contracts/src/auth.ts`, `index.ts`):**
+   - Реализованы строгие Zod-схемы для всех сценариев аутентификации:
+     - `passwordSchema`: пароль от 8 до 128 символов включительно, поддержка пробелов, кириллицы и спецсимволов;
+     - `emailSchema`: валидация и нормализация email (`trim`, `toLowerCase`);
+     - `emailCodeSchema`: 6-значный цифровой OTP-код (`/^\d{6}$/`);
+     - `recoveryCodeSchema`: одноразовый буквенно-цифровой резервный код (8–32 символа);
+     - `loginSchema`, `registerSchema`, `verifyEmailSchema`, `forgotPasswordSchema`, `resetPasswordSchema`, `accountRecoverySchema`.
+2. **Слайс пользовательских сценариев (`apps/web/src/features/auth/`):**
+   - `AuthCard` (`ui/auth-card.tsx`): унифицированная контентная карточка в стиле Augen Pro (`max-w-[500px]`, `rounded-[32px] md:rounded-[44px]`, hairline-рамка 0.5px, zero-shadows);
+   - `LoginForm` (`ui/login-form.tsx`): форма входа с переключением видимости пароля, чекбоксом сессии на 30 дней (`rememberMe`), ссылками на сброс пароля, резервный код и регистрацию;
+   - `RegisterForm` (`ui/register-form.tsx`): форма регистрации с валидацией пароля (8–128), подтверждением пароля, чекбоксом обязательного принятия условий и политики, автоматическим переходом на подтверждение email;
+   - `VerifyEmailForm` (`ui/verify-email-form.tsx`): интерактивный экран подтверждения с таймером действия кода (10 минут / 600 с), защитой от перебора (счетчик 5 попыток), кулдауном повторной отправки (60 с) с кнопкой запроса нового кода и возможностью смены email;
+   - `ForgotPasswordForm` (`ui/forgot-password-form.tsx`): экран запроса сброса пароля с безопасным уведомлением OWASP (без раскрытия факта существования аккаунта) и переходом к установке нового пароля;
+   - `ResetPasswordForm` (`ui/reset-password-form.tsx`): установка нового пароля по 6-значному коду с обязательным предупреждением безопасности по ТЗ §6.3 (завершение всех сессий на всех устройствах и отзыв действующего API-ключа);
+   - `RecoveryCodeForm` (`ui/recovery-code-form.tsx`): процедура восстановления при утере почты по ТЗ §6.5 (ввод резервного кода, указание нового свободного email с отправкой кода подтверждения, задание нового пароля, предупреждение об аннулировании старых кодов, сессий, ключа и Telegram-бота, лимит 5 попыток за 15 минут);
+   - `index.ts`: Public API слайса `features/auth`.
+3. **Слайс композиции страниц (`apps/web/src/_pages/auth/`):**
+   - `LoginPage`, `RegisterPage`, `VerifyEmailPage`, `ForgotPasswordPage`, `ResetPasswordPage`, `RecoveryCodePage` с безопасными обертками `React.Suspense` для клиентских поисковых параметров;
+   - `index.ts`: Public API слайса `_pages/auth`.
+4. **Маршрутизация Next.js App Router (`apps/web/app/[locale]/auth/`):**
+   - Локализованные роуты для трех языков (`uk`, `ru`, `en`) с генерацией метаданных `generateMetadata` и статической генерацией `generateStaticParams`:
+     - `app/[locale]/auth/page.tsx` (редирект на `/auth/login`);
+     - `app/[locale]/auth/login/page.tsx`;
+     - `app/[locale]/auth/register/page.tsx`;
+     - `app/[locale]/auth/verify-email/page.tsx`;
+     - `app/[locale]/auth/forgot-password/page.tsx`;
+     - `app/[locale]/auth/reset-password/page.tsx`;
+     - `app/[locale]/auth/recovery-code/page.tsx`.
+5. **Интернационализация и навигация:**
+   - Добавлен полный раздел переводов `"auth"` (login, register, verifyEmail, forgotPassword, resetPassword, recoveryCode) в словари `uk.json`, `ru.json`, `en.json`;
+   - В выпадающее меню страниц `PAGE_GROUPS` компонента `Navbar` добавлены ссылки на экраны авторизации со статусом `ready`.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/auth.ts`: Zod-схемы и типы данных для всех сценариев авторизации и восстановления.
+- `packages/contracts/src/index.ts`: Экспорт контрактов авторизации.
+- `apps/web/src/features/auth/model/types.ts`: Типы состояния форм и контрактов.
+- `apps/web/src/features/auth/ui/auth-card.tsx`: Базовая карточка Augen Pro для форм авторизации.
+- `apps/web/src/features/auth/ui/login-form.tsx`: Форма входа в аккаунт с валидацией Zod.
+- `apps/web/src/features/auth/ui/register-form.tsx`: Форма регистрации с проверкой пароля и условий.
+- `apps/web/src/features/auth/ui/verify-email-form.tsx`: Экран подтверждения email (таймер 10 мин, 5 попыток, кулдаун 60 с).
+- `apps/web/src/features/auth/ui/forgot-password-form.tsx`: Форма запроса сброса пароля (OWASP).
+- `apps/web/src/features/auth/ui/reset-password-form.tsx`: Форма установки нового пароля с уведомлением об отзыве сессий и API-ключей.
+- `apps/web/src/features/auth/ui/recovery-code-form.tsx`: Форма восстановления по резервному коду (ТЗ §6.5).
+- `apps/web/src/features/auth/index.ts`: Public API слайса `features/auth`.
+- `apps/web/src/_pages/auth/login-page.tsx`: Страница входа.
+- `apps/web/src/_pages/auth/register-page.tsx`: Страница регистрации.
+- `apps/web/src/_pages/auth/verify-email-page.tsx`: Страница ввода 6-значного OTP кода.
+- `apps/web/src/_pages/auth/forgot-password-page.tsx`: Страница запроса сброса пароля.
+- `apps/web/src/_pages/auth/reset-password-page.tsx`: Страница смены пароля.
+- `apps/web/src/_pages/auth/recovery-code-page.tsx`: Страница восстановления по резервному коду.
+- `apps/web/src/_pages/auth/index.ts`, `apps/web/src/_pages/index.ts`: Public API слоя `_pages`.
+- `apps/web/app/[locale]/auth/page.tsx`: Редирект на экран входа.
+- `apps/web/app/[locale]/auth/login/page.tsx`: Роут Next.js App Router для входа.
+- `apps/web/app/[locale]/auth/register/page.tsx`: Роут Next.js App Router для регистрации.
+- `apps/web/app/[locale]/auth/verify-email/page.tsx`: Роут Next.js App Router для верификации email.
+- `apps/web/app/[locale]/auth/forgot-password/page.tsx`: Роут Next.js App Router для запроса сброса пароля.
+- `apps/web/app/[locale]/auth/reset-password/page.tsx`: Роут Next.js App Router для сброса пароля.
+- `apps/web/app/[locale]/auth/recovery-code/page.tsx`: Роут Next.js App Router для резервного кода.
+- `apps/web/src/shared/ui/checkbox.tsx`: Поддержка `React.ReactNode` в свойстве `label`.
+- `apps/web/src/shared/ui/navbar.tsx`: Актуализация dev-меню со статусом `ready` для экранов авторизации.
+- `apps/web/src/shared/i18n/messages/uk.json`: Переводы раздела `auth` и dev-меню на украинском языке.
+- `apps/web/src/shared/i18n/messages/ru.json`: Переводы раздела `auth` и dev-меню на русском языке.
+- `apps/web/src/shared/i18n/messages/en.json`: Переводы раздела `auth` и dev-меню на английском языке.
+- `apps/web/next.config.ts`: Настройка транспиляции и алиасов расширений для `@doc-converter/contracts`.
+- `docs/implementation-plan.md`: Отметка о выполнении пункта 1.6.
+- `docs/project-structure.md`: Фиксация новых файлов авторизации в структуре проекта.
+- `docs/progress.md`: Журнал выполнения пункта 1.6.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
+# Прогресс разработки doc-converter
+
 ## [2026-11-05] Интернационализация (i18n) на базе next-intl и словари переводов (Пункт 1.2)
 
 ### Суть задачи

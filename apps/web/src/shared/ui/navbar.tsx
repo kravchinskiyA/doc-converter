@@ -27,6 +27,7 @@ type DevMenuItemKey =
   | 'register'
   | 'verifyEmail'
   | 'forgotPassword'
+  | 'resetPassword'
   | 'recoveryCode'
   | 'account'
   | 'adminLogin'
@@ -73,11 +74,12 @@ const PAGE_GROUPS: PageCategory[] = [
   {
     category: 'auth',
     items: [
-      { key: 'login', href: '/auth/login', status: 'planned', step: '1.6' },
-      { key: 'register', href: '/auth/register', status: 'planned', step: '1.6' },
-      { key: 'verifyEmail', href: '/auth/verify-email', status: 'planned', step: '1.6' },
-      { key: 'forgotPassword', href: '/auth/forgot-password', status: 'planned', step: '1.6' },
-      { key: 'recoveryCode', href: '/auth/recovery-code', status: 'planned', step: '1.6' },
+      { key: 'login', href: '/auth/login', status: 'ready' },
+      { key: 'register', href: '/auth/register', status: 'ready' },
+      { key: 'verifyEmail', href: '/auth/verify-email', status: 'ready' },
+      { key: 'forgotPassword', href: '/auth/forgot-password', status: 'ready' },
+      { key: 'resetPassword', href: '/auth/reset-password', status: 'ready' },
+      { key: 'recoveryCode', href: '/auth/recovery-code', status: 'ready' },
     ],
   },
   {
