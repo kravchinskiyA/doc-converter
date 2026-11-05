@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: "Архитектура монорепозитория, границы пакетов apps/* и packages/*, единый Origin, проксирование /api/* и межпакетные контракты."
+---
+
 # 2. Архитектура монорепозитория и взаимодействие (architecture-monorepo.md)
 
 ## Структура Monorepo

@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: "Обзор проекта doc-converter, границы Этапа 1 (SaaS) и Этапа 2 (Telegram), юрисдикция ЕС, приватность и TTL хранения файлов."
+---
+
 # 1. Обзор проекта и общие ограничения (project-overview.md)
 
 ## Назначение

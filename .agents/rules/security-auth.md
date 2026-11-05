@@ -1,3 +1,9 @@
+---
+trigger: glob
+globs: "apps/api/**, packages/infrastructure/prisma/**"
+description: "Аутентификация Better Auth, шифрование ключей (AES-256-GCM + AWS KMS), шифрование S3 (SSE-KMS) и политики сессий."
+---
+
 # 7. Безопасность, секреты и авторизация (security-auth.md)
 
 ## Стек безопасности и авторизации

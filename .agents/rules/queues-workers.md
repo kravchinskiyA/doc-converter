@@ -1,3 +1,9 @@
+---
+trigger: glob
+globs: "apps/worker/**, apps/maintenance/**"
+description: "Очереди BullMQ, Redis, воркеры конвертации, паттерн Transactional Outbox в PostgreSQL и лимит параллельности (Global Concurrency 5)."
+---
+
 # 5. Очереди задач и воркеры (queues-workers.md)
 
 ## Стек очередей и воркеров
