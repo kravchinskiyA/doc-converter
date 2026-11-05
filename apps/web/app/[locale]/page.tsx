@@ -1,5 +1,6 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button, Badge } from '@/shared/ui';
-import { ArrowRight, FileUp, ShieldCheck, Zap, Lock } from 'lucide-react';
+import { Badge } from '@/shared/ui';
+import { ShieldCheck, Zap, Lock } from 'lucide-react';
+import { QuickConverter } from '@/features/quick-converter';
 
 export default async function HomePage({
   params,
@@ -10,7 +11,7 @@ export default async function HomePage({
 
   return (
     <div className="space-y-[90px] py-4">
-      {/* Hero Section с карточкой 54px */}
+      {/* Hero Section */}
       <section className="flex flex-col items-center text-center">
         <Badge variant="signal-chip" className="mb-6">
           Augen Pro • 100% EU Data Jurisdiction
@@ -22,62 +23,8 @@ export default async function HomePage({
           Точный OCR печатного текста, экспорт DOCX в PDF и обработка изображений на собственных изолированных серверах в ЕС.
         </p>
 
-        {/* Главная карточка 54px — Блок "Документы" */}
-        <Card className="w-full max-w-[860px] text-left">
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <CardTitle>Конвертер документов</CardTitle>
-                <CardDescription>
-                  Перетащите PDF или DOCX файл сюда либо выберите вручную
-                </CardDescription>
-              </div>
-              <Badge variant="neutral">Гость: 3 попытки</Badge>
-            </div>
-          </CardHeader>
-          <CardContent>
-            {/* Drag and Drop область */}
-            <div className="border border-dashed border-black/15 hover:border-signal-blue/50 rounded-[24px] p-8 md:p-14 text-center transition-colors flex flex-col items-center justify-center cursor-pointer bg-black/[0.01]">
-              <div className="h-12 w-12 rounded-full bg-signal-blue/5 flex items-center justify-center text-signal-blue mb-4">
-                <FileUp className="h-6 w-6 stroke-[1.5]" />
-              </div>
-              <p className="text-[15px] font-book text-off-black mb-1">
-                Перетащите файлы сюда или нажмите для выбора
-              </p>
-              <p className="text-[13px] font-book text-ash-gray">
-                Поддерживаются PDF и DOCX до 25 МБ
-              </p>
-            </div>
-
-            {/* Кнопка ручного выбора файлов */}
-            <div className="mt-6 flex justify-end">
-              <Button variant="floating-cta">
-                Выбрать файлы
-                <ArrowRight className="h-3.5 w-3.5 text-signal-blue" />
-              </Button>
-            </div>
-
-            {/* Быстрые чипы направлений */}
-            <div className="mt-8 flex flex-wrap items-center gap-2">
-              <span className="text-[13px] font-book text-steel-gray mr-2">Популярные направления:</span>
-              <a href={`/${locale}/convert/pdf-to-docx`}>
-                <Badge variant="signal-chip" className="hover:bg-signal-blue/5 cursor-pointer">
-                  PDF → DOCX (OCR)
-                </Badge>
-              </a>
-              <a href={`/${locale}/convert/docx-to-pdf`}>
-                <Badge variant="neutral" className="hover:border-black/20 cursor-pointer">
-                  DOCX → PDF
-                </Badge>
-              </a>
-              <a href={`/${locale}/convert/images-to-pdf`}>
-                <Badge variant="neutral" className="hover:border-black/20 cursor-pointer">
-                  Изображения → PDF
-                </Badge>
-              </a>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Главная интерактивная карточка — Блок Drag-and-Drop «Документы» */}
+        <QuickConverter locale={locale} />
       </section>
 
       {/* Преимущества — 3 колонки без теней */}
