@@ -1,5 +1,72 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-06] Реализация Страницы тарифов и шлюза оплаты (Пункт 1.8)
+
+### Суть задачи
+
+Выполнен пункт 1.8 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.8) — разработана страница тарифов и шлюз оплаты Stripe Checkout (`/[locale]/pricing/`) в строгом соответствии с ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§3.2, 3.3, 3.4, 3.6, 3.7, 3.8, 10.3, 11.1–11.3, 11.14), стандартами дизайн-системы Augen Pro (монохромный светлый фон, акцент Signal Blue `#0071e3`, начертание 350, радиусы 44px/pill, zero-shadows) и архитектурой Feature-Sliced Design (FSD):
+
+1. **Контракты и типизация цен и лимитов (`packages/contracts/src/pricing.ts`, `index.ts`):**
+   - Константа цен `TARIFF_PRICES_EUR` (Базовый 0 €, Pro 5 €/мес и 51 €/год с экономией 9 € и скидкой 15%, Максимальный 10 €/мес и 102 €/год с экономией 18 €, Enterprise договорная).
+   - Единая матрица лимитов `PLAN_LIMITS_MAP` для всех 4 тарифов (квоты документов/изображений, циклы восстановления 5ч/2ч, размеры файлов, пакеты, пиксельные лимиты 40 Мп/12000 px, память 2 ГБ, время 10 мин, точность OCR CER ≤ 2%).
+   - Схемы валидации сессий оплаты `createCheckoutSessionSchema`, `checkoutSessionResponseSchema` и формы обращения Enterprise `enterpriseInquirySchema`.
+2. **Слайс пользовательского интерфейса тарифов (`apps/web/src/features/pricing/`):**
+   - `model/types.ts`: типы тарифных карточек, матриц сравнения, FAQ и состояний модальных окон Stripe Checkout и Enterprise.
+   - `model/pricing-data.ts`: детальное наполнение всех 4 тарифов, структурированные группы параметров для матрицы лимитов (5 категорий) и расширенный блок часто задаваемых вопросов (FAQ).
+   - `ui/pricing-period-toggle.tsx`: переключатель периода «Месяц / Год» в стиле плавающей капсулы Augen Pro с бейджем «-15%» и индикатором годовой экономии до 18 €.
+   - `ui/pricing-card.tsx`: адаптивная карточка тарифа с динамическим расчетом цены (€/мес или €/мес* при оплате за год с суммой списания), отметкой «Все налоги включены, продавец ФОП в Украине», списком включенных опций и кнопками вызова целевого сценария.
+   - `ui/pricing-cards-grid.tsx`: адаптивная 4-колоночная сетка тарифов с визуальным выделением Pro («Популярный выбор»).
+   - `ui/pricing-comparison-table.tsx`: детальная сводная таблица технических параметров всех 4 тарифов с группировкой по категориям, подсказками и примечаниями.
+   - `ui/stripe-checkout-modal.tsx`: интерактивный модальный шлюз оплаты Stripe Checkout:
+     * Валидация статуса подтверждения email по ТЗ §11.1 (проверка гостя с предложением войти/зарегистрироваться, предупреждение для неподтвержденных email о необходимости ввода 6-значного кода, и полноценный шлюз для подтвержденных email);
+     * Форма защищенного ввода реквизитов банковской карты (номер, MM/ГГ, CVC, имя) с кнопкой быстрого автозаполнения тестовой картой Stripe;
+     * Расчет итоговой суммы, подтверждение включения налогов, отметка о выключенном по умолчанию автопродлении (ТЗ §11.1);
+     * Индикация безопасной обработки (PCI-DSS, 256-bit SSL, серверы строго в ЕС);
+     * Состояние успешной активации подписки с генерацией ID транзакции Stripe и переходом в Личный кабинет.
+   - `ui/enterprise-contact-dialog.tsx`: диалог обращения по индивидуальным условиям тарифа Enterprise (ТЗ §11.14) с формой заявки и прямой кнопкой `mailto:support@doc-converter.com`.
+   - `ui/pricing-faq.tsx`: интерактивный аккордеон с ответами на ключевые вопросы о налогах, цикле восстановления попыток, скидке и отмене подписки с возвратом.
+   - `index.ts`: Public API слайса.
+3. **Слайс композиции страниц (`apps/web/src/_pages/pricing/`):**
+   - `pricing-page.tsx`: сборка главной страницы тарифов со всеми блоками, Hero-секцией, информационным баннером юрисдикции ЕС и модальными шлюзами.
+   - `index.ts`: экспорт страницы и регистрация в `apps/web/src/_pages/index.ts`.
+4. **Маршрутизация App Router (`apps/web/app/[locale]/pricing/`):**
+   - `page.tsx`: серверный компонент страницы с динамическими метаданными `generateMetadata`, `setRequestLocale` и интеграцией `PricingPage`.
+5. **Интернационализация и навигация:**
+   - Добавлен раздел `"pricing"` в словари `ru.json`, `uk.json`, `en.json`.
+   - Статус страницы `pricing` в выпадающем DevMenu и навигации `apps/web/src/shared/ui/navbar.tsx` обновлен на `ready`.
+6. **Верификация качества:**
+   - `npm run typecheck` завершен с кодом 0 по всем воркспейсам.
+   - `npm run build -w @doc-converter/web` успешно собрал все 54 статически генерируемые страницы.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/pricing.ts`: Цены, матрицы лимитов тарифов и Zod-схемы Stripe Checkout / Enterprise.
+- `packages/contracts/src/index.ts`: Реэкспорт контрактов ценообразования.
+- `apps/web/src/features/pricing/model/types.ts`: Интерфейсы и типы данных для страницы тарифов.
+- `apps/web/src/features/pricing/model/pricing-data.ts`: Данные тарифов, сводной матрицы лимитов и FAQ по ТЗ.
+- `apps/web/src/features/pricing/ui/pricing-period-toggle.tsx`: Переключатель «Месяц / Год» со скидкой 15%.
+- `apps/web/src/features/pricing/ui/pricing-card.tsx`: Компонент карточки тарифа Augen Pro.
+- `apps/web/src/features/pricing/ui/pricing-cards-grid.tsx`: Сетка тарифов.
+- `apps/web/src/features/pricing/ui/pricing-comparison-table.tsx`: Сводная таблица параметров и лимитов.
+- `apps/web/src/features/pricing/ui/stripe-checkout-modal.tsx`: Модальный экран оплаты Stripe Checkout с проверкой подтверждения email.
+- `apps/web/src/features/pricing/ui/enterprise-contact-dialog.tsx`: Модальное окно обращения по Enterprise тарифу.
+- `apps/web/src/features/pricing/ui/pricing-faq.tsx`: Блок часто задаваемых вопросов.
+- `apps/web/src/features/pricing/index.ts`: Публичный API слайса `features/pricing`.
+- `apps/web/src/_pages/pricing/pricing-page.tsx`: Презентационный компонент страницы тарифов.
+- `apps/web/src/_pages/pricing/index.ts`: Экспорт страницы.
+- `apps/web/src/_pages/index.ts`: Реэкспорт `PricingPage`.
+- `apps/web/app/[locale]/pricing/page.tsx`: Серверная страница маршрута `/pricing`.
+- `apps/web/src/shared/i18n/messages/ru.json`: Локализация страницы тарифов на русский язык.
+- `apps/web/src/shared/i18n/messages/uk.json`: Локализация страницы тарифов на украинский язык.
+- `apps/web/src/shared/i18n/messages/en.json`: Локализация страницы тарифов на английский язык.
+- `apps/web/src/shared/ui/navbar.tsx`: Обновление статуса страницы в навигаторе на `ready`.
+- `docs/implementation-plan.md`: Отметка о выполнении пункта 1.8.
+- `docs/progress.md`: Фиксация результатов выполнения задачи в журнале прогресса.
+
+---
+
+
+
 ## [2026-11-06] Реализация Личного кабинета пользователя (Пункт 1.7)
 
 ### Суть задачи

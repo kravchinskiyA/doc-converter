@@ -55,7 +55,7 @@ const PAGE_GROUPS: PageCategory[] = [
     category: 'main',
     items: [
       { key: 'home', href: '/', status: 'ready' },
-      { key: 'pricing', href: '/pricing', status: 'planned', step: '1.8' },
+      { key: 'pricing', href: '/pricing', status: 'ready' },
     ],
   },
   {
