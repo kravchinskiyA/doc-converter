@@ -11,3 +11,4 @@ export default function ErrorPage({
 }) {
   return <ErrorView error={error} reset={reset} />;
 }
+
