@@ -82,3 +82,4 @@ export function PricingFaq({ items, className }: PricingFaqProps) {
     </div>
   );
 }
+
