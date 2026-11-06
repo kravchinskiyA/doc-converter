@@ -85,7 +85,7 @@ const PAGE_GROUPS: PageCategory[] = [
   {
     category: 'service',
     items: [
-      { key: 'account', href: '/account', status: 'planned', step: '1.7' },
+      { key: 'account', href: '/account', status: 'ready', step: '1.7' },
       { key: 'adminLogin', href: '/admin/login', status: 'planned', step: '1.9' },
       { key: 'adminDashboard', href: '/admin/dashboard', status: 'planned', step: '1.9' },
       { key: 'apiDocs', href: '/api-docs', status: 'planned', step: '1.10' },

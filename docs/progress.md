@@ -1,5 +1,74 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-06] Реализация Личного кабинета пользователя (Пункт 1.7)
+
+### Суть задачи
+
+Выполнен пункт 1.7 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.7) — разработан полнофункциональный Личный кабинет пользователя (`/[locale]/account/`) в строгом соответствии с ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§5.4, 6.2, 6.3, 6.4, 6.5, 7, 10.1, 10.3, 11.1–11.3, 12.17), архитектурой Feature-Sliced Design (FSD), стандартами дизайна Augen Pro (zero-shadows, начертание 350, радиусы 54px/40px/28px/full, акцент Signal Blue) и полной поддержкой трёх языков (`uk`, `ru`, `en`):
+
+1. **Контракты и схемы Zod (`packages/contracts/src/account.ts`, `index.ts`):**
+   - Описаны строгие схемы валидации: `userProfileSchema`, `updateProfileSchema` (ФИО до 50 символов), `initEmailChangeSchema`, `verifyOldEmailStepSchema`, `completeEmailChangeSchema` (двухэтапная смена с чекбоксом завершения сессий), `changePasswordSchema` (scrypt, 8–128 символов), `apiKeyInfoSchema`, `rotateApiKeySchema`, `storageQuotaSchema` (квоты по тарифам 5/15/50 ГБ), `savedFileSchema` (срок 6 месяцев по ТЗ §10.1), `supportAccessRequestSchema` / `confirmSupportAccessSchema` / `revokeSupportAccessSchema` (ТЗ §12.17), `generateRecoveryCodesSchema` (ТЗ §6.5), `subscriptionDetailsSchema`, `changeSubscriptionPlanSchema`, `cancelSubscriptionSchema` (с расчетом возврата на карту по ТЗ §11.2), `deleteAccountSchema` (ТЗ §6.4).
+2. **Слайс пользовательских сценариев (`apps/web/src/features/account/`):**
+   - `model/types.ts`: типы навигационных вкладок, шагов flow-состояний смены email, пароля, ротации ключа, резервных кодов и отмены подписки.
+   - `model/use-account-state.ts`: хук управления состоянием личного кабинета с поддержкой:
+     * Профиля: сохранение ФИО, двухэтапная смена email с общим таймером 20 минут и чекбоксом отзыва сессий (ТЗ §6.2), смена пароля с подтверждением кодом и отзывом API-ключа (ТЗ §6.3);
+     * Хранилища: расчет занятого места (байт/МБ/ГБ), предупреждение при ≥75%, блокировка новых конвертаций при 100%, полная очистка хранилища (ТЗ §10.3);
+     * Сохраненных файлов: таблица результатов (сайт и API), поиск по имени, фильтрация по источнику, индивидуальное скачивание ZIP (ТЗ §10.2), пакетное скачивание архива выбранных файлов, удаление отдельных и выбранных файлов с мгновенным перерасчетом квоты;
+     * API-ключа: создание по запросу пользователя (по умолчанию до первого выпуска ключ отсутствует по ТЗ §7), скрытый просмотр (`••••••••`), копирование, перевыпуск с подтверждением email-кодом, запрет выпуска/замены при активных конвертациях;
+     * Подписки и оплаты: текущий статус (Stripe), переключатель автопродления (выключен по умолчанию по ТЗ §11.1), модальное окно смены тарифа (Pro ↔ Максимальный с доплатой/возвратом за оставшиеся дни периода по ТЗ §11.3), модальное окно немедленной отмены подписки с расчетом возврата на карту Stripe (ТЗ §11.2), история платежей и возвратов;
+     * Резервных кодов: выпуск/замена набора из 10 непредсказуемых кодов (ТЗ §6.5) с подтверждением кодом на email, модальное окно однократного показа, копирование всех кодов и скачивание текстового файла `.txt`;
+     * Служебного доступа: журнал запросов инженеров техподдержки к сбойным файлам с подтверждением 6-значным кодом на 24 часа и кнопкой досрочного отзыва (ТЗ §12.17);
+     * Удаления аккаунта: Danger Zone с предупреждением об удалении файлов и отсутствии возврата за оставшийся оплаченный срок подписки (ТЗ §6.4), подтверждение через 6-значный email-код.
+   - `ui/account-nav-tabs.tsx`: горизонтальные вкладки навигации Augen Pro с бейджами предупреждений квоты и входящих запросов.
+   - `ui/profile-section.tsx`: карточка профиля, диалоги двухэтапной смены email и пароля.
+   - `ui/storage-section.tsx`: шкала дискового пространства с порогом 75%, индикацией 100% блокировки и диалогом очистки.
+   - `ui/saved-files-table.tsx`: таблица результатов с мультиселектом, поиском и ZIP-скачиванием.
+   - `ui/api-key-section.tsx`: интерфейс API-ключа со скрытием, копированием и cURL-примером.
+   - `ui/subscription-section.tsx`: карточка тарифа, автопродление, диалоги апгрейда/даунгрейда и отмены с возвратом.
+   - `ui/security-codes-section.tsx`: карточка 10 резервных кодов с модалкой однократного показа и экспортом в файл.
+   - `ui/staff-access-section.tsx`: контроль доступа техподдержки к документам с подтверждением и отзывом.
+   - `ui/danger-zone-section.tsx`: зона необратимого удаления аккаунта.
+   - `index.ts`: Public API слайса `features/account`.
+3. **Слайс композиции страниц (`apps/web/src/_pages/account/`):**
+   - `account-page.tsx`: страница личного кабинета со sticky-меню Augen Pro и адаптивным лейаутом.
+   - `index.ts`: Public API слайса.
+   - Экспорт в `apps/web/src/_pages/index.ts`.
+4. **Маршрутизация Next.js App Router (`apps/web/app/[locale]/account/`):**
+   - `page.tsx`: серверный компонент с динамическими метаданными `generateMetadata`, `setRequestLocale` и рендерингом `AccountPage`.
+5. **Интернационализация и UI:**
+   - Добавлен раздел `"account"` во все языковые словари (`uk.json`, `ru.json`, `en.json`).
+   - В выпадающем меню `Navbar` статус маршрута `account` обновлен на `ready`.
+6. **Верификация качества:**
+   - Проверка типов TypeScript `npm run typecheck` пройдена без ошибок по всем воркспейсам монорепозитория.
+   - Продакшен-сборка `npm run build -w @doc-converter/web` успешно сгенерировала все 51 страницу приложения.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/account.ts`: Zod-схемы профиля, хранилища, файлов, подписок, API-ключей, резервных кодов и служебного доступа.
+- `packages/contracts/src/index.ts`: Экспорт контрактов аккаунта.
+- `apps/web/src/features/account/model/types.ts`: Типы данных и состояний слайса `features/account`.
+- `apps/web/src/features/account/model/use-account-state.ts`: Хук жизненного цикла личного кабинета со всей бизнес-логикой ТЗ.
+- `apps/web/src/features/account/ui/account-nav-tabs.tsx`: Навигационные вкладки разделов кабинета в стиле Augen Pro.
+- `apps/web/src/features/account/ui/profile-section.tsx`: Секция профиля, двухэтапная смена email и смена пароля.
+- `apps/web/src/features/account/ui/storage-section.tsx`: Секция хранилища с прогресс-баром, порогом 75% и очисткой.
+- `apps/web/src/features/account/ui/saved-files-table.tsx`: Таблица результатов (web/API) с мультивыбором и ZIP-скачиванием.
+- `apps/web/src/features/account/ui/api-key-section.tsx`: Секция API-ключа со скрытием, копированием и ротацией по email-коду.
+- `apps/web/src/features/account/ui/subscription-section.tsx`: Секция подписки, автопродление, смена тарифа и отмена с возвратом на карту.
+- `apps/web/src/features/account/ui/security-codes-section.tsx`: Секция 10 резервных кодов восстановления (однократный показ, скачивание .txt).
+- `apps/web/src/features/account/ui/staff-access-section.tsx`: Секция служебного доступа техподдержки к файлам по ТЗ §12.17.
+- `apps/web/src/features/account/ui/danger-zone-section.tsx`: Зона удаления аккаунта с подтверждением по email.
+- `apps/web/src/features/account/index.ts`: Public API слайса `features/account`.
+- `apps/web/src/_pages/account/account-page.tsx`: Композиция страницы Личного кабинета.
+- `apps/web/src/_pages/account/index.ts`: Public API слайса `_pages/account`.
+- `apps/web/src/_pages/index.ts`: Реэкспорт `AccountPage`.
+- `apps/web/app/[locale]/account/page.tsx`: Маршрут Next.js App Router с локализацией и метаданными.
+- `apps/web/src/shared/i18n/messages/uk.json`: Переводы раздела `"account"` на украинский.
+- `apps/web/src/shared/i18n/messages/ru.json`: Переводы раздела `"account"` на русский.
+- `apps/web/src/shared/i18n/messages/en.json`: Переводы раздела `"account"` на английский.
+- `apps/web/src/shared/ui/navbar.tsx`: Обновление статуса ссылки кабинета на `ready`.
+- `docs/implementation-plan.md`: Отметка о выполнении пункта 1.7.
+- `docs/project-structure.md`: Актуализация архитектурной структуры слайсов и контрактов.
+
 ## [2026-11-05] Реализация страницы ожидания и результатов конвертации (Пункт 1.5)
 
 ### Суть задачи

@@ -595,5 +595,23 @@
       "timeout": "Processing timeout exceeded (10 minutes)",
       "genericError": "Conversion failure without disclosing private data"
     }
+  },
+  "account": {
+    "metadata": {
+      "title": "Account Dashboard",
+      "description": "Manage your profile, storage quota, saved documents and subscription"
+    },
+    "title": "Personal Account",
+    "subtitle": "Manage profile, EU security and documents",
+    "tabs": {
+      "profile": "Profile",
+      "storage": "Storage",
+      "files": "Files",
+      "apiKey": "API Key",
+      "subscription": "Subscription",
+      "recovery": "Recovery Codes",
+      "support": "Support Access",
+      "danger": "Danger Zone"
+    }
   }
 }
