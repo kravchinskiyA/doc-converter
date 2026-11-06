@@ -88,9 +88,9 @@ const PAGE_GROUPS: PageCategory[] = [
       { key: 'account', href: '/account', status: 'ready', step: '1.7' },
       { key: 'adminLogin', href: '/admin/login', status: 'planned', step: '1.9' },
       { key: 'adminDashboard', href: '/admin/dashboard', status: 'planned', step: '1.9' },
-      { key: 'apiDocs', href: '/api-docs', status: 'planned', step: '1.10' },
-      { key: 'terms', href: '/terms', status: 'planned', step: '1.10' },
-      { key: 'privacy', href: '/privacy', status: 'planned', step: '1.10' },
+      { key: 'apiDocs', href: '/api-docs', status: 'ready' },
+      { key: 'terms', href: '/terms', status: 'ready' },
+      { key: 'privacy', href: '/privacy', status: 'ready' },
     ],
   },
 ];
