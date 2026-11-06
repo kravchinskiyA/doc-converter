@@ -619,5 +619,23 @@
       "title": "Pricing & Plans",
       "description": "Transparent pricing for doc-converter. Free Basic plan, Pro and Maximum plans, secure payment via Stripe."
     }
+  },
+  "apiDocs": {
+    "metadata": {
+      "title": "REST API Documentation",
+      "description": "Specification and code integration examples for doc-converter public REST API."
+    }
+  },
+  "terms": {
+    "metadata": {
+      "title": "Terms of Service",
+      "description": "Public offer, subscription billing, auto-renewal, refunds, and acceptable use policy of doc-converter."
+    }
+  },
+  "privacy": {
+    "metadata": {
+      "title": "GDPR Privacy Policy",
+      "description": "Personal data protection, GDPR compliance, S3 SSE-KMS encryption, and European Union server jurisdiction."
+    }
   }
 }
