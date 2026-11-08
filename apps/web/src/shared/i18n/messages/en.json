@@ -98,6 +98,7 @@
       "title": "Service",
       "pricing": "Pricing and subscription",
       "apiDocs": "REST API documentation",
+      "designSystem": "Design System (UI Kit)",
       "staffLogin": "Staff sign-in"
     },
     "security": {

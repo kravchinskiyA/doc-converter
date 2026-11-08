@@ -1,5 +1,34 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-08] Реализация отдельной витрины компонентов (Design System Showcase)
+
+### Суть задачи
+
+Создана интерактивная демонстрационная витрина компонентов и спецификация дизайн-системы **Augen Pro** («Apple keynote on surgical white») по роуту `/[locale]/design-system` в полном соответствии с проектными правилами ([`.agents/rules/design-system.md`](../.agents/rules/design-system.md)) и архитектурой Feature-Sliced Design:
+
+1. **Палитра цветов (Color Tokens):** интерактивные карточки всех 7 фирменных токенов (`Off-Black`, `Pure Black`, `Off-White`, `Pure White`, `Steel Gray`, `Ash Gray`, `Signal Blue`) с быстрым копированием HEX, CSS-переменными, классами Tailwind и показателями контрастности WCAG.
+2. **Типографика (Whisper-Weight):** наглядная демонстрация шкалы размеров (Display 44px, Heading 27px, Subheading 18px, Body 16px, Caption 12-13px) на базовом начертании 350 (Book), плотном трекинге `-0.02em` и интерлиньяже 1.15–1.2.
+3. **Геометрия и радиусы скругления:** интерактивная визуализация радиусов `rounded-pill` (9999px), `rounded-section` (63px), `rounded-card` (54px), `rounded-btn` (26px) и `rounded-nav` (10px).
+4. **Интерактивные компоненты UI-кита:**
+   - Кнопки (`Button`): все варианты (`floating-cta`, `secondary`, `outline`, `ghost`, `link`), размеры (`sm`, `default`, `lg`, `icon`), иконки и заблокированные состояния.
+   - Бейджи (`Badge`): `signal-chip`, `neutral`, `muted`, `success`, `error`.
+   - Поля ввода (`Input`) и флажки (`Checkbox`): стандартные, с ошибкой, заблокированные и интерактивные состояния с живым превью.
+   - Карточки (`Card`): эталонная структура карточки с внутренними отступами 69px и радиусом 54px.
+   - Модальное окно (`Dialog`): вызов интерактивного диалога с мягким оверлеем без теней, закрытием по Esc и клику на подложку.
+5. **Свод правил Do & Don't и Zero-Shadows:** наглядные матрицы сравнения допустимых и запрещенных дизайн-паттернов.
+6. **Навигация:** добавлена ссылка в футер подраздела «Сервис» с полной локализацией на украинский, русский и английский языки.
+
+### Измененные и созданные файлы
+
+- `apps/web/src/_pages/design-system/design-system-page.tsx`: Интерактивный клиентский компонент витрины дизайн-системы Augen Pro.
+- `apps/web/src/_pages/design-system/index.ts`: Реэкспорт компонента страницы.
+- `apps/web/src/_pages/index.ts`: Реэкспорт модуля `design-system` в слое `_pages`.
+- `apps/web/app/[locale]/design-system/page.tsx`: Страница App Router с поддержкой i18n и генерацией метаданных.
+- `apps/web/src/shared/ui/footer.tsx`: Добавлена ссылка на витрину дизайн-системы в блок «Сервис».
+- `apps/web/src/shared/i18n/messages/ru.json`, `en.json`, `uk.json`: Добавлен ключ `footer.service.designSystem`.
+
+---
+
 ## [2026-11-06] Реализация Закрытой административной панели (Пункт 1.9)
 
 ### Суть задачи

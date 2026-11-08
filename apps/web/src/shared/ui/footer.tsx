@@ -78,6 +78,11 @@ export function Footer({ className }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href="/design-system" className={LINK_CLASS}>
+                  {t('service.designSystem')}
+                </Link>
+              </li>
+              <li>
                 <Link href="/admin/login" className={LINK_CLASS}>
                   {t('service.staffLogin')}
                 </Link>

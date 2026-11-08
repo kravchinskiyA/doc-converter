@@ -98,6 +98,7 @@
       "title": "Сервіс",
       "pricing": "Тарифи та підписка",
       "apiDocs": "Документація REST API",
+      "designSystem": "Дизайн-система (UI Kit)",
       "staffLogin": "Службовий вхід"
     },
     "security": {

@@ -8,5 +8,6 @@ export * from './terms';
 export * from './privacy';
 export * from './errors';
 export * from './admin';
+export * from './design-system';
 
 
