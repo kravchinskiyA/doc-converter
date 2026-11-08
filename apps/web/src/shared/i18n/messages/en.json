@@ -65,6 +65,7 @@
       "items": {
         "home": "Home page (step 1.3)",
         "pricing": "Pricing and subscription",
+        "designSystem": "Design System (Augen Pro UI Kit)",
         "pdfToDocx": "PDF → DOCX (OCR with thumbnails)",
         "docxToPdf": "DOCX → PDF (LibreOffice)",
         "imagesToPdf": "Images → PDF (A4, 10 mm)",

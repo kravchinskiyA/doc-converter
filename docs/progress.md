@@ -25,7 +25,8 @@
 - `apps/web/src/_pages/index.ts`: Реэкспорт модуля `design-system` в слое `_pages`.
 - `apps/web/app/[locale]/design-system/page.tsx`: Страница App Router с поддержкой i18n и генерацией метаданных.
 - `apps/web/src/shared/ui/footer.tsx`: Добавлена ссылка на витрину дизайн-системы в блок «Сервис».
-- `apps/web/src/shared/i18n/messages/ru.json`, `en.json`, `uk.json`: Добавлен ключ `footer.service.designSystem`.
+- `apps/web/src/shared/ui/navbar.tsx`: Добавлена страница дизайн-системы в навигатор по страницам сервиса в шапке (категория «Главные»).
+- `apps/web/src/shared/i18n/messages/ru.json`, `en.json`, `uk.json`: Добавлены ключи `footer.service.designSystem` и `navigation.devMenu.items.designSystem`.
 
 ---
 
