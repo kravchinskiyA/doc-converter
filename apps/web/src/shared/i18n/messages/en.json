@@ -637,5 +637,176 @@
       "title": "GDPR Privacy Policy",
       "description": "Personal data protection, GDPR compliance, S3 SSE-KMS encryption, and European Union server jurisdiction."
     }
+  },
+  "admin": {
+    "metadata": {
+      "title": "Staff Administration Panel",
+      "description": "Internal administration panel for doc-converter with mandatory 2FA authentication."
+    },
+    "roles": {
+      "admin": "Administrator",
+      "support": "Support"
+    },
+    "login": {
+      "title": "Staff Sign-In",
+      "subtitle": "Access restricted to authorized personnel with verified second factor (TOTP 2FA or backup code).",
+      "badge": "Internal Environment • Staff Only",
+      "emailLabel": "Staff Email",
+      "emailPlaceholder": "staff@doc-converter.eu",
+      "passwordLabel": "Account Password",
+      "totpLabel": "Authenticator App Code",
+      "totpHint": "Enter the 6-digit code from Google Authenticator, 1Password, or Authy",
+      "recoveryCodeLabel": "Staff Recovery Code",
+      "recoveryCodeHint": "Enter one of your 10 one-time staff emergency recovery codes",
+      "useRecoveryCode": "Use emergency recovery code",
+      "useTotpCode": "Use TOTP authenticator code",
+      "submit": "Sign in to Admin Panel",
+      "submitting": "Verifying credentials…",
+      "demoNotice": "Demonstration mode: fill test credentials or switch role below",
+      "demoAdmin": "Sign in as Administrator",
+      "demoSupport": "Sign in as Support",
+      "backToHome": "Return to Home Page"
+    },
+    "header": {
+      "title": "Service Administration",
+      "subtitle": "Infrastructure monitoring, quota control, and security audit log",
+      "regionBadge": "EU Region (Frankfurt)",
+      "twoFactorBadge": "2FA TOTP Active",
+      "signedInAs": "Operator:",
+      "switchRole": "Switch Role (Test)",
+      "logout": "Sign out"
+    },
+    "tabs": {
+      "metrics": "Service Metrics",
+      "users": "Users & Quotas",
+      "jobs": "Conversion Jobs",
+      "billing": "Payments & Refunds",
+      "emergency": "Emergency Controls",
+      "audit": "Security Audit Log (90d)"
+    },
+    "metrics": {
+      "title": "Service Health & Infrastructure",
+      "description": "Real-time monitoring of BullMQ conversion queues, S3 storage, and ClamAV daemon.",
+      "bullmq": {
+        "title": "BullMQ Processing Queues",
+        "concurrency": "Concurrency (Global Limit: 5)",
+        "active": "Active",
+        "waiting": "Waiting",
+        "completed": "Completed (24h)",
+        "failed": "Failed (24h)",
+        "delayed": "Delayed",
+        "avgDuration": "Avg Duration"
+      },
+      "s3": {
+        "title": "Amazon S3 EU (SSE-KMS)",
+        "tempUsed": "Temp Buffer (temp/ 12h TTL)",
+        "resultsUsed": "Results (results/ 6mo)",
+        "objects": "Active Objects",
+        "cleanedToday": "Cleaned by TTL (24h)"
+      },
+      "clamav": {
+        "title": "ClamAV Antivirus Daemon",
+        "status": "clamd Status",
+        "signatures": "Signatures DB Version",
+        "scanned": "Scanned Today",
+        "threats": "Threats Blocked"
+      },
+      "infra": {
+        "title": "Infrastructure & Connections",
+        "globalPause": "Conversion Ingestion",
+        "globalPauseActive": "PAUSED",
+        "globalPauseNormal": "Operational",
+        "redis": "Redis Cluster (Queues & Quotas)",
+        "db": "PostgreSQL Connection Pool"
+      }
+    },
+    "users": {
+      "title": "Users, Quotas & Storage",
+      "description": "Manage user accounts, monitor quota usage, and enforce administrator restrictions.",
+      "search": "Search by email or user ID…",
+      "filterAll": "All Users",
+      "filterActive": "Active Conversions",
+      "filterPaused": "Paused",
+      "colUser": "User",
+      "colPlan": "Plan",
+      "colQuotas": "Quotas (Docs / Images)",
+      "colStorage": "Permanent S3",
+      "colStatus": "Conversions Status",
+      "colActions": "Actions",
+      "pauseConversions": "Pause Conversions",
+      "resumeConversions": "Resume Conversions",
+      "revokeApiKey": "Revoke API Key",
+      "apiKeyRevoked": "Key Revoked",
+      "noApiKey": "No Key Issued",
+      "supportNotice": "Support staff role has read-only access. Administrator role required to pause or revoke."
+    },
+    "jobs": {
+      "title": "Conversion Jobs Log",
+      "description": "Real-time job execution log. Pursuant to §12.6, document contents and file names are strictly isolated.",
+      "noPiiNotice": "Privacy: document contents and file names are never exposed in staff panels.",
+      "search": "Search by Job ID…",
+      "filterAll": "All Statuses",
+      "filterCompleted": "Completed",
+      "filterProcessing": "Processing",
+      "filterQueued": "Queued",
+      "filterFailed": "Failed",
+      "colJobId": "Job ID",
+      "colDirection": "Direction",
+      "colStatus": "Status",
+      "colDuration": "Duration",
+      "colTime": "Created At",
+      "colError": "Error Diagnostics"
+    },
+    "billing": {
+      "title": "Stripe Payments, Subscriptions & Refunds",
+      "description": "Review transactions and retry failed refunds per §11.10 without altering the computed amount.",
+      "colTx": "Stripe Transaction ID",
+      "colCustomer": "Customer",
+      "colAmount": "Amount",
+      "colPlan": "Plan / Interval",
+      "colStatus": "Status",
+      "colDate": "Date",
+      "colAction": "Action",
+      "retryRefund": "Retry Refund",
+      "retrying": "Sending to Stripe…",
+      "retrySuccess": "Refund request dispatched to Stripe (amount preserved)",
+      "supportNotice": "Refund retries are restricted to Administrator role."
+    },
+    "emergency": {
+      "title": "Emergency Administrator Controls",
+      "description": "Global traffic controls and emergency service mitigation.",
+      "globalCardTitle": "Global Conversion Ingestion (Web & API)",
+      "globalCardDesc": "Pauses new task submission system-wide. Active jobs complete normally, account portal and downloads remain accessible.",
+      "pauseConversionsBtn": "Emergency Pause Ingestion",
+      "resumeConversionsBtn": "Resume Normal Ingestion",
+      "currentStatus": "Current Status:",
+      "pausedAlert": "Service is in emergency pause mode. New conversions are rejected.",
+      "pauseReasonPrefix": "Pause Reason:",
+      "pauseByPrefix": "Triggered by:",
+      "pauseTimePrefix": "Timestamp:"
+    },
+    "audit": {
+      "title": "Security Audit & Staff Actions Log",
+      "description": "All operator actions and status changes are recorded and retained for 90 days per §12.14 without PII.",
+      "retentionNotice": "Security audit records are retained strictly for 90 days from the event. Auto-expunge active.",
+      "colTime": "Time (UTC)",
+      "colActor": "Operator",
+      "colRole": "Role",
+      "colAction": "Action",
+      "colTarget": "Target",
+      "colReason": "Justification / Reason",
+      "colIp": "IP Address",
+      "colResult": "Result"
+    },
+    "dialog": {
+      "pauseTitle": "Pause Conversions",
+      "resumeTitle": "Resume Conversions",
+      "revokeTitle": "Revoke User API Key",
+      "reasonLabel": "Mandatory justification (reason) for security audit log",
+      "reasonPlaceholder": "Specify reason (min 10 characters), e.g.: Compromised key token suspected…",
+      "confirm": "Confirm Action",
+      "cancel": "Cancel",
+      "minReasonError": "Reason must contain at least 10 characters"
+    }
   }
 }

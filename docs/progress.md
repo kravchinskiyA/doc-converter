@@ -1,5 +1,83 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-06] Реализация Закрытой административной панели (Пункт 1.9)
+
+### Суть задачи
+
+Выполнен пункт 1.9 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.9) — полностью разработана закрытая административная панель управления сервисом (`/[locale]/admin/`, `/[locale]/admin/login/`, `/[locale]/admin/dashboard/`) в строгом соответствии с ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§5.6, 11.10, 12.6, 12.14, 12.15, 12.16, 12.17, 12.18, 12.19), дизайн-системой Augen Pro (zero-shadows, начертание 350, радиусы 40px/pill, акцент Signal Blue `#0071e3`, монохромный светлый фон `#f2f2f4`) и архитектурой Feature-Sliced Design (FSD):
+
+1. **Контракты и типизация Zod (`packages/contracts/src/admin.ts`, `index.ts`):**
+   - Описаны служебные роли персонала: `staffRoleSchema = z.enum(['admin', 'support'])` по ТЗ §12.15.
+   - Схема формы входа персонала `staffLoginSchema` с обязательным вторым фактором (6-значный TOTP-код приложения-аутентификатора либо служебный резервный код из набора 10 одноразовых кодов персонала).
+   - Схемы экстренных действий с обязательным обоснованием для журнала безопасности (минимум 10 символов): `emergencyGlobalPauseSchema`, `emergencyUserPauseSchema`, `emergencyRevokeApiKeySchema`.
+   - Схема повтора сбойного возврата средств Stripe `retryFailedRefundSchema` без изменения рассчитанной суммы (ТЗ §11.10, §12.16).
+   - Схема системных метрик сервиса `serviceMetricsSchema` (BullMQ, S3, ClamAV, Redis, PostgreSQL).
+2. **Экран служебного входа персонала с обязательным 2FA (`apps/web/src/features/admin/ui/staff-login-form.tsx`):**
+   - Ввод email, пароля и 6-значного кода TOTP (или служебного резервного кода восстановления).
+   - Защита от публичной регистрации: служебный доступ предоставляется только сотрудникам с назначенной ролью.
+   - Демонстрационные кнопки быстрого входа с предустановленными ролями «Администратор» и «Поддержка» для тестирования разграничения прав.
+   - Маршрут `/admin/login`.
+3. **Дашборд системных метрик в реальном времени (`apps/web/src/features/admin/ui/admin-metrics-section.tsx`):**
+   - **BullMQ Очереди и воркеры:** активные, ожидающие, завершенные и сбойные задачи за сутки, параллельность 3/5 (Global Concurrency 5), средняя длительность конвертации.
+   - **Amazon S3 EU (SSE-KMS):** учет входящего буфера (`temp/` с автоочисткой через 12ч) и постоянного хранилища (`results/` со сроком до 6 месяцев), активные объекты, очистка по TTL.
+   - **ClamAV:** онлайн-статус демона `clamd`, версия вирусных баз, количество проверенных входящих потоков (100% сканирование до обработки), блокировки угроз.
+   - **Инфраструктура:** статус приема задач, подключение и память Redis Cluster, пул соединений PostgreSQL.
+4. **Таблицы пользователей, квот и заданий конвертации (`apps/web/src/features/admin/ui/admin-users-section.tsx`, `admin-jobs-section.tsx`):**
+   - Просмотр пользователей, тарифов, квот документов и изображений, занятого постоянного дискового пространства S3.
+   - Разграничение прав: сотрудникам роли «Поддержка» доступен только просмотр (read-only), администратору доступны кнопки приостановки/возобновления конвертаций и отключения API-ключа.
+   - Журнал заданий конвертации: Job ID, направление, статус, длительность, машинный код диагностики ошибок. В строгом соответствии с ТЗ §12.6 категорически исключены имена файлов, содержимое документов и PII.
+   - Поиск по email/ID и фильтры по статусам.
+5. **Журнал платежей Stripe и подписок (`apps/web/src/features/admin/ui/admin-billing-section.tsx`):**
+   - Транзакции Stripe, суммы в EUR, периоды, статусы подписок.
+   - Механизм ручного повтора неуспешного возврата Stripe: администратор может повторить сбойную операцию возврата без изменения рассчитанной суммы (ТЗ §11.10, §12.16); поддержка право изменения не получает.
+6. **Панель экстренных действий и журнал аудита (`apps/web/src/features/admin/ui/admin-emergency-section.tsx`, `admin-audit-section.tsx`, `emergency-action-dialog.tsx`):**
+   - Глобальный переключатель приема новых конвертаций (сайт и REST API) с обязательным модальным окном ввода причины действия.
+   - Оперативное отключение пользовательских API-ключей без раскрытия значения ключа.
+   - Журнал аудита безопасности (Audit Log) со строгим сроком хранения 90 дней (ТЗ §12.14) без PII, паролей и секретов.
+7. **Интернационализация и навигация:**
+   - Добавлены полные словари `admin` во все три языка (`uk.json`, `ru.json`, `en.json`).
+   - Статусы ссылок `adminLogin` и `adminDashboard` в навигации `apps/web/src/shared/ui/navbar.tsx` переведены в `ready`.
+8. **Верификация качества:**
+   - `npm run typecheck` завершен успешно (код 0) по всему монорепозиторию.
+   - `npm run build -w @doc-converter/web` завершен успешно (код 0) со сборкой всех 72 статических страниц.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/admin.ts`: Zod-схемы служебных ролей, входа с 2FA, экстренных действий и метрик.
+- `packages/contracts/src/index.ts`: Реэкспорт контрактов администрирования.
+- `apps/web/src/features/admin/model/types.ts`: TypeScript-типы сессий, вкладок, пользователей, заданий, платежей и аудита.
+- `apps/web/src/features/admin/model/mock-data.ts`: Демонстрационные данные, согласованные с ТЗ (EU region, 5 потоков, clamd, 90 дней логов).
+- `apps/web/src/features/admin/model/use-admin-state.ts`: Реактивное состояние админ-панели (аутентификация, переключение ролей admin/support, экстренные действия, повтор возвратов).
+- `apps/web/src/features/admin/ui/emergency-action-dialog.tsx`: Модальное окно подтверждения экстренного действия с валидацией причины.
+- `apps/web/src/features/admin/ui/staff-login-form.tsx`: Форма входа персонала с поддержкой TOTP и резервных кодов.
+- `apps/web/src/features/admin/ui/admin-header.tsx`: Шапка панели со статусом 2FA, регионом ЕС, индикатором роли и кнопкой тестирования.
+- `apps/web/src/features/admin/ui/admin-nav-tabs.tsx`: Навигационные вкладки Augen Pro с бейджами ошибок и статуса.
+- `apps/web/src/features/admin/ui/admin-metrics-section.tsx`: Секция мониторинга BullMQ, S3 EU, ClamAV и инфраструктуры.
+- `apps/web/src/features/admin/ui/admin-users-section.tsx`: Секция пользователей, квот и управления конвертациями.
+- `apps/web/src/features/admin/ui/admin-jobs-section.tsx`: Секция журнала заданий без PII и содержимого документов.
+- `apps/web/src/features/admin/ui/admin-billing-section.tsx`: Секция платежей Stripe с повтором возврата без изменения суммы.
+- `apps/web/src/features/admin/ui/admin-emergency-section.tsx`: Панель экстренного глобального управления приемом задач.
+- `apps/web/src/features/admin/ui/admin-audit-section.tsx`: Журнал безопасности и действий операторов (90 дней хранения).
+- `apps/web/src/features/admin/index.ts`: Публичный API фичи административной панели.
+- `apps/web/src/_pages/admin/admin-page.tsx`: Презентационный компонент закрытой административной панели.
+- `apps/web/src/_pages/admin/admin-login-page.tsx`: Презентационный компонент страницы входа персонала.
+- `apps/web/src/_pages/admin/index.ts`: Публичный API слоя страниц admin.
+- `apps/web/src/_pages/index.ts`: Реэкспорт страниц admin.
+- `apps/web/app/[locale]/admin/page.tsx`: Серверный маршрут `/[locale]/admin/`.
+- `apps/web/app/[locale]/admin/login/page.tsx`: Серверный маршрут `/[locale]/admin/login/`.
+- `apps/web/app/[locale]/admin/dashboard/page.tsx`: Серверный маршрут `/[locale]/admin/dashboard/`.
+- `apps/web/src/shared/i18n/messages/ru.json`: Локализация панели администратора на русский язык.
+- `apps/web/src/shared/i18n/messages/uk.json`: Локализация панели администратора на украинский язык.
+- `apps/web/src/shared/i18n/messages/en.json`: Локализация панели администратора на английский язык.
+- `apps/web/src/shared/ui/navbar.tsx`: Обновление статусов ссылок админки на `ready`.
+- `docs/implementation-plan.md`: Отметка пунктов 1.9 как выполненных.
+- `docs/project-structure.md`: Актуализация структуры FSD-слоев `_pages/admin` и `features/admin`.
+- `docs/progress.md`: Документирование выполнения пункта 1.9.
+
+---
+
+
+
 ## [2026-11-06] Реализация Служебных страниц (Пункт 1.10)
 
 ### Суть задачи

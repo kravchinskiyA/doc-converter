@@ -7,5 +7,6 @@ export * from './api-docs';
 export * from './terms';
 export * from './privacy';
 export * from './errors';
+export * from './admin';
 
 
