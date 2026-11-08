@@ -1,0 +1,235 @@
+import type { ServiceMetrics } from '@doc-converter/contracts';
+import type {
+  StaffSession,
+  AdminUserItem,
+  AdminJobItem,
+  AdminPaymentItem,
+  AdminAuditItem,
+} from './types';
+
+export const initialStaffSession: StaffSession = {
+  email: 'sec-admin@doc-converter.eu',
+  role: 'admin',
+  authenticatedAt: '2026-11-06T14:32:00Z',
+  twoFactorType: 'totp',
+};
+
+export const initialMetrics: ServiceMetrics = {
+  bullmq: {
+    status: 'healthy',
+    activeJobs: 3,
+    waitingJobs: 1,
+    completedJobsToday: 1420,
+    failedJobsToday: 4,
+    delayedJobs: 0,
+    concurrencyCurrent: 3,
+    concurrencyMax: 5,
+    avgDurationMs: 4250,
+  },
+  storageS3: {
+    region: 'eu-central-1',
+    encryption: 'SSE-KMS',
+    tempUsedBytes: 1024 * 1024 * 1420, // 1.4 GB
+    resultsUsedBytes: 1024 * 1024 * 1024 * 48.5, // 48.5 GB
+    totalObjects: 3840,
+    cleanedTodayCount: 620,
+  },
+  clamav: {
+    status: 'online',
+    signaturesVersion: 'v27345 (2026-11-06 04:12 UTC)',
+    scannedTodayCount: 1424,
+    threatsBlockedTodayCount: 0,
+    lastHeartbeat: '2026-11-06T15:58:10Z',
+  },
+  infrastructure: {
+    globalConversionsPaused: false,
+    globalPauseReason: null,
+    globalPauseAt: null,
+    globalPauseBy: null,
+    redisStatus: 'connected',
+    redisMemoryUsedMb: 148,
+    dbConnectionsActive: 8,
+    dbConnectionsMax: 20,
+  },
+};
+
+export const initialAdminUsers: AdminUserItem[] = [
+  {
+    id: 'usr_eu_01h8a',
+    email: 'alex.meyer@berlin-tech.de',
+    plan: 'pro',
+    docsUsed: 14,
+    docsLimit: 20,
+    imagesUsed: 28,
+    imagesLimit: 50,
+    storageUsedBytes: 1024 * 1024 * 145, // 145 MB
+    storageMaxBytes: 1024 * 1024 * 1024 * 5, // 5 GB
+    isConversionsPaused: false,
+    pauseReason: null,
+    apiKeyStatus: 'active',
+    createdAt: '2026-10-12T09:15:00Z',
+  },
+  {
+    id: 'usr_eu_02k9b',
+    email: 'elena.kovalenko@kyiv-audit.ua',
+    plan: 'max',
+    docsUsed: 42,
+    docsLimit: 50,
+    imagesUsed: 94,
+    imagesLimit: 100,
+    storageUsedBytes: 1024 * 1024 * 1024 * 12.4, // 12.4 GB
+    storageMaxBytes: 1024 * 1024 * 1024 * 25, // 25 GB
+    isConversionsPaused: false,
+    pauseReason: null,
+    apiKeyStatus: 'active',
+    createdAt: '2026-09-04T11:20:00Z',
+  },
+  {
+    id: 'usr_eu_03m7c',
+    email: 'guest-temp-4819@inbox-test.com',
+    plan: 'basic',
+    docsUsed: 2,
+    docsLimit: 5,
+    imagesUsed: 4,
+    imagesLimit: 5,
+    storageUsedBytes: 0,
+    storageMaxBytes: 0,
+    isConversionsPaused: false,
+    pauseReason: null,
+    apiKeyStatus: 'none',
+    createdAt: '2026-11-06T08:00:00Z',
+  },
+  {
+    id: 'usr_eu_04p2d',
+    email: 'dev-bot-service@nord-cloud.se',
+    plan: 'pro',
+    docsUsed: 19,
+    docsLimit: 20,
+    imagesUsed: 48,
+    imagesLimit: 50,
+    storageUsedBytes: 1024 * 1024 * 820,
+    storageMaxBytes: 1024 * 1024 * 1024 * 5,
+    isConversionsPaused: true,
+    pauseReason: 'Превышение порога нетипичной активности API (исследование тикета #8412)',
+    apiKeyStatus: 'revoked',
+    createdAt: '2026-08-19T14:40:00Z',
+  },
+];
+
+export const initialAdminJobs: AdminJobItem[] = [
+  {
+    id: 'job_88a91b2c',
+    userId: 'usr_eu_01h8a',
+    direction: 'pdf-to-docx',
+    status: 'completed',
+    durationMs: 3820,
+    errorDiagnostic: null,
+    createdAt: '2026-11-06T15:52:10Z',
+  },
+  {
+    id: 'job_44c12d3e',
+    userId: 'usr_eu_02k9b',
+    direction: 'images-to-pdf',
+    status: 'completed',
+    durationMs: 1450,
+    errorDiagnostic: null,
+    createdAt: '2026-11-06T15:54:30Z',
+  },
+  {
+    id: 'job_12e45f6a',
+    userId: 'usr_eu_01h8a',
+    direction: 'pdf-to-images',
+    status: 'processing',
+    durationMs: null,
+    errorDiagnostic: null,
+    createdAt: '2026-11-06T15:57:02Z',
+  },
+  {
+    id: 'job_99f67a8b',
+    userId: 'usr_eu_03m7c',
+    direction: 'docx-to-pdf',
+    status: 'queued',
+    durationMs: null,
+    errorDiagnostic: null,
+    createdAt: '2026-11-06T15:57:45Z',
+  },
+  {
+    id: 'job_77b34e5d',
+    userId: 'usr_eu_04p2d',
+    direction: 'docx-to-pdf',
+    status: 'failed',
+    durationMs: 2100,
+    errorDiagnostic: 'DOCX_EXPANSION_LIMIT_EXCEEDED (Архивная бомба отклонена: лимит распаковки 500 МБ)',
+    createdAt: '2026-11-06T15:40:12Z',
+  },
+];
+
+export const initialAdminPayments: AdminPaymentItem[] = [
+  {
+    id: 'ch_3N8xKaLkd921',
+    userId: 'usr_eu_02k9b',
+    amount: 199.0,
+    currency: 'EUR',
+    plan: 'Максимальный',
+    interval: 'year',
+    status: 'succeeded',
+    createdAt: '2026-11-01T10:14:00Z',
+  },
+  {
+    id: 'ch_3N7yMbLkd819',
+    userId: 'usr_eu_01h8a',
+    amount: 9.9,
+    currency: 'EUR',
+    plan: 'Pro',
+    interval: 'month',
+    status: 'succeeded',
+    createdAt: '2026-11-04T12:00:00Z',
+  },
+  {
+    id: 'ch_3N6zNcLkd702',
+    userId: 'usr_eu_04p2d',
+    amount: 7.42,
+    currency: 'EUR',
+    plan: 'Pro (Возврат за 23 неисп. дня)',
+    interval: 'month',
+    status: 'refund_failed',
+    refundFailureReason: 'Stripe API Error: rate_limit_temporary_upstream (Требуется ручной повтор администратором)',
+    createdAt: '2026-11-05T16:22:00Z',
+  },
+];
+
+export const initialAdminAuditLogs: AdminAuditItem[] = [
+  {
+    id: 'aud_01',
+    timestamp: '2026-11-06T14:32:00Z',
+    actorEmail: 'sec-admin@doc-converter.eu',
+    actorRole: 'admin',
+    action: 'STAFF_LOGIN_TOTP',
+    target: 'admin_session',
+    reason: 'Плановый вход оператора со служебного IP ЕС',
+    ip: '194.28.112.45',
+    result: 'success',
+  },
+  {
+    id: 'aud_02',
+    timestamp: '2026-11-06T15:41:20Z',
+    actorEmail: 'sec-admin@doc-converter.eu',
+    actorRole: 'admin',
+    action: 'REVOKE_API_KEY',
+    target: 'usr_eu_04p2d',
+    reason: 'Превышение порога нетипичной активности API (исследование тикета #8412)',
+    ip: '194.28.112.45',
+    result: 'success',
+  },
+  {
+    id: 'aud_03',
+    timestamp: '2026-11-06T15:42:00Z',
+    actorEmail: 'sec-admin@doc-converter.eu',
+    actorRole: 'admin',
+    action: 'PAUSE_USER_CONVERSIONS',
+    target: 'usr_eu_04p2d',
+    reason: 'Превышение порога нетипичной активности API (исследование тикета #8412)',
+    ip: '194.28.112.45',
+    result: 'success',
+  },
+];
