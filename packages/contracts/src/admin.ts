@@ -143,3 +143,4 @@ export const serviceMetricsSchema = z.object({
 });
 
 export type ServiceMetrics = z.infer<typeof serviceMetricsSchema>;
+
