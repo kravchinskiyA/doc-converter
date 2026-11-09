@@ -65,6 +65,7 @@
       "items": {
         "home": "Головна сторінка (пункт 1.3)",
         "pricing": "Тарифи та підписка",
+        "designSystem": "Дизайн-система (Augen Pro UI Kit)",
         "pdfToDocx": "PDF → DOCX (OCR з мініатюрами)",
         "docxToPdf": "DOCX → PDF (LibreOffice)",
         "imagesToPdf": "Зображення → PDF (A4, 10 мм)",
@@ -98,6 +99,7 @@
       "title": "Сервіс",
       "pricing": "Тарифи та підписка",
       "apiDocs": "Документація REST API",
+      "designSystem": "Дизайн-система (UI Kit)",
       "staffLogin": "Службовий вхід"
     },
     "security": {

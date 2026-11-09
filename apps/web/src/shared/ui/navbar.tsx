@@ -18,6 +18,7 @@ type DevMenuCategoryKey = 'main' | 'converters' | 'results' | 'auth' | 'service'
 type DevMenuItemKey =
   | 'home'
   | 'pricing'
+  | 'designSystem'
   | 'pdfToDocx'
   | 'docxToPdf'
   | 'imagesToPdf'
@@ -56,6 +57,7 @@ const PAGE_GROUPS: PageCategory[] = [
     items: [
       { key: 'home', href: '/', status: 'ready' },
       { key: 'pricing', href: '/pricing', status: 'ready' },
+      { key: 'designSystem', href: '/design-system', status: 'ready' },
     ],
   },
   {
