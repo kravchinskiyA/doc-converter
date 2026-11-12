@@ -22,8 +22,8 @@ export function VerifyEmailForm() {
   const searchParams = useSearchParams();
 
   const queryEmail = searchParams.get('email') || '';
+  const hasQueryEmail = Boolean(queryEmail);
   const [email, setEmail] = React.useState(queryEmail);
-  const [isEditingEmail, setIsEditingEmail] = React.useState(!queryEmail);
 
   // Таймеры и попытки
   const [timeLeft, setTimeLeft] = React.useState(EXPIRATION_SECONDS);
@@ -79,6 +79,12 @@ export function VerifyEmailForm() {
   const handleResendCode = async () => {
     if (cooldown > 0 || isResending) return;
 
+    const targetEmail = hasQueryEmail ? queryEmail : email;
+    if (!targetEmail) {
+      setErrorMessage(t('emailNotice'));
+      return;
+    }
+
     setIsResending(true);
     setErrorMessage(null);
 
@@ -130,47 +136,41 @@ export function VerifyEmailForm() {
   return (
     <AuthCard
       title={t('title')}
-      subtitle={email ? `${t('subtitle')} ${email}` : t('emailNotice')}
+      subtitle={
+        hasQueryEmail ? (
+          <>
+            {t('subtitle')}{' '}
+            <span className="text-off-black font-regular">{queryEmail}</span>
+          </>
+        ) : (
+          t('emailNotice')
+        )
+      }
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-left">
-        {/* Редактирование email если не передан через query */}
-        {isEditingEmail ? (
+        {/* Если email передан из формы регистрации (query), поле ввода скрывается */}
+        {hasQueryEmail ? (
+          <input type="hidden" {...register('email')} />
+        ) : (
           <div className="space-y-1.5">
             <label className="text-[13px] font-regular text-off-black">Email</label>
-            <div className="flex gap-2">
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@example.com"
-              />
-              <Button
-                type="button"
-                variant="secondary"
-                size="sm"
-                onClick={() => setIsEditingEmail(false)}
-              >
-                OK
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div className="flex items-center justify-between p-3 rounded-[12px] bg-black/[0.03] border-[0.5px] border-black/[0.05]">
-            <span className="text-[14px] font-book text-off-black truncate pr-2">
-              {email}
-            </span>
-            <button
-              type="button"
-              onClick={() => setIsEditingEmail(true)}
-              className="text-[12px] font-book text-signal-blue hover:underline shrink-0"
-            >
-              {t('changeEmail')}
-            </button>
+            <Input
+              type="email"
+              placeholder="name@example.com"
+              error={!!errors.email}
+              {...register('email')}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setValue('email', e.target.value);
+              }}
+            />
+            {errors.email?.message && (
+              <p className="text-[12px] font-book text-red-600">
+                {errors.email.message}
+              </p>
+            )}
           </div>
         )}
-
-        {/* Скрытое поле email для валидации формы */}
-        <input type="hidden" {...register('email')} />
 
         {/* Поле 6-значного кода */}
         <div className="space-y-2">

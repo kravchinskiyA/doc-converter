@@ -4,7 +4,7 @@ import { cn } from '@/shared/lib';
 export interface AuthCardProps extends React.HTMLAttributes<HTMLDivElement> {
   badge?: React.ReactNode;
   title: string;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   children: React.ReactNode;
 }
 
