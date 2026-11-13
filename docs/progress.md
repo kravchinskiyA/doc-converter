@@ -1,5 +1,27 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-13] Очистка бейджей и упоминаний ТЗ в страницах и секциях личного кабинета
+
+### Суть задачи
+
+В ветке `feature/account-pages-updates` удалены технические/информационные бейджи, два лишних информационных блока в разделе хранилища и упоминания пунктов ТЗ в текстах личного кабинета.
+
+### Изменённые файлы
+
+- `apps/web/src/_pages/account/account-page.tsx`: удалён блок бейджей заголовка страницы и неиспользуемый импорт `Badge`.
+- `apps/web/src/features/account/ui/profile-section.tsx`: удалён бейдж `euBadge`.
+- `apps/web/src/features/account/ui/storage-section.tsx`: удалён бейдж `s3Badge`, удалены блоки `rules.euTitle`/`rules.euDesc` и `rules.batchTitle`/`rules.batchDesc` (сетка изменена на `grid-cols-1`), удалены неиспользуемые импорты `Server` и `Info`.
+- `apps/web/src/features/account/ui/subscription-section.tsx`: удалён бейдж `stripeBadge`.
+- `apps/web/src/features/account/ui/staff-access-section.tsx`: удалён бейдж `specBadge`.
+- `apps/web/src/features/account/ui/danger-zone-section.tsx`: удалён бейдж `specBadge`.
+- `apps/web/src/shared/i18n/messages/ru.json`, `en.json`, `uk.json`: удалены упоминания ТЗ/§ из `account.subscription.refundInfoTitle`, `account.recovery.description`, `account.danger.consequencesTitle` и `account.danger.item2`.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
 ## [2026-11-13] Локализация (i18n) страниц и секций личного кабинета
 
 ### Суть задачи

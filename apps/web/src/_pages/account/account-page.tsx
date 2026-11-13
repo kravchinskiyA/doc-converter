@@ -14,7 +14,6 @@ import {
   DangerZoneSection,
   useAccountState,
 } from '@/features/account';
-import { Badge } from '@/shared/ui/badge';
 
 export function AccountPage() {
   const t = useTranslations('account.header');
@@ -25,11 +24,6 @@ export function AccountPage() {
       <div className="px-4 sm:px-6 lg:px-8 pb-20 space-y-8">
         {/* Заголовок страницы */}
         <div className="space-y-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="signal-chip">{t('badge')}</Badge>
-            <Badge variant="neutral">{t('gdprBadge')}</Badge>
-            <Badge variant="muted">{t('euBadge')}</Badge>
-          </div>
           <h1 className="text-[28px] md:text-[38px] font-book tracking-tight text-off-black">
             {t('title')}
           </h1>

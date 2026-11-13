@@ -57,7 +57,6 @@ export function SubscriptionSection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="signal-chip">{t('stripeBadge')}</Badge>
               <Badge variant={subscription.status === 'active' ? 'success' : 'neutral'}>
                 {subscription.status === 'active' ? t('statusActive') : t('statusBasic')}
               </Badge>

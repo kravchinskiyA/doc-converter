@@ -63,7 +63,6 @@ export function ProfileSection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="signal-chip">{t('euBadge')}</Badge>
               <Badge variant="success">
                 <CheckCircle2 className="h-3 w-3" />
                 {t('emailVerified')}

@@ -34,7 +34,6 @@ export function DangerZoneSection({
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <Badge variant="error">{t('badge')}</Badge>
-              <Badge variant="neutral">{t('specBadge')}</Badge>
             </div>
             <CardTitle className="text-[22px] md:text-[26px] text-red-600">
               {t('title')}

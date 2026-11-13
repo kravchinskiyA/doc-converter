@@ -6,8 +6,6 @@ import {
   AlertTriangle,
   Trash2,
   CheckCircle2,
-  Info,
-  Server,
 } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/shared/ui/card';
 import { Button } from '@/shared/ui/button';
@@ -46,7 +44,6 @@ export function StorageSection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="signal-chip">{t('s3Badge')}</Badge>
               <Badge variant="neutral">{t('planBadge', { plan: storageQuota.plan.toUpperCase() })}</Badge>
             </div>
             <CardTitle className="text-[22px] md:text-[26px]">{t('title')}</CardTitle>
@@ -114,13 +111,12 @@ export function StorageSection({
             {/* Прогресс-бар с отметкой 75% */}
             <div className="relative w-full h-3.5 rounded-full bg-black/[0.06] overflow-hidden">
               <div
-                className={`h-full transition-all duration-500 rounded-full ${
-                  storageQuota.isOver100
+                className={`h-full transition-all duration-500 rounded-full ${storageQuota.isOver100
                     ? 'bg-red-500'
                     : storageQuota.isOver75
-                    ? 'bg-amber-500'
-                    : 'bg-[#0f1012]'
-                }`}
+                      ? 'bg-amber-500'
+                      : 'bg-[#0f1012]'
+                  }`}
                 style={{ width: `${percentUsed}%` }}
               />
               {/* Вертикальная метка 75% */}
@@ -142,17 +138,7 @@ export function StorageSection({
           </div>
 
           {/* Информационные правила хранения */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-            <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
-              <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
-                <Server className="h-4 w-4 text-signal-blue" />
-                {t('rules.euTitle')}
-              </div>
-              <p className="text-[14px] text-steel-gray leading-relaxed">
-                {t('rules.euDesc')}
-              </p>
-            </div>
-
+          <div className="grid grid-cols-1 gap-3 pt-2">
             <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
               <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600" />
@@ -160,16 +146,6 @@ export function StorageSection({
               </div>
               <p className="text-[14px] text-steel-gray leading-relaxed">
                 {t('rules.retentionDesc')}
-              </p>
-            </div>
-
-            <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
-              <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
-                <Info className="h-4 w-4 text-signal-blue" />
-                {t('rules.batchTitle')}
-              </div>
-              <p className="text-[14px] text-steel-gray leading-relaxed">
-                {t('rules.batchDesc')}
               </p>
             </div>
           </div>
