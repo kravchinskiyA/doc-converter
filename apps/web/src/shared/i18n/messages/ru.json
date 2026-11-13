@@ -132,11 +132,11 @@
   },
   "quickConverter": {
     "title": "Конвертер документов",
-    "description": "Быстрая приватная конвертация PDF и DOCX с OCR печатного текста",
+    "description": "Быстрая приватная конвертация PDF в DOCX с OCR печатного текста",
     "guestAttempts": "Гость: {count} из {total} попыток",
     "dropzone": {
       "title": "Перетащите файлы сюда или нажмите для выбора",
-      "hint": "Поддерживаются PDF и DOCX до {maxMb} МБ (до {maxFiles} файлов для гостя)",
+      "hint": "Поддерживается PDF до {maxMb} МБ (до {maxFiles} файлов для гостя)",
       "chooseFiles": "Выбрать файлы"
     },
     "list": {

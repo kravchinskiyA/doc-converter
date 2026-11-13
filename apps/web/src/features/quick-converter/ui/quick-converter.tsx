@@ -26,7 +26,6 @@ import {
 import { Link, useFormatFileSize, useRouter } from '@/shared/i18n';
 import {
   type ConverterFile,
-  type ConversionDirection,
   GUEST_MAX_FILES,
   MAX_FILE_SIZE_BYTES,
   INITIAL_GUEST_ATTEMPTS,
@@ -41,7 +40,6 @@ export function QuickConverter() {
   const formatFileSize = useFormatFileSize();
   const router = useRouter();
   const [files, setFiles] = React.useState<ConverterFile[]>([]);
-  const [direction, setDirection] = React.useState<ConversionDirection>('pdf-to-docx');
   const [isDragging, setIsDragging] = React.useState(false);
   const [guestAttempts, setGuestAttempts] = React.useState<number>(() => {
     if (typeof window === 'undefined') return INITIAL_GUEST_ATTEMPTS;
@@ -89,12 +87,8 @@ export function QuickConverter() {
     for (const file of filesToProcess) {
       const lowerName = file.name.toLowerCase();
       const isPdf = lowerName.endsWith('.pdf') || file.type === 'application/pdf';
-      const isDocx =
-        lowerName.endsWith('.docx') ||
-        file.type ===
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
       const isTooLarge = file.size > MAX_FILE_SIZE_BYTES;
-      const isInvalidFormat = !isPdf && !isDocx;
+      const isInvalidFormat = !isPdf;
 
       newFiles.push({
         id: `${file.name}-${file.size}-${Date.now()}-${Math.random()}`,
@@ -103,24 +97,12 @@ export function QuickConverter() {
         size: file.size,
         type: file.type,
         isPdf,
-        isDocx,
         isTooLarge,
         isInvalidFormat,
       });
     }
 
-    const updatedFiles = [...files, ...newFiles];
-    setFiles(updatedFiles);
-
-    // Автоматическое определение направления конвертации по первому добавленному файлу
-    if (files.length === 0 && newFiles.length > 0) {
-      const first = newFiles[0];
-      if (first?.isDocx) {
-        setDirection('docx-to-pdf');
-      } else {
-        setDirection('pdf-to-docx');
-      }
-    }
+    setFiles([...files, ...newFiles]);
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -236,7 +218,7 @@ export function QuickConverter() {
           ref={fileInputRef}
           type="file"
           multiple
-          accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          accept=".pdf,application/pdf"
           className="hidden"
           onChange={(e) => {
             if (e.target.files) {
@@ -400,36 +382,13 @@ export function QuickConverter() {
               ))}
             </div>
 
-            {/* Выбор направления конвертации */}
+            {/* Направление конвертации (только PDF → DOCX) */}
             <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-black/[0.06]">
               <div className="flex items-center gap-2">
                 <span className="text-[13px] font-book text-steel-gray">
                   {t('direction.label')}
                 </span>
-                <div className="inline-flex rounded-button p-0.5 border border-black/10 bg-black/[0.02]">
-                  <button
-                    type="button"
-                    onClick={() => setDirection('pdf-to-docx')}
-                    className={`px-3 py-1 text-[12px] rounded-button transition-colors ${
-                      direction === 'pdf-to-docx'
-                        ? 'bg-pure-white text-off-black font-regular shadow-none'
-                        : 'text-steel-gray hover:text-off-black'
-                    }`}
-                  >
-                    {t('direction.pdfToDocx')}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setDirection('docx-to-pdf')}
-                    className={`px-3 py-1 text-[12px] rounded-button transition-colors ${
-                      direction === 'docx-to-pdf'
-                        ? 'bg-pure-white text-off-black font-regular shadow-none'
-                        : 'text-steel-gray hover:text-off-black'
-                    }`}
-                  >
-                    {t('direction.docxToPdf')}
-                  </button>
-                </div>
+                <Badge variant="neutral">{t('direction.pdfToDocx')}</Badge>
               </div>
 
               {/* Кнопка запуска */}
@@ -477,7 +436,7 @@ export function QuickConverter() {
           </div>
         )}
 
-        {/* Быстрые чипы направлений */}
+        {/* Быстрый переход в расширенный режим PDF → DOCX */}
         <div className="mt-4 pt-4 border-t border-black/[0.06] flex flex-wrap items-center gap-2">
           <span className="text-[13px] font-book text-steel-gray mr-2">
             {t('modes.label')}
@@ -488,16 +447,6 @@ export function QuickConverter() {
               className="hover:bg-signal-blue/5 cursor-pointer"
             >
               {t('modes.pdfPages')}
-            </Badge>
-          </Link>
-          <Link href="/convert/docx-to-pdf">
-            <Badge variant="neutral" className="hover:border-black/20 cursor-pointer">
-              {t('modes.docxToPdf')}
-            </Badge>
-          </Link>
-          <Link href="/convert/images-to-pdf">
-            <Badge variant="neutral" className="hover:border-black/20 cursor-pointer">
-              {t('modes.imagesToPdf')}
             </Badge>
           </Link>
         </div>

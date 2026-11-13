@@ -1,4 +1,4 @@
-export type ConversionDirection = 'pdf-to-docx' | 'docx-to-pdf';
+export type ConversionDirection = 'pdf-to-docx';
 
 export interface ConverterFile {
   id: string;
@@ -7,7 +7,6 @@ export interface ConverterFile {
   size: number;
   type: string;
   isPdf: boolean;
-  isDocx: boolean;
   isTooLarge: boolean;
   isInvalidFormat: boolean;
 }

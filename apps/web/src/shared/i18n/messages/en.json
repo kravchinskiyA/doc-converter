@@ -132,11 +132,11 @@
   },
   "quickConverter": {
     "title": "Document converter",
-    "description": "Fast private PDF and DOCX conversion with OCR for printed text",
+    "description": "Fast private PDF to DOCX conversion with OCR for printed text",
     "guestAttempts": "Guest: {count} of {total} attempts",
     "dropzone": {
       "title": "Drag files here or click to choose",
-      "hint": "PDF and DOCX up to {maxMb} MB are supported (up to {maxFiles} files for guests)",
+      "hint": "PDF up to {maxMb} MB is supported (up to {maxFiles} files for guests)",
       "chooseFiles": "Choose files"
     },
     "list": {
