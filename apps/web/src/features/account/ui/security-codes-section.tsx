@@ -112,7 +112,7 @@ export function SecurityCodesSection({
           <div className="rounded-[28px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-6 space-y-3">
             <div className="flex items-center justify-between text-[14px]">
               <span className="font-book text-off-black">Статус резервных ключей</span>
-              <span className="text-[12px] text-steel-gray">
+              <span className="text-[14px] text-steel-gray">
                 Хэши scrypt, защищённое хранение на сервере
               </span>
             </div>
@@ -125,7 +125,7 @@ export function SecurityCodesSection({
                 <p className="text-[14px] text-off-black font-book">
                   В наборе сохранено: <strong>{recoveryCodesCount} из 10 одноразовых ключей</strong>
                 </p>
-                <p className="text-[12px] text-steel-gray">
+                <p className="text-[14px] text-steel-gray">
                   По ТЗ §6.5 коды показываются только один раз при выпуске. Повторное раскрытие значений
                   сервером категорически запрещено.
                 </p>
@@ -136,22 +136,22 @@ export function SecurityCodesSection({
           {/* Информационные правила ТЗ §6.5 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-[24px] border-[0.5px] border-black/5 bg-off-white/40 p-4 space-y-2">
-              <span className="text-[13px] font-medium text-off-black flex items-center gap-1.5">
+              <span className="text-[14px] font-medium text-off-black flex items-center gap-1.5">
                 <Info className="h-4 w-4 text-signal-blue" />
                 Как использовать при утере email:
               </span>
-              <p className="text-[12px] text-steel-gray leading-relaxed">
+              <p className="text-[14px] text-steel-gray leading-relaxed">
                 На экране входа выберите «Нет доступа к почте», введите один из этих 10 кодов и укажите
                 новый адрес. Код одноразовый и после использования сгорает.
               </p>
             </div>
 
             <div className="rounded-[24px] border-[0.5px] border-black/5 bg-off-white/40 p-4 space-y-2">
-              <span className="text-[13px] font-medium text-off-black flex items-center gap-1.5">
+              <span className="text-[14px] font-medium text-off-black flex items-center gap-1.5">
                 <AlertTriangle className="h-4 w-4 text-amber-600" />
                 Правило замены набора:
               </span>
-              <p className="text-[12px] text-steel-gray leading-relaxed">
+              <p className="text-[14px] text-steel-gray leading-relaxed">
                 При выпуске нового набора все оставшиеся старые коды немедленно отзываются. Не забудьте
                 сохранить свежий файл или распечатку.
               </p>
@@ -180,7 +180,7 @@ export function SecurityCodesSection({
             </h3>
 
             {recoveryCodesFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[13px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertTriangle className="h-4 w-4 shrink-0" />
                 <span>{recoveryCodesFlow.error}</span>
               </div>
@@ -188,7 +188,7 @@ export function SecurityCodesSection({
 
             {recoveryCodesFlow.step === 'request_code' && (
               <div className="space-y-3 pt-2">
-                <p className="text-[13px] text-steel-gray leading-relaxed">
+                <p className="text-[14px] text-steel-gray leading-relaxed">
                   Для генерации набора из 10 резервных кодов введите 6-значный проверочный код,
                   отправленный на вашу текущую почту <strong>{userProfile.email}</strong>.
                 </p>
@@ -224,7 +224,7 @@ export function SecurityCodesSection({
 
             {recoveryCodesFlow.step === 'display_codes' && (
               <div className="space-y-4 pt-1">
-                <div className="p-3 rounded-[20px] border-[0.5px] border-amber-500/30 bg-amber-500/[0.05] text-[12px] text-amber-800 flex items-start gap-2">
+                <div className="p-3 rounded-[20px] border-[0.5px] border-amber-500/30 bg-amber-500/[0.05] text-[14px] text-amber-800 flex items-start gap-2">
                   <AlertTriangle className="h-4 w-4 shrink-0 text-amber-600 mt-0.5" />
                   <div>
                     <strong>Внимание: это единственный раз, когда эти коды отображаются!</strong>
@@ -234,13 +234,13 @@ export function SecurityCodesSection({
                 </div>
 
                 {/* Сетка кодов */}
-                <div className="grid grid-cols-2 gap-2 p-3 rounded-[20px] bg-black/[0.03] border-[0.5px] border-black/5 font-mono text-[13px] text-off-black">
+                <div className="grid grid-cols-2 gap-2 p-3 rounded-[20px] bg-black/[0.03] border-[0.5px] border-black/5 font-mono text-[14px] text-off-black">
                   {recoveryCodesFlow.codes.map((code, idx) => (
                     <div
                       key={idx}
                       className="p-2 rounded-[12px] bg-pure-white border-[0.5px] border-black/5 text-center tracking-wider"
                     >
-                      <span className="text-[10px] text-steel-gray mr-1.5">{idx + 1}.</span>
+                      <span className="text-[14px] text-steel-gray mr-1.5">{idx + 1}.</span>
                       {code}
                     </div>
                   ))}

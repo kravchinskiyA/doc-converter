@@ -74,7 +74,7 @@ export function AdminUsersSection({
                 placeholder={t('search')}
                 value={userSearch}
                 onChange={(e) => setUserSearch(e.target.value)}
-                className="pl-10 rounded-full h-10 text-[13px]"
+                className="pl-10 rounded-full h-10 text-[14px]"
               />
             </div>
 
@@ -83,7 +83,7 @@ export function AdminUsersSection({
                 variant={userFilter === 'all' ? 'floating-cta' : 'secondary'}
                 size="sm"
                 onClick={() => setUserFilter('all')}
-                className={`rounded-full text-[12px] h-9 ${userFilter === 'all' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
+                className={`rounded-full text-[14px] h-9 ${userFilter === 'all' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
               >
                 {t('filterAll')}
               </Button>
@@ -91,7 +91,7 @@ export function AdminUsersSection({
                 variant={userFilter === 'active' ? 'floating-cta' : 'secondary'}
                 size="sm"
                 onClick={() => setUserFilter('active')}
-                className={`rounded-full text-[12px] h-9 ${userFilter === 'active' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
+                className={`rounded-full text-[14px] h-9 ${userFilter === 'active' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
               >
                 {t('filterActive')}
               </Button>
@@ -99,7 +99,7 @@ export function AdminUsersSection({
                 variant={userFilter === 'paused' ? 'floating-cta' : 'secondary'}
                 size="sm"
                 onClick={() => setUserFilter('paused')}
-                className={`rounded-full text-[12px] h-9 ${userFilter === 'paused' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
+                className={`rounded-full text-[14px] h-9 ${userFilter === 'paused' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
               >
                 {t('filterPaused')}
               </Button>
@@ -109,7 +109,7 @@ export function AdminUsersSection({
 
         <CardContent className="pt-6">
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-[13px]">
+            <table className="w-full text-left border-collapse text-[14px]">
               <thead>
                 <tr className="border-b border-black/10 text-steel-gray font-regular">
                   <th className="pb-3 pr-4 font-normal">{t('colUser')}</th>
@@ -133,12 +133,12 @@ export function AdminUsersSection({
                       {/* Email + ID */}
                       <td className="py-4 pr-4">
                         <div className="font-regular">{user.email}</div>
-                        <div className="font-mono text-[11px] text-steel-gray">{user.id}</div>
+                        <div className="font-mono text-[14px] text-steel-gray">{user.id}</div>
                       </td>
 
                       {/* Тариф */}
                       <td className="py-4 px-4">
-                        <Badge variant="neutral" className="uppercase text-[11px]">
+                        <Badge variant="neutral" className="uppercase text-[14px]">
                           {user.plan}
                         </Badge>
                       </td>
@@ -148,7 +148,7 @@ export function AdminUsersSection({
                         <div>
                           Док: <span className="font-regular">{user.docsUsed}</span> / {user.docsLimit}
                         </div>
-                        <div className="text-[12px] text-steel-gray">
+                        <div className="text-[14px] text-steel-gray">
                           Фото: <span className="font-regular">{user.imagesUsed}</span> / {user.imagesLimit}
                         </div>
                       </td>
@@ -158,7 +158,7 @@ export function AdminUsersSection({
                         {user.storageMaxBytes > 0 ? (
                           <div>
                             <span className="font-regular">{formatBytes(user.storageUsedBytes)}</span>
-                            <span className="text-[11px] text-steel-gray"> / {formatBytes(user.storageMaxBytes)}</span>
+                            <span className="text-[14px] text-steel-gray"> / {formatBytes(user.storageMaxBytes)}</span>
                           </div>
                         ) : (
                           <span className="text-steel-gray">Гостевой (12ч)</span>
@@ -173,7 +173,7 @@ export function AdminUsersSection({
                               Приостановлен
                             </Badge>
                             {user.pauseReason && (
-                              <p className="text-[11px] text-steel-gray max-w-xs truncate" title={user.pauseReason}>
+                              <p className="text-[14px] text-steel-gray max-w-xs truncate" title={user.pauseReason}>
                                 {user.pauseReason}
                               </p>
                             )}
@@ -195,7 +195,7 @@ export function AdminUsersSection({
                               size="sm"
                               disabled={!isAdmin}
                               onClick={() => onOpenEmergencyModal('user_resume', user.id, user.email)}
-                              className="rounded-full h-8 text-[11px] gap-1 text-emerald-600 border-emerald-500/30 hover:bg-emerald-500/10"
+                              className="rounded-full h-8 text-[14px] gap-1 text-emerald-600 border-emerald-500/30 hover:bg-emerald-500/10"
                             >
                               <PlayCircle className="w-3 h-3" />
                               Возобновить
@@ -206,7 +206,7 @@ export function AdminUsersSection({
                               size="sm"
                               disabled={!isAdmin}
                               onClick={() => onOpenEmergencyModal('user_pause', user.id, user.email)}
-                              className="rounded-full h-8 text-[11px] gap-1 text-amber-600 border-amber-500/30 hover:bg-amber-500/10"
+                              className="rounded-full h-8 text-[14px] gap-1 text-amber-600 border-amber-500/30 hover:bg-amber-500/10"
                             >
                               <PauseCircle className="w-3 h-3" />
                               Пауза
@@ -220,16 +220,16 @@ export function AdminUsersSection({
                               size="sm"
                               disabled={!isAdmin}
                               onClick={() => onOpenEmergencyModal('revoke_api_key', user.id, user.email)}
-                              className="rounded-full h-8 text-[11px] gap-1 text-red-600 border-red-500/30 hover:bg-red-500/10"
+                              className="rounded-full h-8 text-[14px] gap-1 text-red-600 border-red-500/30 hover:bg-red-500/10"
                               title="Отключить API-ключ (значение ключа администратору не раскрывается)"
                             >
                               <KeyRound className="w-3 h-3" />
                               Отключить ключ
                             </Button>
                           ) : user.apiKeyStatus === 'revoked' ? (
-                            <span className="text-[11px] text-steel-gray px-2">Ключ отключен</span>
+                            <span className="text-[14px] text-steel-gray px-2">Ключ отключен</span>
                           ) : (
-                            <span className="text-[11px] text-steel-gray px-2">—</span>
+                            <span className="text-[14px] text-steel-gray px-2">—</span>
                           )}
                         </div>
                       </td>

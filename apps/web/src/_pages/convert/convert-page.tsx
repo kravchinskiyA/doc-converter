@@ -80,7 +80,7 @@ export function ConvertPage({ direction }: ConvertPageProps) {
           {title}
         </h1>
 
-        <p className="text-xs sm:text-sm md:text-base text-[#0f1012]/70 leading-relaxed font-light">
+        <p className="text-[14px] sm:text-sm md:text-base text-[#0f1012]/70 leading-relaxed font-light">
           {subtitle}
         </p>
       </div>
@@ -95,8 +95,8 @@ export function ConvertPage({ direction }: ConvertPageProps) {
         <div className="p-5 rounded-[28px] bg-white border border-[#0f1012]/10 flex items-start gap-3">
           <ShieldCheck className="w-5 h-5 text-[#0071e3] shrink-0 mt-0.5" />
           <div className="space-y-0.5">
-            <h5 className="text-xs font-semibold text-[#0f1012]">ClamAV Сканування</h5>
-            <p className="text-[11px] text-[#0f1012]/60 leading-relaxed">
+            <h5 className="text-[14px] font-semibold text-[#0f1012]">ClamAV Сканування</h5>
+            <p className="text-[14px] text-[#0f1012]/60 leading-relaxed">
               Жоден файл не передається на обробку без попереднього антивірусного вердикту.
             </p>
           </div>
@@ -105,8 +105,8 @@ export function ConvertPage({ direction }: ConvertPageProps) {
         <div className="p-5 rounded-[28px] bg-white border border-[#0f1012]/10 flex items-start gap-3">
           <Clock className="w-5 h-5 text-[#0071e3] shrink-0 mt-0.5" />
           <div className="space-y-0.5">
-            <h5 className="text-xs font-semibold text-[#0f1012]">Контроль TTL (12 год)</h5>
-            <p className="text-[11px] text-[#0f1012]/60 leading-relaxed">
+            <h5 className="text-[14px] font-semibold text-[#0f1012]">Контроль TTL (12 год)</h5>
+            <p className="text-[14px] text-[#0f1012]/60 leading-relaxed">
               Вхідні та результуючі файли гарантовано видаляються після закінчення терміну доступності.
             </p>
           </div>

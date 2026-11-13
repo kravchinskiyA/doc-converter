@@ -19,7 +19,7 @@ export default function GlobalError({
             An unexpected error occurred. Please try again.
           </p>
           {error?.digest && (
-            <p className="text-xs font-mono text-gray-400">Digest: {error.digest}</p>
+            <p className="text-[14px] font-mono text-gray-400">Digest: {error.digest}</p>
           )}
           <div className="pt-2">
             <button

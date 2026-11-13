@@ -52,7 +52,7 @@ export function AdminPage() {
 
         {/* Уведомление об операции */}
         {admin.toastMessage && (
-          <div className="rounded-[20px] bg-off-black text-pure-white px-5 py-3 text-[13px] font-book flex items-center justify-between shadow-none animate-in fade-in slide-in-from-top-2">
+          <div className="rounded-[20px] bg-off-black text-pure-white px-5 py-3 text-[14px] font-book flex items-center justify-between shadow-none animate-in fade-in slide-in-from-top-2">
             <span>{admin.toastMessage}</span>
           </div>
         )}

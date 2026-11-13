@@ -34,7 +34,7 @@ export function Footer({ className }: FooterProps) {
 
           {/* Колонка 2: Конвертеры */}
           <div className="space-y-3">
-            <h4 className="text-[12px] font-regular uppercase tracking-wider text-ash-gray">
+            <h4 className="text-[14px] font-regular uppercase tracking-wider text-ash-gray">
               {t('converters.title')}
             </h4>
             <ul className="space-y-2 text-[14px] font-book text-ash-gray">
@@ -63,7 +63,7 @@ export function Footer({ className }: FooterProps) {
 
           {/* Колонка 3: Сервис и API */}
           <div className="space-y-3">
-            <h4 className="text-[12px] font-regular uppercase tracking-wider text-ash-gray">
+            <h4 className="text-[14px] font-regular uppercase tracking-wider text-ash-gray">
               {t('service.title')}
             </h4>
             <ul className="space-y-2 text-[14px] font-book text-ash-gray">
@@ -92,7 +92,7 @@ export function Footer({ className }: FooterProps) {
 
           {/* Колонка 4: Юридическая информация */}
           <div className="space-y-3">
-            <h4 className="text-[12px] font-regular uppercase tracking-wider text-ash-gray">
+            <h4 className="text-[14px] font-regular uppercase tracking-wider text-ash-gray">
               {t('security.title')}
             </h4>
             <ul className="space-y-2 text-[14px] font-book text-ash-gray">
@@ -107,7 +107,7 @@ export function Footer({ className }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <span className="text-[12px] text-ash-gray/80 inline-block border-[0.5px] border-white/10 rounded-pill px-2.5 py-0.5">
+                <span className="text-[14px] text-ash-gray/80 inline-block border-[0.5px] border-white/10 rounded-pill px-2.5 py-0.5">
                   {t('security.euIsolation')}
                 </span>
               </li>
@@ -116,9 +116,9 @@ export function Footer({ className }: FooterProps) {
         </div>
 
         {/* Нижняя строчка копирайта */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] font-book text-ash-gray">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[14px] font-book text-ash-gray">
           <p>{t('copyright', { year: new Date().getFullYear() })}</p>
-          <p className="text-[12px]">{t('bottomNote')}</p>
+          <p className="text-[14px]">{t('bottomNote')}</p>
         </div>
       </div>
     </footer>

@@ -61,13 +61,13 @@ export function EnterpriseContactDialog({
               <h3 className="text-[17px] font-regular tracking-tight text-off-black">
                 Тариф Enterprise
               </h3>
-              <p className="text-[12px] text-steel-gray font-book">
+              <p className="text-[14px] text-steel-gray font-book">
                 Индивидуальные условия для компаний (ТЗ §11.14)
               </p>
             </div>
           </div>
 
-          <Badge variant="neutral" className="text-[11px] py-0.5">
+          <Badge variant="neutral" className="text-[14px] py-0.5">
             Договорная цена
           </Badge>
         </div>
@@ -81,7 +81,7 @@ export function EnterpriseContactDialog({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="text-[12px] font-regular text-steel-gray mb-1 block">
+                <label className="text-[14px] font-regular text-steel-gray mb-1 block">
                   Ваше имя
                 </label>
                 <Input
@@ -89,12 +89,12 @@ export function EnterpriseContactDialog({
                   placeholder="Иван Иванов"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="h-10 text-[13px]"
+                  className="h-10 text-[14px]"
                 />
               </div>
 
               <div>
-                <label className="text-[12px] font-regular text-steel-gray mb-1 block">
+                <label className="text-[14px] font-regular text-steel-gray mb-1 block">
                   Корпоративный email
                 </label>
                 <Input
@@ -103,14 +103,14 @@ export function EnterpriseContactDialog({
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-10 text-[13px]"
+                  className="h-10 text-[14px]"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="text-[12px] font-regular text-steel-gray mb-1 block">
+                <label className="text-[14px] font-regular text-steel-gray mb-1 block">
                   Компания / Организация
                 </label>
                 <Input
@@ -118,12 +118,12 @@ export function EnterpriseContactDialog({
                   placeholder="Acme Corp"
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  className="h-10 text-[13px]"
+                  className="h-10 text-[14px]"
                 />
               </div>
 
               <div>
-                <label className="text-[12px] font-regular text-steel-gray mb-1 block">
+                <label className="text-[14px] font-regular text-steel-gray mb-1 block">
                   Ориентировочный объем (док/мес)
                 </label>
                 <Input
@@ -131,13 +131,13 @@ export function EnterpriseContactDialog({
                   placeholder="5000"
                   value={volume}
                   onChange={(e) => setVolume(e.target.value)}
-                  className="h-10 text-[13px]"
+                  className="h-10 text-[14px]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-[12px] font-regular text-steel-gray mb-1 block">
+              <label className="text-[14px] font-regular text-steel-gray mb-1 block">
                 Дополнительные пожелания к интеграции
               </label>
               <textarea
@@ -145,7 +145,7 @@ export function EnterpriseContactDialog({
                 placeholder="Особые требования к SLA, форматам или REST API…"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full rounded-2xl border-[0.5px] border-black/10 bg-pure-white p-3 text-[13px] font-book text-off-black placeholder:text-steel-gray/60 focus:outline-none focus:ring-1 focus:ring-signal-blue"
+                className="w-full rounded-2xl border-[0.5px] border-black/10 bg-pure-white p-3 text-[14px] font-book text-off-black placeholder:text-steel-gray/60 focus:outline-none focus:ring-1 focus:ring-signal-blue"
               />
             </div>
 
@@ -154,7 +154,7 @@ export function EnterpriseContactDialog({
                 type="submit"
                 disabled={isSubmitting}
                 variant="floating-cta"
-                className="w-full h-11 bg-off-black text-pure-white hover:bg-off-black/90 text-[13px] flex items-center justify-center gap-2"
+                className="w-full h-11 bg-off-black text-pure-white hover:bg-off-black/90 text-[14px] flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
@@ -178,7 +178,7 @@ export function EnterpriseContactDialog({
                 <Button
                   type="button"
                   variant="secondary"
-                  className="w-full h-11 text-[13px] flex items-center justify-center gap-1.5"
+                  className="w-full h-11 text-[14px] flex items-center justify-center gap-1.5"
                 >
                   <Mail className="w-4 h-4 text-steel-gray" />
                   <span>Написать в email</span>
@@ -194,7 +194,7 @@ export function EnterpriseContactDialog({
             <h4 className="text-[18px] font-regular tracking-tight text-off-black">
               Запрос успешно принят!
             </h4>
-            <p className="text-[13px] text-steel-gray font-book max-w-sm mx-auto leading-relaxed">
+            <p className="text-[14px] text-steel-gray font-book max-w-sm mx-auto leading-relaxed">
               Спасибо за интерес к Enterprise. Наша команда свяжется с вами по адресу{' '}
               <strong className="text-off-black font-regular">{email}</strong> в течение 1 рабочего дня.
             </p>

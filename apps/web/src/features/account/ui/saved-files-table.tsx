@@ -88,14 +88,14 @@ export function SavedFilesTable({
         {/* Панель массовых действий */}
         {selectedFileIds.length > 0 && (
           <div className="flex items-center gap-2 p-1.5 rounded-full bg-black/[0.04] border-[0.5px] border-black/10">
-            <span className="text-[12px] font-medium text-off-black px-3">
+            <span className="text-[14px] font-medium text-off-black px-3">
               Выбрано: {selectedFileIds.length}
             </span>
             <Button
               variant="secondary"
               size="sm"
               onClick={handleDownloadSelectedZip}
-              className="gap-1.5 text-[12px] h-[32px] px-3"
+              className="gap-1.5 text-[14px] h-[32px] px-3"
             >
               <Download className="h-3 w-3" />
               Скачать ZIP
@@ -104,7 +104,7 @@ export function SavedFilesTable({
               variant="outline"
               size="sm"
               onClick={handleDeleteSelectedFiles}
-              className="gap-1.5 text-[12px] h-[32px] px-3 border-red-500/30 text-red-600 hover:bg-red-500/5"
+              className="gap-1.5 text-[14px] h-[32px] px-3 border-red-500/30 text-red-600 hover:bg-red-500/5"
             >
               <Trash2 className="h-3 w-3" />
               Удалить
@@ -122,17 +122,17 @@ export function SavedFilesTable({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Поиск по имени файла..."
-              className="pl-9 h-[38px] text-[13px] rounded-full"
+              className="pl-9 h-[38px] text-[14px] rounded-full"
             />
           </div>
 
           <div className="flex items-center gap-1.5 p-1 rounded-full bg-black/[0.03] border-[0.5px] border-black/5 self-start sm:self-auto">
-            <span className="text-[11px] text-steel-gray px-2 flex items-center gap-1">
+            <span className="text-[14px] text-steel-gray px-2 flex items-center gap-1">
               <Filter className="h-3 w-3" /> Источник:
             </span>
             <button
               onClick={() => setSourceFilter('all')}
-              className={`px-3 py-1 text-[12px] rounded-full transition-all ${
+              className={`px-3 py-1 text-[14px] rounded-full transition-all ${
                 sourceFilter === 'all'
                   ? 'bg-pure-white text-off-black font-medium shadow-none border-[0.5px] border-black/10'
                   : 'text-steel-gray hover:text-off-black'
@@ -142,7 +142,7 @@ export function SavedFilesTable({
             </button>
             <button
               onClick={() => setSourceFilter('web')}
-              className={`px-3 py-1 text-[12px] rounded-full transition-all flex items-center gap-1 ${
+              className={`px-3 py-1 text-[14px] rounded-full transition-all flex items-center gap-1 ${
                 sourceFilter === 'web'
                   ? 'bg-pure-white text-off-black font-medium shadow-none border-[0.5px] border-black/10'
                   : 'text-steel-gray hover:text-off-black'
@@ -152,7 +152,7 @@ export function SavedFilesTable({
             </button>
             <button
               onClick={() => setSourceFilter('api')}
-              className={`px-3 py-1 text-[12px] rounded-full transition-all flex items-center gap-1 ${
+              className={`px-3 py-1 text-[14px] rounded-full transition-all flex items-center gap-1 ${
                 sourceFilter === 'api'
                   ? 'bg-pure-white text-off-black font-medium shadow-none border-[0.5px] border-black/10'
                   : 'text-steel-gray hover:text-off-black'
@@ -168,15 +168,15 @@ export function SavedFilesTable({
           <div className="rounded-[28px] border-[0.5px] border-dashed border-black/15 p-12 text-center space-y-3 bg-[#fdfdfd]">
             <FileText className="h-8 w-8 text-steel-gray/60 mx-auto" />
             <h4 className="text-[16px] font-book text-off-black">Нет сохранённых документов</h4>
-            <p className="text-[13px] text-steel-gray max-w-sm mx-auto">
+            <p className="text-[14px] text-steel-gray max-w-sm mx-auto">
               Здесь будут автоматически отображаться все результаты ваших конвертаций через сайт или API.
             </p>
           </div>
         ) : (
           <div className="overflow-x-auto rounded-[24px] border-[0.5px] border-black/10 bg-[#fdfdfd]">
-            <table className="w-full text-left border-collapse text-[13px]">
+            <table className="w-full text-left border-collapse text-[14px]">
               <thead>
-                <tr className="border-b border-black/5 bg-black/[0.02] text-steel-gray text-[12px] font-regular">
+                <tr className="border-b border-black/5 bg-black/[0.02] text-steel-gray text-[14px] font-regular">
                   <th className="py-3.5 pl-4 pr-2 w-10">
                     <Checkbox
                       id="select-all-files"
@@ -218,25 +218,25 @@ export function SavedFilesTable({
                         </div>
                       </td>
                       <td className="py-3 px-3">
-                        <Badge variant="neutral" className="text-[11px] px-2 py-0.5">
+                        <Badge variant="neutral" className="text-[14px] px-2 py-0.5">
                           {file.format}
                         </Badge>
                       </td>
-                      <td className="py-3 px-3 font-mono text-[12px] text-steel-gray">
+                      <td className="py-3 px-3 font-mono text-[14px] text-steel-gray">
                         {formatBytes(file.sizeBytes)}
                       </td>
                       <td className="py-3 px-3">
                         {file.source === 'web' ? (
-                          <span className="inline-flex items-center gap-1 text-[11px] text-steel-gray">
+                          <span className="inline-flex items-center gap-1 text-[14px] text-steel-gray">
                             <Globe className="h-3 w-3 text-signal-blue" /> Web
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 text-[11px] text-steel-gray">
+                          <span className="inline-flex items-center gap-1 text-[14px] text-steel-gray">
                             <Terminal className="h-3 w-3 text-amber-600" /> API
                           </span>
                         )}
                       </td>
-                      <td className="py-3 px-3 text-steel-gray text-[12px]">
+                      <td className="py-3 px-3 text-steel-gray text-[14px]">
                         <span className="flex items-center gap-1">
                           <Clock className="h-3 w-3 text-steel-gray/80" />
                           {formatDate(file.expiresAt)}
@@ -248,7 +248,7 @@ export function SavedFilesTable({
                             variant="secondary"
                             size="sm"
                             onClick={() => handleDownloadSingleFileZip(file)}
-                            className="h-[30px] px-2.5 text-[11px] gap-1"
+                            className="h-[30px] px-2.5 text-[14px] gap-1"
                             title="Скачать ZIP архив этого файла (ТЗ §10.2)"
                           >
                             <Download className="h-3 w-3" />

@@ -327,12 +327,12 @@
   "auth": {
     "login": {
       "title": "Вхід до акаунта",
-      "subtitle": "Увійдіть для доступу до персонального сховища, API-ключа та зняття гостьових лімітів.",
+      "subtitle": "Увійдіть для доступу до персонального сховища.",
       "emailLabel": "Email",
       "emailPlaceholder": "name@example.com",
       "passwordLabel": "Пароль",
       "passwordPlaceholder": "••••••••",
-      "rememberMe": "Запам'ятати мене на 30 днів",
+      "rememberMe": "Запам'ятати мене",
       "forgotPassword": "Забули пароль?",
       "recoveryCode": "Втратили доступ до пошти? Відновлення за резервним кодом",
       "submit": "Увійти",
@@ -349,7 +349,7 @@
       "passwordPlaceholder": "••••••••",
       "confirmPasswordLabel": "Повторіть пароль",
       "confirmPasswordPlaceholder": "••••••••",
-      "passwordHint": "Від 8 до 128 символів. Пробіли та спеціальні знаки дозволені.",
+      "passwordHint": "Від 8 символів.",
       "acceptTerms": "Я приймаю Умови сервісу та Політику конфіденційності",
       "termsLink": "Умови сервісу",
       "privacyLink": "Політику конфіденційності",

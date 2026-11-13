@@ -327,12 +327,12 @@
   "auth": {
     "login": {
       "title": "Вход в аккаунт",
-      "subtitle": "Войдите для доступа к персональному хранилищу, API-ключу и снятия гостевых лимитов.",
+      "subtitle": "Войдите для доступа к персональному хранилищу.",
       "emailLabel": "Email",
       "emailPlaceholder": "name@example.com",
       "passwordLabel": "Пароль",
       "passwordPlaceholder": "••••••••",
-      "rememberMe": "Запомнить меня на 30 дней",
+      "rememberMe": "Запомнить меня",
       "forgotPassword": "Забыли пароль?",
       "recoveryCode": "Потеряли доступ к почте? Восстановление по резервному коду",
       "submit": "Войти",
@@ -349,7 +349,7 @@
       "passwordPlaceholder": "••••••••",
       "confirmPasswordLabel": "Повторите пароль",
       "confirmPasswordPlaceholder": "••••••••",
-      "passwordHint": "От 8 до 128 символов. Пробелы и специальные символы разрешены.",
+      "passwordHint": "От 8 символов.",
       "acceptTerms": "Я принимаю Условия сервиса и Политику конфиденциальности",
       "termsLink": "Условия сервиса",
       "privacyLink": "Политику конфиденциальности",

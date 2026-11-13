@@ -1,5 +1,84 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-13] Замена всех размеров шрифта менее `14px` на `14px` во всех страницах и компонентах
+
+### Суть задачи
+
+Во всех страницах и UI-компонентах `apps/web/app` и `apps/web/src` все размеры шрифта менее `14px` (`text-[9px]`–`text-[12px]`, `text-xs`, а также `size="sm"` в `Button`) заменены на `text-[14px]` (327 вхождений в 48 файлах).
+
+### Изменённые файлы
+
+- `apps/web/app/global-error.tsx`: `text-xs` → `text-[14px]`.
+- `apps/web/src/shared/ui/` (`button.tsx`, `footer.tsx`, `locale-switcher.tsx`, `navbar.tsx`): `<14px` → `text-[14px]`.
+- `apps/web/src/_pages/` (`api-docs-page.tsx`, `convert-page.tsx`, `design-system-page.tsx`, `error-view.tsx`, `not-found-view.tsx`): `<14px` → `text-[14px]`.
+- `apps/web/src/features/` (`account/ui/*`, `admin/ui/*`, `auth/ui/*`, `conversion-directions/ui/*`, `job-results/ui/*`, `pricing/ui/*`, `quick-converter/ui/quick-converter.tsx`): `<14px` → `text-[14px]`.
+
+---
+
+## [2026-11-13] Замена всех `text-[13px]` на `text-[14px]` во всех страницах и компонентах
+
+### Суть задачи
+
+Во всех страницах и UI-компонентах `apps/web/src` и `apps/web/app` удалён размер шрифта `text-[13px]` (171 вхождение в 39 файлах) и заменён на `text-[14px]`.
+
+### Измененные файлы
+
+- `apps/web/src/shared/ui/` (`button.tsx`, `footer.tsx`, `locale-switcher.tsx`, `navbar.tsx`): `text-[13px]` → `text-[14px]`.
+- `apps/web/src/_pages/` (`admin-page.tsx`, `api-docs-page.tsx`, `design-system-page.tsx`, `error-view.tsx`, `not-found-view.tsx`): `text-[13px]` → `text-[14px]`.
+- `apps/web/src/features/` (`account/ui/*`, `admin/ui/*`, `auth/ui/*`, `job-results/ui/*`, `pricing/ui/*`, `quick-converter/ui/quick-converter.tsx`): `text-[13px]` → `text-[14px]`.
+
+---
+
+## [2026-11-13] Скругление кнопки `sendEmailCode` в форме восстановления
+
+### Суть задачи
+
+В компоненте `RecoveryCodeForm` для кнопки отправки кода на новый email (`sendEmailCode`) задано скругление `rounded-nav`, как у `Input`.
+
+### Измененные файлы
+
+- `apps/web/src/features/auth/ui/recovery-code-form.tsx`: добавлен класс `rounded-nav` и задана высота `h-[44px]` для кнопки `sendEmailCode` (вровень с `Input`).
+
+---
+
+## [2026-11-13] Удаление `subtitle` в `AuthCard` и сокращение `passwordHint`
+
+### Суть задачи
+
+- В компоненте `AuthCard` убран рендеринг подзаголовка `subtitle`.
+- В сообщениях `auth.register.passwordHint` для всех локалей (`uk`, `ru`, `en`) текст сокращен до «Від 8 символів.» / «От 8 символов.» / «From 8 characters.».
+
+### Измененные файлы
+
+- `apps/web/src/features/auth/ui/auth-card.tsx`: убран вывод `subtitle`.
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: обновлен ключ `auth.register.passwordHint`.
+
+---
+
+## [2026-11-13] Сокращение подписи чекбокса «Запомнить меня» (`auth.login.rememberMe`)
+
+### Суть задачи
+
+В сообщениях `auth.login.rememberMe` для всех локалей (`uk`, `ru`, `en`) убрано упоминание срока «на 30 днів» / «на 30 дней» / «for 30 days».
+
+### Измененные файлы
+
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: обновлен ключ `auth.login.rememberMe`.
+
+---
+
+## [2026-11-13] Сокращение подзаголовка формы входа (`auth.login.subtitle`)
+
+### Суть задачи
+
+В сообщениях `auth.login.subtitle` для всех локалей (`uk`, `ru`, `en`) убрано упоминание API-ключа и снятия гостевых лимитов.
+
+### Измененные файлы
+
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: обновлен ключ `auth.login.subtitle`.
+
+---
+
 ## [2026-11-13] Сокращение таблицы сравнения тарифов
 
 ### Суть задачи

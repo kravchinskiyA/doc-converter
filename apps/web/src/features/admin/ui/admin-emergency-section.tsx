@@ -62,7 +62,7 @@ export function AdminEmergencySection({
                 <Button
                   disabled={!isAdmin}
                   onClick={() => onOpenEmergencyModal('global_resume')}
-                  className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-pure-white gap-2 text-[13px] h-11 px-6 shadow-none"
+                  className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-pure-white gap-2 text-[14px] h-11 px-6 shadow-none"
                 >
                   <PlayCircle className="w-4 h-4" />
                   {t('resumeConversionsBtn')}
@@ -71,7 +71,7 @@ export function AdminEmergencySection({
                 <Button
                   disabled={!isAdmin}
                   onClick={() => onOpenEmergencyModal('global_pause')}
-                  className="rounded-full bg-red-600 hover:bg-red-700 text-pure-white gap-2 text-[13px] h-11 px-6 shadow-none"
+                  className="rounded-full bg-red-600 hover:bg-red-700 text-pure-white gap-2 text-[14px] h-11 px-6 shadow-none"
                 >
                   <PauseCircle className="w-4 h-4" />
                   {t('pauseConversionsBtn')}
@@ -88,23 +88,23 @@ export function AdminEmergencySection({
                 <ShieldAlert className="w-4 h-4" />
                 <span>{t('pausedAlert')}</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[13px] pt-2 text-off-black">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[14px] pt-2 text-off-black">
                 <div>
-                  <span className="text-steel-gray block text-[11px]">{t('pauseReasonPrefix')}</span>
+                  <span className="text-steel-gray block text-[14px]">{t('pauseReasonPrefix')}</span>
                   <span className="font-medium">{metrics.infrastructure.globalPauseReason}</span>
                 </div>
                 <div>
-                  <span className="text-steel-gray block text-[11px]">{t('pauseByPrefix')}</span>
+                  <span className="text-steel-gray block text-[14px]">{t('pauseByPrefix')}</span>
                   <span className="font-mono">{metrics.infrastructure.globalPauseBy}</span>
                 </div>
                 <div>
-                  <span className="text-steel-gray block text-[11px]">{t('pauseTimePrefix')}</span>
+                  <span className="text-steel-gray block text-[14px]">{t('pauseTimePrefix')}</span>
                   <span>{metrics.infrastructure.globalPauseAt ? new Date(metrics.infrastructure.globalPauseAt).toLocaleString() : '—'}</span>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="rounded-[24px] bg-emerald-500/10 border border-emerald-500/20 p-4 flex items-center gap-3 text-emerald-800 text-[13px]">
+            <div className="rounded-[24px] bg-emerald-500/10 border border-emerald-500/20 p-4 flex items-center gap-3 text-emerald-800 text-[14px]">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>
                 Сервис принимает новые задачи конвертации через веб-интерфейс и публичный REST API в штатном режиме.
@@ -112,7 +112,7 @@ export function AdminEmergencySection({
             </div>
           )}
 
-          <div className="rounded-[24px] bg-[#f2f2f4] p-4 flex items-start gap-3 text-[12px] text-steel-gray font-book">
+          <div className="rounded-[24px] bg-[#f2f2f4] p-4 flex items-start gap-3 text-[14px] text-steel-gray font-book">
             <Info className="w-4 h-4 text-signal-blue shrink-0 mt-0.5" />
             <div className="space-y-1">
               <p className="font-regular text-off-black">Правила работы экстренной приостановки (ТЗ §12.16):</p>

@@ -153,7 +153,7 @@ export function VerifyEmailForm() {
           <input type="hidden" {...register('email')} />
         ) : (
           <div className="space-y-1.5">
-            <label className="text-[13px] font-regular text-off-black">Email</label>
+            <label className="text-[14px] font-regular text-off-black">Email</label>
             <Input
               type="email"
               placeholder="name@example.com"
@@ -165,7 +165,7 @@ export function VerifyEmailForm() {
               }}
             />
             {errors.email?.message && (
-              <p className="text-[12px] font-book text-red-600">
+              <p className="text-[14px] font-book text-red-600">
                 {errors.email.message}
               </p>
             )}
@@ -174,7 +174,7 @@ export function VerifyEmailForm() {
 
         {/* Поле 6-значного кода */}
         <div className="space-y-2">
-          <label className="text-[13px] font-regular text-off-black block">
+          <label className="text-[14px] font-regular text-off-black block">
             {t('codeLabel')}
           </label>
           <Input
@@ -188,7 +188,7 @@ export function VerifyEmailForm() {
             className="text-center font-mono text-[22px] tracking-[0.4em] h-[52px]"
             {...register('code')}
           />
-          <div className="flex items-center justify-between text-[12px] font-book text-steel-gray pt-1">
+          <div className="flex items-center justify-between text-[14px] font-book text-steel-gray pt-1">
             <span className="flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5 text-steel-gray" />
               {isExpired ? (
@@ -202,7 +202,7 @@ export function VerifyEmailForm() {
             </span>
           </div>
           {errors.code?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.code.message}
             </p>
           )}
@@ -210,14 +210,14 @@ export function VerifyEmailForm() {
 
         {/* Сообщения об ошибках или успехе */}
         {errorMessage && (
-          <div className="flex items-start gap-2 rounded-[12px] border-[0.5px] border-red-500/30 bg-red-500/[0.04] p-3 text-[13px] font-book text-red-600">
+          <div className="flex items-start gap-2 rounded-[12px] border-[0.5px] border-red-500/30 bg-red-500/[0.04] p-3 text-[14px] font-book text-red-600">
             <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
             <span>{errorMessage}</span>
           </div>
         )}
 
         {feedbackMessage && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[13px] font-book text-emerald-700">
+          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {feedbackMessage}
           </div>
         )}
@@ -247,7 +247,7 @@ export function VerifyEmailForm() {
             size="sm"
             disabled={cooldown > 0 || isResending}
             onClick={handleResendCode}
-            className="text-[13px] text-steel-gray hover:text-off-black"
+            className="text-[14px] text-steel-gray hover:text-off-black"
           >
             <RefreshCw
               className={`h-3.5 w-3.5 mr-1.5 ${isResending ? 'animate-spin' : ''}`}
@@ -262,7 +262,7 @@ export function VerifyEmailForm() {
         <div className="pt-4 border-t border-black/[0.06] text-center">
           <Link
             href="/auth/login"
-            className="text-[13px] font-book text-signal-blue hover:underline"
+            className="text-[14px] font-book text-signal-blue hover:underline"
           >
             {t('backToLogin')}
           </Link>

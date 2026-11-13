@@ -37,7 +37,7 @@ export function AdminAuditSection({ auditLogs }: AdminAuditSectionProps) {
 
         <CardContent className="pt-6">
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-[13px]">
+            <table className="w-full text-left border-collapse text-[14px]">
               <thead>
                 <tr className="border-b border-black/10 text-steel-gray font-regular">
                   <th className="pb-3 pr-4 font-normal">{t('colTime')}</th>
@@ -53,7 +53,7 @@ export function AdminAuditSection({ auditLogs }: AdminAuditSectionProps) {
                 {auditLogs.map((log) => (
                   <tr key={log.id} className="hover:bg-black/[0.02] transition-colors">
                     {/* Time */}
-                    <td className="py-4 pr-4 whitespace-nowrap text-steel-gray font-mono text-[11px]">
+                    <td className="py-4 pr-4 whitespace-nowrap text-steel-gray font-mono text-[14px]">
                       {new Date(log.timestamp).toLocaleString()}
                     </td>
 
@@ -62,43 +62,43 @@ export function AdminAuditSection({ auditLogs }: AdminAuditSectionProps) {
                       <div className="font-medium text-off-black">{log.actorEmail}</div>
                       <Badge
                         variant={log.actorRole === 'admin' ? 'signal-chip' : 'neutral'}
-                        className="text-[10px] py-0 px-1.5 mt-0.5"
+                        className="text-[14px] py-0 px-1.5 mt-0.5"
                       >
                         {log.actorRole}
                       </Badge>
                     </td>
 
                     {/* Action */}
-                    <td className="py-4 px-4 whitespace-nowrap font-mono text-[12px] font-medium text-signal-blue">
+                    <td className="py-4 px-4 whitespace-nowrap font-mono text-[14px] font-medium text-signal-blue">
                       {log.action}
                     </td>
 
                     {/* Target */}
-                    <td className="py-4 px-4 whitespace-nowrap font-mono text-[11px] text-steel-gray">
+                    <td className="py-4 px-4 whitespace-nowrap font-mono text-[14px] text-steel-gray">
                       {log.target}
                     </td>
 
                     {/* Reason */}
                     <td className="py-4 px-4 max-w-sm">
-                      <span className="text-off-black text-[12px] line-clamp-2" title={log.reason}>
+                      <span className="text-off-black text-[14px] line-clamp-2" title={log.reason}>
                         {log.reason}
                       </span>
                     </td>
 
                     {/* IP */}
-                    <td className="py-4 px-4 whitespace-nowrap font-mono text-[11px] text-steel-gray">
+                    <td className="py-4 px-4 whitespace-nowrap font-mono text-[14px] text-steel-gray">
                       {log.ip}
                     </td>
 
                     {/* Result */}
                     <td className="py-4 pl-4 text-right whitespace-nowrap">
                       {log.result === 'success' ? (
-                        <span className="inline-flex items-center gap-1 text-emerald-600 font-medium text-[12px]">
+                        <span className="inline-flex items-center gap-1 text-emerald-600 font-medium text-[14px]">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           OK
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 text-red-600 font-medium text-[12px]">
+                        <span className="inline-flex items-center gap-1 text-red-600 font-medium text-[14px]">
                           <XCircle className="w-3.5 h-3.5" />
                           ERR
                         </span>

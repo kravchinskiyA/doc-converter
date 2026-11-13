@@ -55,7 +55,7 @@ export function LoginForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-left">
         {/* Email */}
         <div className="space-y-1.5">
-          <label className="text-[13px] font-regular text-off-black">
+          <label className="text-[14px] font-regular text-off-black">
             {t('emailLabel')}
           </label>
           <Input
@@ -66,7 +66,7 @@ export function LoginForm() {
             {...register('email')}
           />
           {errors.email?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.email.message}
             </p>
           )}
@@ -75,12 +75,12 @@ export function LoginForm() {
         {/* Пароль */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-[13px] font-regular text-off-black">
+            <label className="text-[14px] font-regular text-off-black">
               {t('passwordLabel')}
             </label>
             <Link
               href="/auth/forgot-password"
-              className="text-[12px] font-book text-signal-blue hover:underline"
+              className="text-[14px] font-book text-signal-blue hover:underline"
             >
               {t('forgotPassword')}
             </Link>
@@ -108,7 +108,7 @@ export function LoginForm() {
             </button>
           </div>
           {errors.password?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.password.message}
             </p>
           )}
@@ -124,7 +124,7 @@ export function LoginForm() {
 
         {/* Сообщение об успешной отправке */}
         {formSuccess && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[13px] font-book text-emerald-700">
+          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {formSuccess}
           </div>
         )}
@@ -148,16 +148,16 @@ export function LoginForm() {
 
         {/* Ссылки восстановления и перехода к регистрации */}
         <div className="pt-4 border-t border-black/[0.06] space-y-3 text-center">
-          <div>
+          {/* <div>
             <Link
               href="/auth/recovery-code"
-              className="text-[12px] font-book text-steel-gray hover:text-signal-blue transition-colors"
+              className="text-[14px] font-book text-steel-gray hover:text-signal-blue transition-colors"
             >
               {t('recoveryCode')}
             </Link>
-          </div>
+          </div> */}
 
-          <p className="text-[13px] font-book text-steel-gray">
+          <p className="text-[14px] font-book text-steel-gray">
             {t('noAccount')}{' '}
             <Link
               href="/auth/register"

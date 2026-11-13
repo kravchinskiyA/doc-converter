@@ -33,10 +33,10 @@ export function PricingFaq({ items, className }: PricingFaqProps) {
         className
       )}
     >
-      <div className="flex items-center gap-2 mb-2">
+      {/* <div className="flex items-center gap-2 mb-2">
         <Badge variant="signal-chip">{t('badgeQa')}</Badge>
         <Badge variant="neutral">{t('badgeTerms')}</Badge>
-      </div>
+      </div> */}
 
       <h3 className="text-[24px] md:text-[30px] font-book tracking-tight text-off-black mb-2">
         {t('title')}

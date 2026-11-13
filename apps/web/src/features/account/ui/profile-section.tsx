@@ -97,7 +97,7 @@ export function ProfileSection({
               <h4 className="text-[15px] font-medium text-off-black">Редактирование имени и фамилии</h4>
               <div className="space-y-3">
                 <div>
-                  <label className="text-[12px] font-regular text-steel-gray block mb-1">
+                  <label className="text-[14px] font-regular text-steel-gray block mb-1">
                     Имя (необязательно, макс. 50 символов)
                   </label>
                   <Input
@@ -110,7 +110,7 @@ export function ProfileSection({
                   />
                 </div>
                 <div>
-                  <label className="text-[12px] font-regular text-steel-gray block mb-1">
+                  <label className="text-[14px] font-regular text-steel-gray block mb-1">
                     Фамилия (необязательно, макс. 50 символов)
                   </label>
                   <Input
@@ -143,7 +143,7 @@ export function ProfileSection({
                   <User className="h-5 w-5 text-off-black" />
                 </div>
                 <div>
-                  <span className="text-[12px] text-steel-gray block">Владелец аккаунта</span>
+                  <span className="text-[14px] text-steel-gray block">Владелец аккаунта</span>
                   <span className="text-[15px] font-book text-off-black">
                     {userProfile.firstName || userProfile.lastName
                       ? `${userProfile.firstName} ${userProfile.lastName}`.trim()
@@ -158,7 +158,7 @@ export function ProfileSection({
                     <Mail className="h-5 w-5 text-off-black" />
                   </div>
                   <div className="truncate">
-                    <span className="text-[12px] text-steel-gray block">Основной email</span>
+                    <span className="text-[14px] text-steel-gray block">Основной email</span>
                     <span className="text-[15px] font-book text-off-black truncate block">
                       {userProfile.email}
                     </span>
@@ -187,7 +187,7 @@ export function ProfileSection({
               </div>
               <div>
                 <span className="text-[14px] font-book text-off-black block">Пароль учётной записи</span>
-                <span className="text-[12px] text-steel-gray block">
+                <span className="text-[14px] text-steel-gray block">
                   Защищён криптографическим хэшем scrypt. Смена пароля отзывает все сессии и API-ключ.
                 </span>
               </div>
@@ -222,7 +222,7 @@ export function ProfileSection({
             <div className="flex items-center justify-between">
               <Badge variant="signal-chip">Двухэтапная процедура</Badge>
               {emailChangeFlow.step !== 'completed' && (
-                <div className="flex items-center gap-1.5 text-[12px] text-steel-gray">
+                <div className="flex items-center gap-1.5 text-[14px] text-steel-gray">
                   <Clock className="h-3.5 w-3.5 text-signal-blue" />
                   <span>Осталось: {formatTimer(emailChangeFlow.timeLeftSeconds)}</span>
                 </div>
@@ -231,13 +231,13 @@ export function ProfileSection({
 
             <h3 className="text-[20px] font-book text-off-black">Смена адреса электронной почты</h3>
 
-            <p className="text-[13px] text-steel-gray leading-relaxed">
+            <p className="text-[14px] text-steel-gray leading-relaxed">
               По стандартам безопасности ТЗ §6.2 требуется подтверждение кодами из двух писем:
               первый отправляется на ваш текущий адрес, второй — на новый. Общий срок операции — 20 минут.
             </p>
 
             {emailChangeFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[13px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{emailChangeFlow.error}</span>
               </div>
@@ -245,7 +245,7 @@ export function ProfileSection({
 
             {emailChangeFlow.step === 'init' && (
               <div className="space-y-3 pt-2">
-                <label className="text-[13px] font-regular text-off-black block">
+                <label className="text-[14px] font-regular text-off-black block">
                   Введите новый адрес электронной почты:
                 </label>
                 <Input
@@ -269,10 +269,10 @@ export function ProfileSection({
 
             {emailChangeFlow.step === 'step1_old_email' && (
               <div className="space-y-3 pt-2">
-                <div className="p-3 rounded-[20px] bg-black/[0.03] text-[13px] text-off-black">
+                <div className="p-3 rounded-[20px] bg-black/[0.03] text-[14px] text-off-black">
                   Код №1 отправлен на старую почту: <strong>{userProfile.email}</strong>
                 </div>
-                <label className="text-[13px] font-regular text-off-black block">
+                <label className="text-[14px] font-regular text-off-black block">
                   Введите 6-значный код из письма на старую почту:
                 </label>
                 <Input
@@ -298,11 +298,11 @@ export function ProfileSection({
 
             {emailChangeFlow.step === 'step2_new_email' && (
               <div className="space-y-4 pt-2">
-                <div className="p-3 rounded-[20px] bg-black/[0.03] text-[13px] text-off-black">
+                <div className="p-3 rounded-[20px] bg-black/[0.03] text-[14px] text-off-black">
                   Код №2 отправлен на новый адрес: <strong>{emailChangeFlow.newEmail}</strong>
                 </div>
                 <div>
-                  <label className="text-[13px] font-regular text-off-black block mb-1">
+                  <label className="text-[14px] font-regular text-off-black block mb-1">
                     Введите 6-значный код из письма на новую почту:
                   </label>
                   <Input
@@ -346,7 +346,7 @@ export function ProfileSection({
               <div className="text-center py-4 space-y-3">
                 <CheckCircle2 className="h-10 w-10 text-emerald-600 mx-auto" />
                 <h4 className="text-[18px] font-book text-off-black">Адрес почты успешно изменён!</h4>
-                <p className="text-[13px] text-steel-gray">
+                <p className="text-[14px] text-steel-gray">
                   Новый email <strong>{userProfile.email}</strong> теперь используется для входа и всех уведомлений.
                 </p>
                 <div className="pt-2">
@@ -378,13 +378,13 @@ export function ProfileSection({
             <Badge variant="signal-chip">Безопасность scrypt</Badge>
             <h3 className="text-[20px] font-book text-off-black">Смена пароля аккаунта</h3>
 
-            <p className="text-[13px] text-steel-gray leading-relaxed">
+            <p className="text-[14px] text-steel-gray leading-relaxed">
               По ТЗ §6.3 смена пароля подтверждается кодом на почту и немедленно завершает все активные сессии
               на всех устройствах, а также отзывает действующий API-ключ.
             </p>
 
             {passwordChangeFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[13px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{passwordChangeFlow.error}</span>
               </div>
@@ -393,7 +393,7 @@ export function ProfileSection({
             {passwordChangeFlow.step === 'input' && (
               <div className="space-y-3 pt-2">
                 <div>
-                  <label className="text-[12px] font-regular text-steel-gray block mb-1">
+                  <label className="text-[14px] font-regular text-steel-gray block mb-1">
                     Текущий пароль
                   </label>
                   <Input
@@ -404,7 +404,7 @@ export function ProfileSection({
                   />
                 </div>
                 <div>
-                  <label className="text-[12px] font-regular text-steel-gray block mb-1">
+                  <label className="text-[14px] font-regular text-steel-gray block mb-1">
                     Новый пароль (от 8 до 128 символов)
                   </label>
                   <Input
@@ -415,7 +415,7 @@ export function ProfileSection({
                   />
                 </div>
                 <div>
-                  <label className="text-[12px] font-regular text-steel-gray block mb-1">
+                  <label className="text-[14px] font-regular text-steel-gray block mb-1">
                     Повторите новый пароль
                   </label>
                   <Input
@@ -441,10 +441,10 @@ export function ProfileSection({
 
             {passwordChangeFlow.step === 'verify_code' && (
               <div className="space-y-3 pt-2">
-                <div className="p-3 rounded-[20px] bg-black/[0.03] text-[13px] text-off-black">
+                <div className="p-3 rounded-[20px] bg-black/[0.03] text-[14px] text-off-black">
                   6-значный проверочный код отправлен на <strong>{userProfile.email}</strong>
                 </div>
-                <label className="text-[13px] font-regular text-off-black block">
+                <label className="text-[14px] font-regular text-off-black block">
                   Введите 6-значный код:
                 </label>
                 <Input
@@ -472,7 +472,7 @@ export function ProfileSection({
               <div className="text-center py-4 space-y-3">
                 <CheckCircle2 className="h-10 w-10 text-emerald-600 mx-auto" />
                 <h4 className="text-[18px] font-book text-off-black">Пароль успешно обновлён</h4>
-                <p className="text-[13px] text-steel-gray">
+                <p className="text-[14px] text-steel-gray">
                   Все другие сессии завершены, API-ключ отозван по соображениям безопасности.
                 </p>
                 <div className="pt-2">

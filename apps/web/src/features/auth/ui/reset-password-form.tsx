@@ -68,7 +68,7 @@ export function ResetPasswordForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-left">
         {/* Email */}
         <div className="space-y-1.5">
-          <label className="text-[13px] font-regular text-off-black">
+          <label className="text-[14px] font-regular text-off-black">
             {t('emailLabel')}
           </label>
           <Input
@@ -79,7 +79,7 @@ export function ResetPasswordForm() {
             {...register('email')}
           />
           {errors.email?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.email.message}
             </p>
           )}
@@ -87,7 +87,7 @@ export function ResetPasswordForm() {
 
         {/* 6-значный код */}
         <div className="space-y-1.5">
-          <label className="text-[13px] font-regular text-off-black">
+          <label className="text-[14px] font-regular text-off-black">
             {t('codeLabel')}
           </label>
           <Input
@@ -101,7 +101,7 @@ export function ResetPasswordForm() {
             {...register('code')}
           />
           {errors.code?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.code.message}
             </p>
           )}
@@ -109,7 +109,7 @@ export function ResetPasswordForm() {
 
         {/* Новый пароль */}
         <div className="space-y-1.5">
-          <label className="text-[13px] font-regular text-off-black">
+          <label className="text-[14px] font-regular text-off-black">
             {t('newPasswordLabel')}
           </label>
           <div className="relative">
@@ -135,7 +135,7 @@ export function ResetPasswordForm() {
             </button>
           </div>
           {errors.newPassword?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.newPassword.message}
             </p>
           )}
@@ -143,7 +143,7 @@ export function ResetPasswordForm() {
 
         {/* Повтор нового пароля */}
         <div className="space-y-1.5">
-          <label className="text-[13px] font-regular text-off-black">
+          <label className="text-[14px] font-regular text-off-black">
             {t('confirmPasswordLabel')}
           </label>
           <div className="relative">
@@ -169,21 +169,21 @@ export function ResetPasswordForm() {
             </button>
           </div>
           {errors.confirmNewPassword?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.confirmNewPassword.message}
             </p>
           )}
         </div>
 
         {/* Предупреждение безопасности по ТЗ §6.3 */}
-        <div className="flex items-start gap-2.5 rounded-[12px] bg-red-500/[0.04] border-[0.5px] border-red-500/20 p-3 text-[12px] font-book text-steel-gray leading-relaxed">
+        <div className="flex items-start gap-2.5 rounded-[12px] bg-red-500/[0.04] border-[0.5px] border-red-500/20 p-3 text-[14px] font-book text-steel-gray leading-relaxed">
           <ShieldAlert className="h-4 w-4 text-red-600 shrink-0 mt-0.5" />
           <span>{t('securityNotice')}</span>
         </div>
 
         {/* Сообщение об успехе */}
         {feedbackMessage && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[13px] font-book text-emerald-700">
+          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {feedbackMessage}
           </div>
         )}
@@ -209,7 +209,7 @@ export function ResetPasswordForm() {
         <div className="pt-4 border-t border-black/[0.06] text-center">
           <Link
             href="/auth/login"
-            className="text-[13px] font-book text-signal-blue hover:underline"
+            className="text-[14px] font-book text-signal-blue hover:underline"
           >
             {t('backToLogin')}
           </Link>

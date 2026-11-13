@@ -55,7 +55,7 @@ export function JobFilesList({
         <h3 className="text-[18px] font-book tracking-tight text-off-black">
           {t('files.title')}
         </h3>
-        <Badge variant="neutral" className="text-[12px]">
+        <Badge variant="neutral" className="text-[14px]">
           {files.length}
         </Badge>
       </div>
@@ -110,12 +110,12 @@ export function JobFilesList({
                     </div>
 
                     {/* Дополнительная строка: размер или статус или ошибка */}
-                    <div className="flex flex-wrap items-center gap-2 text-[12px] font-book text-steel-gray">
+                    <div className="flex flex-wrap items-center gap-2 text-[14px] font-book text-steel-gray">
                       {file.status === 'completed' && (
                         <>
                           <span>{formatFileSize(file.sizeBytes)}</span>
                           <span>•</span>
-                          <span className="uppercase font-mono text-[11px] bg-black/5 px-2 py-0.5 rounded-[6px]">
+                          <span className="uppercase font-mono text-[14px] bg-black/5 px-2 py-0.5 rounded-[6px]">
                             {file.outputFormat}
                           </span>
                         </>
@@ -160,19 +160,19 @@ export function JobFilesList({
                   )}
 
                   {file.status === 'processing' && (
-                    <Badge variant="signal-chip" className="text-[12px]">
+                    <Badge variant="signal-chip" className="text-[14px]">
                       {t('badge.processing')}
                     </Badge>
                   )}
 
                   {file.status === 'queued' && (
-                    <Badge variant="muted" className="text-[12px]">
+                    <Badge variant="muted" className="text-[14px]">
                       {t('badge.queued')}
                     </Badge>
                   )}
 
                   {file.status === 'failed' && (
-                    <Badge variant="error" className="text-[12px]">
+                    <Badge variant="error" className="text-[14px]">
                       {t('badge.failed')}
                     </Badge>
                   )}

@@ -99,7 +99,7 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
 
         <CardContent className="space-y-6">
           {authError && (
-            <div className="rounded-[16px] bg-red-500/10 border border-red-500/20 p-3 text-[13px] text-red-600 font-book">
+            <div className="rounded-[16px] bg-red-500/10 border border-red-500/20 p-3 text-[14px] text-red-600 font-book">
               {authError}
             </div>
           )}
@@ -107,7 +107,7 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Email */}
             <div className="space-y-1.5">
-              <label className="text-[13px] font-regular text-off-black flex items-center gap-1.5">
+              <label className="text-[14px] font-regular text-off-black flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-steel-gray" />
                 {t('emailLabel')}
               </label>
@@ -118,13 +118,13 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
                 className="rounded-full h-11"
               />
               {errors.email && (
-                <p className="text-[12px] text-red-500 font-book">{errors.email.message}</p>
+                <p className="text-[14px] text-red-500 font-book">{errors.email.message}</p>
               )}
             </div>
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label className="text-[13px] font-regular text-off-black flex items-center gap-1.5">
+              <label className="text-[14px] font-regular text-off-black flex items-center gap-1.5">
                 <Lock className="w-3.5 h-3.5 text-steel-gray" />
                 {t('passwordLabel')}
               </label>
@@ -135,14 +135,14 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
                 className="rounded-full h-11"
               />
               {errors.password && (
-                <p className="text-[12px] text-red-500 font-book">{errors.password.message}</p>
+                <p className="text-[14px] text-red-500 font-book">{errors.password.message}</p>
               )}
             </div>
 
             {/* 2FA: TOTP or Recovery Code */}
             {!useRecoveryCode ? (
               <div className="space-y-1.5">
-                <label className="text-[13px] font-regular text-off-black flex items-center gap-1.5">
+                <label className="text-[14px] font-regular text-off-black flex items-center gap-1.5">
                   <KeyRound className="w-3.5 h-3.5 text-signal-blue" />
                   {t('totpLabel')}
                 </label>
@@ -153,14 +153,14 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
                   {...register('totpCode')}
                   className="rounded-full h-11 text-center font-mono tracking-widest text-[18px]"
                 />
-                <p className="text-[12px] text-steel-gray font-book">{t('totpHint')}</p>
+                <p className="text-[14px] text-steel-gray font-book">{t('totpHint')}</p>
                 {errors.totpCode && (
-                  <p className="text-[12px] text-red-500 font-book">{errors.totpCode.message}</p>
+                  <p className="text-[14px] text-red-500 font-book">{errors.totpCode.message}</p>
                 )}
               </div>
             ) : (
               <div className="space-y-1.5">
-                <label className="text-[13px] font-regular text-off-black flex items-center gap-1.5">
+                <label className="text-[14px] font-regular text-off-black flex items-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
                   {t('recoveryCodeLabel')}
                 </label>
@@ -170,9 +170,9 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
                   {...register('recoveryCode')}
                   className="rounded-full h-11 font-mono text-center tracking-wider text-[14px]"
                 />
-                <p className="text-[12px] text-steel-gray font-book">{t('recoveryCodeHint')}</p>
+                <p className="text-[14px] text-steel-gray font-book">{t('recoveryCodeHint')}</p>
                 {errors.recoveryCode && (
-                  <p className="text-[12px] text-red-500 font-book">
+                  <p className="text-[14px] text-red-500 font-book">
                     {errors.recoveryCode.message}
                   </p>
                 )}
@@ -188,7 +188,7 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
                   setUseRecoveryCode(nextVal);
                   setValue('useRecoveryCode', nextVal);
                 }}
-                className="text-[13px] text-signal-blue hover:underline font-book"
+                className="text-[14px] text-signal-blue hover:underline font-book"
               >
                 {useRecoveryCode ? t('useTotpCode') : t('useRecoveryCode')}
               </button>
@@ -216,7 +216,7 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
 
           {/* Быстрый демо-вход для тестирования ролей */}
           <div className="border-t border-black/10 pt-4 space-y-2.5">
-            <p className="text-[12px] text-steel-gray text-center font-book">
+            <p className="text-[14px] text-steel-gray text-center font-book">
               {t('demoNotice')}
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -225,7 +225,7 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
                 variant="outline"
                 size="sm"
                 onClick={() => handleDemoLogin('admin')}
-                className="rounded-full text-[12px] h-9"
+                className="rounded-full text-[14px] h-9"
               >
                 {t('demoAdmin')}
               </Button>
@@ -234,7 +234,7 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
                 variant="outline"
                 size="sm"
                 onClick={() => handleDemoLogin('support')}
-                className="rounded-full text-[12px] h-9"
+                className="rounded-full text-[14px] h-9"
               >
                 {t('demoSupport')}
               </Button>
@@ -244,7 +244,7 @@ export function StaffLoginForm({ onSuccess }: StaffLoginFormProps) {
           <div className="text-center pt-2">
             <Link
               href="/"
-              className="text-[13px] text-steel-gray hover:text-off-black transition-colors inline-flex items-center gap-1.5 font-book"
+              className="text-[14px] text-steel-gray hover:text-off-black transition-colors inline-flex items-center gap-1.5 font-book"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               {t('backToHome')}

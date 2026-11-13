@@ -75,7 +75,7 @@ export function DocxToPdfForm() {
           <h3 className="text-lg md:text-xl font-medium text-[#0f1012] mb-1">
             {t('dropzone.docxTitle')}
           </h3>
-          <p className="text-xs md:text-sm text-[#0f1012]/60 mb-6">
+          <p className="text-[14px] md:text-sm text-[#0f1012]/60 mb-6">
             {t('dropzone.hint', { maxMb: 25, maxFiles: 1 })}
           </p>
           <Button type="button" size="lg" className="rounded-full px-6">
@@ -94,7 +94,7 @@ export function DocxToPdfForm() {
                 <h4 className="text-sm font-semibold text-[#0f1012] truncate max-w-[280px] sm:max-w-md">
                   {file.name}
                 </h4>
-                <p className="text-xs text-[#0f1012]/60">
+                <p className="text-[14px] text-[#0f1012]/60">
                   {(file.size / (1024 * 1024)).toFixed(2)} МБ • Microsoft Word DOCX
                 </p>
               </div>
@@ -122,21 +122,21 @@ export function DocxToPdfForm() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-4 rounded-2xl bg-white border border-[#0f1012]/5 space-y-1.5">
-                <div className="flex items-center gap-2 text-xs font-semibold text-[#0f1012]">
+                <div className="flex items-center gap-2 text-[14px] font-semibold text-[#0f1012]">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   Ліміт розпакування (500 МБ)
                 </div>
-                <p className="text-xs text-[#0f1012]/70 leading-relaxed">
+                <p className="text-[14px] text-[#0f1012]/70 leading-relaxed">
                   {tDocx('unpackInfo')}
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-white border border-[#0f1012]/5 space-y-1.5">
-                <div className="flex items-center gap-2 text-xs font-semibold text-[#0f1012]">
+                <div className="flex items-center gap-2 text-[14px] font-semibold text-[#0f1012]">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   Движок LibreOffice (ЕС)
                 </div>
-                <p className="text-xs text-[#0f1012]/70 leading-relaxed">
+                <p className="text-[14px] text-[#0f1012]/70 leading-relaxed">
                   {tDocx('engineInfo')}
                 </p>
               </div>
@@ -145,10 +145,10 @@ export function DocxToPdfForm() {
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <Badge variant="neutral" className="rounded-full px-3 py-1 text-xs text-[#0f1012]/70">
+              <Badge variant="neutral" className="rounded-full px-3 py-1 text-[14px] text-[#0f1012]/70">
                 {t('features.clamav')}
               </Badge>
-              <Badge variant="neutral" className="rounded-full px-3 py-1 text-xs text-[#0f1012]/70">
+              <Badge variant="neutral" className="rounded-full px-3 py-1 text-[14px] text-[#0f1012]/70">
                 {t('features.eu')}
               </Badge>
             </div>

@@ -118,29 +118,29 @@ export function StripeCheckoutModal({
               <h3 className="text-[17px] font-regular tracking-tight text-off-black">
                 Оплата через Stripe
               </h3>
-              <p className="text-[12px] text-steel-gray font-book">
+              <p className="text-[14px] text-steel-gray font-book">
                 Безопасный 256-битный платежный шлюз
               </p>
             </div>
           </div>
 
-          <Badge variant="signal-chip" className="text-[11px] py-0.5">
+          <Badge variant="signal-chip" className="text-[14px] py-0.5">
             Stripe Checkout
           </Badge>
         </div>
 
         {/* Тестовый переключатель статуса авторизации (для валидации ТЗ §11.1) */}
-        <div className="mb-5 p-3 rounded-2xl bg-[#f2f2f4]/70 border-[0.5px] border-black/5 text-[12px]">
+        <div className="mb-5 p-3 rounded-2xl bg-[#f2f2f4]/70 border-[0.5px] border-black/5 text-[14px]">
           <div className="flex items-center justify-between mb-1.5">
             <span className="font-regular text-steel-gray">Режим симуляции статуса:</span>
-            <span className="text-[11px] text-steel-gray">ТЗ §11.1 проверка email</span>
+            <span className="text-[14px] text-steel-gray">ТЗ §11.1 проверка email</span>
           </div>
           <div className="flex items-center gap-1.5">
             <button
               type="button"
               onClick={() => setAuthStatus('verified')}
               className={cn(
-                'px-2.5 py-1 rounded-pill text-[11px] font-regular transition-colors',
+                'px-2.5 py-1 rounded-pill text-[14px] font-regular transition-colors',
                 authStatus === 'verified'
                   ? 'bg-signal-blue text-pure-white'
                   : 'bg-pure-white text-steel-gray hover:text-off-black'
@@ -152,7 +152,7 @@ export function StripeCheckoutModal({
               type="button"
               onClick={() => setAuthStatus('unverified')}
               className={cn(
-                'px-2.5 py-1 rounded-pill text-[11px] font-regular transition-colors',
+                'px-2.5 py-1 rounded-pill text-[14px] font-regular transition-colors',
                 authStatus === 'unverified'
                   ? 'bg-amber-500 text-pure-white'
                   : 'bg-pure-white text-steel-gray hover:text-off-black'
@@ -164,7 +164,7 @@ export function StripeCheckoutModal({
               type="button"
               onClick={() => setAuthStatus('guest')}
               className={cn(
-                'px-2.5 py-1 rounded-pill text-[11px] font-regular transition-colors',
+                'px-2.5 py-1 rounded-pill text-[14px] font-regular transition-colors',
                 authStatus === 'guest'
                   ? 'bg-off-black text-pure-white'
                   : 'bg-pure-white text-steel-gray hover:text-off-black'
@@ -185,7 +185,7 @@ export function StripeCheckoutModal({
                   <h4 className="text-[14px] font-regular text-amber-900">
                     Требуется авторизация
                   </h4>
-                  <p className="text-[13px] text-amber-800/90 font-book leading-relaxed">
+                  <p className="text-[14px] text-amber-800/90 font-book leading-relaxed">
                     По правилам сервиса (ТЗ §11.1) оформление платной подписки привязывается к постоянному
                     аккаунту. Войдите или создайте аккаунт, чтобы перейти к оплате тарифа {planName}.
                   </p>
@@ -221,7 +221,7 @@ export function StripeCheckoutModal({
                   <h4 className="text-[14px] font-regular text-red-900">
                     Оплата доступна только для подтвержденных email
                   </h4>
-                  <p className="text-[13px] text-red-800/90 font-book leading-relaxed">
+                  <p className="text-[14px] text-red-800/90 font-book leading-relaxed">
                     Адрес <strong className="font-regular">{userEmail}</strong> еще не подтвержден.
                     Согласно разделу ТЗ §11.1, в целях безопасности покупка тарифа разрешена только после
                     ввода 6-значного проверочного кода из почты.
@@ -242,7 +242,7 @@ export function StripeCheckoutModal({
               <Button
                 variant="secondary"
                 onClick={() => setAuthStatus('verified')}
-                className="text-[13px]"
+                className="text-[14px]"
               >
                 Я уже подтвердил
               </Button>
@@ -265,17 +265,17 @@ export function StripeCheckoutModal({
               </div>
 
               {isAnnual && (
-                <div className="flex items-center justify-between text-[12px] text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-pill mb-2">
+                <div className="flex items-center justify-between text-[14px] text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-pill mb-2">
                   <span>Скидка 15% при оплате за год</span>
                   <span>-€{savings}</span>
                 </div>
               )}
 
-              <div className="flex items-center justify-between text-[12px] text-steel-gray pt-2 border-t border-black/[0.05]">
+              <div className="flex items-center justify-between text-[14px] text-steel-gray pt-2 border-t border-black/[0.05]">
                 <span>Применимые налоги (НДС)</span>
                 <span>Включены в стоимость</span>
               </div>
-              <div className="flex items-center justify-between text-[12px] text-steel-gray mt-1">
+              <div className="flex items-center justify-between text-[14px] text-steel-gray mt-1">
                 <span>Продавец</span>
                 <span>ФОП, Украина (ТЗ §3.2)</span>
               </div>
@@ -284,14 +284,14 @@ export function StripeCheckoutModal({
             {/* Поля карты Stripe */}
             <div className="space-y-3.5">
               <div className="flex items-center justify-between">
-                <label className="text-[13px] font-regular text-off-black flex items-center gap-1.5">
+                <label className="text-[14px] font-regular text-off-black flex items-center gap-1.5">
                   <Lock className="w-3.5 h-3.5 text-signal-blue" />
                   Данные карты
                 </label>
                 <button
                   type="button"
                   onClick={handleFillTestCard}
-                  className="text-[11px] text-signal-blue hover:underline font-book"
+                  className="text-[14px] text-signal-blue hover:underline font-book"
                 >
                   Заполнить тестовой картой Stripe
                 </button>
@@ -335,13 +335,13 @@ export function StripeCheckoutModal({
                   value={cardName}
                   onChange={(e) => setCardName(e.target.value.toUpperCase())}
                   required
-                  className="h-11 text-[13px]"
+                  className="h-11 text-[14px]"
                 />
               </div>
             </div>
 
             {/* Подсказка об автопродлении */}
-            <div className="flex items-start gap-2 text-[12px] text-steel-gray font-book bg-[#f2f2f4]/60 p-3 rounded-2xl">
+            <div className="flex items-start gap-2 text-[14px] text-steel-gray font-book bg-[#f2f2f4]/60 p-3 rounded-2xl">
               <Info className="w-4 h-4 text-steel-gray shrink-0 mt-0.5" />
               <span>
                 Автопродление выключено по умолчанию (ТЗ §11.1). Вы сможете включить его в любое время
@@ -370,7 +370,7 @@ export function StripeCheckoutModal({
             </Button>
 
             {/* Нижние индикаторы безопасности */}
-            <div className="flex items-center justify-center gap-4 text-[11px] text-steel-gray font-book pt-1">
+            <div className="flex items-center justify-center gap-4 text-[14px] text-steel-gray font-book pt-1">
               <span className="flex items-center gap-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                 PCI-DSS Level 1
@@ -394,13 +394,13 @@ export function StripeCheckoutModal({
               <h4 className="text-[20px] font-regular tracking-tight text-off-black">
                 Подписка успешно активирована!
               </h4>
-              <p className="text-[13px] text-steel-gray font-book mt-1">
+              <p className="text-[14px] text-steel-gray font-book mt-1">
                 Тариф <strong className="font-regular text-off-black">{planName}</strong> активирован
                 на вашем аккаунте. Квитанция об оплате отправлена на {userEmail}.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-[#f2f2f4]/70 border-[0.5px] border-black/5 text-[12px] text-steel-gray font-mono text-left">
+            <div className="p-3.5 rounded-2xl bg-[#f2f2f4]/70 border-[0.5px] border-black/5 text-[14px] text-steel-gray font-mono text-left">
               <div>ID транзакции: {transactionId}</div>
               <div>Сумма: €{totalAmount} (налоги включены)</div>
               <div>Статус: Succeeded • Stripe</div>
@@ -408,14 +408,14 @@ export function StripeCheckoutModal({
 
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
               <Link href="/account" className="w-full">
-                <Button variant="floating-cta" className="w-full text-[13px]">
+                <Button variant="floating-cta" className="w-full text-[14px]">
                   Личный кабинет
                 </Button>
               </Link>
               <Link href="/convert/pdf-to-docx" className="w-full">
                 <Button
                   variant="floating-cta"
-                  className="w-full bg-signal-blue text-pure-white hover:bg-signal-blue/90 text-[13px] flex items-center justify-center gap-1.5"
+                  className="w-full bg-signal-blue text-pure-white hover:bg-signal-blue/90 text-[14px] flex items-center justify-center gap-1.5"
                 >
                   <span>Начать конвертацию</span>
                   <ArrowRight className="w-4 h-4" />

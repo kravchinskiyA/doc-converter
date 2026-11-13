@@ -119,7 +119,7 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
           <h3 className="text-lg md:text-xl font-medium text-[#0f1012] mb-1">
             {t('dropzone.pdfTitle')}
           </h3>
-          <p className="text-xs md:text-sm text-[#0f1012]/60 mb-6">
+          <p className="text-[14px] md:text-sm text-[#0f1012]/60 mb-6">
             {t('dropzone.hint', { maxMb: 25, maxFiles: 1 })}
           </p>
           <Button type="button" size="lg" className="rounded-full px-6">
@@ -138,7 +138,7 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
                 <h4 className="text-sm font-semibold text-[#0f1012] truncate max-w-[280px] sm:max-w-md">
                   {file.name}
                 </h4>
-                <p className="text-xs text-[#0f1012]/60">
+                <p className="text-[14px] text-[#0f1012]/60">
                   {(file.size / (1024 * 1024)).toFixed(2)} МБ • {pages.length} стор.
                 </p>
               </div>
@@ -166,7 +166,7 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
 
             {/* Выбор выходного формата: JPG или WebP */}
             <div className="space-y-2">
-              <span className="text-xs font-semibold text-[#0f1012] block">
+              <span className="text-[14px] font-semibold text-[#0f1012] block">
                 {tImages('formatTitle')}
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -180,8 +180,8 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
                       : 'border-[#0f1012]/10 hover:border-[#0f1012]/20'
                   )}
                 >
-                  <span className="text-xs font-semibold text-[#0f1012] block">JPG</span>
-                  <span className="text-[11px] text-[#0f1012]/60">{tImages('formatJpg')}</span>
+                  <span className="text-[14px] font-semibold text-[#0f1012] block">JPG</span>
+                  <span className="text-[14px] text-[#0f1012]/60">{tImages('formatJpg')}</span>
                 </button>
                 <button
                   type="button"
@@ -193,8 +193,8 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
                       : 'border-[#0f1012]/10 hover:border-[#0f1012]/20'
                   )}
                 >
-                  <span className="text-xs font-semibold text-[#0f1012] block">WebP</span>
-                  <span className="text-[11px] text-[#0f1012]/60">{tImages('formatWebp')}</span>
+                  <span className="text-[14px] font-semibold text-[#0f1012] block">WebP</span>
+                  <span className="text-[14px] text-[#0f1012]/60">{tImages('formatWebp')}</span>
                 </button>
               </div>
             </div>
@@ -202,10 +202,10 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
             {/* Выбор DPI: 72, 150, 300 */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#0f1012] block">
+                <span className="text-[14px] font-semibold text-[#0f1012] block">
                   {tImages('dpiTitle')}
                 </span>
-                <span className="text-xs text-[#0f1012]/50 font-mono">{dpi} DPI</span>
+                <span className="text-[14px] text-[#0f1012]/50 font-mono">{dpi} DPI</span>
               </div>
               <div className="grid grid-cols-3 gap-2">
                 {SUPPORTED_DPIS.map((val) => (
@@ -214,7 +214,7 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
                     type="button"
                     onClick={() => setDpi(val)}
                     className={cn(
-                      'py-2.5 px-3 rounded-xl border text-center transition-all text-xs font-medium',
+                      'py-2.5 px-3 rounded-xl border text-center transition-all text-[14px] font-medium',
                       dpi === val
                         ? 'border-[#0071e3] bg-[#0071e3] text-white'
                         : 'border-[#0f1012]/10 hover:border-[#0f1012]/30 text-[#0f1012]/80 bg-[#fdfdfd]'
@@ -224,16 +224,16 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
                   </button>
                 ))}
               </div>
-              <p className="text-[11px] text-[#0f1012]/60">{tImages('dpiInfo')}</p>
+              <p className="text-[14px] text-[#0f1012]/60">{tImages('dpiInfo')}</p>
             </div>
 
             {/* Ползунок качества сжатия 1-100 */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#0f1012] block">
+                <span className="text-[14px] font-semibold text-[#0f1012] block">
                   {tImages('qualityTitle')}
                 </span>
-                <span className="text-xs font-bold text-[#0071e3] font-mono">{quality}</span>
+                <span className="text-[14px] font-bold text-[#0071e3] font-mono">{quality}</span>
               </div>
               <input
                 type="range"
@@ -243,13 +243,13 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
                 onChange={(e) => setQuality(Number(e.target.value))}
                 className="w-full accent-[#0071e3] cursor-pointer"
               />
-              <p className="text-[11px] text-[#0f1012]/60">
+              <p className="text-[14px] text-[#0f1012]/60">
                 {tImages('qualityDesc', { quality })}
               </p>
             </div>
 
             {/* Заметка о белом фоне */}
-            <div className="p-3.5 rounded-xl bg-[#f2f2f4]/60 border border-[#0f1012]/5 flex items-center gap-2 text-xs text-[#0f1012]/70">
+            <div className="p-3.5 rounded-xl bg-[#f2f2f4]/60 border border-[#0f1012]/5 flex items-center gap-2 text-[14px] text-[#0f1012]/70">
               <Info className="w-4 h-4 text-[#0071e3] shrink-0" />
               <span>{tImages('whiteBgNotice')}</span>
             </div>
@@ -268,13 +268,13 @@ export function PdfToImagesForm({ initialFormat = 'jpg' }: PdfToImagesFormProps)
           {/* Действия */}
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <Badge variant="neutral" className="rounded-full px-3 py-1 text-xs text-[#0f1012]/70">
+              <Badge variant="neutral" className="rounded-full px-3 py-1 text-[14px] text-[#0f1012]/70">
                 {dpi} DPI
               </Badge>
-              <Badge variant="neutral" className="rounded-full px-3 py-1 text-xs text-[#0f1012]/70">
+              <Badge variant="neutral" className="rounded-full px-3 py-1 text-[14px] text-[#0f1012]/70">
                 Q{quality}
               </Badge>
-              <Badge variant="neutral" className="rounded-full px-3 py-1 text-xs text-[#0f1012]/70">
+              <Badge variant="neutral" className="rounded-full px-3 py-1 text-[14px] text-[#0f1012]/70">
                 {format.toUpperCase()}
               </Badge>
             </div>

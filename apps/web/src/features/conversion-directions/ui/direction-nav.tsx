@@ -63,7 +63,7 @@ export function DirectionNav({ currentDirection, className }: DirectionNavProps)
             key={item.direction}
             href={item.href}
             className={cn(
-              'px-4 py-2 text-xs md:text-sm font-medium rounded-full transition-all duration-200 whitespace-nowrap',
+              'px-4 py-2 text-[14px] md:text-sm font-medium rounded-full transition-all duration-200 whitespace-nowrap',
               active
                 ? 'bg-[#0f1012] text-white'
                 : 'text-[#0f1012]/70 md:hover:text-[#0f1012] md:hover:bg-white/60'

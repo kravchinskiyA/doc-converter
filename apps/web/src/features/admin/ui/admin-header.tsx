@@ -57,7 +57,7 @@ export function AdminHeader({
 
         {/* Профиль оператора и действия */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-[13px] text-steel-gray font-book">
+          <div className="flex items-center gap-2 text-[14px] text-steel-gray font-book">
             <UserCheck className="w-4 h-4 text-signal-blue" />
             <span>{t('signedInAs')}</span>
             <span className="text-off-black font-regular">{session.email}</span>
@@ -68,7 +68,7 @@ export function AdminHeader({
             variant="outline"
             size="sm"
             onClick={() => onSwitchRole(isRoleAdmin ? 'support' : 'admin')}
-            className="rounded-full gap-1.5 text-[12px] h-8"
+            className="rounded-full gap-1.5 text-[14px] h-8"
             title="Переключить между Администратором и Поддержкой"
           >
             <RefreshCw className="w-3 h-3" />
@@ -79,7 +79,7 @@ export function AdminHeader({
             variant="ghost"
             size="sm"
             onClick={onLogout}
-            className="rounded-full gap-1.5 text-[12px] h-8 text-red-600 hover:bg-red-500/10"
+            className="rounded-full gap-1.5 text-[14px] h-8 text-red-600 hover:bg-red-500/10"
           >
             <LogOut className="w-3.5 h-3.5" />
             {t('logout')}

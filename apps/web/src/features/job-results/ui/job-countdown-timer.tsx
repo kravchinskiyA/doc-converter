@@ -37,7 +37,7 @@ export function JobCountdownTimer({ countdown, isGuest }: JobCountdownTimerProps
 
         {/* Правая часть: интерактивный счетчик обратного отсчета */}
         <div className="flex flex-col items-start md:items-end gap-1 shrink-0">
-          <div className="text-[12px] font-book text-steel-gray flex items-center gap-1.5">
+          <div className="text-[14px] font-book text-steel-gray flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5 text-signal-blue" />
             {t('timeRemaining')}
           </div>
@@ -51,21 +51,21 @@ export function JobCountdownTimer({ countdown, isGuest }: JobCountdownTimerProps
             <div className="flex items-baseline gap-2 font-mono text-[22px] sm:text-[26px] tracking-tight text-off-black">
               <span className="bg-pure-white border-[0.5px] border-black/10 px-2.5 py-0.5 rounded-[10px]">
                 {String(countdown.hours).padStart(2, '0')}
-                <span className="text-[11px] font-sans text-steel-gray ml-1">
+                <span className="text-[14px] font-sans text-steel-gray ml-1">
                   {t('hours')}
                 </span>
               </span>
               <span className="text-steel-gray/50">:</span>
               <span className="bg-pure-white border-[0.5px] border-black/10 px-2.5 py-0.5 rounded-[10px]">
                 {String(countdown.minutes).padStart(2, '0')}
-                <span className="text-[11px] font-sans text-steel-gray ml-1">
+                <span className="text-[14px] font-sans text-steel-gray ml-1">
                   {t('minutes')}
                 </span>
               </span>
               <span className="text-steel-gray/50">:</span>
               <span className="bg-pure-white border-[0.5px] border-black/10 px-2.5 py-0.5 rounded-[10px]">
                 {String(countdown.seconds).padStart(2, '0')}
-                <span className="text-[11px] font-sans text-steel-gray ml-1">
+                <span className="text-[14px] font-sans text-steel-gray ml-1">
                   {t('seconds')}
                 </span>
               </span>
@@ -76,7 +76,7 @@ export function JobCountdownTimer({ countdown, isGuest }: JobCountdownTimerProps
 
       {/* Призыв зарегистрироваться для гостя для бессрочного сохранения до 6 месяцев */}
       {isGuest && !countdown.isExpired && (
-        <div className="mt-4 pt-4 border-t border-black/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[13px] font-book text-steel-gray">
+        <div className="mt-4 pt-4 border-t border-black/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[14px] font-book text-steel-gray">
           <span>{t('accountBenefit')}</span>
           <Link
             href="/auth/register"

@@ -37,10 +37,10 @@ export function NotFoundView({
 
           {/* Быстрые ссылки на основные разделы */}
           <div className="p-4 rounded-2xl bg-[#f2f2f4]/60 text-left space-y-2">
-            <div className="text-[12px] font-regular text-steel-gray uppercase tracking-wider">
+            <div className="text-[14px] font-regular text-steel-gray uppercase tracking-wider">
               Популярные разделы:
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[13px] font-book">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[14px] font-book">
               <Link href="/convert/pdf-to-docx" className="text-signal-blue hover:underline flex items-center gap-1">
                 <span>PDF → DOCX (Распознавание OCR)</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -64,7 +64,7 @@ export function NotFoundView({
             <Link href="/" className="w-full sm:w-auto">
               <Button
                 variant="floating-cta"
-                className="w-full sm:w-auto h-11 px-6 bg-signal-blue text-pure-white hover:bg-signal-blue/90 border-transparent text-[13px] flex items-center justify-center gap-2"
+                className="w-full sm:w-auto h-11 px-6 bg-signal-blue text-pure-white hover:bg-signal-blue/90 border-transparent text-[14px] flex items-center justify-center gap-2"
               >
                 <Home className="w-4 h-4 text-pure-white" />
                 <span>На главную страницу</span>
@@ -73,7 +73,7 @@ export function NotFoundView({
             <Link href="/convert/pdf-to-docx" className="w-full sm:w-auto">
               <Button
                 variant="secondary"
-                className="w-full sm:w-auto h-11 px-6 text-[13px] flex items-center justify-center gap-2"
+                className="w-full sm:w-auto h-11 px-6 text-[14px] flex items-center justify-center gap-2"
               >
                 <RefreshCw className="w-4 h-4 text-steel-gray" />
                 <span>К конвертеру файлов</span>

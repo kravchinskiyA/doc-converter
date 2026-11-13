@@ -119,7 +119,7 @@ export function PdfToDocxForm() {
           <h3 className="text-lg md:text-xl font-medium text-[#0f1012] mb-1">
             {t('dropzone.pdfTitle')}
           </h3>
-          <p className="text-xs md:text-sm text-[#0f1012]/60 mb-6">
+          <p className="text-[14px] md:text-sm text-[#0f1012]/60 mb-6">
             {t('dropzone.hint', { maxMb: 25, maxFiles: 1 })}
           </p>
           <Button type="button" size="lg" className="rounded-full px-6">
@@ -137,7 +137,7 @@ export function PdfToDocxForm() {
               <h4 className="text-sm font-semibold text-[#0f1012] truncate max-w-[280px] sm:max-w-md">
                 {file.name}
               </h4>
-              <p className="text-xs text-[#0f1012]/60">
+              <p className="text-[14px] text-[#0f1012]/60">
                 {(file.size / (1024 * 1024)).toFixed(2)} МБ • {pages.length} стор.
               </p>
             </div>
@@ -174,7 +174,7 @@ export function PdfToDocxForm() {
               <h4 className="text-sm md:text-base font-semibold text-[#0f1012]">
                 {tDocx('ocrLanguagesTitle')}
               </h4>
-              <p className="text-xs text-[#0f1012]/60">{tDocx('ocrLanguagesHint')}</p>
+              <p className="text-[14px] text-[#0f1012]/60">{tDocx('ocrLanguagesHint')}</p>
             </div>
             <div className="flex flex-wrap gap-2">
               {SUPPORTED_OCR_LANGUAGES.map((lang) => {
@@ -185,7 +185,7 @@ export function PdfToDocxForm() {
                     type="button"
                     onClick={() => handleToggleLanguage(lang)}
                     className={cn(
-                      'px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all flex items-center gap-1.5',
+                      'px-3.5 py-1.5 rounded-full text-[14px] font-medium border transition-all flex items-center gap-1.5',
                       isSelected
                         ? 'bg-[#0071e3] text-white border-[#0071e3]'
                         : 'bg-white text-[#0f1012]/70 border-[#0f1012]/15 hover:border-[#0f1012]/40'
@@ -200,7 +200,7 @@ export function PdfToDocxForm() {
           </div>
 
           {/* Информационная карточка гарантий ТЗ §2.4 */}
-          <div className="p-5 md:p-6 rounded-[28px] bg-[#f2f2f4]/60 border border-[#0f1012]/5 flex items-start gap-3.5 text-xs text-[#0f1012]/80">
+          <div className="p-5 md:p-6 rounded-[28px] bg-[#f2f2f4]/60 border border-[#0f1012]/5 flex items-start gap-3.5 text-[14px] text-[#0f1012]/80">
             <ShieldCheck className="w-5 h-5 text-[#0071e3] shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold text-[#0f1012] mb-0.5">{tDocx('layoutInfoTitle')}</p>
@@ -211,10 +211,10 @@ export function PdfToDocxForm() {
           {/* Кнопка запуска конвертации */}
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <Badge variant="neutral" className="rounded-full px-3 py-1 text-xs text-[#0f1012]/70">
+              <Badge variant="neutral" className="rounded-full px-3 py-1 text-[14px] text-[#0f1012]/70">
                 {t('features.cer')}
               </Badge>
-              <Badge variant="neutral" className="rounded-full px-3 py-1 text-xs text-[#0f1012]/70">
+              <Badge variant="neutral" className="rounded-full px-3 py-1 text-[14px] text-[#0f1012]/70">
                 {t('features.eu')}
               </Badge>
             </div>

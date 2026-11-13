@@ -121,7 +121,7 @@ export function PricingComparisonTable({
         </table>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-black/[0.06] flex flex-wrap items-center justify-end gap-3 text-[12px] text-steel-gray font-book">
+      <div className="mt-6 pt-4 border-t border-black/[0.06] flex flex-wrap items-center justify-end gap-3 text-[14px] text-steel-gray font-book">
         <span>Все тарифы работают по стандарту GDPR с шифрованием SSE-KMS в ЕС.</span>
       </div>
     </div>

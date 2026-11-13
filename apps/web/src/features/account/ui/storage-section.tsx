@@ -71,7 +71,7 @@ export function StorageSection({
                 <h4 className="text-[14px] font-medium text-red-700">
                   Хранилище заполнено (100%) — новые конвертации заблокированы
                 </h4>
-                <p className="text-[12px] text-red-600/90 mt-1 leading-relaxed">
+                <p className="text-[14px] text-red-600/90 mt-1 leading-relaxed">
                   По правилам ТЗ §10.3 при исчерпании лимита приём новых задач сайта и API прекращается.
                   Удалите ненужные файлы вручную либо очистите всё хранилище для возобновления работы.
                 </p>
@@ -84,7 +84,7 @@ export function StorageSection({
                 <h4 className="text-[14px] font-medium text-amber-700">
                   Внимание: занято более 75% дискового пространства
                 </h4>
-                <p className="text-[12px] text-amber-700/80 mt-1 leading-relaxed">
+                <p className="text-[14px] text-amber-700/80 mt-1 leading-relaxed">
                   Место в хранилище скоро закончится ({formatBytes(storageQuota.usedBytes)} из {formatBytes(storageQuota.totalBytes)}).
                   Рекомендуется удалить неактуальные документы или перейти на тариф «Максимальный» (50 ГБ).
                 </p>
@@ -122,7 +122,7 @@ export function StorageSection({
               />
             </div>
 
-            <div className="flex items-center justify-between text-[11px] text-steel-gray pt-1">
+            <div className="flex items-center justify-between text-[14px] text-steel-gray pt-1">
               <span>0 ГБ</span>
               <span className="flex items-center gap-1">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500" />
@@ -135,31 +135,31 @@ export function StorageSection({
           {/* Информационные правила хранения */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
             <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
-              <div className="flex items-center gap-2 text-off-black font-book text-[13px] mb-1">
+              <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
                 <Server className="h-4 w-4 text-signal-blue" />
                 Безопасность в ЕС
               </div>
-              <p className="text-[12px] text-steel-gray leading-relaxed">
+              <p className="text-[14px] text-steel-gray leading-relaxed">
                 Все файлы зашифрованы ключами KMS и хранятся исключительно в дата-центрах ЕС (Германия/Франкфурт).
               </p>
             </div>
 
             <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
-              <div className="flex items-center gap-2 text-off-black font-book text-[13px] mb-1">
+              <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600" />
                 Срок 6 месяцев
               </div>
-              <p className="text-[12px] text-steel-gray leading-relaxed">
+              <p className="text-[14px] text-steel-gray leading-relaxed">
                 Результаты принятых заданий хранятся 6 календарных месяцев от готовности (ТЗ §10.1).
               </p>
             </div>
 
             <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
-              <div className="flex items-center gap-2 text-off-black font-book text-[13px] mb-1">
+              <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
                 <Info className="h-4 w-4 text-signal-blue" />
                 Правило пакета
               </div>
-              <p className="text-[12px] text-steel-gray leading-relaxed">
+              <p className="text-[14px] text-steel-gray leading-relaxed">
                 Если результат принятой задачи превышает остаток, он сохраняется сверх квоты (ТЗ §10.3).
               </p>
             </div>
@@ -173,7 +173,7 @@ export function StorageSection({
           <div className="space-y-4">
             <Badge variant="error">Необратимое действие</Badge>
             <h3 className="text-[20px] font-book text-off-black">Полная очистка хранилища?</h3>
-            <p className="text-[13px] text-steel-gray leading-relaxed">
+            <p className="text-[14px] text-steel-gray leading-relaxed">
               Вы собираетесь безвозвратно удалить <strong>{files.length} файлов</strong> общим объёмом{' '}
               <strong>{formatBytes(storageQuota.usedBytes)}</strong>. Все файлы будут немедленно исключены из квоты
               и физически удалены из S3 в течение 1 часа (ТЗ §10.4).

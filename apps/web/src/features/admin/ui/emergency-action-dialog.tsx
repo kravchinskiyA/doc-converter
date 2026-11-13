@@ -69,7 +69,7 @@ export function EmergencyActionDialog({
               <DialogTitle className="text-[18px] md:text-[20px] font-book">
                 {getTitle()}
               </DialogTitle>
-              <DialogDescription className="text-steel-gray text-[13px]">
+              <DialogDescription className="text-steel-gray text-[14px]">
                 Действие фиксируется в журнале безопасности со сроком хранения 90 дней (ТЗ §12.14).
               </DialogDescription>
             </div>
@@ -78,7 +78,7 @@ export function EmergencyActionDialog({
 
         <form onSubmit={handleSubmit} className="space-y-4 pt-2">
           <div className="space-y-1.5">
-            <label className="text-[13px] font-regular text-off-black">
+            <label className="text-[14px] font-regular text-off-black">
               {t('reasonLabel')} <span className="text-red-500">*</span>
             </label>
             <textarea
@@ -91,7 +91,7 @@ export function EmergencyActionDialog({
               placeholder={t('reasonPlaceholder')}
               className="w-full rounded-[16px] border border-black/15 p-3 text-[14px] font-book text-off-black focus:outline-none focus:border-signal-blue resize-none"
             />
-            {error && <p className="text-[12px] text-red-500 font-book">{error}</p>}
+            {error && <p className="text-[14px] text-red-500 font-book">{error}</p>}
           </div>
 
           <div className="flex items-center justify-end gap-3 pt-3">

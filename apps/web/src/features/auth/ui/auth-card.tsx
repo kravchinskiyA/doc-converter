@@ -11,7 +11,7 @@ export interface AuthCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function AuthCard({
   badge,
   title,
-  subtitle,
+  subtitle: _subtitle,
   children,
   className,
   ...props
@@ -29,11 +29,6 @@ export function AuthCard({
         <h1 className="text-[24px] md:text-[27px] font-book tracking-tight text-off-black leading-tight">
           {title}
         </h1>
-        {subtitle && (
-          <p className="text-[14px] md:text-[15px] font-book text-steel-gray leading-relaxed">
-            {subtitle}
-          </p>
-        )}
       </div>
 
       {children}

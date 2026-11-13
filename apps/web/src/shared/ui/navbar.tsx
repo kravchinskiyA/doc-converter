@@ -199,7 +199,7 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
             onClick={() => setIsPagesOpen((prev) => !prev)}
             aria-expanded={isPagesOpen}
             className={cn(
-              'flex items-center gap-1.5 px-2.5 py-1 rounded-[8px] text-[13px] font-book transition-all',
+              'flex items-center gap-1.5 px-2.5 py-1 rounded-[8px] text-[14px] font-book transition-all',
               isPagesOpen
                 ? 'bg-signal-blue/10 text-signal-blue'
                 : 'text-off-black hover:text-signal-blue hover:bg-black/[0.03]'
@@ -218,10 +218,10 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
           {isPagesOpen && (
             <div className="absolute top-full mt-3.5 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:right-0 w-[310px] sm:w-[360px] max-h-[72vh] overflow-y-auto bg-pure-white border-[0.5px] border-black/[0.1] rounded-[20px] p-2.5 z-50 text-left">
               <div className="px-2.5 py-1.5 mb-1 border-b border-black/[0.05] flex items-center justify-between">
-                <span className="text-[11px] font-regular text-ash-gray uppercase tracking-wider">
+                <span className="text-[14px] font-regular text-ash-gray uppercase tracking-wider">
                   {t('devMenu.title')}
                 </span>
-                <span className="text-[11px] font-book text-steel-gray">
+                <span className="text-[14px] font-book text-steel-gray">
                   {t('devMenu.badge')}
                 </span>
               </div>
@@ -229,7 +229,7 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
               <div className="space-y-3 pt-1">
                 {PAGE_GROUPS.map((group) => (
                   <div key={group.category} className="space-y-1">
-                    <p className="px-2.5 text-[10px] font-regular text-ash-gray uppercase tracking-wider">
+                    <p className="px-2.5 text-[14px] font-regular text-ash-gray uppercase tracking-wider">
                       {t(`devMenu.categories.${group.category}`)}
                     </p>
                     <div className="space-y-0.5">
@@ -238,10 +238,10 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
                           key={item.href}
                           href={item.href}
                           onClick={() => setIsPagesOpen(false)}
-                          className="flex items-center justify-between px-2.5 py-1.5 rounded-[10px] text-[13px] font-book text-off-black hover:bg-black/[0.03] hover:text-signal-blue transition-colors group"
+                          className="flex items-center justify-between px-2.5 py-1.5 rounded-[10px] text-[14px] font-book text-off-black hover:bg-black/[0.03] hover:text-signal-blue transition-colors group"
                         >
                           <span className="truncate pr-2">{t(`devMenu.items.${item.key}`)}</span>
-                          <span className="shrink-0 flex items-center gap-1 text-[11px]">
+                          <span className="shrink-0 flex items-center gap-1 text-[14px]">
                             {item.status === 'ready' ? (
                               <span className="inline-flex items-center gap-1 text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-[6px]">
                                 <CheckCircle2 className="h-2.5 w-2.5" />

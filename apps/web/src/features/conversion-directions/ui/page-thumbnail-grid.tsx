@@ -30,7 +30,7 @@ export function PageThumbnailGrid({
       <div className="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-[#0f1012]/10">
         <div>
           <h4 className="text-sm font-semibold text-[#0f1012]">{t('pagesTitle')}</h4>
-          <p className="text-xs text-[#0f1012]/60">{t('pagesHint')}</p>
+          <p className="text-[14px] text-[#0f1012]/60">{t('pagesHint')}</p>
         </div>
         <div className="flex items-center gap-2">
           <Button
@@ -38,7 +38,7 @@ export function PageThumbnailGrid({
             variant="outline"
             size="sm"
             onClick={onSelectAll}
-            className="h-8 text-xs rounded-full px-3"
+            className="h-8 text-[14px] rounded-full px-3"
           >
             <CheckSquare className="w-3.5 h-3.5 mr-1 text-[#0071e3]" />
             {t('selectAll')}
@@ -48,7 +48,7 @@ export function PageThumbnailGrid({
             variant="ghost"
             size="sm"
             onClick={onDeselectAll}
-            className="h-8 text-xs rounded-full px-3 text-[#0f1012]/70"
+            className="h-8 text-[14px] rounded-full px-3 text-[#0f1012]/70"
           >
             <Square className="w-3.5 h-3.5 mr-1" />
             {t('deselectAll')}
@@ -56,7 +56,7 @@ export function PageThumbnailGrid({
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-[#0f1012]/70">
+      <div className="flex items-center justify-between text-[14px] text-[#0f1012]/70">
         <span>{t('selectedCount', { count: selectedCount, total: pages.length })}</span>
       </div>
 
@@ -76,7 +76,7 @@ export function PageThumbnailGrid({
           >
             {/* Чекбокс в верхнем правом углу карточки */}
             <div className="w-full flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-[#0f1012]">
+              <span className="text-[14px] font-semibold text-[#0f1012]">
                 {t('pageCard', { number: page.pageNumber })}
               </span>
               <div
@@ -100,7 +100,7 @@ export function PageThumbnailGrid({
                 <div className="h-1 bg-[#0f1012]/10 rounded w-full" />
                 <div className="h-1 bg-[#0f1012]/10 rounded w-2/3" />
               </div>
-              <div className="pt-2 border-t border-[#0f1012]/5 flex justify-between items-center text-[9px] text-[#0f1012]/40">
+              <div className="pt-2 border-t border-[#0f1012]/5 flex justify-between items-center text-[14px] text-[#0f1012]/40">
                 <span>doc-converter</span>
                 <span>p.{page.pageNumber}</span>
               </div>

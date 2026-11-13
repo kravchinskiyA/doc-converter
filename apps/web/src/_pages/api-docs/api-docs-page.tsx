@@ -160,14 +160,14 @@ if res.status_code == 202:
 
           <div className="pt-2 flex flex-wrap items-center gap-3">
             <Link href="/account">
-              <Button variant="floating-cta" className="h-10 text-[13px] flex items-center gap-1.5">
+              <Button variant="floating-cta" className="h-10 text-[14px] flex items-center gap-1.5">
                 <Key className="w-4 h-4 text-signal-blue" />
                 <span>Получить API-ключ в кабинете</span>
                 <ExternalLink className="w-3.5 h-3.5 opacity-60" />
               </Button>
             </Link>
             <Link href="/pricing">
-              <Button variant="secondary" className="h-10 text-[13px]">
+              <Button variant="secondary" className="h-10 text-[14px]">
                 Лимиты тарифов API
               </Button>
             </Link>
@@ -181,8 +181,8 @@ if res.status_code == 202:
               <Key className="w-4 h-4 text-signal-blue" />
               <span>Авторизация (ТЗ §7)</span>
             </div>
-            <p className="text-[13px] text-steel-gray font-book leading-relaxed">
-              Заголовок <code className="text-signal-blue font-mono text-[12px] bg-signal-blue/5 px-1.5 py-0.5 rounded">X-API-Key</code>.
+            <p className="text-[14px] text-steel-gray font-book leading-relaxed">
+              Заголовок <code className="text-signal-blue font-mono text-[14px] bg-signal-blue/5 px-1.5 py-0.5 rounded">X-API-Key</code>.
               Ключ генерируется вручную в кабинете. Передача в URL строго запрещена.
             </p>
           </div>
@@ -192,7 +192,7 @@ if res.status_code == 202:
               <Clock className="w-4 h-4 text-emerald-600" />
               <span>Частота запросов (ТЗ §3.8)</span>
             </div>
-            <p className="text-[13px] text-steel-gray font-book leading-relaxed">
+            <p className="text-[14px] text-steel-gray font-book leading-relaxed">
               Создание — 10/мин, проверка статуса — 120/мин суммарно (не чаще раза в 5 секунд на задание),
               скачивание результатов — 10/мин.
             </p>
@@ -203,8 +203,8 @@ if res.status_code == 202:
               <ShieldCheck className="w-4 h-4 text-off-black" />
               <span>Статус 202 Accepted (ТЗ §9.1)</span>
             </div>
-            <p className="text-[13px] text-steel-gray font-book leading-relaxed">
-              Все конвертации асинхронны. Запрос возвращает <code className="font-mono text-[12px]">202 Accepted</code> и ID задания.
+            <p className="text-[14px] text-steel-gray font-book leading-relaxed">
+              Все конвертации асинхронны. Запрос возвращает <code className="font-mono text-[14px]">202 Accepted</code> и ID задания.
               Результаты сохраняются в кабинете на 6 месяцев.
             </p>
           </div>
@@ -218,7 +218,7 @@ if res.status_code == 202:
                 <Code2 className="w-5 h-5 text-signal-blue" />
                 Быстрый старт: отправка и скачивание
               </h3>
-              <p className="text-[13px] text-steel-gray font-book mt-0.5">
+              <p className="text-[14px] text-steel-gray font-book mt-0.5">
                 Выберите ваш стек технологий для просмотра готового примера интеграции.
               </p>
             </div>
@@ -231,7 +231,7 @@ if res.status_code == 202:
                   type="button"
                   onClick={() => setActiveLang(lang)}
                   className={cn(
-                    'px-4 py-1.5 rounded-pill text-[13px] font-regular tracking-tight transition-all',
+                    'px-4 py-1.5 rounded-pill text-[14px] font-regular tracking-tight transition-all',
                     activeLang === lang
                       ? 'bg-pure-white text-off-black shadow-none'
                       : 'text-steel-gray hover:text-off-black'
@@ -244,7 +244,7 @@ if res.status_code == 202:
           </div>
 
           {/* Окно кода */}
-          <div className="relative rounded-[24px] bg-[#0f1012] p-5 text-pure-white font-mono text-[13px] leading-relaxed overflow-x-auto">
+          <div className="relative rounded-[24px] bg-[#0f1012] p-5 text-pure-white font-mono text-[14px] leading-relaxed overflow-x-auto">
             <button
               type="button"
               onClick={() => copyToClipboard('quickstart', codeSnippets[activeLang].code)}
@@ -276,25 +276,25 @@ if res.status_code == 202:
           <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-black/[0.06]">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[13px] font-regular px-2.5 py-1 rounded-pill bg-emerald-500/10 text-emerald-700 border-[0.5px] border-emerald-500/20">
+                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-emerald-500/10 text-emerald-700 border-[0.5px] border-emerald-500/20">
                   POST
                 </span>
                 <code className="font-mono text-[15px] font-regular text-off-black">/jobs</code>
               </div>
-              <Badge variant="signal-chip" className="text-[11px]">
+              <Badge variant="signal-chip" className="text-[14px]">
                 Возвращает 202 Accepted
               </Badge>
             </div>
 
             <p className="text-[14px] text-steel-gray font-book">
-              Создание новой задачи конвертации пакета файлов. Тело запроса передается как <code className="font-mono text-[12px]">multipart/form-data</code>.
+              Создание новой задачи конвертации пакета файлов. Тело запроса передается как <code className="font-mono text-[14px]">multipart/form-data</code>.
             </p>
 
             <div className="space-y-3 pt-2">
-              <h4 className="text-[13px] font-regular text-off-black uppercase tracking-wider">
+              <h4 className="text-[14px] font-regular text-off-black uppercase tracking-wider">
                 Параметры формы (multipart/form-data):
               </h4>
-              <ul className="space-y-2 text-[13px] text-off-black font-book divide-y divide-black/[0.04]">
+              <ul className="space-y-2 text-[14px] text-off-black font-book divide-y divide-black/[0.04]">
                 <li className="pt-2 flex flex-col sm:flex-row sm:items-baseline gap-2">
                   <code className="font-mono text-signal-blue font-regular w-36 shrink-0">direction</code>
                   <span className="text-steel-gray">Обязательное. Одно из: <code className="font-mono text-off-black">pdf-to-docx</code>, <code className="font-mono text-off-black">docx-to-pdf</code>, <code className="font-mono text-off-black">images-to-pdf</code>, <code className="font-mono text-off-black">pdf-to-images</code>.</span>
@@ -319,12 +319,12 @@ if res.status_code == 202:
           <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-black/[0.06]">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[13px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border-[0.5px] border-signal-blue/20">
+                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border-[0.5px] border-signal-blue/20">
                   GET
                 </span>
                 <code className="font-mono text-[15px] font-regular text-off-black">/jobs/:jobId</code>
               </div>
-              <Badge variant="neutral" className="text-[11px]">
+              <Badge variant="neutral" className="text-[14px]">
                 Опрос не чаще 1 раз в 5 сек
               </Badge>
             </div>
@@ -333,7 +333,7 @@ if res.status_code == 202:
               Получение текущего статуса задания и списка готовых файлов с ссылками на скачивание.
             </p>
 
-            <div className="rounded-2xl bg-[#0f1012] p-4 text-pure-white font-mono text-[12px] overflow-x-auto">
+            <div className="rounded-2xl bg-[#0f1012] p-4 text-pure-white font-mono text-[14px] overflow-x-auto">
               <pre>{`{
   "jobId": "job_98a7bc12e4f0",
   "status": "completed", // "queued" | "processing" | "completed" | "failed"
@@ -357,12 +357,12 @@ if res.status_code == 202:
           <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-black/[0.06]">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[13px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border-[0.5px] border-signal-blue/20">
+                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border-[0.5px] border-signal-blue/20">
                   GET
                 </span>
                 <code className="font-mono text-[15px] font-regular text-off-black">/jobs/:jobId/zip</code>
               </div>
-              <Badge variant="muted" className="text-[11px]">
+              <Badge variant="muted" className="text-[14px]">
                 application/zip
               </Badge>
             </div>
@@ -376,12 +376,12 @@ if res.status_code == 202:
           <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-black/[0.06]">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[13px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border-[0.5px] border-signal-blue/20">
+                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border-[0.5px] border-signal-blue/20">
                   GET
                 </span>
                 <code className="font-mono text-[15px] font-regular text-off-black">/account/quota</code>
               </div>
-              <Badge variant="neutral" className="text-[11px]">
+              <Badge variant="neutral" className="text-[14px]">
                 Информация о лимитах
               </Badge>
             </div>
@@ -406,7 +406,7 @@ if res.status_code == 202:
           </p>
 
           <div className="overflow-x-auto pt-2">
-            <table className="w-full min-w-[600px] text-left border-collapse text-[13px]">
+            <table className="w-full min-w-[600px] text-left border-collapse text-[14px]">
               <thead>
                 <tr className="border-b border-black/[0.08] text-steel-gray font-regular">
                   <th className="py-2.5 pr-4 w-28">Статус</th>

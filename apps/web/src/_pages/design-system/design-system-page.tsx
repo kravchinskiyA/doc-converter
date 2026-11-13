@@ -199,7 +199,7 @@ export function DesignSystemPage() {
             <a
               key={item.href}
               href={item.href}
-              className="rounded-btn border-[0.5px] border-black/10 bg-pure-white px-3.5 py-1.5 text-[13px] font-regular tracking-tight text-off-black hover:border-signal-blue hover:text-signal-blue transition-colors"
+              className="rounded-btn border-[0.5px] border-black/10 bg-pure-white px-3.5 py-1.5 text-[14px] font-regular tracking-tight text-off-black hover:border-signal-blue hover:text-signal-blue transition-colors"
             >
               {item.label}
             </a>
@@ -234,14 +234,14 @@ export function DesignSystemPage() {
                     token.border
                   )}
                 >
-                  <span className={cn('text-[13px] font-regular', token.textColor)}>
+                  <span className={cn('text-[14px] font-regular', token.textColor)}>
                     {token.name}
                   </span>
                   <button
                     type="button"
                     onClick={() => copyToClipboard(token.hex)}
                     className={cn(
-                      'flex items-center gap-1 rounded-pill px-2.5 py-1 text-[11px] font-regular backdrop-blur-sm transition-all',
+                      'flex items-center gap-1 rounded-pill px-2.5 py-1 text-[14px] font-regular backdrop-blur-sm transition-all',
                       token.hex === '#fdfdfd' || token.hex === '#f2f2f4'
                         ? 'bg-black/5 text-off-black hover:bg-black/10'
                         : 'bg-white/20 text-pure-white hover:bg-white/30'
@@ -263,18 +263,18 @@ export function DesignSystemPage() {
                 </div>
 
                 <div className="mt-4 space-y-2">
-                  <div className="flex items-center justify-between text-[12px] font-regular text-ash-gray">
+                  <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                     <span>{token.cssVar}</span>
-                    <span className="font-mono text-[11px]">{token.tailwind}</span>
+                    <span className="font-mono text-[14px]">{token.tailwind}</span>
                   </div>
-                  <p className="text-[13px] font-book text-steel-gray leading-relaxed">
+                  <p className="text-[14px] font-book text-steel-gray leading-relaxed">
                     {token.desc}
                   </p>
                 </div>
               </div>
 
               <div className="pt-3 border-t-[0.5px] border-black/5">
-                <span className="text-[11px] font-book text-ash-gray">
+                <span className="text-[14px] font-book text-ash-gray">
                   {token.wcag}
                 </span>
               </div>
@@ -302,19 +302,19 @@ export function DesignSystemPage() {
           {/* Характеристики шрифта */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-6 border-b-[0.5px] border-black/[0.06]">
             <div>
-              <span className="text-[12px] font-regular text-ash-gray block mb-1">Гарнитура</span>
+              <span className="text-[14px] font-regular text-ash-gray block mb-1">Гарнитура</span>
               <p className="text-[16px] font-book text-off-black">
                 PP Neue Montreal / Inter / System Sans
               </p>
             </div>
             <div>
-              <span className="text-[12px] font-regular text-ash-gray block mb-1">Letter-spacing</span>
+              <span className="text-[14px] font-regular text-ash-gray block mb-1">Letter-spacing</span>
               <p className="text-[16px] font-book text-off-black">
                 -0.02em (плотный инженерный трекинг)
               </p>
             </div>
             <div>
-              <span className="text-[12px] font-regular text-ash-gray block mb-1">Line-height</span>
+              <span className="text-[14px] font-regular text-ash-gray block mb-1">Line-height</span>
               <p className="text-[16px] font-book text-off-black">
                 1.15 – 1.20 (компактный интерлиньяж)
               </p>
@@ -324,7 +324,7 @@ export function DesignSystemPage() {
           {/* Шкала размеров */}
           <div className="space-y-8">
             <div className="space-y-2 pb-6 border-b-[0.5px] border-black/[0.06]">
-              <div className="flex items-center justify-between text-[12px] font-regular text-ash-gray">
+              <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                 <span>Display / Page Title</span>
                 <span className="font-mono">44px / LH 1.15 / LS -0.02em / Weight 350</span>
               </div>
@@ -334,7 +334,7 @@ export function DesignSystemPage() {
             </div>
 
             <div className="space-y-2 pb-6 border-b-[0.5px] border-black/[0.06]">
-              <div className="flex items-center justify-between text-[12px] font-regular text-ash-gray">
+              <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                 <span>Heading</span>
                 <span className="font-mono">27px / LH 32.4px / LS -0.54px / Weight 350</span>
               </div>
@@ -344,7 +344,7 @@ export function DesignSystemPage() {
             </div>
 
             <div className="space-y-2 pb-6 border-b-[0.5px] border-black/[0.06]">
-              <div className="flex items-center justify-between text-[12px] font-regular text-ash-gray">
+              <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                 <span>Subheading</span>
                 <span className="font-mono">18px / LH 21.6px / LS -0.36px / Weight 350</span>
               </div>
@@ -354,7 +354,7 @@ export function DesignSystemPage() {
             </div>
 
             <div className="space-y-2 pb-6 border-b-[0.5px] border-black/[0.06]">
-              <div className="flex items-center justify-between text-[12px] font-regular text-ash-gray">
+              <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                 <span>Body / Основной текст</span>
                 <span className="font-mono">16px / LH 19.2px / LS -0.32px / Weight 350</span>
               </div>
@@ -365,11 +365,11 @@ export function DesignSystemPage() {
             </div>
 
             <div className="space-y-2">
-              <div className="flex items-center justify-between text-[12px] font-regular text-ash-gray">
+              <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                 <span>Caption / Служебные подписи</span>
-                <span className="font-mono">12-13px / LH 14px / Weight 400 (Regular)</span>
+                <span className="font-mono">14px / LH 14px / Weight 400 (Regular)</span>
               </div>
-              <p className="text-[13px] font-regular tracking-tight text-ash-gray">
+              <p className="text-[14px] font-regular tracking-tight text-ash-gray">
                 Форматы: PDF/A-1b, DOCX, PNG, JPEG. Лимит размера файла: до 500 МБ для аккаунтов Pro.
               </p>
             </div>
@@ -399,9 +399,9 @@ export function DesignSystemPage() {
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-[15px] font-regular text-off-black">{item.name}</span>
-                  <span className="text-[13px] font-mono text-signal-blue">{item.value}</span>
+                  <span className="text-[14px] font-mono text-signal-blue">{item.value}</span>
                 </div>
-                <p className="text-[13px] font-book text-steel-gray mb-6 leading-relaxed">
+                <p className="text-[14px] font-book text-steel-gray mb-6 leading-relaxed">
                   {item.usage}
                 </p>
               </div>
@@ -410,7 +410,7 @@ export function DesignSystemPage() {
               <div className="h-28 rounded-[16px] bg-[#f2f2f4] flex items-center justify-center p-3">
                 <div
                   className={cn(
-                    'border-[0.5px] border-signal-blue/40 bg-pure-white flex items-center justify-center text-[11px] font-mono text-signal-blue',
+                    'border-[0.5px] border-signal-blue/40 bg-pure-white flex items-center justify-center text-[14px] font-mono text-signal-blue',
                     item.exampleClass
                   )}
                 >
@@ -443,7 +443,7 @@ export function DesignSystemPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Floating CTA */}
               <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-                <span className="text-[12px] font-regular text-ash-gray block">
+                <span className="text-[14px] font-regular text-ash-gray block">
                   variant="floating-cta" (Основная кнопка)
                 </span>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -456,7 +456,7 @@ export function DesignSystemPage() {
 
               {/* Secondary */}
               <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-                <span className="text-[12px] font-regular text-ash-gray block">
+                <span className="text-[14px] font-regular text-ash-gray block">
                   variant="secondary"
                 </span>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -468,7 +468,7 @@ export function DesignSystemPage() {
 
               {/* Outline */}
               <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-                <span className="text-[12px] font-regular text-ash-gray block">
+                <span className="text-[14px] font-regular text-ash-gray block">
                   variant="outline" (Контур Signal Blue)
                 </span>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -481,7 +481,7 @@ export function DesignSystemPage() {
 
               {/* Ghost */}
               <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-                <span className="text-[12px] font-regular text-ash-gray block">
+                <span className="text-[14px] font-regular text-ash-gray block">
                   variant="ghost" (Без фона)
                 </span>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -493,7 +493,7 @@ export function DesignSystemPage() {
 
               {/* Link */}
               <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-                <span className="text-[12px] font-regular text-ash-gray block">
+                <span className="text-[14px] font-regular text-ash-gray block">
                   variant="link" (Текстовая ссылка)
                 </span>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -505,7 +505,7 @@ export function DesignSystemPage() {
 
               {/* Disabled состояние */}
               <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-                <span className="text-[12px] font-regular text-ash-gray block">
+                <span className="text-[14px] font-regular text-ash-gray block">
                   Состояние disabled
                 </span>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -557,7 +557,7 @@ export function DesignSystemPage() {
         <div className="rounded-card border-[0.5px] border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-              <span className="text-[12px] font-regular text-ash-gray block">variant="signal-chip"</span>
+              <span className="text-[14px] font-regular text-ash-gray block">variant="signal-chip"</span>
               <div className="pt-2 flex flex-wrap gap-2">
                 <Badge variant="signal-chip">
                   <ShieldCheck className="h-3.5 w-3.5 mr-1" />
@@ -568,7 +568,7 @@ export function DesignSystemPage() {
             </div>
 
             <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-              <span className="text-[12px] font-regular text-ash-gray block">variant="neutral"</span>
+              <span className="text-[14px] font-regular text-ash-gray block">variant="neutral"</span>
               <div className="pt-2 flex flex-wrap gap-2">
                 <Badge variant="neutral">Тариф Pro</Badge>
                 <Badge variant="neutral">DOCX → PDF</Badge>
@@ -576,7 +576,7 @@ export function DesignSystemPage() {
             </div>
 
             <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-              <span className="text-[12px] font-regular text-ash-gray block">variant="muted"</span>
+              <span className="text-[14px] font-regular text-ash-gray block">variant="muted"</span>
               <div className="pt-2 flex flex-wrap gap-2">
                 <Badge variant="muted">TTL: 2 часа</Badge>
                 <Badge variant="muted">В очереди</Badge>
@@ -584,7 +584,7 @@ export function DesignSystemPage() {
             </div>
 
             <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-              <span className="text-[12px] font-regular text-ash-gray block">variant="success"</span>
+              <span className="text-[14px] font-regular text-ash-gray block">variant="success"</span>
               <div className="pt-2 flex flex-wrap gap-2">
                 <Badge variant="success">
                   <Check className="h-3.5 w-3.5 mr-1" />
@@ -594,7 +594,7 @@ export function DesignSystemPage() {
             </div>
 
             <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
-              <span className="text-[12px] font-regular text-ash-gray block">variant="error"</span>
+              <span className="text-[14px] font-regular text-ash-gray block">variant="error"</span>
               <div className="pt-2 flex flex-wrap gap-2">
                 <Badge variant="error">
                   <XCircle className="h-3.5 w-3.5 mr-1" />
@@ -623,7 +623,7 @@ export function DesignSystemPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Интерактивный инпут */}
             <div className="space-y-2">
-              <label className="text-[13px] font-regular text-steel-gray block">
+              <label className="text-[14px] font-regular text-steel-gray block">
                 Стандартное поле ввода (Input)
               </label>
               <Input
@@ -631,14 +631,14 @@ export function DesignSystemPage() {
                 onChange={(e) => setDemoInput(e.target.value)}
                 placeholder="Введите текст документа..."
               />
-              <span className="text-[12px] font-book text-ash-gray block">
+              <span className="text-[14px] font-book text-ash-gray block">
                 Живое значение: {demoInput}
               </span>
             </div>
 
             {/* Инпут с ошибкой */}
             <div className="space-y-2">
-              <label className="text-[13px] font-regular text-steel-gray block">
+              <label className="text-[14px] font-regular text-steel-gray block">
                 Поле с ошибкой валидации (error=true)
               </label>
               <Input
@@ -646,28 +646,28 @@ export function DesignSystemPage() {
                 defaultValue="invalid-api-key-format"
                 placeholder="Ключ API"
               />
-              <span className="text-[12px] font-book text-red-600 block">
+              <span className="text-[14px] font-book text-red-600 block">
                 Неверный формат ключа (ожидается dc_live_...)
               </span>
             </div>
 
             {/* Заблокированное поле */}
             <div className="space-y-2">
-              <label className="text-[13px] font-regular text-steel-gray block">
+              <label className="text-[14px] font-regular text-steel-gray block">
                 Заблокированное поле (disabled)
               </label>
               <Input
                 disabled
                 defaultValue="readonly_system_file.pdf"
               />
-              <span className="text-[12px] font-book text-ash-gray block">
+              <span className="text-[14px] font-book text-ash-gray block">
                 Редактирование запрещено
               </span>
             </div>
 
             {/* Чекбоксы */}
             <div className="space-y-3">
-              <label className="text-[13px] font-regular text-steel-gray block">
+              <label className="text-[14px] font-regular text-steel-gray block">
                 Флажки выбора (Checkbox)
               </label>
               <div className="space-y-2.5 pt-1">
@@ -706,7 +706,7 @@ export function DesignSystemPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <Badge variant="signal-chip">Демонстрационная карточка</Badge>
-                <span className="text-[12px] font-mono text-ash-gray">p-6 md:p-[69px]</span>
+                <span className="text-[14px] font-mono text-ash-gray">p-6 md:p-[69px]</span>
               </div>
               <CardTitle>Структура Card компонента</CardTitle>
               <CardDescription>
@@ -720,7 +720,7 @@ export function DesignSystemPage() {
               </p>
             </CardContent>
             <CardFooter className="flex justify-between items-center">
-              <span className="text-[12px] font-book text-ash-gray">Радиус: 54px</span>
+              <span className="text-[14px] font-book text-ash-gray">Радиус: 54px</span>
               <Button variant="secondary" size="sm">
                 Действие
               </Button>

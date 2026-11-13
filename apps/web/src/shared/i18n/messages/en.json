@@ -327,12 +327,12 @@
   "auth": {
     "login": {
       "title": "Sign in to account",
-      "subtitle": "Sign in to access your personal storage, API key and remove guest conversion limits.",
+      "subtitle": "Sign in to access your personal storage.",
       "emailLabel": "Email",
       "emailPlaceholder": "name@example.com",
       "passwordLabel": "Password",
       "passwordPlaceholder": "••••••••",
-      "rememberMe": "Remember me for 30 days",
+      "rememberMe": "Remember me",
       "forgotPassword": "Forgot password?",
       "recoveryCode": "Lost access to email? Account recovery with backup code",
       "submit": "Sign in",
@@ -349,7 +349,7 @@
       "passwordPlaceholder": "••••••••",
       "confirmPasswordLabel": "Repeat password",
       "confirmPasswordPlaceholder": "••••••••",
-      "passwordHint": "From 8 to 128 characters. Spaces and special characters are permitted.",
+      "passwordHint": "From 8 characters.",
       "acceptTerms": "I accept the Terms of Service and Privacy Policy",
       "termsLink": "Terms of Service",
       "privacyLink": "Privacy Policy",

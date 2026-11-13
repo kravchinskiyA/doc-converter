@@ -79,7 +79,7 @@ export function AdminBillingSection({
 
         <CardContent className="pt-6">
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-[13px]">
+            <table className="w-full text-left border-collapse text-[14px]">
               <thead>
                 <tr className="border-b border-black/10 text-steel-gray font-regular">
                   <th className="pb-3 pr-4 font-normal">{t('colTx')}</th>
@@ -98,7 +98,7 @@ export function AdminBillingSection({
                     <td className="py-4 pr-4">
                       <div className="font-mono font-medium text-off-black">{p.id}</div>
                       {p.refundFailureReason && (
-                        <p className="text-[11px] text-red-600 max-w-xs truncate" title={p.refundFailureReason}>
+                        <p className="text-[14px] text-red-600 max-w-xs truncate" title={p.refundFailureReason}>
                           {p.refundFailureReason}
                         </p>
                       )}
@@ -112,7 +112,7 @@ export function AdminBillingSection({
                     {/* Plan */}
                     <td className="py-4 px-4">
                       <span className="font-regular">{p.plan}</span>
-                      <span className="text-[11px] text-steel-gray block">
+                      <span className="text-[14px] text-steel-gray block">
                         {p.interval === 'month' ? 'Ежемесячно' : 'Ежегодно (-15%)'}
                       </span>
                     </td>
@@ -140,14 +140,14 @@ export function AdminBillingSection({
                           size="sm"
                           disabled={!isAdmin || retryingId === p.id}
                           onClick={() => handleRetry(p.id)}
-                          className="rounded-full h-8 text-[11px] gap-1.5 border-red-500/30 text-red-600 hover:bg-red-500/10"
+                          className="rounded-full h-8 text-[14px] gap-1.5 border-red-500/30 text-red-600 hover:bg-red-500/10"
                           title="Повторить неуспешную операцию возврата без изменения суммы по разделу 11.10 ТЗ"
                         >
                           <RotateCw className={`w-3 h-3 ${retryingId === p.id ? 'animate-spin' : ''}`} />
                           {retryingId === p.id ? t('retrying') : t('retryRefund')}
                         </Button>
                       ) : (
-                        <span className="text-steel-gray text-[12px]">—</span>
+                        <span className="text-steel-gray text-[14px]">—</span>
                       )}
                     </td>
                   </tr>

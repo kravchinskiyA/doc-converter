@@ -41,7 +41,7 @@ export function ErrorView({
 
           {/* Идентификатор инцидента без раскрытия PII или трейсов */}
           {error?.digest && (
-            <div className="p-3 rounded-2xl bg-[#f2f2f4]/80 text-[12px] font-mono text-steel-gray">
+            <div className="p-3 rounded-2xl bg-[#f2f2f4]/80 text-[14px] font-mono text-steel-gray">
               Идентификатор сбоя (digest): {error.digest}
             </div>
           )}
@@ -52,7 +52,7 @@ export function ErrorView({
                 type="button"
                 onClick={() => reset()}
                 variant="floating-cta"
-                className="w-full sm:w-auto h-11 px-6 bg-signal-blue text-pure-white hover:bg-signal-blue/90 border-transparent text-[13px] flex items-center justify-center gap-2"
+                className="w-full sm:w-auto h-11 px-6 bg-signal-blue text-pure-white hover:bg-signal-blue/90 border-transparent text-[14px] flex items-center justify-center gap-2"
               >
                 <RotateCcw className="w-4 h-4 text-pure-white" />
                 <span>Попробовать снова</span>
@@ -61,7 +61,7 @@ export function ErrorView({
             <Link href="/" className="w-full sm:w-auto">
               <Button
                 variant="secondary"
-                className="w-full sm:w-auto h-11 px-6 text-[13px] flex items-center justify-center gap-2"
+                className="w-full sm:w-auto h-11 px-6 text-[14px] flex items-center justify-center gap-2"
               >
                 <Home className="w-4 h-4 text-steel-gray" />
                 <span>На главную</span>
@@ -74,7 +74,7 @@ export function ErrorView({
               <Button
                 type="button"
                 variant="secondary"
-                className="w-full sm:w-auto h-11 px-5 text-[13px] flex items-center justify-center gap-2"
+                className="w-full sm:w-auto h-11 px-5 text-[14px] flex items-center justify-center gap-2"
               >
                 <LifeBuoy className="w-4 h-4 text-steel-gray" />
                 <span>Поддержка</span>

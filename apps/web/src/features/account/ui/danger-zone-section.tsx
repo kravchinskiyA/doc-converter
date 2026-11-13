@@ -62,12 +62,12 @@ export function DangerZoneSection({
         </CardHeader>
 
         <CardContent className="pt-6 space-y-4">
-          <div className="rounded-[24px] border-[0.5px] border-red-500/20 bg-red-500/[0.03] p-5 space-y-3 text-[13px] text-red-950/80 leading-relaxed">
+          <div className="rounded-[24px] border-[0.5px] border-red-500/20 bg-red-500/[0.03] p-5 space-y-3 text-[14px] text-red-950/80 leading-relaxed">
             <h4 className="font-medium text-[15px] text-red-700 flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 shrink-0 text-red-600" />
               Последствия подтверждения удаления по ТЗ §6.4:
             </h4>
-            <ul className="space-y-1.5 list-disc pl-5 text-[12px] text-red-900/90">
+            <ul className="space-y-1.5 list-disc pl-5 text-[14px] text-red-900/90">
               <li>
                 <strong>Все сохранённые документы и результаты:</strong> будут немедленно заблокированы
                 и безвозвратно удалены из облачного хранилища S3 в течение 1 часа.
@@ -103,20 +103,20 @@ export function DangerZoneSection({
             <Badge variant="error">Подтверждение удаления аккаунта</Badge>
             <h3 className="text-[20px] font-book text-off-black">Вы уверены, что хотите удалить аккаунт?</h3>
 
-            <p className="text-[13px] text-steel-gray leading-relaxed">
+            <p className="text-[14px] text-steel-gray leading-relaxed">
               Это действие необратимо. Для подтверждения мы выслали 6-значный проверочный код на ваш email{' '}
               <strong>{userProfile.email}</strong>.
             </p>
 
             {deleteAccountFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[13px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{deleteAccountFlow.error}</span>
               </div>
             )}
 
             <div className="space-y-3 pt-2">
-              <label className="text-[13px] font-regular text-off-black block">
+              <label className="text-[14px] font-regular text-off-black block">
                 Введите 6-значный код из письма:
               </label>
               <Input

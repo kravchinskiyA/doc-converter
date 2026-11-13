@@ -147,12 +147,12 @@ export function PricingPage() {
 
         {/* Финальный призыв к действию */}
         <div className="rounded-[36px] md:rounded-[44px] bg-off-black text-pure-white p-8 md:p-12 text-center space-y-4">
-          <Badge
+          {/* <Badge
             variant="signal-chip"
             className="border-white/20 text-pure-white bg-white/10"
           >
             {t('cta.badge')}
-          </Badge>
+          </Badge> */}
           <h3 className="text-[26px] md:text-[34px] font-book tracking-tight">
             {t('cta.title')}
           </h3>

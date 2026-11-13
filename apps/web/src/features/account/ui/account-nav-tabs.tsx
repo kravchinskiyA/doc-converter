@@ -74,7 +74,7 @@ export function AccountNavTabs({
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             className={cn(
-              'group inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-[13px] font-regular tracking-tight transition-all shrink-0',
+              'group inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-[14px] font-regular tracking-tight transition-all shrink-0',
               isActive
                 ? 'bg-[#0f1012] text-pure-white font-book'
                 : 'text-off-black hover:bg-black/[0.04]'
@@ -90,7 +90,7 @@ export function AccountNavTabs({
             {tab.badge && (
               <span
                 className={cn(
-                  'ml-0.5 rounded-full px-1.5 py-0.2 text-[10px] font-regular leading-none',
+                  'ml-0.5 rounded-full px-1.5 py-0.2 text-[14px] font-regular leading-none',
                   tab.badgeVariant === 'warning'
                     ? 'bg-amber-500/20 text-amber-700'
                     : tab.badgeVariant === 'danger'

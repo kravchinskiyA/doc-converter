@@ -47,7 +47,7 @@ export function AdminMetricsSection({ metrics }: AdminMetricsSectionProps) {
               {t('bullmq.title')}
             </CardTitle>
           </div>
-          <div className="flex items-center gap-2 text-[13px] text-steel-gray font-book">
+          <div className="flex items-center gap-2 text-[14px] text-steel-gray font-book">
             <Cpu className="w-4 h-4 text-signal-blue" />
             <span>Параллельность:</span>
             <span className="font-regular text-off-black">
@@ -59,42 +59,42 @@ export function AdminMetricsSection({ metrics }: AdminMetricsSectionProps) {
         <CardContent className="pt-6">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             <div className="rounded-[24px] bg-[#f2f2f4] p-4 text-center space-y-1">
-              <span className="text-[12px] text-steel-gray font-book">{t('bullmq.active')}</span>
+              <span className="text-[14px] text-steel-gray font-book">{t('bullmq.active')}</span>
               <p className="text-[22px] font-regular text-signal-blue">
                 {metrics.bullmq.activeJobs}
               </p>
             </div>
 
             <div className="rounded-[24px] bg-[#f2f2f4] p-4 text-center space-y-1">
-              <span className="text-[12px] text-steel-gray font-book">{t('bullmq.waiting')}</span>
+              <span className="text-[14px] text-steel-gray font-book">{t('bullmq.waiting')}</span>
               <p className="text-[22px] font-regular text-off-black">
                 {metrics.bullmq.waitingJobs}
               </p>
             </div>
 
             <div className="rounded-[24px] bg-[#f2f2f4] p-4 text-center space-y-1">
-              <span className="text-[12px] text-steel-gray font-book">{t('bullmq.completed')}</span>
+              <span className="text-[14px] text-steel-gray font-book">{t('bullmq.completed')}</span>
               <p className="text-[22px] font-regular text-emerald-600">
                 {metrics.bullmq.completedJobsToday}
               </p>
             </div>
 
             <div className="rounded-[24px] bg-[#f2f2f4] p-4 text-center space-y-1">
-              <span className="text-[12px] text-steel-gray font-book">{t('bullmq.failed')}</span>
+              <span className="text-[14px] text-steel-gray font-book">{t('bullmq.failed')}</span>
               <p className="text-[22px] font-regular text-red-600">
                 {metrics.bullmq.failedJobsToday}
               </p>
             </div>
 
             <div className="rounded-[24px] bg-[#f2f2f4] p-4 text-center space-y-1">
-              <span className="text-[12px] text-steel-gray font-book">{t('bullmq.delayed')}</span>
+              <span className="text-[14px] text-steel-gray font-book">{t('bullmq.delayed')}</span>
               <p className="text-[22px] font-regular text-off-black">
                 {metrics.bullmq.delayedJobs}
               </p>
             </div>
 
             <div className="rounded-[24px] bg-[#f2f2f4] p-4 text-center space-y-1">
-              <span className="text-[12px] text-steel-gray font-book">{t('bullmq.avgDuration')}</span>
+              <span className="text-[14px] text-steel-gray font-book">{t('bullmq.avgDuration')}</span>
               <p className="text-[20px] font-regular text-off-black">
                 {(metrics.bullmq.avgDurationMs / 1000).toFixed(1)} с
               </p>
@@ -120,29 +120,29 @@ export function AdminMetricsSection({ metrics }: AdminMetricsSectionProps) {
           <CardContent className="pt-6 space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-[24px] bg-[#f2f2f4] p-4 space-y-1">
-                <span className="text-[12px] text-steel-gray font-book">{t('s3.tempUsed')}</span>
+                <span className="text-[14px] text-steel-gray font-book">{t('s3.tempUsed')}</span>
                 <p className="text-[20px] font-regular text-off-black">
                   {formatBytes(metrics.storageS3.tempUsedBytes)}
                 </p>
-                <p className="text-[11px] text-steel-gray">Автоочистка через 12 часов</p>
+                <p className="text-[14px] text-steel-gray">Автоочистка через 12 часов</p>
               </div>
 
               <div className="rounded-[24px] bg-[#f2f2f4] p-4 space-y-1">
-                <span className="text-[12px] text-steel-gray font-book">{t('s3.resultsUsed')}</span>
+                <span className="text-[14px] text-steel-gray font-book">{t('s3.resultsUsed')}</span>
                 <p className="text-[20px] font-regular text-off-black">
                   {formatBytes(metrics.storageS3.resultsUsedBytes)}
                 </p>
-                <p className="text-[11px] text-steel-gray">Хранение до 6 месяцев</p>
+                <p className="text-[14px] text-steel-gray">Хранение до 6 месяцев</p>
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-[13px] pt-2 border-t border-black/5">
+            <div className="flex items-center justify-between text-[14px] pt-2 border-t border-black/5">
               <span className="text-steel-gray font-book">{t('s3.objects')}:</span>
               <span className="font-regular text-off-black">
                 {metrics.storageS3.totalObjects.toLocaleString()} шт.
               </span>
             </div>
-            <div className="flex items-center justify-between text-[13px]">
+            <div className="flex items-center justify-between text-[14px]">
               <span className="text-steel-gray font-book">{t('s3.cleanedToday')}:</span>
               <span className="font-regular text-emerald-600">
                 {metrics.storageS3.cleanedTodayCount} файлов
@@ -169,31 +169,31 @@ export function AdminMetricsSection({ metrics }: AdminMetricsSectionProps) {
           <CardContent className="pt-6 space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-[24px] bg-[#f2f2f4] p-4 space-y-1">
-                <span className="text-[12px] text-steel-gray font-book">{t('clamav.scanned')}</span>
+                <span className="text-[14px] text-steel-gray font-book">{t('clamav.scanned')}</span>
                 <p className="text-[20px] font-regular text-off-black">
                   {metrics.clamav.scannedTodayCount}
                 </p>
-                <p className="text-[11px] text-steel-gray">100% входящих потоков</p>
+                <p className="text-[14px] text-steel-gray">100% входящих потоков</p>
               </div>
 
               <div className="rounded-[24px] bg-[#f2f2f4] p-4 space-y-1">
-                <span className="text-[12px] text-steel-gray font-book">{t('clamav.threats')}</span>
+                <span className="text-[14px] text-steel-gray font-book">{t('clamav.threats')}</span>
                 <p className="text-[20px] font-regular text-emerald-600">
                   {metrics.clamav.threatsBlockedTodayCount} угроз
                 </p>
-                <p className="text-[11px] text-steel-gray">Чистый входящий поток</p>
+                <p className="text-[14px] text-steel-gray">Чистый входящий поток</p>
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-[13px] pt-2 border-t border-black/5">
+            <div className="flex items-center justify-between text-[14px] pt-2 border-t border-black/5">
               <span className="text-steel-gray font-book">{t('clamav.signatures')}:</span>
-              <span className="font-mono text-[12px] text-off-black">
+              <span className="font-mono text-[14px] text-off-black">
                 {metrics.clamav.signaturesVersion}
               </span>
             </div>
-            <div className="flex items-center justify-between text-[13px]">
+            <div className="flex items-center justify-between text-[14px]">
               <span className="text-steel-gray font-book">Heartbeat демона:</span>
-              <span className="font-regular text-steel-gray text-[12px]">
+              <span className="font-regular text-steel-gray text-[14px]">
                 {new Date(metrics.clamav.lastHeartbeat).toLocaleTimeString()} UTC
               </span>
             </div>
@@ -212,7 +212,7 @@ export function AdminMetricsSection({ metrics }: AdminMetricsSectionProps) {
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-[24px] bg-[#f2f2f4] p-4 space-y-1">
-              <span className="text-[12px] text-steel-gray font-book">{t('infra.globalPause')}</span>
+              <span className="text-[14px] text-steel-gray font-book">{t('infra.globalPause')}</span>
               <p
                 className={`text-[16px] font-regular ${
                   metrics.infrastructure.globalConversionsPaused
@@ -227,14 +227,14 @@ export function AdminMetricsSection({ metrics }: AdminMetricsSectionProps) {
             </div>
 
             <div className="rounded-[24px] bg-[#f2f2f4] p-4 space-y-1">
-              <span className="text-[12px] text-steel-gray font-book">{t('infra.redis')}</span>
+              <span className="text-[14px] text-steel-gray font-book">{t('infra.redis')}</span>
               <p className="text-[16px] font-regular text-off-black">
                 Connected • {metrics.infrastructure.redisMemoryUsedMb} МБ ОЗУ
               </p>
             </div>
 
             <div className="rounded-[24px] bg-[#f2f2f4] p-4 space-y-1">
-              <span className="text-[12px] text-steel-gray font-book">{t('infra.db')}</span>
+              <span className="text-[14px] text-steel-gray font-book">{t('infra.db')}</span>
               <p className="text-[16px] font-regular text-off-black">
                 {metrics.infrastructure.dbConnectionsActive} / {metrics.infrastructure.dbConnectionsMax} активных
               </p>

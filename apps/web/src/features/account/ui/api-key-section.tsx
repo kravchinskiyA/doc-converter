@@ -119,7 +119,7 @@ export function ApiKeySection({
                 <h4 className="text-[14px] font-medium text-amber-700">
                   Активные задания конвертации в очереди
                 </h4>
-                <p className="text-[12px] text-amber-700/80 mt-1 leading-relaxed">
+                <p className="text-[14px] text-amber-700/80 mt-1 leading-relaxed">
                   По правилам ТЗ §7 генерация и замена API-ключа строго запрещены до завершения текущих конвертаций.
                 </p>
               </div>
@@ -129,9 +129,9 @@ export function ApiKeySection({
           {apiKey.hasKey ? (
             <div className="space-y-4">
               <div className="rounded-[28px] border-[0.5px] border-black/10 bg-[#fdfdfd] p-5 space-y-3">
-                <div className="flex items-center justify-between text-[12px] text-steel-gray">
+                <div className="flex items-center justify-between text-[14px] text-steel-gray">
                   <span>Действующий секретный ключ (выпущен {formatDate(apiKey.createdAt)})</span>
-                  <span className="text-[11px] text-emerald-600 flex items-center gap-1">
+                  <span className="text-[14px] text-emerald-600 flex items-center gap-1">
                     <ShieldCheck className="h-3.5 w-3.5" /> Авторизация включена
                   </span>
                 </div>
@@ -142,7 +142,7 @@ export function ApiKeySection({
                       type="text"
                       readOnly
                       value={isApiKeyRevealed ? rawApiKeyValue : apiKey.keyPreview}
-                      className="font-mono text-[13px] bg-black/[0.02] pr-10 tracking-wider"
+                      className="font-mono text-[14px] bg-black/[0.02] pr-10 tracking-wider"
                     />
                     <button
                       type="button"
@@ -178,21 +178,21 @@ export function ApiKeySection({
                   </Button>
                 </div>
 
-                <p className="text-[12px] text-steel-gray pt-1">
+                <p className="text-[14px] text-steel-gray pt-1">
                   Никогда не передавайте ключ третьим лицам и не публикуйте в клиентских репозиториях.
                 </p>
               </div>
 
               {/* Пример использования curl */}
               <div className="rounded-[24px] border-[0.5px] border-black/10 bg-[#0f1012] p-5 text-pure-white space-y-3">
-                <div className="flex items-center justify-between text-[12px] text-pure-white/70">
+                <div className="flex items-center justify-between text-[14px] text-pure-white/70">
                   <span className="flex items-center gap-1.5">
                     <Terminal className="h-3.5 w-3.5 text-signal-blue" />
                     Пример вызова REST API (cURL)
                   </span>
-                  <span className="text-[11px] font-mono text-pure-white/50">bash</span>
+                  <span className="text-[14px] font-mono text-pure-white/50">bash</span>
                 </div>
-                <pre className="font-mono text-[12px] text-emerald-400 overflow-x-auto p-3 rounded-[16px] bg-black/40 leading-relaxed">
+                <pre className="font-mono text-[14px] text-emerald-400 overflow-x-auto p-3 rounded-[16px] bg-black/40 leading-relaxed">
 {`curl -X POST https://doc-converter.internal/api/v1/jobs \\
   -H "X-API-Key: ${rawApiKeyValue.slice(0, 16)}..." \\
   -F "file=@document.pdf" \\
@@ -204,7 +204,7 @@ export function ApiKeySection({
             <div className="rounded-[28px] border-[0.5px] border-dashed border-black/15 p-10 text-center space-y-3 bg-[#fdfdfd]">
               <KeyRound className="h-8 w-8 text-steel-gray/60 mx-auto" />
               <h4 className="text-[16px] font-book text-off-black">API-ключ ещё не выпущен</h4>
-              <p className="text-[13px] text-steel-gray max-w-md mx-auto">
+              <p className="text-[14px] text-steel-gray max-w-md mx-auto">
                 По ТЗ §7 до первого ручного создания ключ отсутствует. Нажмите кнопку создания выше,
                 чтобы получить ключ для интеграции с API или Telegram-ботом.
               </p>
@@ -212,7 +212,7 @@ export function ApiKeySection({
           )}
 
           {/* Информационные правила ТЗ §7 */}
-          <div className="p-4 rounded-[22px] bg-black/[0.03] border-[0.5px] border-black/5 flex items-start gap-3 text-[12px] text-steel-gray">
+          <div className="p-4 rounded-[22px] bg-black/[0.03] border-[0.5px] border-black/5 flex items-start gap-3 text-[14px] text-steel-gray">
             <Info className="h-4 w-4 text-signal-blue shrink-0 mt-0.5" />
             <div className="space-y-1">
               <span className="font-medium text-off-black block">Правила безопасности ключа (ТЗ §7):</span>
@@ -245,20 +245,20 @@ export function ApiKeySection({
             <Badge variant="signal-chip">Подтверждение по email</Badge>
             <h3 className="text-[20px] font-book text-off-black">Перевыпуск API-ключа</h3>
 
-            <p className="text-[13px] text-steel-gray leading-relaxed">
+            <p className="text-[14px] text-steel-gray leading-relaxed">
               По ТЗ §7 замена ключа требует подтверждения кодом на ваш email (<strong>{userProfile.email}</strong>).
               После генерации нового ключа старый ключ <strong>немедленно потеряет силу</strong>.
             </p>
 
             {apiKeyRotateFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[13px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{apiKeyRotateFlow.error}</span>
               </div>
             )}
 
             <div className="space-y-3 pt-2">
-              <label className="text-[13px] font-regular text-off-black block">
+              <label className="text-[14px] font-regular text-off-black block">
                 Введите 6-значный код подтверждения:
               </label>
               <Input

@@ -47,27 +47,27 @@ export function StaffAccessSection({
     switch (status) {
       case 'pending':
         return (
-          <Badge variant="signal-chip" className="text-[11px]">
+          <Badge variant="signal-chip" className="text-[14px]">
             Ожидает подтверждения
           </Badge>
         );
       case 'active':
         return (
-          <Badge variant="success" className="text-[11px]">
+          <Badge variant="success" className="text-[14px]">
             <CheckCircle2 className="h-3 w-3" />
             Доступ активен (до 24ч)
           </Badge>
         );
       case 'revoked':
         return (
-          <Badge variant="muted" className="text-[11px]">
+          <Badge variant="muted" className="text-[14px]">
             <XCircle className="h-3 w-3" />
             Отозван пользователем
           </Badge>
         );
       case 'expired':
         return (
-          <Badge variant="neutral" className="text-[11px]">
+          <Badge variant="neutral" className="text-[14px]">
             Истёк срок
           </Badge>
         );
@@ -93,7 +93,7 @@ export function StaffAccessSection({
         </CardHeader>
 
         <CardContent className="pt-6 space-y-6">
-          <div className="p-4 rounded-[24px] bg-black/[0.03] border-[0.5px] border-black/5 flex items-start gap-3 text-[12px] text-steel-gray leading-relaxed">
+          <div className="p-4 rounded-[24px] bg-black/[0.03] border-[0.5px] border-black/5 flex items-start gap-3 text-[14px] text-steel-gray leading-relaxed">
             <ShieldCheck className="h-4 w-4 text-signal-blue shrink-0 mt-0.5" />
             <div>
               <span className="font-medium text-off-black block mb-0.5">
@@ -110,7 +110,7 @@ export function StaffAccessSection({
             <div className="rounded-[28px] border-[0.5px] border-dashed border-black/15 p-10 text-center space-y-2 bg-[#fdfdfd]">
               <UserCheck className="h-7 w-7 text-steel-gray/60 mx-auto" />
               <h4 className="text-[15px] font-book text-off-black">Запросов на доступ нет</h4>
-              <p className="text-[12px] text-steel-gray max-w-sm mx-auto">
+              <p className="text-[14px] text-steel-gray max-w-sm mx-auto">
                 Когда инженер поддержки запросит просмотр сбойного файла по вашему тикету, запрос появится здесь.
               </p>
             </div>
@@ -124,22 +124,22 @@ export function StaffAccessSection({
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/5 pb-3">
                     <div className="flex items-center gap-2">
                       <span className="font-book text-[15px] text-off-black">{req.staffName}</span>
-                      <span className="text-[11px] text-steel-gray font-mono">({req.staffEmail})</span>
+                      <span className="text-[14px] text-steel-gray font-mono">({req.staffEmail})</span>
                     </div>
                     {getStatusBadge(req.status)}
                   </div>
 
-                  <div className="space-y-2 text-[13px]">
+                  <div className="space-y-2 text-[14px]">
                     <div>
-                      <span className="text-steel-gray block text-[11px]">Причина запроса:</span>
+                      <span className="text-steel-gray block text-[14px]">Причина запроса:</span>
                       <p className="text-off-black font-book">{req.reason}</p>
                     </div>
 
                     <div>
-                      <span className="text-steel-gray block text-[11px]">Запрашиваемые файлы:</span>
+                      <span className="text-steel-gray block text-[14px]">Запрашиваемые файлы:</span>
                       <div className="flex flex-wrap gap-1.5 pt-1">
                         {req.fileNames.map((fn, idx) => (
-                          <Badge key={idx} variant="neutral" className="text-[11px] py-0.5">
+                          <Badge key={idx} variant="neutral" className="text-[14px] py-0.5">
                             <FileCheck className="h-3 w-3 text-signal-blue mr-1" />
                             {fn}
                           </Badge>
@@ -147,7 +147,7 @@ export function StaffAccessSection({
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 text-[11px] text-steel-gray pt-1">
+                    <div className="flex items-center gap-4 text-[14px] text-steel-gray pt-1">
                       <span>Запрошен: {formatDate(req.requestedAt)}</span>
                       <span>Действует до: {formatDate(req.expiresAt)}</span>
                     </div>
@@ -167,7 +167,7 @@ export function StaffAccessSection({
                             isSubmitting: false,
                           });
                         }}
-                        className="text-[12px] h-[34px]"
+                        className="text-[14px] h-[34px]"
                       >
                         Подтвердить кодом на email
                       </Button>
@@ -178,7 +178,7 @@ export function StaffAccessSection({
                         variant="outline"
                         size="sm"
                         onClick={() => handleRevokeSupportAccess(req.id)}
-                        className="border-red-500/30 text-red-600 hover:bg-red-500/5 text-[12px] h-[34px]"
+                        className="border-red-500/30 text-red-600 hover:bg-red-500/5 text-[14px] h-[34px]"
                       >
                         Отозвать доступ немедленно
                       </Button>
@@ -206,20 +206,20 @@ export function StaffAccessSection({
             <Badge variant="signal-chip">Подтверждение ТЗ §12.17</Badge>
             <h3 className="text-[20px] font-book text-off-black">Предоставление доступа инженеру</h3>
 
-            <p className="text-[13px] text-steel-gray leading-relaxed">
+            <p className="text-[14px] text-steel-gray leading-relaxed">
               Вы разрешаете инженеру <strong>{supportApprovalFlow.request?.staffName}</strong> просмотр указанных файлов
               на срок до 24 часов. Код подтверждения отправлен на вашу почту (<strong>{userProfile.email}</strong>).
             </p>
 
             {supportApprovalFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[13px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{supportApprovalFlow.error}</span>
               </div>
             )}
 
             <div className="space-y-3 pt-2">
-              <label className="text-[13px] font-regular text-off-black block">
+              <label className="text-[14px] font-regular text-off-black block">
                 Введите 6-значный проверочный код:
               </label>
               <Input

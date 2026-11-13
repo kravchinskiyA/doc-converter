@@ -87,7 +87,7 @@ export function AdminJobsSection({
                 placeholder={t('search')}
                 value={jobSearch}
                 onChange={(e) => setJobSearch(e.target.value)}
-                className="pl-10 rounded-full h-10 text-[13px]"
+                className="pl-10 rounded-full h-10 text-[14px]"
               />
             </div>
 
@@ -96,7 +96,7 @@ export function AdminJobsSection({
                 variant={jobFilter === 'all' ? 'floating-cta' : 'secondary'}
                 size="sm"
                 onClick={() => setJobFilter('all')}
-                className={`rounded-full text-[12px] h-9 ${jobFilter === 'all' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
+                className={`rounded-full text-[14px] h-9 ${jobFilter === 'all' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
               >
                 {t('filterAll')}
               </Button>
@@ -104,7 +104,7 @@ export function AdminJobsSection({
                 variant={jobFilter === 'completed' ? 'floating-cta' : 'secondary'}
                 size="sm"
                 onClick={() => setJobFilter('completed')}
-                className={`rounded-full text-[12px] h-9 ${jobFilter === 'completed' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
+                className={`rounded-full text-[14px] h-9 ${jobFilter === 'completed' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
               >
                 {t('filterCompleted')}
               </Button>
@@ -112,7 +112,7 @@ export function AdminJobsSection({
                 variant={jobFilter === 'processing' ? 'floating-cta' : 'secondary'}
                 size="sm"
                 onClick={() => setJobFilter('processing')}
-                className={`rounded-full text-[12px] h-9 ${jobFilter === 'processing' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
+                className={`rounded-full text-[14px] h-9 ${jobFilter === 'processing' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
               >
                 {t('filterProcessing')}
               </Button>
@@ -120,7 +120,7 @@ export function AdminJobsSection({
                 variant={jobFilter === 'queued' ? 'floating-cta' : 'secondary'}
                 size="sm"
                 onClick={() => setJobFilter('queued')}
-                className={`rounded-full text-[12px] h-9 ${jobFilter === 'queued' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
+                className={`rounded-full text-[14px] h-9 ${jobFilter === 'queued' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
               >
                 {t('filterQueued')}
               </Button>
@@ -128,7 +128,7 @@ export function AdminJobsSection({
                 variant={jobFilter === 'failed' ? 'floating-cta' : 'secondary'}
                 size="sm"
                 onClick={() => setJobFilter('failed')}
-                className={`rounded-full text-[12px] h-9 ${jobFilter === 'failed' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
+                className={`rounded-full text-[14px] h-9 ${jobFilter === 'failed' ? 'bg-off-black text-pure-white hover:bg-black/80' : ''}`}
               >
                 {t('filterFailed')}
               </Button>
@@ -138,7 +138,7 @@ export function AdminJobsSection({
 
         <CardContent className="pt-6">
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-[13px]">
+            <table className="w-full text-left border-collapse text-[14px]">
               <thead>
                 <tr className="border-b border-black/10 text-steel-gray font-regular">
                   <th className="pb-3 pr-4 font-normal">{t('colJobId')}</th>
@@ -162,12 +162,12 @@ export function AdminJobsSection({
                       {/* Job ID */}
                       <td className="py-4 pr-4">
                         <div className="font-mono font-medium text-off-black">{job.id}</div>
-                        <div className="font-mono text-[11px] text-steel-gray">User: {job.userId}</div>
+                        <div className="font-mono text-[14px] text-steel-gray">User: {job.userId}</div>
                       </td>
 
                       {/* Направление */}
                       <td className="py-4 px-4 font-medium">
-                        <Badge variant="neutral" className="uppercase text-[11px]">
+                        <Badge variant="neutral" className="uppercase text-[14px]">
                           {job.direction}
                         </Badge>
                       </td>
@@ -190,7 +190,7 @@ export function AdminJobsSection({
                       {/* Диагностика ошибки (без PII) */}
                       <td className="py-4 pl-4">
                         {job.errorDiagnostic ? (
-                          <span className="text-red-600 font-mono text-[12px]">
+                          <span className="text-red-600 font-mono text-[14px]">
                             {job.errorDiagnostic}
                           </span>
                         ) : (
