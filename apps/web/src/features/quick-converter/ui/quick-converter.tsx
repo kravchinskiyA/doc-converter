@@ -435,21 +435,6 @@ export function QuickConverter() {
             </Link>
           </div>
         )}
-
-        {/* Быстрый переход в расширенный режим PDF → DOCX */}
-        <div className="mt-4 pt-4 border-t border-black/[0.06] flex flex-wrap items-center gap-2">
-          <span className="text-[13px] font-book text-steel-gray mr-2">
-            {t('modes.label')}
-          </span>
-          <Link href="/convert/pdf-to-docx">
-            <Badge
-              variant="signal-chip"
-              className="hover:bg-signal-blue/5 cursor-pointer"
-            >
-              {t('modes.pdfPages')}
-            </Badge>
-          </Link>
-        </div>
       </CardContent>
     </Card>
   );

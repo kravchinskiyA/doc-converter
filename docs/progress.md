@@ -7,12 +7,12 @@
 В компоненте `QuickConverter` на главной странице убрано переключение между режимами и направлениями конвертации — оставлена только конвертация **PDF → DOCX**:
 - Убран переключатель направлений (`PDF → DOCX (OCR)` / `DOCX → PDF`), вместо него отображается статичный бейдж `PDF → DOCX (OCR)`.
 - В дропзоне и валидации файлов оставлена поддержка только PDF (`.pdf`, `application/pdf`).
-- Из нижней панели быстрых режимов удалены ссылки на `DOCX → PDF` и `Изображения → PDF`, оставлена только ссылка на расширенный режим `Выбор страниц PDF → DOCX` (`/convert/pdf-to-docx`).
+- Из нижней панели удалён блок со ссылкой на специализированные режимы (`modes`).
 - Обновлены описания и подсказки `quickConverter` в словарях `ru.json`, `en.json` и `uk.json`.
 
 ### Измененные файлы
 
-- `apps/web/src/features/quick-converter/ui/quick-converter.tsx`: Удалено переключение направлений, автоопределение DOCX и лишние чипы режимов.
+- `apps/web/src/features/quick-converter/ui/quick-converter.tsx`: Удалено переключение направлений, автоопределение DOCX и блок `modes` («Специализированные режимы»).
 - `apps/web/src/features/quick-converter/types.ts`: Тип `ConversionDirection` сужен до `'pdf-to-docx'`, удалено поле `isDocx` из `ConverterFile`.
 - `apps/web/src/shared/i18n/messages/ru.json`, `en.json`, `uk.json`: Актуализированы `quickConverter.description` и `quickConverter.dropzone.hint` под PDF.
 
