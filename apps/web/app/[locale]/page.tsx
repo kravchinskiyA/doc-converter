@@ -24,9 +24,9 @@ export default async function HomePage({
     <div className="space-y-[90px] py-4">
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center">
-        <Badge variant="signal-chip" className="mb-6">
+        {/* <Badge variant="signal-chip" className="mb-6">
           {t('badge')}
-        </Badge>
+        </Badge> */}
         <h1 className="text-[32px] md:text-[44px] font-book tracking-tight text-off-black max-w-[800px] leading-[1.15] mb-4">
           {t('title')}
         </h1>
