@@ -1,5 +1,128 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-13] Сокращение таблицы сравнения тарифов
+
+### Суть задачи
+
+Из матрицы параметров таблицы сравнения тарифов (`PricingComparisonTable`) во всех языковых версиях (`ru`, `en`, `uk`) удалены указанные строки и блок «Безопасность, юрисдикция и приватность», а также убрано ставшее неактуальным примечание о лимите страниц в подвале таблицы.
+
+### Измененные файлы
+
+- `apps/web/src/features/pricing/model/pricing-data.ts`, `pricing-data-en.ts`, `pricing-data-uk.ts`: удалены строки «Списание квоты», «Пиксельные ограничения (изображения)», «Максимальное время активной обработки файла», «Лимит страниц в документе», «Качество оптического распознавания (OCR)», «Предупреждение о заполнении диска» и группа «Безопасность, юрисдикция и приватность».
+- `apps/web/src/features/pricing/ui/pricing-comparison-table.tsx`: удалена сноска `* Лимит страниц не ограничивается продуктово...`.
+
+---
+
+## [2026-11-13] Обновление шкалы размеров шрифта (18px / 16px / 14px)
+
+### Суть задачи
+
+Размеры шрифтов приведены к новой шкале:
+- Основной текст (`body`, подзаголовки hero и основные описания): `18px`.
+- Подписи и тексты карточек / таблицы / FAQ: `16px`.
+- Бейджи (`Badge`), вспомогательные примечания и значения в таблице: `14px`.
+
+### Измененные файлы
+
+- `apps/web/src/_app/styles/globals.css`: для `body` задан `font-size: 18px`.
+- `apps/web/src/shared/ui/badge.tsx`: базовый размер `Badge` увеличен до `text-[14px]`.
+- `apps/web/src/_pages/pricing/pricing-page.tsx`, `apps/web/src/features/pricing/ui/pricing-card.tsx`, `pricing-cards-grid.tsx`, `pricing-period-toggle.tsx`, `pricing-comparison-table.tsx`, `pricing-faq.tsx`: размеры шрифтов обновлены под шкалу `18px` / `16px` / `14px`, в сетке карточек `gap-6` (`1.5rem`) уменьшен до `gap-4` (`1rem`).
+
+---
+
+## [2026-11-13] Замена дробных размеров шрифта `text-[13.5px]` на `text-[14px]`
+
+### Суть задачи
+
+Во всех компонентах и страницах `apps/web` убран дробный размер шрифта `text-[13.5px]` — заменён на целочисленный `text-[14px]` в соответствии со стилем проекта.
+
+### Измененные файлы
+
+- `apps/web/src/features/pricing/ui/pricing-card.tsx`, `pricing-comparison-table.tsx`, `pricing-faq.tsx`, `enterprise-contact-dialog.tsx`: `text-[13.5px]` → `text-[14px]`.
+- `apps/web/src/_pages/privacy/privacy-page.tsx`, `terms/terms-page.tsx`: `text-[13.5px]` → `text-[14px]`.
+
+---
+
+## [2026-11-13] Увеличение максимальной ширины шаблона страницы до `1400px`
+
+### Суть задачи
+
+Максимальная ширина основного контейнера контента (`max-w-content`) увеличена с `1200px` до `1400px` в конфигурации Tailwind CSS, а также убраны дублирующие ограничения `max-w-[1240px]` и `max-w-[1200px]` на страницах.
+
+### Измененные файлы
+
+- `apps/web/tailwind.config.ts`: `maxWidth.content` изменено с `'1200px'` на `'1400px'`.
+- `apps/web/src/_pages/pricing/pricing-page.tsx`, `api-docs/api-docs-page.tsx`, `admin/admin-page.tsx`: убрано ограничение `mx-auto max-w-[1240px]`.
+- `apps/web/src/_pages/account/account-page.tsx`: убрано ограничение `mx-auto max-w-[1200px]`.
+
+---
+
+## [2026-11-13] Доработка карточек тарифов и полная локализация страницы `/pricing` (`uk`, `ru`, `en`)
+
+### Суть задачи
+
+На странице тарифов (`PricingPage`) и в модуле `features/pricing`:
+- В `PricingCard` бейдж тарифа перенесён на отдельную строку под названием тарифа, а в карточке `Pro` добавлен скрытый слот высоты бейджа (`invisible`) для точного вертикального выравнивания контента.
+- Убрана подпись `"Конечная цена с учетом применимых налогов • ФОП, Украина"` из блока цены.
+- Выполнена локализация всей страницы тарифов (заголовки, переключатель периода, карточки, таблица сравнения лимитов, FAQ, блок гарантий и CTA) на `uk`, `ru` и `en` через `next-intl` и `getPricingData(locale)`.
+
+### Измененные файлы
+
+- `apps/web/src/features/pricing/ui/pricing-card.tsx`: Перенос `Badge` на новую строку, удаление налоговой приписки с ФОП, подключение `useTranslations('pricing.card')`.
+- `apps/web/src/features/pricing/ui/pricing-period-toggle.tsx`, `pricing-comparison-table.tsx`, `pricing-faq.tsx`: Подключение `useTranslations('pricing.*')`.
+- `apps/web/src/features/pricing/model/pricing-data-uk.ts`, `pricing-data-en.ts`, `pricing-data.ts`: Добавлены украинская и английская версии тарифов, таблицы лимитов и FAQ, а также хелпер `getPricingData(locale)`.
+- `apps/web/src/_pages/pricing/pricing-page.tsx`: Подключены `useLocale()`, `useTranslations('pricing.page')` и `getPricingData(locale)`.
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: Добавлены ключи `pricing.page`, `pricing.toggle`, `pricing.card`, `pricing.table`, `pricing.faq`.
+
+---
+
+## [2026-11-13] Унификация верхнего отступа (padding-top) только на уровне тега `<main>`
+
+### Суть задачи
+
+На всех страницах приложения (кроме страниц `auth/*`) убран верхний отступ (`pt-*` / верхняя часть `py-*`) у корневых контейнеров, чтобы вертикальный отступ сверху задавался централизованно только тегом `<main>` в [layout.tsx](file:///Applications/ServBay/www/files-converter/apps/web/app/[locale]/layout.tsx).
+
+### Измененные файлы
+
+- `apps/web/app/[locale]/page.tsx`: `py-4` → `pb-4`.
+- `apps/web/src/_pages/account/account-page.tsx`: `pt-28 md:pt-36 pb-20` → `pb-20`.
+- `apps/web/src/_pages/admin/admin-page.tsx`, `admin-login-page.tsx`: убраны `pt-28`/`pt-36` и `py-20` заменено на `pb-20`.
+- `apps/web/src/_pages/api-docs/api-docs-page.tsx`, `pricing/pricing-page.tsx`, `privacy/privacy-page.tsx`, `terms/terms-page.tsx`: `pt-28 md:pt-36 pb-24` → `pb-24`.
+- `apps/web/src/_pages/convert/convert-page.tsx`, `results/results-page.tsx`: `py-8 md:py-16` → `pb-8 md:pb-16`.
+- `apps/web/src/_pages/design-system/design-system-page.tsx`: `py-6` → `pb-6`.
+- `apps/web/src/_pages/errors/error-view.tsx`, `not-found-view.tsx`: `py-12` → `pb-12`.
+
+---
+
+## [2026-11-13] Исправление hover-эффекта в DirectionNav на мобильных устройствах
+
+### Суть задачи
+
+В компоненте `DirectionNav` hover-эффект (`hover:text-[#0f1012] hover:bg-white/60`) ограничен только десктопным брейкпоинтом (`md:hover:...`), чтобы на мобильных устройствах при тапе не появлялся промежуточный белый фон перед переходом в активное состояние.
+
+### Измененные файлы
+
+- `apps/web/src/features/conversion-directions/ui/direction-nav.tsx`: `hover:` классы заменены на `md:hover:`.
+
+---
+
+## [2026-11-13] Добавление мобильного burger-меню в шапку (Navbar)
+
+### Суть задачи
+
+В компонент `Navbar` добавлена адаптивная мобильная навигация в стиле дизайн-системы Augen Pro (zero-shadows, `0.5px` hairline-рамки, скругление `24px`, акцент Signal Blue `#0071e3`):
+- Добавлена кнопка-бургер с тремя равными линиями (`Menu` / `X` из `lucide-react`) для мобильных экранов (`md:hidden`).
+- Реализована полноэкранная мобильная панель навигации, выезжающая справа (`fixed inset-0`, `translate-x-full` → `translate-x-0`), с блокировкой прокрутки фона, отцентрированными ссылками (`PDF → DOCX`, `DOCX → PDF`, `Изображения → PDF`, `Тарифы`) и центрированной CTA-кнопкой входа/кабинета.
+- Настроено автоматическое закрытие меню при переходе по маршруту, клике вне шапки и нажатии `Escape`.
+- Добавлены ключи локализации `navigation.mobileMenu` в `ru.json`, `uk.json` и `en.json`.
+
+### Измененные файлы
+
+- `apps/web/src/shared/ui/navbar.tsx`: Вынесен общий массив `PRIMARY_NAV_LINKS`, добавлена кнопка burger и панель мобильной навигации.
+- `apps/web/src/shared/i18n/messages/ru.json`, `uk.json`, `en.json`: Добавлена секция `navigation.mobileMenu`.
+
+---
+
 ## [2026-11-13] Обновление страницы конвертации (ConvertPage)
 
 ### Суть задачи

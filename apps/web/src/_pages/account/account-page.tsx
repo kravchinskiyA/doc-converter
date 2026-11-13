@@ -20,7 +20,7 @@ export function AccountPage() {
 
   return (
     <div className="min-h-screen bg-[#f2f2f4] text-off-black">
-      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 pt-28 md:pt-36 pb-20 space-y-8">
+      <div className="px-4 sm:px-6 lg:px-8 pb-20 space-y-8">
         {/* Заголовок страницы */}
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">

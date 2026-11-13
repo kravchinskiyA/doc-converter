@@ -14,7 +14,7 @@ export function ResultsPage({ jobId }: ResultsPageProps) {
   const t = useTranslations('results');
 
   return (
-    <div className="py-8 md:py-16 space-y-8 max-w-4xl mx-auto px-4 sm:px-6">
+    <div className="pb-8 md:pb-16 space-y-8 max-w-4xl mx-auto px-4 sm:px-6">
       {/* Заголовок страницы и бейджи безопасности ЕС */}
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="flex items-center justify-center gap-2">

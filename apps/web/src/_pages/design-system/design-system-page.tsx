@@ -168,7 +168,7 @@ export function DesignSystemPage() {
   };
 
   return (
-    <div className="space-y-[90px] py-6 text-off-black">
+    <div className="space-y-[90px] pb-6 text-off-black">
       {/* 1. Hero & Введение */}
       <section className="flex flex-col items-center text-center">
         <Badge variant="signal-chip" className="mb-6">

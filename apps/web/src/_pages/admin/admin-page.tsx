@@ -20,7 +20,7 @@ export function AdminPage() {
 
   if (!admin.session) {
     return (
-      <div className="min-h-screen bg-[#f2f2f4] text-off-black flex items-center justify-center px-4 py-20 pt-28">
+      <div className="min-h-screen bg-[#f2f2f4] text-off-black flex items-center justify-center px-4 pb-20">
         <StaffLoginForm onSuccess={admin.login} />
       </div>
     );
@@ -31,7 +31,7 @@ export function AdminPage() {
 
   return (
     <div className="min-h-screen bg-[#f2f2f4] text-off-black">
-      <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8 pt-28 md:pt-36 pb-20 space-y-8">
+      <div className="px-4 sm:px-6 lg:px-8 pb-20 space-y-8">
         {/* Шапка административной панели */}
         <AdminHeader
           session={admin.session}

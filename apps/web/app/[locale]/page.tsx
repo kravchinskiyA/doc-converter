@@ -21,7 +21,7 @@ export default async function HomePage({
   const t = await getTranslations('home');
 
   return (
-    <div className="space-y-[90px] py-4">
+    <div className="space-y-[90px] pb-4">
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center">
         {/* <Badge variant="signal-chip" className="mb-6">

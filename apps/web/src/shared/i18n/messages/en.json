@@ -50,6 +50,11 @@
     "localeSwitcher": {
       "label": "Interface language"
     },
+    "mobileMenu": {
+      "open": "Open menu",
+      "close": "Close menu",
+      "title": "Navigation"
+    },
     "devMenu": {
       "trigger": "Pages",
       "title": "Page navigator",
@@ -620,6 +625,72 @@
     "metadata": {
       "title": "Pricing & Plans",
       "description": "Transparent pricing for doc-converter. Free Basic plan, Pro and Maximum plans, secure payment via Stripe."
+    },
+    "page": {
+      "badges": {
+        "plans": "Pricing plans",
+        "stripe": "Stripe Billing",
+        "noFees": "No hidden fees"
+      },
+      "title": "Transparent pricing for every conversion workflow",
+      "subtitle": "From a free Basic tier for occasional documents to high-throughput plans with fast 2-hour quota recovery and parallel processing.",
+      "guarantees": {
+        "eu": {
+          "title": "Strictly in the EU",
+          "text": "All servers, databases, and S3 storage are hosted in Germany and France under GDPR protection."
+        },
+        "privacy": {
+          "title": "Absolute privacy",
+          "text": "No document is ever sent to third-party AI/OCR APIs. All processing runs exclusively on isolated cores."
+        },
+        "stripe": {
+          "title": "Secure Stripe",
+          "text": "Card payments via Stripe. Taxes included, with pro-rata refunds for unused days."
+        }
+      },
+      "cta": {
+        "badge": "Instant start",
+        "title": "Ready to convert documents without loss?",
+        "subtitle": "Try the Basic tier without registration or upgrade to Pro for larger files and OCR.",
+        "connectPro": "Get Pro plan",
+        "tryFree": "Try for free"
+      }
+    },
+    "toggle": {
+      "ariaLabel": "Billing period",
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "annualNote": "Billed annually:",
+      "annualDiscount": "15% off (save up to €18/year)"
+    },
+    "card": {
+      "enterprisePrice": "Custom",
+      "enterpriseNote": "By individual agreement",
+      "forever": "/ forever",
+      "noCard": "No card required",
+      "perMonthStar": "/ mo*",
+      "annualBilledNote": "€{amount} billed annually (save €{savings})",
+      "perMonth": "/ mo",
+      "monthlyBilledNote": "Monthly billing, cancel anytime",
+      "popularFallback": "Popular choice",
+      "includedTitle": "Included in plan:"
+    },
+    "table": {
+      "badgeMatrix": "Parameter matrix",
+      "badgeSpec": "Spec §3.3–§3.8",
+      "title": "Limits and capabilities comparison",
+      "subtitle": "Detailed technical comparison of plans, quotas, compute resources, and security.",
+      "colParameter": "Parameter",
+      "colBasic": "Basic",
+      "colPro": "Pro",
+      "colMax": "Max",
+      "colEnterprise": "Enterprise"
+    },
+    "faq": {
+      "badgeQa": "Q&A",
+      "badgeTerms": "Transparent terms",
+      "title": "Frequently asked questions",
+      "subtitle": "Everything you need to know about billing, quota recovery rules, taxes, and cancellation."
     }
   },
   "apiDocs": {

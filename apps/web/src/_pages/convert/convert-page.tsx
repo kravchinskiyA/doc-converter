@@ -68,7 +68,7 @@ export function ConvertPage({ direction }: ConvertPageProps) {
   };
 
   return (
-    <div className="py-8 md:py-16 space-y-10 max-w-4xl mx-auto px-4 sm:px-6">
+    <div className="pb-8 md:pb-16 space-y-10 max-w-4xl mx-auto px-4 sm:px-6">
       {/* Навигатор направлений конвертации */}
       <div className="flex justify-center">
         <DirectionNav currentDirection={direction} />

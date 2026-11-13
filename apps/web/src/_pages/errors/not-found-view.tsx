@@ -16,7 +16,7 @@ export function NotFoundView({
   description = 'Запрашиваемый адрес не существует, был удален или перемещен. Проверьте правильность введенного URL или воспользуйтесь навигацией ниже.',
 }: NotFoundViewProps) {
   return (
-    <div className="min-h-[70vh] flex items-center justify-center py-12 px-4">
+    <div className="min-h-[70vh] flex items-center justify-center pb-12 px-4">
       <div className="max-w-[620px] w-full text-center space-y-6">
         <div className="rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-8 md:p-12 space-y-6">
           <div className="mx-auto w-16 h-16 rounded-full bg-signal-blue/10 flex items-center justify-center text-signal-blue">

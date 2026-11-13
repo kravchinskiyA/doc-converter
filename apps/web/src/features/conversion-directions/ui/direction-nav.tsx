@@ -66,7 +66,7 @@ export function DirectionNav({ currentDirection, className }: DirectionNavProps)
               'px-4 py-2 text-xs md:text-sm font-medium rounded-full transition-all duration-200 whitespace-nowrap',
               active
                 ? 'bg-[#0f1012] text-white'
-                : 'text-[#0f1012]/70 hover:text-[#0f1012] hover:bg-white/60'
+                : 'text-[#0f1012]/70 md:hover:text-[#0f1012] md:hover:bg-white/60'
             )}
           >
             {item.label}

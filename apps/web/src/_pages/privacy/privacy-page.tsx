@@ -14,7 +14,7 @@ import { Badge } from '@/shared/ui/badge';
 export function PrivacyPage() {
   return (
     <div className="min-h-screen bg-[#f2f2f4] text-off-black">
-      <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8 pt-28 md:pt-36 pb-24 space-y-10">
+      <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8 pb-24 space-y-10">
         {/* Заголовок страницы */}
         <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-2">
@@ -129,7 +129,7 @@ export function PrivacyPage() {
           <p className="text-[14px] text-steel-gray font-book leading-relaxed">
             Вы обладаете следующими неотъемлемыми правами в отношении ваших персональных данных:
           </p>
-          <ul className="list-disc list-inside space-y-2 text-[13.5px] text-steel-gray font-book pl-2">
+          <ul className="list-disc list-inside space-y-2 text-[14px] text-steel-gray font-book pl-2">
             <li><strong>Право на доступ (ст. 15):</strong> просмотр всех хранящихся данных и истории файлов в Личном кабинете.</li>
             <li><strong>Право на переносимость данных (ст. 20):</strong> скачивание всех результатов в едином ZIP-архиве.</li>
             <li><strong>Право на исправление (ст. 16):</strong> изменение имени, пароля и двухэтапная смена email.</li>

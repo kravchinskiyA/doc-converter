@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import { Check, Sparkles, Building2, ShieldCheck, Zap } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
 import { Badge } from '@/shared/ui/badge';
@@ -20,40 +21,44 @@ export function PricingCard({
   onSelectPlan,
   className,
 }: PricingCardProps) {
+  const t = useTranslations('pricing.card');
   const isAnnual = billingPeriod === 'annual';
 
   // Расчет отображаемой цены
   const displayPrice = React.useMemo(() => {
     if (plan.tier === 'enterprise') {
       return {
-        amount: 'Договорная',
+        amount: t('enterprisePrice'),
         period: '',
-        billedNote: 'По индивидуальному соглашению',
+        billedNote: t('enterpriseNote'),
       };
     }
 
     if (plan.tier === 'basic') {
       return {
         amount: '€0',
-        period: '/ навсегда',
-        billedNote: 'Без привязки карты',
+        period: t('forever'),
+        billedNote: t('noCard'),
       };
     }
 
     if (isAnnual) {
       return {
         amount: `€${plan.annualMonthlyEquivalentEur?.toFixed(2).replace('.', ',')}`,
-        period: '/ мес*',
-        billedNote: `€${plan.annualPriceEur} списывается сразу за год (экономия €${plan.annualSavingsEur})`,
+        period: t('perMonthStar'),
+        billedNote: t('annualBilledNote', {
+          amount: plan.annualPriceEur ?? 0,
+          savings: plan.annualSavingsEur ?? 0,
+        }),
       };
     }
 
     return {
       amount: `€${plan.monthlyPriceEur}`,
-      period: '/ мес',
-      billedNote: 'Ежемесячное списание без обязательств',
+      period: t('perMonth'),
+      billedNote: t('monthlyBilledNote'),
     };
-  }, [plan, isAnnual]);
+  }, [plan, isAnnual, t]);
 
   return (
     <div
@@ -70,35 +75,43 @@ export function PricingCard({
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
           <Badge
             variant="signal-chip"
-            className="bg-signal-blue text-pure-white border-none px-3.5 py-1 text-[11px] font-regular flex items-center gap-1.5"
+            className="bg-signal-blue text-pure-white border-none px-3.5 py-1 text-[14px] font-regular flex items-center gap-1.5"
           >
             <Sparkles className="w-3 h-3 text-pure-white" />
-            <span>{plan.badge || 'Популярный выбор'}</span>
+            <span>{plan.badge || t('popularFallback')}</span>
           </Badge>
         </div>
       )}
 
       {/* Верхняя часть: Название, бейдж, описание и цена */}
       <div>
-        <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="space-y-2 mb-3">
           <div className="flex items-center gap-2">
-            {plan.tier === 'basic' && <ShieldCheck className="w-5 h-5 text-steel-gray" />}
-            {plan.tier === 'pro' && <Zap className="w-5 h-5 text-signal-blue" />}
-            {plan.tier === 'max' && <Sparkles className="w-5 h-5 text-off-black" />}
-            {plan.tier === 'enterprise' && <Building2 className="w-5 h-5 text-steel-gray" />}
+            {plan.tier === 'basic' && <ShieldCheck className="w-5 h-5 text-steel-gray shrink-0" />}
+            {plan.tier === 'pro' && <Zap className="w-5 h-5 text-signal-blue shrink-0" />}
+            {plan.tier === 'max' && <Sparkles className="w-5 h-5 text-off-black shrink-0" />}
+            {plan.tier === 'enterprise' && <Building2 className="w-5 h-5 text-steel-gray shrink-0" />}
             <h3 className="text-[22px] font-book tracking-tight text-off-black">
               {plan.title}
             </h3>
           </div>
 
-          {!plan.isPopular && plan.badge && (
-            <Badge variant={plan.badgeVariant || 'neutral'} className="text-[11px]">
-              {plan.badge}
-            </Badge>
+          {!plan.isPopular && plan.badge ? (
+            <div>
+              <Badge variant={plan.badgeVariant || 'neutral'} className="text-[14px]">
+                {plan.badge}
+              </Badge>
+            </div>
+          ) : (
+            <div aria-hidden="true" className="invisible select-none">
+              <Badge variant="neutral" className="text-[14px]">
+                {plan.badge || t('popularFallback')}
+              </Badge>
+            </div>
           )}
         </div>
 
-        <p className="text-[14px] text-steel-gray font-book min-h-[40px] leading-snug mb-5">
+        <p className="text-[16px] text-steel-gray font-book min-h-[44px] leading-snug mb-5">
           {plan.tagline}
         </p>
 
@@ -109,18 +122,14 @@ export function PricingCard({
               {displayPrice.amount}
             </span>
             {displayPrice.period && (
-              <span className="text-[14px] font-book text-steel-gray">
+              <span className="text-[16px] font-book text-steel-gray">
                 {displayPrice.period}
               </span>
             )}
           </div>
 
-          <p className="text-[12px] text-steel-gray font-book mt-1 min-h-[18px]">
+          <p className="text-[14px] text-steel-gray font-book mt-1 min-h-[20px]">
             {displayPrice.billedNote}
-          </p>
-
-          <p className="text-[11px] text-steel-gray/80 font-book mt-1">
-            Конечная цена с учетом применимых налогов • ФОП, Украина
           </p>
         </div>
 
@@ -131,7 +140,7 @@ export function PricingCard({
             variant={plan.isPopular ? 'floating-cta' : plan.ctaVariant}
             onClick={() => onSelectPlan(plan.tier)}
             className={cn(
-              'w-full py-3 h-[46px] text-[14px] font-regular',
+              'w-full py-3 h-[46px] text-[16px] font-regular',
               plan.isPopular && 'bg-signal-blue hover:bg-signal-blue/90 text-pure-white border-transparent'
             )}
           >
@@ -141,15 +150,15 @@ export function PricingCard({
 
         {/* Список возможностей */}
         <div className="space-y-3">
-          <div className="text-[12px] font-regular text-steel-gray uppercase tracking-wider mb-2">
-            В тариф входит:
+          <div className="text-[14px] font-regular text-steel-gray uppercase tracking-wider mb-2">
+            {t('includedTitle')}
           </div>
           <ul className="space-y-2.5">
             {plan.features.map((feature, idx) => (
               <li
                 key={idx}
                 className={cn(
-                  'flex items-start gap-2.5 text-[13.5px] leading-tight font-book',
+                  'flex items-start gap-2.5 text-[16px] leading-snug font-book',
                   feature.included ? 'text-off-black' : 'text-steel-gray/60 line-through'
                 )}
               >

@@ -3,6 +3,16 @@ import type {
   LimitCategoryGroup,
   FaqItem,
 } from './types';
+import {
+  PRICING_PLANS_UK,
+  LIMITS_COMPARISON_GROUPS_UK,
+  PRICING_FAQ_ITEMS_UK,
+} from './pricing-data-uk';
+import {
+  PRICING_PLANS_EN,
+  LIMITS_COMPARISON_GROUPS_EN,
+  PRICING_FAQ_ITEMS_EN,
+} from './pricing-data-en';
 
 /**
  * Карточки тарифов (ТЗ §3.2, §3.3).
@@ -143,14 +153,6 @@ export const LIMITS_COMPARISON_GROUPS: LimitCategoryGroup[] = [
         enterprise: 'Индивидуально',
         tooltip: 'Таймер запускается в момент исчерпания лимита. Вторая категория остаётся доступной.',
       },
-      {
-        parameter: 'Списание квоты',
-        basic: 'Только при успехе',
-        pro: 'Только при успехе',
-        max: 'Только при успехе',
-        enterprise: 'Только при успехе',
-        tooltip: 'Сбой конвертации, таймаут или превышение лимитов никогда не сжигают попытку.',
-      },
     ],
   },
   {
@@ -198,14 +200,6 @@ export const LIMITS_COMPARISON_GROUPS: LimitCategoryGroup[] = [
         max: 'до 250 МБ',
         enterprise: 'По договорённости',
       },
-      {
-        parameter: 'Пиксельные ограничения (изображения)',
-        basic: '≤ 40 Мп (сторона ≤ 12 000 px)',
-        pro: '≤ 40 Мп (сторона ≤ 12 000 px)',
-        max: '≤ 40 Мп (сторона ≤ 12 000 px)',
-        enterprise: '≤ 40 Мп (сторона ≤ 12 000 px)',
-        tooltip: 'Ограничение площади и стороны действует для защиты от атак декомпрессионных бомб.',
-      },
     ],
   },
   {
@@ -233,34 +227,11 @@ export const LIMITS_COMPARISON_GROUPS: LimitCategoryGroup[] = [
         enterprise: 'до 2 ГБ+',
       },
       {
-        parameter: 'Максимальное время активной обработки файла',
-        basic: '10 минут',
-        pro: '10 минут',
-        max: '10 минут',
-        enterprise: '10 минут+',
-        tooltip: 'Включая OCR и растеризацию. Ожидание в очереди в лимит времени не входит.',
-      },
-      {
-        parameter: 'Лимит страниц в документе',
-        basic: 'Без ограничений*',
-        pro: 'Без ограничений*',
-        max: 'Без ограничений*',
-        enterprise: 'Без ограничений*',
-        tooltip: 'Отдельного лимита страниц нет. Обработка ограничена лимитами памяти (2 ГБ) и времени (10 мин).',
-      },
-      {
         parameter: 'Безопасная распаковка DOCX',
         basic: 'до 500 МБ / 10 000 файлов',
         pro: 'до 500 МБ / 10 000 файлов',
         max: 'до 500 МБ / 10 000 файлов',
         enterprise: 'до 500 МБ / 10 000 файлов',
-      },
-      {
-        parameter: 'Качество оптического распознавания (OCR)',
-        basic: 'CER ≤ 2% (PaddleOCR)',
-        pro: 'CER ≤ 2% (PaddleOCR)',
-        max: 'CER ≤ 2% (PaddleOCR)',
-        enterprise: 'CER ≤ 2% (PaddleOCR)',
       },
     ],
   },
@@ -282,13 +253,6 @@ export const LIMITS_COMPARISON_GROUPS: LimitCategoryGroup[] = [
         enterprise: '6 месяцев+',
       },
       {
-        parameter: 'Предупреждение о заполнении диска',
-        basic: 'при 75% (3,75 ГБ)',
-        pro: 'при 75% (11,25 ГБ)',
-        max: 'при 75% (37,5 ГБ)',
-        enterprise: 'при 75%',
-      },
-      {
         parameter: 'Доступ к программному REST API',
         basic: 'Да, по ключу',
         pro: 'Да, по ключу',
@@ -301,40 +265,6 @@ export const LIMITS_COMPARISON_GROUPS: LimitCategoryGroup[] = [
         pro: '10 созд / 120 статус / 10 скач',
         max: '10 созд / 120 статус / 10 скач',
         enterprise: 'Повышенные лимиты',
-      },
-    ],
-  },
-  {
-    groupTitle: 'Безопасность, юрисдикция и приватность',
-    rows: [
-      {
-        parameter: 'Юрисдикция серверов и хранилищ',
-        basic: 'Строго ЕС (Германия/Франция)',
-        pro: 'Строго ЕС (Германия/Франция)',
-        max: 'Строго ЕС (Германия/Франция)',
-        enterprise: 'Строго ЕС (Германия/Франция)',
-      },
-      {
-        parameter: 'Передача файлов внешним AI / OCR API',
-        basic: 'Категорически запрещена',
-        pro: 'Категорически запрещена',
-        max: 'Категорически запрещена',
-        enterprise: 'Категорически запрещена',
-        tooltip: 'Все вычисления производятся исключительно на изолированных мощностях сервиса.',
-      },
-      {
-        parameter: 'Антивирусное сканирование (ClamAV)',
-        basic: 'До обработки файла',
-        pro: 'До обработки файла',
-        max: 'До обработки файла',
-        enterprise: 'До обработки файла',
-      },
-      {
-        parameter: 'Шифрование при хранении (S3 SSE-KMS)',
-        basic: 'Включено (AES-256)',
-        pro: 'Включено (AES-256)',
-        max: 'Включено (AES-256)',
-        enterprise: 'Включено (AES-256)',
       },
     ],
   },
@@ -381,4 +311,32 @@ export const PRICING_FAQ_ITEMS: FaqItem[] = [
       'Тариф Enterprise предназначен для юридических лиц и команд (до 11 аккаунтов). Он включает индивидуально согласованные объемы квот, выделенные вычислительные мощности, оплату по счету-договору и персонального менеджера. Для консультации нажмите «Связаться с нами» или напишите на support@doc-converter.com.',
   },
 ];
+
+export function getPricingData(locale: string): {
+  plans: PlanCardData[];
+  comparisonGroups: LimitCategoryGroup[];
+  faqItems: FaqItem[];
+} {
+  switch (locale) {
+    case 'uk':
+      return {
+        plans: PRICING_PLANS_UK,
+        comparisonGroups: LIMITS_COMPARISON_GROUPS_UK,
+        faqItems: PRICING_FAQ_ITEMS_UK,
+      };
+    case 'en':
+      return {
+        plans: PRICING_PLANS_EN,
+        comparisonGroups: LIMITS_COMPARISON_GROUPS_EN,
+        faqItems: PRICING_FAQ_ITEMS_EN,
+      };
+    case 'ru':
+    default:
+      return {
+        plans: PRICING_PLANS,
+        comparisonGroups: LIMITS_COMPARISON_GROUPS,
+        faqItems: PRICING_FAQ_ITEMS,
+      };
+  }
+}
 

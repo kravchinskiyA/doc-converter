@@ -74,7 +74,7 @@ export function EnterpriseContactDialog({
 
         {!isSubmitted ? (
           <form onSubmit={handleSubmit} className="space-y-4">
-            <p className="text-[13.5px] text-steel-gray font-book leading-relaxed">
+            <p className="text-[14px] text-steel-gray font-book leading-relaxed">
               Оставьте заявку, и наш менеджер свяжется с вами для расчета индивидуального объема квот,
               выделения до 10 аккаунтов команды и подготовки договора.
             </p>

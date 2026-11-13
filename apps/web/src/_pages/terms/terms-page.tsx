@@ -15,7 +15,7 @@ import { Badge } from '@/shared/ui/badge';
 export function TermsPage() {
   return (
     <div className="min-h-screen bg-[#f2f2f4] text-off-black">
-      <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8 pt-28 md:pt-36 pb-24 space-y-10">
+      <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8 pb-24 space-y-10">
         {/* Заголовок страницы */}
         <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-2">
@@ -112,7 +112,7 @@ export function TermsPage() {
           <p className="text-[14px] text-steel-gray font-book leading-relaxed">
             4.2. Для защиты инфраструктуры действуют технические пределы:
           </p>
-          <ul className="list-disc list-inside space-y-1.5 text-[13.5px] text-steel-gray font-book pl-2">
+          <ul className="list-disc list-inside space-y-1.5 text-[14px] text-steel-gray font-book pl-2">
             <li>Изображения: не более 40 мегапикселей и не более 12 000 px по стороне (защита от bomb-атак).</li>
             <li>Распаковка DOCX: не более 500 МБ распакованных данных и не более 10 000 внутренних файлов.</li>
             <li>Лимит оперативной памяти: до 2 ГБ на исходный файл.</li>
