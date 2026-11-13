@@ -434,7 +434,7 @@
       "pdfToDocx": {
         "nav": "PDF → DOCX (OCR)",
         "title": "Convert PDF to DOCX",
-        "subtitle": "High-accuracy optical character recognition (OCR) hosted on proprietary EU servers, preserving headings, lists, tables, and layout."
+        "subtitle": "High-accuracy optical character recognition (OCR), preserving headings, lists, tables, and layout."
       },
       "docxToPdf": {
         "nav": "DOCX → PDF",

@@ -7,10 +7,12 @@
 На странице направлений конвертации (`ConvertPage`):
 - Убран блок с `Badge` и подписью `ТЗ §2` над заголовком.
 - В блоке гарантий безопасности удалена вторая карточка о юрисдикции в ЕС, сетка адаптирована под две карточки (`sm:grid-cols-2`).
+- В словарях `uk.json`, `ru.json` и `en.json` из `convert.directions.pdfToDocx.subtitle` убрано упоминание собственных мощностей/серверов в ЕС.
 
 ### Измененные файлы
 
 - `apps/web/src/_pages/convert/convert-page.tsx`: Удалены `Badge`, `ТЗ §2` и карточка «Юрисдикція ЄС»; обновлена сетка карточек гарантий безопасности.
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: Обновлён текст `convert.directions.pdfToDocx.subtitle`.
 
 ---
 
