@@ -22,8 +22,8 @@ export function VerifyEmailForm() {
   const searchParams = useSearchParams();
 
   const queryEmail = searchParams.get('email') || '';
+  const hasQueryEmail = Boolean(queryEmail);
   const [email, setEmail] = React.useState(queryEmail);
-  const [isEditingEmail, setIsEditingEmail] = React.useState(!queryEmail);
 
   // Таймеры и попытки
   const [timeLeft, setTimeLeft] = React.useState(EXPIRATION_SECONDS);
@@ -79,6 +79,12 @@ export function VerifyEmailForm() {
   const handleResendCode = async () => {
     if (cooldown > 0 || isResending) return;
 
+    const targetEmail = hasQueryEmail ? queryEmail : email;
+    if (!targetEmail) {
+      setErrorMessage(t('emailNotice'));
+      return;
+    }
+
     setIsResending(true);
     setErrorMessage(null);
 
@@ -130,51 +136,45 @@ export function VerifyEmailForm() {
   return (
     <AuthCard
       title={t('title')}
-      subtitle={email ? `${t('subtitle')} ${email}` : t('emailNotice')}
+      subtitle={
+        hasQueryEmail ? (
+          <>
+            {t('subtitle')}{' '}
+            <span className="text-off-black font-regular">{queryEmail}</span>
+          </>
+        ) : (
+          t('emailNotice')
+        )
+      }
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-left">
-        {/* Редактирование email если не передан через query */}
-        {isEditingEmail ? (
-          <div className="space-y-1.5">
-            <label className="text-[13px] font-regular text-off-black">Email</label>
-            <div className="flex gap-2">
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@example.com"
-              />
-              <Button
-                type="button"
-                variant="secondary"
-                size="sm"
-                onClick={() => setIsEditingEmail(false)}
-              >
-                OK
-              </Button>
-            </div>
-          </div>
+        {/* Если email передан из формы регистрации (query), поле ввода скрывается */}
+        {hasQueryEmail ? (
+          <input type="hidden" {...register('email')} />
         ) : (
-          <div className="flex items-center justify-between p-3 rounded-[12px] bg-black/[0.03] border-[0.5px] border-black/[0.05]">
-            <span className="text-[14px] font-book text-off-black truncate pr-2">
-              {email}
-            </span>
-            <button
-              type="button"
-              onClick={() => setIsEditingEmail(true)}
-              className="text-[12px] font-book text-signal-blue hover:underline shrink-0"
-            >
-              {t('changeEmail')}
-            </button>
+          <div className="space-y-1.5">
+            <label className="text-[14px] font-regular text-off-black">Email</label>
+            <Input
+              type="email"
+              placeholder="name@example.com"
+              error={!!errors.email}
+              {...register('email')}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setValue('email', e.target.value);
+              }}
+            />
+            {errors.email?.message && (
+              <p className="text-[14px] font-book text-red-600">
+                {errors.email.message}
+              </p>
+            )}
           </div>
         )}
 
-        {/* Скрытое поле email для валидации формы */}
-        <input type="hidden" {...register('email')} />
-
         {/* Поле 6-значного кода */}
         <div className="space-y-2">
-          <label className="text-[13px] font-regular text-off-black block">
+          <label className="text-[14px] font-regular text-off-black block">
             {t('codeLabel')}
           </label>
           <Input
@@ -188,7 +188,7 @@ export function VerifyEmailForm() {
             className="text-center font-mono text-[22px] tracking-[0.4em] h-[52px]"
             {...register('code')}
           />
-          <div className="flex items-center justify-between text-[12px] font-book text-steel-gray pt-1">
+          <div className="flex items-center justify-between text-[14px] font-book text-steel-gray pt-1">
             <span className="flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5 text-steel-gray" />
               {isExpired ? (
@@ -202,7 +202,7 @@ export function VerifyEmailForm() {
             </span>
           </div>
           {errors.code?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.code.message}
             </p>
           )}
@@ -210,14 +210,14 @@ export function VerifyEmailForm() {
 
         {/* Сообщения об ошибках или успехе */}
         {errorMessage && (
-          <div className="flex items-start gap-2 rounded-[12px] border-[0.5px] border-red-500/30 bg-red-500/[0.04] p-3 text-[13px] font-book text-red-600">
+          <div className="flex items-start gap-2 rounded-[12px] border-[0.5px] border-red-500/30 bg-red-500/[0.04] p-3 text-[14px] font-book text-red-600">
             <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
             <span>{errorMessage}</span>
           </div>
         )}
 
         {feedbackMessage && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[13px] font-book text-emerald-700">
+          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {feedbackMessage}
           </div>
         )}
@@ -247,7 +247,7 @@ export function VerifyEmailForm() {
             size="sm"
             disabled={cooldown > 0 || isResending}
             onClick={handleResendCode}
-            className="text-[13px] text-steel-gray hover:text-off-black"
+            className="text-[14px] text-steel-gray hover:text-off-black"
           >
             <RefreshCw
               className={`h-3.5 w-3.5 mr-1.5 ${isResending ? 'animate-spin' : ''}`}
@@ -262,7 +262,7 @@ export function VerifyEmailForm() {
         <div className="pt-4 border-t border-black/[0.06] text-center">
           <Link
             href="/auth/login"
-            className="text-[13px] font-book text-signal-blue hover:underline"
+            className="text-[14px] font-book text-signal-blue hover:underline"
           >
             {t('backToLogin')}
           </Link>

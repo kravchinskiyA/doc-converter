@@ -34,14 +34,14 @@ export function LocaleSwitcher({ className }: LocaleSwitcherProps) {
   return (
     <label
       className={cn(
-        'relative flex items-center gap-1 text-[13px] text-steel-gray pl-2 pr-1.5 py-1 rounded-[6px] border-[0.5px] border-black/5 bg-black/[0.02] hover:border-black/15 transition-colors focus-within:border-signal-blue/50',
+        'relative flex items-center gap-1 text-[14px] text-steel-gray pl-2 pr-1.5 py-1 rounded-[6px] border-[0.5px] border-black/5 bg-black/[0.02] hover:border-black/15 transition-colors focus-within:border-signal-blue/50',
         isPending && 'opacity-60',
         className,
       )}
     >
       <span className="sr-only">{t('label')}</span>
       <Globe className="h-3.5 w-3.5 text-ash-gray" aria-hidden="true" />
-      <span className="uppercase text-[11px] font-regular" aria-hidden="true">
+      <span className="uppercase text-[14px] font-regular" aria-hidden="true">
         {locale}
       </span>
       <ChevronDown className="h-3 w-3 text-ash-gray" aria-hidden="true" />

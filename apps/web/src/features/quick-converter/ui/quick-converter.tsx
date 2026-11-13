@@ -26,7 +26,6 @@ import {
 import { Link, useFormatFileSize, useRouter } from '@/shared/i18n';
 import {
   type ConverterFile,
-  type ConversionDirection,
   GUEST_MAX_FILES,
   MAX_FILE_SIZE_BYTES,
   INITIAL_GUEST_ATTEMPTS,
@@ -41,7 +40,6 @@ export function QuickConverter() {
   const formatFileSize = useFormatFileSize();
   const router = useRouter();
   const [files, setFiles] = React.useState<ConverterFile[]>([]);
-  const [direction, setDirection] = React.useState<ConversionDirection>('pdf-to-docx');
   const [isDragging, setIsDragging] = React.useState(false);
   const [guestAttempts, setGuestAttempts] = React.useState<number>(() => {
     if (typeof window === 'undefined') return INITIAL_GUEST_ATTEMPTS;
@@ -89,12 +87,8 @@ export function QuickConverter() {
     for (const file of filesToProcess) {
       const lowerName = file.name.toLowerCase();
       const isPdf = lowerName.endsWith('.pdf') || file.type === 'application/pdf';
-      const isDocx =
-        lowerName.endsWith('.docx') ||
-        file.type ===
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
       const isTooLarge = file.size > MAX_FILE_SIZE_BYTES;
-      const isInvalidFormat = !isPdf && !isDocx;
+      const isInvalidFormat = !isPdf;
 
       newFiles.push({
         id: `${file.name}-${file.size}-${Date.now()}-${Math.random()}`,
@@ -103,24 +97,12 @@ export function QuickConverter() {
         size: file.size,
         type: file.type,
         isPdf,
-        isDocx,
         isTooLarge,
         isInvalidFormat,
       });
     }
 
-    const updatedFiles = [...files, ...newFiles];
-    setFiles(updatedFiles);
-
-    // Автоматическое определение направления конвертации по первому добавленному файлу
-    if (files.length === 0 && newFiles.length > 0) {
-      const first = newFiles[0];
-      if (first?.isDocx) {
-        setDirection('docx-to-pdf');
-      } else {
-        setDirection('pdf-to-docx');
-      }
-    }
+    setFiles([...files, ...newFiles]);
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -222,7 +204,7 @@ export function QuickConverter() {
           <div className="flex items-center gap-2">
             <Badge
               variant={guestAttempts > 0 ? 'neutral' : 'signal-chip'}
-              className="text-[12px]"
+              className="text-[14px]"
             >
               {t('guestAttempts', { count: guestAttempts, total: INITIAL_GUEST_ATTEMPTS })}
             </Badge>
@@ -236,7 +218,7 @@ export function QuickConverter() {
           ref={fileInputRef}
           type="file"
           multiple
-          accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          accept=".pdf,application/pdf"
           className="hidden"
           onChange={(e) => {
             if (e.target.files) {
@@ -265,7 +247,7 @@ export function QuickConverter() {
             <p className="text-[15px] font-book text-off-black mb-1">
               {t('dropzone.title')}
             </p>
-            <p className="text-[13px] font-book text-ash-gray">
+            <p className="text-[14px] font-book text-ash-gray">
               {t('dropzone.hint', { maxMb: MAX_FILE_SIZE_MB, maxFiles: GUEST_MAX_FILES })}
             </p>
 
@@ -292,7 +274,7 @@ export function QuickConverter() {
                 <span className="text-[14px] font-book text-off-black">
                   {t('list.selected', { count: files.length, max: GUEST_MAX_FILES })}
                 </span>
-                <span className="text-[12px] font-book text-ash-gray">
+                <span className="text-[14px] font-book text-ash-gray">
                   {t('list.totalSize', {
                     size: formatFileSize(files.reduce((acc, f) => acc + f.size, 0)),
                   })}
@@ -303,7 +285,7 @@ export function QuickConverter() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-[13px] text-signal-blue hover:bg-signal-blue/5"
+                    className="text-[14px] text-signal-blue hover:bg-signal-blue/5"
                     onClick={() => fileInputRef.current?.click()}
                   >
                     <Plus className="h-3.5 w-3.5 mr-1" />
@@ -313,7 +295,7 @@ export function QuickConverter() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-[13px] text-steel-gray hover:text-off-black"
+                  className="text-[14px] text-steel-gray hover:text-off-black"
                   onClick={handleClearAll}
                 >
                   {t('list.clear')}
@@ -342,23 +324,23 @@ export function QuickConverter() {
                         {file.name}
                       </p>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <span className="text-[12px] font-book text-ash-gray">
+                        <span className="text-[14px] font-book text-ash-gray">
                           {formatFileSize(file.size)}
                         </span>
                         {file.isTooLarge && (
-                          <span className="text-[11px] font-book text-red-600 flex items-center gap-1">
+                          <span className="text-[14px] font-book text-red-600 flex items-center gap-1">
                             <AlertCircle className="h-3 w-3" />
                             {t('fileStatus.tooLarge', { maxMb: MAX_FILE_SIZE_MB })}
                           </span>
                         )}
                         {file.isInvalidFormat && (
-                          <span className="text-[11px] font-book text-red-600 flex items-center gap-1">
+                          <span className="text-[14px] font-book text-red-600 flex items-center gap-1">
                             <AlertCircle className="h-3 w-3" />
                             {t('fileStatus.invalidFormat')}
                           </span>
                         )}
                         {!file.isTooLarge && !file.isInvalidFormat && (
-                          <span className="text-[11px] font-book text-emerald-600 flex items-center gap-1">
+                          <span className="text-[14px] font-book text-emerald-600 flex items-center gap-1">
                             <CheckCircle2 className="h-3 w-3" />
                             {t('fileStatus.ready')}
                           </span>
@@ -400,42 +382,19 @@ export function QuickConverter() {
               ))}
             </div>
 
-            {/* Выбор направления конвертации */}
+            {/* Направление конвертации (только PDF → DOCX) */}
             <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-black/[0.06]">
               <div className="flex items-center gap-2">
-                <span className="text-[13px] font-book text-steel-gray">
+                <span className="text-[14px] font-book text-steel-gray">
                   {t('direction.label')}
                 </span>
-                <div className="inline-flex rounded-button p-0.5 border border-black/10 bg-black/[0.02]">
-                  <button
-                    type="button"
-                    onClick={() => setDirection('pdf-to-docx')}
-                    className={`px-3 py-1 text-[12px] rounded-button transition-colors ${
-                      direction === 'pdf-to-docx'
-                        ? 'bg-pure-white text-off-black font-regular shadow-none'
-                        : 'text-steel-gray hover:text-off-black'
-                    }`}
-                  >
-                    {t('direction.pdfToDocx')}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setDirection('docx-to-pdf')}
-                    className={`px-3 py-1 text-[12px] rounded-button transition-colors ${
-                      direction === 'docx-to-pdf'
-                        ? 'bg-pure-white text-off-black font-regular shadow-none'
-                        : 'text-steel-gray hover:text-off-black'
-                    }`}
-                  >
-                    {t('direction.docxToPdf')}
-                  </button>
-                </div>
+                <Badge variant="neutral">{t('direction.pdfToDocx')}</Badge>
               </div>
 
               {/* Кнопка запуска */}
               <div className="flex items-center gap-3 self-end sm:self-auto">
                 {conversionStep ? (
-                  <div className="flex items-center gap-2 text-[13px] text-signal-blue font-book">
+                  <div className="flex items-center gap-2 text-[14px] text-signal-blue font-book">
                     <RefreshCw className="h-4 w-4 animate-spin" />
                     <span>{t(`steps.${conversionStep}`)}</span>
                   </div>
@@ -456,7 +415,7 @@ export function QuickConverter() {
 
         {/* Сообщение об ошибке лимитов */}
         {errorMessage && (
-          <div className="rounded-[14px] border border-red-200 bg-red-50/50 p-3 flex items-center gap-2 text-[13px] text-red-600">
+          <div className="rounded-[14px] border border-red-200 bg-red-50/50 p-3 flex items-center gap-2 text-[14px] text-red-600">
             <AlertCircle className="h-4 w-4 shrink-0" />
             <span>{errorMessage}</span>
           </div>
@@ -464,7 +423,7 @@ export function QuickConverter() {
 
         {/* Предупреждение об исчерпании попыток */}
         {guestAttempts === 0 && (
-          <div className="rounded-[14px] border border-signal-blue/20 bg-signal-blue/[0.03] p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[13px]">
+          <div className="rounded-[14px] border border-signal-blue/20 bg-signal-blue/[0.03] p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[14px]">
             <span className="text-off-black font-book">
               {t('attemptsExhausted.text', { total: INITIAL_GUEST_ATTEMPTS })}
             </span>
@@ -476,31 +435,6 @@ export function QuickConverter() {
             </Link>
           </div>
         )}
-
-        {/* Быстрые чипы направлений */}
-        <div className="mt-4 pt-4 border-t border-black/[0.06] flex flex-wrap items-center gap-2">
-          <span className="text-[13px] font-book text-steel-gray mr-2">
-            {t('modes.label')}
-          </span>
-          <Link href="/convert/pdf-to-docx">
-            <Badge
-              variant="signal-chip"
-              className="hover:bg-signal-blue/5 cursor-pointer"
-            >
-              {t('modes.pdfPages')}
-            </Badge>
-          </Link>
-          <Link href="/convert/docx-to-pdf">
-            <Badge variant="neutral" className="hover:border-black/20 cursor-pointer">
-              {t('modes.docxToPdf')}
-            </Badge>
-          </Link>
-          <Link href="/convert/images-to-pdf">
-            <Badge variant="neutral" className="hover:border-black/20 cursor-pointer">
-              {t('modes.imagesToPdf')}
-            </Badge>
-          </Link>
-        </div>
       </CardContent>
     </Card>
   );

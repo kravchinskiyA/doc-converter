@@ -50,6 +50,11 @@
     "localeSwitcher": {
       "label": "Interface language"
     },
+    "mobileMenu": {
+      "open": "Open menu",
+      "close": "Close menu",
+      "title": "Navigation"
+    },
     "devMenu": {
       "trigger": "Pages",
       "title": "Page navigator",
@@ -65,6 +70,7 @@
       "items": {
         "home": "Home page (step 1.3)",
         "pricing": "Pricing and subscription",
+        "designSystem": "Design System (Augen Pro UI Kit)",
         "pdfToDocx": "PDF → DOCX (OCR with thumbnails)",
         "docxToPdf": "DOCX → PDF (LibreOffice)",
         "imagesToPdf": "Images → PDF (A4, 10 mm)",
@@ -98,6 +104,7 @@
       "title": "Service",
       "pricing": "Pricing and subscription",
       "apiDocs": "REST API documentation",
+      "designSystem": "Design System (UI Kit)",
       "staffLogin": "Staff sign-in"
     },
     "security": {
@@ -112,10 +119,10 @@
   "home": {
     "badge": "Augen Pro • 100% EU data jurisdiction",
     "title": "Private document and image conversion",
-    "subtitle": "Accurate OCR for printed text, DOCX to PDF export and image processing on our own isolated servers in the EU.",
+    "subtitle": "Accurate OCR for printed text, DOCX to PDF export and image processing.",
     "features": {
       "eu": {
-        "title": "100% isolation in the EU",
+        "title": "100% isolation",
         "text": "Files are never sent to third-party AI services. All processing runs on our own hardware in EU data centres."
       },
       "ocr": {
@@ -130,11 +137,11 @@
   },
   "quickConverter": {
     "title": "Document converter",
-    "description": "Fast private PDF and DOCX conversion with OCR for printed text",
+    "description": "Fast private PDF to DOCX conversion with OCR for printed text",
     "guestAttempts": "Guest: {count} of {total} attempts",
     "dropzone": {
       "title": "Drag files here or click to choose",
-      "hint": "PDF and DOCX up to {maxMb} MB are supported (up to {maxFiles} files for guests)",
+      "hint": "PDF up to {maxMb} MB is supported (up to {maxFiles} files for guests)",
       "chooseFiles": "Choose files"
     },
     "list": {
@@ -320,12 +327,12 @@
   "auth": {
     "login": {
       "title": "Sign in to account",
-      "subtitle": "Sign in to access your personal storage, API key and remove guest conversion limits.",
+      "subtitle": "Sign in to access your personal storage.",
       "emailLabel": "Email",
       "emailPlaceholder": "name@example.com",
       "passwordLabel": "Password",
       "passwordPlaceholder": "••••••••",
-      "rememberMe": "Remember me for 30 days",
+      "rememberMe": "Remember me",
       "forgotPassword": "Forgot password?",
       "recoveryCode": "Lost access to email? Account recovery with backup code",
       "submit": "Sign in",
@@ -342,7 +349,7 @@
       "passwordPlaceholder": "••••••••",
       "confirmPasswordLabel": "Repeat password",
       "confirmPasswordPlaceholder": "••••••••",
-      "passwordHint": "From 8 to 128 characters. Spaces and special characters are permitted.",
+      "passwordHint": "From 8 characters.",
       "acceptTerms": "I accept the Terms of Service and Privacy Policy",
       "termsLink": "Terms of Service",
       "privacyLink": "Privacy Policy",
@@ -424,6 +431,786 @@
       "backToLogin": "Back to standard sign in",
       "demoSuccess": "Account recovered successfully! Now sign in with your new email and password."
     }
+  },
+  "convert": {
+    "badge": "Documents & Images Converter",
+    "switchDirection": "Conversion directions:",
+    "directions": {
+      "pdfToDocx": {
+        "nav": "PDF → DOCX (OCR)",
+        "title": "Convert PDF to DOCX",
+        "subtitle": "High-accuracy optical character recognition (OCR), preserving headings, lists, tables, and layout."
+      },
+      "docxToPdf": {
+        "nav": "DOCX → PDF",
+        "title": "Convert DOCX to PDF",
+        "subtitle": "Reliable Word document export to standardized PDF via headless LibreOffice with exact typographic fidelity."
+      },
+      "imagesToPdf": {
+        "nav": "Images → PDF",
+        "title": "Convert Images to PDF",
+        "subtitle": "Merge or convert JPG, PNG, and static WebP images into standardized A4 sheets with 10 mm margins and automatic orientation."
+      },
+      "pdfToImages": {
+        "nav": "PDF → Images (JPG/WebP)",
+        "title": "Rasterize PDF to Images",
+        "subtitle": "Page-by-page rendering to JPG or WebP on clean white backgrounds with customizable 72, 150, or 300 DPI and quality controls."
+      }
+    },
+    "features": {
+      "clamav": "ClamAV Verified",
+      "eu": "EU Servers",
+      "ttl": "12h Auto-cleanup",
+      "a4": "A4 Standard (10 mm)",
+      "cer": "OCR Accuracy CER ≤ 2%",
+      "dpi": "72 / 150 / 300 DPI"
+    },
+    "dropzone": {
+      "pdfTitle": "Drag & drop PDF file here or browse from disk",
+      "docxTitle": "Drag & drop DOCX file here or browse from disk",
+      "imagesTitle": "Drag & drop images here (JPG, PNG, WebP)",
+      "hint": "Maximum size: {maxMb} MB per file (up to {maxFiles} files for guests)",
+      "chooseFile": "Browse file",
+      "chooseFiles": "Browse images"
+    },
+    "pdfToDocx": {
+      "pagesTitle": "Select pages for OCR processing",
+      "pagesHint": "Select specific pages to OCR. All pages are selected by default.",
+      "selectAll": "Select all",
+      "deselectAll": "Deselect all",
+      "pageCard": "Page {number}",
+      "selectedCount": "Selected pages: {count} of {total}",
+      "ocrLanguagesTitle": "Printed text OCR languages",
+      "ocrLanguagesHint": "Auto-detection optimized for mandatory languages (Spec §2.3):",
+      "languages": {
+        "uk": "Ukrainian",
+        "ru": "Russian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "pl": "Polish"
+      },
+      "layoutInfoTitle": "Layout Preservation Guarantee (Spec §2.4)",
+      "layoutInfoDesc": "Reading order, paragraphs, headings, bullet lists, figures, and simple tables are fully preserved. Strict threshold: CER ≤ 2%.",
+      "submit": "Convert to DOCX ({count} pages)"
+    },
+    "docxToPdf": {
+      "inspectorTitle": "DOCX Safety Inspection (Spec §3.6)",
+      "unpackInfo": "Unpack volume limit check: up to 500 MB and max 10,000 internal files to prevent Zip-bomb vulnerabilities.",
+      "engineInfo": "Automated export runs in a sandboxed headless LibreOffice worker strictly within the EU jurisdiction.",
+      "submit": "Convert to PDF"
+    },
+    "imagesToPdf": {
+      "orderTitle": "Page sequence in output document",
+      "orderHint": "Drag images or use arrow buttons to arrange the page order in the generated PDF.",
+      "mergeToggle": "Merge all images into a single PDF document",
+      "mergeHint": "Default is off (generates individual PDFs per image). Turn on to merge all uploaded images into a single multi-page PDF.",
+      "a4StandardInfo": "Each image is placed on an individual A4 sheet with 10 mm margins. Proportions are preserved and transparency is filled with pure white.",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "remove": "Remove",
+      "submitMerge": "Merge into 1 PDF ({count} images)",
+      "submitSeparate": "Convert to separate PDFs ({count} files)"
+    },
+    "pdfToImages": {
+      "formatTitle": "Output image format",
+      "formatJpg": "JPG (universal bitmap, white background)",
+      "formatWebp": "WebP (modern high-efficiency compression)",
+      "dpiTitle": "Rasterization resolution (DPI)",
+      "dpi72": "72 DPI — fast web/screen viewing",
+      "dpi150": "150 DPI — standard document quality (default)",
+      "dpi300": "300 DPI — high resolution for printing",
+      "dpiInfo": "Selected DPI and quality apply uniformly to all selected pages in the batch.",
+      "qualityTitle": "Compression quality",
+      "qualityDesc": "Value: {quality} (default 85 — optimal balance between quality and file size)",
+      "pagesTitle": "Select pages to rasterize",
+      "whiteBgNotice": "Rendered on a clean white background per Spec §2.2.",
+      "submit": "Convert to {format} ({count} pages)"
+    },
+    "flow": {
+      "scanning": "ClamAV virus scan (EU)…",
+      "dispatching": "Dispatching job to BullMQ queue…",
+      "ready": "Job accepted. Redirecting to status…"
+    }
+  },
+  "results": {
+    "metadata": {
+      "title": "Conversion Results | doc-converter",
+      "description": "Waiting and download page for file conversion results in doc-converter."
+    },
+    "badge": {
+      "queued": "Queued",
+      "processing": "Processing",
+      "completed": "Completed",
+      "partial": "Partially Completed",
+      "failed": "Failed"
+    },
+    "status": {
+      "title": "Job Status",
+      "queuedDesc": "The job has been queued in BullMQ and is waiting for an available worker slot in the EU region.",
+      "processingDesc": "Files are being converted by isolated conversion engines. This usually takes from a few seconds to a minute.",
+      "completedDesc": "Conversion completed successfully. All files are ready for secure download.",
+      "partialDesc": "Some files were successfully converted, while others encountered errors.",
+      "failedDesc": "Unable to convert files. Please review the reasons provided."
+    },
+    "summary": {
+      "jobId": "Job ID",
+      "direction": "Direction",
+      "createdAt": "Created",
+      "total": "Total Files",
+      "ready": "Ready",
+      "failed": "Errors"
+    },
+    "ttl": {
+      "badge": "EU Storage (GDPR)",
+      "guestBadge": "Guest Access",
+      "accountBadge": "Saved in Account",
+      "guestWarning": "For guest users, results are stored strictly for 12 hours from readiness, after which they are permanently deleted.",
+      "accountBenefit": "Log in or register to automatically keep your conversion results in your personal dashboard for 6 months.",
+      "timeRemaining": "Time remaining until auto-deletion:",
+      "hours": "h",
+      "minutes": "min",
+      "seconds": "sec",
+      "expired": "Storage period has expired. Files have been safely deleted in accordance with GDPR."
+    },
+    "files": {
+      "title": "Job Files",
+      "original": "Original File",
+      "result": "Result",
+      "size": "Size",
+      "status": "Status",
+      "action": "Action",
+      "download": "Download",
+      "downloadZip": "Download ZIP",
+      "noFiles": "No files found",
+      "inQueue": "Waiting in queue…",
+      "processing": "Converting document…"
+    },
+    "actions": {
+      "downloadAllZip": "Download All in single ZIP",
+      "generatingZip": "Generating ZIP…",
+      "newConversion": "New Conversion",
+      "goToAccount": "To Personal Account",
+      "signUpToSave": "Sign up to keep files"
+    },
+    "reasons": {
+      "passwordProtected": "File is password protected or encrypted",
+      "unpackLimitExceeded": "Safe unpacking limit exceeded (500 MB)",
+      "corruptedFile": "File structure is corrupted or invalid",
+      "unsupportedFormat": "Unsupported internal document format",
+      "ocrFailed": "Text not detected or scan quality is too low",
+      "timeout": "Processing timeout exceeded (10 minutes)",
+      "genericError": "Conversion failure without disclosing private data"
+    }
+  },
+  "account": {
+    "metadata": {
+      "title": "Account Dashboard",
+      "description": "Manage your profile, storage quota, saved documents and subscription"
+    },
+    "title": "Personal Account",
+    "subtitle": "Manage profile, EU security and documents",
+    "header": {
+      "badge": "Personal Account",
+      "gdprBadge": "GDPR & ISO/IEC 27001",
+      "euBadge": "EU Jurisdiction",
+      "title": "Account & Storage Management",
+      "description": "Security settings, disk quota monitoring, conversion results download, and subscription management."
+    },
+    "tabs": {
+      "profile": "Profile",
+      "storage": "Storage",
+      "files": "Files",
+      "apiKey": "API Key",
+      "subscription": "Subscription",
+      "recovery": "Recovery Codes",
+      "support": "Support Access",
+      "danger": "Danger Zone"
+    },
+    "errors": {
+      "emailChangeExpired": "The operation window (20 minutes) has expired. Please start over.",
+      "emailSameAsCurrent": "The new email address matches your current one.",
+      "invalidCode6": "Please enter a valid 6-digit code.",
+      "passwordLength": "Password must be between 8 and 128 characters.",
+      "passwordsMismatch": "Passwords do not match."
+    },
+    "demo": {
+      "firstName": "Alex",
+      "lastName": "Kovalenko",
+      "txProMonthly": "Pro Plan (Monthly Subscription)",
+      "supportStaffName": "Elena Marchenko (Support Tier 2)",
+      "supportReason": "Diagnostics of OCR table recognition failure in a complex scanned document (Ticket #49281)"
+    },
+    "units": {
+      "mb": "MB",
+      "gb": "GB"
+    },
+    "profile": {
+      "euBadge": "EU Region (Frankfurt)",
+      "emailVerified": "Email Verified",
+      "title": "Personal Profile",
+      "description": "Manage personal details, contact email address, and access security",
+      "editNameBtn": "Edit Name",
+      "editFormTitle": "Edit First & Last Name",
+      "firstNameLabel": "First Name (optional, max 50 chars)",
+      "firstNamePlaceholder": "e.g., Alex",
+      "lastNameLabel": "Last Name (optional, max 50 chars)",
+      "lastNamePlaceholder": "e.g., Kovalenko",
+      "saveChanges": "Save Changes",
+      "cancel": "Cancel",
+      "accountOwner": "Account Owner",
+      "nameNotSet": "Name not set",
+      "primaryEmail": "Primary Email",
+      "changeBtn": "Change",
+      "passwordTitle": "Account Password",
+      "passwordHint": "Protected with scrypt cryptographic hash. Changing your password revokes all active sessions and your API key.",
+      "changePasswordBtn": "Change Password",
+      "emailDialog": {
+        "badge": "Two-Step Verification",
+        "timeLeft": "Time left: {time}",
+        "title": "Change Email Address",
+        "description": "Per security policy §6.2, confirmation codes from two emails are required: the first is sent to your current address, the second to your new one. Total window is 20 minutes.",
+        "newEmailLabel": "Enter new email address:",
+        "newEmailPlaceholder": "new-email@example.com",
+        "sendFirstCode": "Send First Code",
+        "step1Sent": "Code #1 sent to your current email: <bold>{email}</bold>",
+        "step1CodeLabel": "Enter the 6-digit code from the email sent to your old address:",
+        "step1Submit": "Confirm & Send Code #2",
+        "step2Sent": "Code #2 sent to your new address: <bold>{email}</bold>",
+        "step2CodeLabel": "Enter the 6-digit code from the email sent to your new address:",
+        "terminateSessionsLabel": "Sign out on all devices and revoke API key after email change (§6.2, recommended)",
+        "step2Submit": "Complete Email Change",
+        "completedTitle": "Email address updated!",
+        "completedDesc": "Your new email <bold>{email}</bold> is now used for sign-in and all notifications.",
+        "doneBtn": "Got it"
+      },
+      "passwordDialog": {
+        "badge": "scrypt Security",
+        "title": "Change Account Password",
+        "description": "Per §6.3, changing your password requires email code confirmation and immediately terminates all active sessions on all devices and revokes your current API key.",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password (8 to 128 characters)",
+        "confirmPassword": "Confirm New Password",
+        "nextSendCode": "Next: Send Code",
+        "codeSent": "A 6-digit verification code was sent to <bold>{email}</bold>",
+        "enterCode": "Enter 6-digit code:",
+        "submit": "Confirm Password Change",
+        "completedTitle": "Password updated successfully",
+        "completedDesc": "All other sessions have been terminated and your API key has been revoked for security.",
+        "close": "Close"
+      }
+    },
+    "storage": {
+      "s3Badge": "Amazon S3 EU (SSE-KMS)",
+      "planBadge": "Plan: {plan}",
+      "title": "Results Storage",
+      "description": "Persistent storage quota for converted documents (6 months retention from completion)",
+      "clearAllBtn": "Clear All Storage",
+      "over100Title": "Storage full (100%) — new conversions blocked",
+      "over100Desc": "Per §10.3, when the quota is exhausted, new web and API jobs are paused. Delete unneeded files manually or clear all storage to resume.",
+      "over75Title": "Warning: over 75% of storage space used",
+      "over75Desc": "Storage space is running low ({used} of {total}). Consider deleting outdated documents or upgrading to the Max plan (50 GB).",
+      "usedLabel": "Space Used",
+      "usedOf": "<bold>{used}</bold> of {total} ({percent}%)",
+      "thresholdTitle": "75% warning threshold",
+      "zeroGb": "0 GB",
+      "thresholdLabel": "75% threshold ({size})",
+      "limitLabel": "Limit: {size}",
+      "rules": {
+        "euTitle": "EU Security",
+        "euDesc": "All files are encrypted with KMS keys and stored exclusively in EU data centers (Germany/Frankfurt).",
+        "retentionTitle": "6-Month Retention",
+        "retentionDesc": "Results of accepted jobs are stored for 6 calendar months from completion (§10.1).",
+        "batchTitle": "Batch Rule",
+        "batchDesc": "If an accepted job result exceeds the remaining quota, it is saved above the limit (§10.3)."
+      },
+      "clearDialog": {
+        "badge": "Irreversible Action",
+        "title": "Clear all storage?",
+        "description": "You are about to permanently delete <bold>{count} files</bold> totaling <bold>{size}</bold>. All files will be immediately removed from your quota and physically deleted from S3 within 1 hour (§10.4).",
+        "cancel": "Cancel",
+        "confirm": "Yes, Clear All"
+      }
+    },
+    "files": {
+      "retentionBadge": "6-Month Storage",
+      "totalBadge": "Total files: {count}",
+      "title": "Saved Results",
+      "description": "Web and API conversion results with individual and batch ZIP downloads",
+      "selectedCount": "Selected: {count}",
+      "downloadZip": "Download ZIP",
+      "deleteSelected": "Delete",
+      "searchPlaceholder": "Search by file name...",
+      "sourceLabel": "Source:",
+      "filterAll": "All ({count})",
+      "filterWeb": "Web",
+      "filterApi": "API",
+      "emptyTitle": "No saved documents",
+      "emptyDesc": "All your web and API conversion results will automatically appear here.",
+      "columns": {
+        "name": "File Name",
+        "format": "Format",
+        "size": "Size",
+        "source": "Source",
+        "expiresAt": "Available Until",
+        "actions": "Actions"
+      },
+      "sourceWeb": "Web",
+      "sourceApi": "API",
+      "downloadSingleTitle": "Download ZIP archive of this file (§10.2)",
+      "downloadZipShort": "ZIP",
+      "deleteFileTitle": "Delete file"
+    },
+    "apiKey": {
+      "unknownDate": "Unknown",
+      "restBadge": "REST API v1",
+      "activeBadge": "Key Active",
+      "notIssuedBadge": "No Key Issued",
+      "title": "User API Key",
+      "description": "Key for programmatic conversion access via the <code>X-API-Key</code> header",
+      "rotateDisabledTitle": "Key rotation is disabled while conversions are active (§7)",
+      "rotateTitle": "Rotate key with email code verification",
+      "rotateBtn": "Rotate Key",
+      "createBtn": "Create API Key",
+      "activeConversionsTitle": "Active conversion jobs in queue",
+      "activeConversionsDesc": "Per §7, creating or rotating an API key is strictly prohibited until current conversions finish.",
+      "currentKeyIssued": "Active secret key (issued {date})",
+      "authEnabled": "Authorization enabled",
+      "hideKeyTitle": "Hide value",
+      "showKeyTitle": "Show full key",
+      "copied": "Copied",
+      "copy": "Copy",
+      "securityWarning": "Never share your key with third parties or commit it to client-side repositories.",
+      "curlTitle": "REST API Call Example (cURL)",
+      "emptyTitle": "No API key issued yet",
+      "emptyDesc": "Per §7, no key exists until manually created. Click the create button above to generate a key for API or Telegram bot integration.",
+      "rulesTitle": "Key Security Rules (§7):",
+      "rule1": "- Key rotation requires a 6-digit email verification code; the old key is deactivated immediately.",
+      "rule2": "- Changing your password automatically revokes the active key to prevent interception.",
+      "rule3": "- Revoking a key does not interrupt API jobs already accepted for processing.",
+      "rotateDialog": {
+        "badge": "Email Verification",
+        "title": "Rotate API Key",
+        "description": "Per §7, key rotation requires confirmation via a code sent to your email (<bold>{email}</bold>). Once the new key is generated, the old key will <bold>immediately stop working</bold>.",
+        "codeLabel": "Enter 6-digit verification code:",
+        "cancel": "Cancel",
+        "submit": "Issue New Key"
+      }
+    },
+    "subscription": {
+      "plans": {
+        "basic": "Basic",
+        "pro": "Pro",
+        "max": "Max",
+        "enterprise": "Enterprise"
+      },
+      "stripeBadge": "Stripe Billing",
+      "statusActive": "Subscription Active",
+      "statusBasic": "Basic Mode",
+      "title": "Plan: {plan}",
+      "description": "Subscription management, plan switching, and transparent refunds for unused days",
+      "cancelBtn": "Cancel Subscription",
+      "changePlanBtn": "Change Plan",
+      "planCostLabel": "Plan Price",
+      "perMonth": "month",
+      "perYear": "year",
+      "paidUntilLabel": "Paid Period Until",
+      "utcNote": "Time in UTC (§11.4)",
+      "autoRenewLabel": "Auto-Renewal",
+      "autoRenewOn": "Enabled",
+      "autoRenewOff": "Disabled",
+      "autoRenewOnHint": "Charged at end of period",
+      "autoRenewOffHint": "Switches to Basic plan",
+      "autoRenewToggleTitle": "Toggle auto-renewal (§11.1)",
+      "refundInfoTitle": "European Transparent Billing Standard (§11.2, §11.3):",
+      "refundInfoDesc": "When canceling a subscription or downgrading immediately, the service automatically calculates the unused days and refunds the amount directly to your Stripe bank card rather than an internal virtual balance.",
+      "historyTitle": "Stripe Payment & Refund History",
+      "columns": {
+        "date": "Date",
+        "description": "Description",
+        "status": "Status",
+        "amount": "Amount (EUR)"
+      },
+      "statusRefund": "Card Refund",
+      "statusPaid": "Paid",
+      "txRefundDescription": "Refund for unused period remainder ({amount} €)",
+      "txPlanChangeDescription": "Plan change to {plan} (proration)",
+      "changeDialog": {
+        "badge": "Daily Proration (§11.3)",
+        "title": "Change Subscription Plan",
+        "description": "Your current period end date (<bold>{date}</bold>) remains unchanged. The charge or refund is prorated based on remaining days.",
+        "selectLabel": "Select target plan:",
+        "proTitle": "Pro (15 GB)",
+        "proPrice": "5.00 €/mo",
+        "proDesc": "Batch upload up to 5 files, 15 GB storage, 2-hour retry window",
+        "maxTitle": "Max (50 GB)",
+        "maxPrice": "10.00 €/mo",
+        "maxDesc": "Highest priority, 50 GB quota, 2-hour retry window",
+        "estimatedLabel": "Estimated charge/refund:",
+        "estimatedUpgrade": "+2.50 € (charge)",
+        "estimatedDowngrade": "-2.50 € (card refund)",
+        "cancel": "Cancel",
+        "confirm": "Confirm Plan Change"
+      },
+      "cancelDialog": {
+        "badge": "Immediate Cancellation",
+        "title": "Cancel Paid Subscription",
+        "description": "Per §11.2, canceling your subscription immediately ends paid features and refunds the unused <bold>{days} days</bold>.",
+        "refundBoxTitle": "Refund amount to Stripe card:",
+        "refundBoxNote": "Will be refunded directly to your original card with no fees deducted",
+        "autoRenewHint": "If you just want to prevent the next charge, turn off Auto-Renewal — your paid period will remain active until {date}.",
+        "keepBtn": "Keep Subscription",
+        "confirmBtn": "Yes, Cancel & Refund {amount} €"
+      }
+    },
+    "recovery": {
+      "exportHeader": "# Doc-Converter Recovery Codes (§6.5)",
+      "exportAccount": "# Account: {email}",
+      "exportIssuedAt": "# Issued at: {date}",
+      "exportNoteCopy": "# Each code is single-use. Store in a secure place.",
+      "exportNoteDownload": "# Warning: each code is single-use. Allows setting a new password if you lose access to your email.",
+      "owaspBadge": "OWASP CheatSheet",
+      "availableBadge": "Available codes: {count}",
+      "emptyBadge": "No codes generated",
+      "title": "Recovery Codes",
+      "description": "A set of 10 single-use codes to recover account access if you lose your email (§6.5)",
+      "replaceBtn": "Replace Code Set",
+      "issueBtn": "Generate 10 Codes",
+      "statusTitle": "Recovery Keys Status",
+      "statusHint": "scrypt hashes, securely stored on the server",
+      "savedCount": "Saved in set: <bold>{count} of 10 single-use keys</bold>",
+      "oneTimeNote": "Per §6.5, codes are shown only once upon generation. Re-displaying values by the server is strictly prohibited.",
+      "howToUseTitle": "How to use if email is lost:",
+      "howToUseDesc": "On the sign-in screen, choose \"No access to email\", enter one of these 10 codes, and provide a new address. Each code is single-use and expires after use.",
+      "replaceRuleTitle": "Set replacement rule:",
+      "replaceRuleDesc": "Generating a new set immediately revokes all remaining old codes. Be sure to save the new file or printout.",
+      "dialog": {
+        "badge": "§6.5 One-Time Display",
+        "titleRequest": "Confirm Code Generation",
+        "titleDisplay": "Your 10 Recovery Codes",
+        "requestDesc": "To generate a set of 10 recovery codes, enter the 6-digit verification code sent to your current email <bold>{email}</bold>.",
+        "cancel": "Cancel",
+        "generateBtn": "Confirm & Generate",
+        "warningTitle": "Warning: this is the only time these codes will be displayed!",
+        "warningDesc": "Save them right now. Once you close this window, you will not be able to view these values again.",
+        "copied": "Copied",
+        "copyAll": "Copy All",
+        "downloadTxt": "Download .txt",
+        "confirmCheckbox": "I have securely saved these 10 codes separately from my email",
+        "closeBtn": "Done, Close Window"
+      }
+    },
+    "support": {
+      "status": {
+        "pending": "Pending Approval",
+        "active": "Access Active (up to 24h)",
+        "revoked": "Revoked by User",
+        "expired": "Expired"
+      },
+      "gdprBadge": "GDPR Privacy",
+      "specBadge": "§12.17",
+      "title": "Support Staff Access",
+      "description": "Control support engineer access to specific files for incident and failure troubleshooting",
+      "privacyTitle": "Privacy Invariant:",
+      "privacyDesc": "Service staff <bold>do not have direct access</bold> to your document contents. Access can only be granted via your explicit email code confirmation for specific files for up to 24 hours and can be revoked at any second.",
+      "emptyTitle": "No access requests",
+      "emptyDesc": "When a support engineer requests access to a failed file for your ticket, the request will appear here.",
+      "reasonLabel": "Request reason:",
+      "filesLabel": "Requested files:",
+      "requestedAt": "Requested: {date}",
+      "expiresAt": "Valid until: {date}",
+      "approveBtn": "Approve with Email Code",
+      "revokeBtn": "Revoke Access Immediately",
+      "dialog": {
+        "badge": "§12.17 Verification",
+        "title": "Grant Access to Engineer",
+        "description": "You are allowing engineer <bold>{staffName}</bold> to view the specified files for up to 24 hours. A verification code has been sent to your email (<bold>{email}</bold>).",
+        "codeLabel": "Enter 6-digit verification code:",
+        "cancel": "Cancel",
+        "submit": "Allow Viewing"
+      }
+    },
+    "danger": {
+      "badge": "Danger Zone",
+      "specBadge": "§6.4",
+      "title": "Delete Account",
+      "description": "Complete termination of service, file deletion, and subscription cancellation",
+      "deleteBtn": "Delete Account Permanently",
+      "consequencesTitle": "Consequences of confirming deletion per §6.4:",
+      "item1": "<bold>All saved documents and results:</bold> will be immediately locked and permanently deleted from S3 cloud storage within 1 hour.",
+      "item2": "<bold>Paid subscription:</bold> terminates immediately. Note: unlike manual subscription cancellation, <bold>no refund is issued for the remaining paid period when deleting an account</bold> (§6.4, §11.3).",
+      "item3": "<bold>Sessions and API key:</bold> all sign-in sessions on all devices are immediately terminated, the API key is revoked, and pending queued jobs are stopped.",
+      "item4": "<bold>Backups:</bold> purged according to the 30-day encrypted backup retention schedule.",
+      "dialog": {
+        "badge": "Confirm Account Deletion",
+        "title": "Are you sure you want to delete your account?",
+        "description": "This action is irreversible. To confirm, we sent a 6-digit verification code to your email <bold>{email}</bold>.",
+        "codeLabel": "Enter the 6-digit code from the email:",
+        "confirmCheckbox": "I understand that all files will be deleted and the remaining subscription balance is non-refundable",
+        "cancel": "Cancel",
+        "confirm": "Confirm Deletion"
+      }
+    }
+  },
+  "pricing": {
+    "metadata": {
+      "title": "Pricing & Plans",
+      "description": "Transparent pricing for doc-converter. Free Basic plan, Pro and Maximum plans, secure payment via Stripe."
+    },
+    "page": {
+      "badges": {
+        "plans": "Pricing plans",
+        "stripe": "Stripe Billing",
+        "noFees": "No hidden fees"
+      },
+      "title": "Transparent pricing for every conversion workflow",
+      "subtitle": "From a free Basic tier for occasional documents to high-throughput plans with fast 2-hour quota recovery and parallel processing.",
+      "guarantees": {
+        "eu": {
+          "title": "Strictly in the EU",
+          "text": "All servers, databases, and S3 storage are hosted in Germany and France under GDPR protection."
+        },
+        "privacy": {
+          "title": "Absolute privacy",
+          "text": "No document is ever sent to third-party AI/OCR APIs. All processing runs exclusively on isolated cores."
+        },
+        "stripe": {
+          "title": "Secure Stripe",
+          "text": "Card payments via Stripe. Taxes included, with pro-rata refunds for unused days."
+        }
+      },
+      "cta": {
+        "badge": "Instant start",
+        "title": "Ready to convert documents without loss?",
+        "subtitle": "Try the Basic tier without registration or upgrade to Pro for larger files and OCR.",
+        "connectPro": "Get Pro plan",
+        "tryFree": "Try for free"
+      }
+    },
+    "toggle": {
+      "ariaLabel": "Billing period",
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "annualNote": "Billed annually:",
+      "annualDiscount": "15% off (save up to €18/year)"
+    },
+    "card": {
+      "enterprisePrice": "Custom",
+      "enterpriseNote": "By individual agreement",
+      "forever": "/ forever",
+      "noCard": "No card required",
+      "perMonthStar": "/ mo*",
+      "annualBilledNote": "€{amount} billed annually (save €{savings})",
+      "perMonth": "/ mo",
+      "monthlyBilledNote": "Monthly billing, cancel anytime",
+      "popularFallback": "Popular choice",
+      "includedTitle": "Included in plan:"
+    },
+    "table": {
+      "badgeMatrix": "Parameter matrix",
+      "badgeSpec": "Spec §3.3–§3.8",
+      "title": "Limits and capabilities comparison",
+      "subtitle": "Detailed technical comparison of plans, quotas, compute resources, and security.",
+      "colParameter": "Parameter",
+      "colBasic": "Basic",
+      "colPro": "Pro",
+      "colMax": "Max",
+      "colEnterprise": "Enterprise"
+    },
+    "faq": {
+      "badgeQa": "Q&A",
+      "badgeTerms": "Transparent terms",
+      "title": "Frequently asked questions",
+      "subtitle": "Everything you need to know about billing, quota recovery rules, taxes, and cancellation."
+    }
+  },
+  "apiDocs": {
+    "metadata": {
+      "title": "REST API Documentation",
+      "description": "Specification and code integration examples for doc-converter public REST API."
+    }
+  },
+  "terms": {
+    "metadata": {
+      "title": "Terms of Service",
+      "description": "Public offer, subscription billing, auto-renewal, refunds, and acceptable use policy of doc-converter."
+    }
+  },
+  "privacy": {
+    "metadata": {
+      "title": "GDPR Privacy Policy",
+      "description": "Personal data protection, GDPR compliance, S3 SSE-KMS encryption, and European Union server jurisdiction."
+    }
+  },
+  "admin": {
+    "metadata": {
+      "title": "Staff Administration Panel",
+      "description": "Internal administration panel for doc-converter with mandatory 2FA authentication."
+    },
+    "roles": {
+      "admin": "Administrator",
+      "support": "Support"
+    },
+    "login": {
+      "title": "Staff Sign-In",
+      "subtitle": "Access restricted to authorized personnel with verified second factor (TOTP 2FA or backup code).",
+      "badge": "Internal Environment • Staff Only",
+      "emailLabel": "Staff Email",
+      "emailPlaceholder": "staff@doc-converter.eu",
+      "passwordLabel": "Account Password",
+      "totpLabel": "Authenticator App Code",
+      "totpHint": "Enter the 6-digit code from Google Authenticator, 1Password, or Authy",
+      "recoveryCodeLabel": "Staff Recovery Code",
+      "recoveryCodeHint": "Enter one of your 10 one-time staff emergency recovery codes",
+      "useRecoveryCode": "Use emergency recovery code",
+      "useTotpCode": "Use TOTP authenticator code",
+      "submit": "Sign in to Admin Panel",
+      "submitting": "Verifying credentials…",
+      "demoNotice": "Demonstration mode: fill test credentials or switch role below",
+      "demoAdmin": "Sign in as Administrator",
+      "demoSupport": "Sign in as Support",
+      "backToHome": "Return to Home Page"
+    },
+    "header": {
+      "title": "Service Administration",
+      "subtitle": "Infrastructure monitoring, quota control, and security audit log",
+      "regionBadge": "EU Region (Frankfurt)",
+      "twoFactorBadge": "2FA TOTP Active",
+      "signedInAs": "Operator:",
+      "switchRole": "Switch Role (Test)",
+      "logout": "Sign out"
+    },
+    "tabs": {
+      "metrics": "Service Metrics",
+      "users": "Users & Quotas",
+      "jobs": "Conversion Jobs",
+      "billing": "Payments & Refunds",
+      "emergency": "Emergency Controls",
+      "audit": "Security Audit Log (90d)"
+    },
+    "metrics": {
+      "title": "Service Health & Infrastructure",
+      "description": "Real-time monitoring of BullMQ conversion queues, S3 storage, and ClamAV daemon.",
+      "bullmq": {
+        "title": "BullMQ Processing Queues",
+        "concurrency": "Concurrency (Global Limit: 5)",
+        "active": "Active",
+        "waiting": "Waiting",
+        "completed": "Completed (24h)",
+        "failed": "Failed (24h)",
+        "delayed": "Delayed",
+        "avgDuration": "Avg Duration"
+      },
+      "s3": {
+        "title": "Amazon S3 EU (SSE-KMS)",
+        "tempUsed": "Temp Buffer (temp/ 12h TTL)",
+        "resultsUsed": "Results (results/ 6mo)",
+        "objects": "Active Objects",
+        "cleanedToday": "Cleaned by TTL (24h)"
+      },
+      "clamav": {
+        "title": "ClamAV Antivirus Daemon",
+        "status": "clamd Status",
+        "signatures": "Signatures DB Version",
+        "scanned": "Scanned Today",
+        "threats": "Threats Blocked"
+      },
+      "infra": {
+        "title": "Infrastructure & Connections",
+        "globalPause": "Conversion Ingestion",
+        "globalPauseActive": "PAUSED",
+        "globalPauseNormal": "Operational",
+        "redis": "Redis Cluster (Queues & Quotas)",
+        "db": "PostgreSQL Connection Pool"
+      }
+    },
+    "users": {
+      "title": "Users, Quotas & Storage",
+      "description": "Manage user accounts, monitor quota usage, and enforce administrator restrictions.",
+      "search": "Search by email or user ID…",
+      "filterAll": "All Users",
+      "filterActive": "Active Conversions",
+      "filterPaused": "Paused",
+      "colUser": "User",
+      "colPlan": "Plan",
+      "colQuotas": "Quotas (Docs / Images)",
+      "colStorage": "Permanent S3",
+      "colStatus": "Conversions Status",
+      "colActions": "Actions",
+      "pauseConversions": "Pause Conversions",
+      "resumeConversions": "Resume Conversions",
+      "revokeApiKey": "Revoke API Key",
+      "apiKeyRevoked": "Key Revoked",
+      "noApiKey": "No Key Issued",
+      "supportNotice": "Support staff role has read-only access. Administrator role required to pause or revoke."
+    },
+    "jobs": {
+      "title": "Conversion Jobs Log",
+      "description": "Real-time job execution log. Pursuant to §12.6, document contents and file names are strictly isolated.",
+      "noPiiNotice": "Privacy: document contents and file names are never exposed in staff panels.",
+      "search": "Search by Job ID…",
+      "filterAll": "All Statuses",
+      "filterCompleted": "Completed",
+      "filterProcessing": "Processing",
+      "filterQueued": "Queued",
+      "filterFailed": "Failed",
+      "colJobId": "Job ID",
+      "colDirection": "Direction",
+      "colStatus": "Status",
+      "colDuration": "Duration",
+      "colTime": "Created At",
+      "colError": "Error Diagnostics"
+    },
+    "billing": {
+      "title": "Stripe Payments, Subscriptions & Refunds",
+      "description": "Review transactions and retry failed refunds per §11.10 without altering the computed amount.",
+      "colTx": "Stripe Transaction ID",
+      "colCustomer": "Customer",
+      "colAmount": "Amount",
+      "colPlan": "Plan / Interval",
+      "colStatus": "Status",
+      "colDate": "Date",
+      "colAction": "Action",
+      "retryRefund": "Retry Refund",
+      "retrying": "Sending to Stripe…",
+      "retrySuccess": "Refund request dispatched to Stripe (amount preserved)",
+      "supportNotice": "Refund retries are restricted to Administrator role."
+    },
+    "emergency": {
+      "title": "Emergency Administrator Controls",
+      "description": "Global traffic controls and emergency service mitigation.",
+      "globalCardTitle": "Global Conversion Ingestion (Web & API)",
+      "globalCardDesc": "Pauses new task submission system-wide. Active jobs complete normally, account portal and downloads remain accessible.",
+      "pauseConversionsBtn": "Emergency Pause Ingestion",
+      "resumeConversionsBtn": "Resume Normal Ingestion",
+      "currentStatus": "Current Status:",
+      "pausedAlert": "Service is in emergency pause mode. New conversions are rejected.",
+      "pauseReasonPrefix": "Pause Reason:",
+      "pauseByPrefix": "Triggered by:",
+      "pauseTimePrefix": "Timestamp:"
+    },
+    "audit": {
+      "title": "Security Audit & Staff Actions Log",
+      "description": "All operator actions and status changes are recorded and retained for 90 days per §12.14 without PII.",
+      "retentionNotice": "Security audit records are retained strictly for 90 days from the event. Auto-expunge active.",
+      "colTime": "Time (UTC)",
+      "colActor": "Operator",
+      "colRole": "Role",
+      "colAction": "Action",
+      "colTarget": "Target",
+      "colReason": "Justification / Reason",
+      "colIp": "IP Address",
+      "colResult": "Result"
+    },
+    "dialog": {
+      "pauseTitle": "Pause Conversions",
+      "resumeTitle": "Resume Conversions",
+      "revokeTitle": "Revoke User API Key",
+      "reasonLabel": "Mandatory justification (reason) for security audit log",
+      "reasonPlaceholder": "Specify reason (min 10 characters), e.g.: Compromised key token suspected…",
+      "confirm": "Confirm Action",
+      "cancel": "Cancel",
+      "minReasonError": "Reason must contain at least 10 characters"
+    }
   }
 }
-

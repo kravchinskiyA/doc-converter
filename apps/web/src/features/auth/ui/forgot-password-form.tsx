@@ -52,7 +52,7 @@ export function ForgotPasswordForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-left">
         {/* Email */}
         <div className="space-y-1.5">
-          <label className="text-[13px] font-regular text-off-black">
+          <label className="text-[14px] font-regular text-off-black">
             {t('emailLabel')}
           </label>
           <Input
@@ -63,21 +63,21 @@ export function ForgotPasswordForm() {
             {...register('email')}
           />
           {errors.email?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.email.message}
             </p>
           )}
         </div>
 
         {/* Информационное уведомление безопасности (OWASP) */}
-        <div className="flex items-start gap-2.5 rounded-[12px] bg-black/[0.03] border-[0.5px] border-black/[0.06] p-3 text-[12px] font-book text-steel-gray leading-relaxed">
+        <div className="flex items-start gap-2.5 rounded-[12px] bg-black/[0.03] border-[0.5px] border-black/[0.06] p-3 text-[14px] font-book text-steel-gray leading-relaxed">
           <ShieldCheck className="h-4 w-4 text-signal-blue shrink-0 mt-0.5" />
           <span>{t('notice')}</span>
         </div>
 
         {/* Сообщение об успешной отправке */}
         {feedbackMessage && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[13px] font-book text-emerald-700">
+          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {feedbackMessage}
           </div>
         )}
@@ -104,7 +104,7 @@ export function ForgotPasswordForm() {
           <div>
             <Link
               href="/auth/recovery-code"
-              className="text-[12px] font-book text-steel-gray hover:text-signal-blue transition-colors"
+              className="text-[14px] font-book text-steel-gray hover:text-signal-blue transition-colors"
             >
               {t('lostEmail')}{' '}
               <span className="text-signal-blue underline">
@@ -113,7 +113,7 @@ export function ForgotPasswordForm() {
             </Link>
           </div>
 
-          <p className="text-[13px] font-book text-steel-gray">
+          <p className="text-[14px] font-book text-steel-gray">
             {t('rememberPassword')}{' '}
             <Link
               href="/auth/login"

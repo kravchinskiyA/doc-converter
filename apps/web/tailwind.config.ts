@@ -51,7 +51,7 @@ const config: Config = {
         none: 'none',
       },
       maxWidth: {
-        content: '1200px',
+        content: '1400px',
       },
     },
   },

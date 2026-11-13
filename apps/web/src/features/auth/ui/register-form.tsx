@@ -57,7 +57,7 @@ export function RegisterForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-left">
         {/* Email */}
         <div className="space-y-1.5">
-          <label className="text-[13px] font-regular text-off-black">
+          <label className="text-[14px] font-regular text-off-black">
             {t('emailLabel')}
           </label>
           <Input
@@ -68,7 +68,7 @@ export function RegisterForm() {
             {...register('email')}
           />
           {errors.email?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.email.message}
             </p>
           )}
@@ -76,7 +76,7 @@ export function RegisterForm() {
 
         {/* Пароль */}
         <div className="space-y-1.5">
-          <label className="text-[13px] font-regular text-off-black">
+          <label className="text-[14px] font-regular text-off-black">
             {t('passwordLabel')}
           </label>
           <div className="relative">
@@ -101,11 +101,11 @@ export function RegisterForm() {
               )}
             </button>
           </div>
-          <p className="text-[11px] font-book text-steel-gray">
+          <p className="text-[14px] font-book text-steel-gray">
             {t('passwordHint')}
           </p>
           {errors.password?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.password.message}
             </p>
           )}
@@ -113,7 +113,7 @@ export function RegisterForm() {
 
         {/* Повтор пароля */}
         <div className="space-y-1.5">
-          <label className="text-[13px] font-regular text-off-black">
+          <label className="text-[14px] font-regular text-off-black">
             {t('confirmPasswordLabel')}
           </label>
           <div className="relative">
@@ -139,7 +139,7 @@ export function RegisterForm() {
             </button>
           </div>
           {errors.confirmPassword?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.confirmPassword.message}
             </p>
           )}
@@ -174,7 +174,7 @@ export function RegisterForm() {
             {...register('acceptTerms')}
           />
           {errors.acceptTerms?.message && (
-            <p className="text-[12px] font-book text-red-600">
+            <p className="text-[14px] font-book text-red-600">
               {errors.acceptTerms.message}
             </p>
           )}
@@ -182,7 +182,7 @@ export function RegisterForm() {
 
         {/* Сообщение об успешной отправке */}
         {formSuccess && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[13px] font-book text-emerald-700">
+          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {formSuccess}
           </div>
         )}
@@ -206,7 +206,7 @@ export function RegisterForm() {
 
         {/* Переход ко входу */}
         <div className="pt-4 border-t border-black/[0.06] text-center">
-          <p className="text-[13px] font-book text-steel-gray">
+          <p className="text-[14px] font-book text-steel-gray">
             {t('hasAccount')}{' '}
             <Link
               href="/auth/login"

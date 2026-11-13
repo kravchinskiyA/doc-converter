@@ -1,5 +1,683 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-13] Локализация (i18n) страниц и секций личного кабинета
+
+### Суть задачи
+
+Все страницы, вкладки, формы, модальные окна, сообщения валидации и форматирование дат/размеров в личном кабинете (`AccountPage` и `features/account`) переведены на `next-intl` (`useTranslations`, `useFormatter`) с полным набором переводов для локалей `uk`, `ru`, `en`.
+
+### Изменённые файлы
+
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: расширена секция `account` переводами для заголовка, ошибок валидации, демо-данных, единиц измерения и всех 8 вкладок (`profile`, `storage`, `files`, `apiKey`, `subscription`, `recovery`, `support`, `danger`).
+- `apps/web/src/_pages/account/account-page.tsx`: заголовок и бейджи страницы переведены через `useTranslations('account.header')`.
+- `apps/web/src/features/account/model/use-account-state.ts`: тексты ошибок валидации, демо-данных и описаний транзакций переведены через `useTranslations('account')`.
+- `apps/web/src/features/account/ui/`: локализованы все 9 компонентов (`account-nav-tabs.tsx`, `profile-section.tsx`, `storage-section.tsx`, `saved-files-table.tsx`, `api-key-section.tsx`, `subscription-section.tsx`, `security-codes-section.tsx`, `staff-access-section.tsx`, `danger-zone-section.tsx`), а `toLocaleDateString('ru-RU')` заменено на `useFormatter().dateTime(...)`.
+
+---
+
+## [2026-11-13] Замена всех размеров шрифта менее `14px` на `14px` во всех страницах и компонентах
+
+### Суть задачи
+
+Во всех страницах и UI-компонентах `apps/web/app` и `apps/web/src` все размеры шрифта менее `14px` (`text-[9px]`–`text-[12px]`, `text-xs`, а также `size="sm"` в `Button`) заменены на `text-[14px]` (327 вхождений в 48 файлах).
+
+### Изменённые файлы
+
+- `apps/web/app/global-error.tsx`: `text-xs` → `text-[14px]`.
+- `apps/web/src/shared/ui/` (`button.tsx`, `footer.tsx`, `locale-switcher.tsx`, `navbar.tsx`): `<14px` → `text-[14px]`.
+- `apps/web/src/_pages/` (`api-docs-page.tsx`, `convert-page.tsx`, `design-system-page.tsx`, `error-view.tsx`, `not-found-view.tsx`): `<14px` → `text-[14px]`.
+- `apps/web/src/features/` (`account/ui/*`, `admin/ui/*`, `auth/ui/*`, `conversion-directions/ui/*`, `job-results/ui/*`, `pricing/ui/*`, `quick-converter/ui/quick-converter.tsx`): `<14px` → `text-[14px]`.
+
+---
+
+## [2026-11-13] Замена всех `text-[13px]` на `text-[14px]` во всех страницах и компонентах
+
+### Суть задачи
+
+Во всех страницах и UI-компонентах `apps/web/src` и `apps/web/app` удалён размер шрифта `text-[13px]` (171 вхождение в 39 файлах) и заменён на `text-[14px]`.
+
+### Измененные файлы
+
+- `apps/web/src/shared/ui/` (`button.tsx`, `footer.tsx`, `locale-switcher.tsx`, `navbar.tsx`): `text-[13px]` → `text-[14px]`.
+- `apps/web/src/_pages/` (`admin-page.tsx`, `api-docs-page.tsx`, `design-system-page.tsx`, `error-view.tsx`, `not-found-view.tsx`): `text-[13px]` → `text-[14px]`.
+- `apps/web/src/features/` (`account/ui/*`, `admin/ui/*`, `auth/ui/*`, `job-results/ui/*`, `pricing/ui/*`, `quick-converter/ui/quick-converter.tsx`): `text-[13px]` → `text-[14px]`.
+
+---
+
+## [2026-11-13] Скругление кнопки `sendEmailCode` в форме восстановления
+
+### Суть задачи
+
+В компоненте `RecoveryCodeForm` для кнопки отправки кода на новый email (`sendEmailCode`) задано скругление `rounded-nav`, как у `Input`.
+
+### Измененные файлы
+
+- `apps/web/src/features/auth/ui/recovery-code-form.tsx`: добавлен класс `rounded-nav` и задана высота `h-[44px]` для кнопки `sendEmailCode` (вровень с `Input`).
+
+---
+
+## [2026-11-13] Удаление `subtitle` в `AuthCard` и сокращение `passwordHint`
+
+### Суть задачи
+
+- В компоненте `AuthCard` убран рендеринг подзаголовка `subtitle`.
+- В сообщениях `auth.register.passwordHint` для всех локалей (`uk`, `ru`, `en`) текст сокращен до «Від 8 символів.» / «От 8 символов.» / «From 8 characters.».
+
+### Измененные файлы
+
+- `apps/web/src/features/auth/ui/auth-card.tsx`: убран вывод `subtitle`.
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: обновлен ключ `auth.register.passwordHint`.
+
+---
+
+## [2026-11-13] Сокращение подписи чекбокса «Запомнить меня» (`auth.login.rememberMe`)
+
+### Суть задачи
+
+В сообщениях `auth.login.rememberMe` для всех локалей (`uk`, `ru`, `en`) убрано упоминание срока «на 30 днів» / «на 30 дней» / «for 30 days».
+
+### Измененные файлы
+
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: обновлен ключ `auth.login.rememberMe`.
+
+---
+
+## [2026-11-13] Сокращение подзаголовка формы входа (`auth.login.subtitle`)
+
+### Суть задачи
+
+В сообщениях `auth.login.subtitle` для всех локалей (`uk`, `ru`, `en`) убрано упоминание API-ключа и снятия гостевых лимитов.
+
+### Измененные файлы
+
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: обновлен ключ `auth.login.subtitle`.
+
+---
+
+## [2026-11-13] Сокращение таблицы сравнения тарифов
+
+### Суть задачи
+
+Из матрицы параметров таблицы сравнения тарифов (`PricingComparisonTable`) во всех языковых версиях (`ru`, `en`, `uk`) удалены указанные строки и блок «Безопасность, юрисдикция и приватность», а также убрано ставшее неактуальным примечание о лимите страниц в подвале таблицы.
+
+### Измененные файлы
+
+- `apps/web/src/features/pricing/model/pricing-data.ts`, `pricing-data-en.ts`, `pricing-data-uk.ts`: удалены строки «Списание квоты», «Пиксельные ограничения (изображения)», «Максимальное время активной обработки файла», «Лимит страниц в документе», «Качество оптического распознавания (OCR)», «Предупреждение о заполнении диска» и группа «Безопасность, юрисдикция и приватность».
+- `apps/web/src/features/pricing/ui/pricing-comparison-table.tsx`: удалена сноска `* Лимит страниц не ограничивается продуктово...`.
+
+---
+
+## [2026-11-13] Обновление шкалы размеров шрифта (18px / 16px / 14px)
+
+### Суть задачи
+
+Размеры шрифтов приведены к новой шкале:
+- Основной текст (`body`, подзаголовки hero и основные описания): `18px`.
+- Подписи и тексты карточек / таблицы / FAQ: `16px`.
+- Бейджи (`Badge`), вспомогательные примечания и значения в таблице: `14px`.
+
+### Измененные файлы
+
+- `apps/web/src/_app/styles/globals.css`: для `body` задан `font-size: 18px`.
+- `apps/web/src/shared/ui/badge.tsx`: базовый размер `Badge` увеличен до `text-[14px]`.
+- `apps/web/src/_pages/pricing/pricing-page.tsx`, `apps/web/src/features/pricing/ui/pricing-card.tsx`, `pricing-cards-grid.tsx`, `pricing-period-toggle.tsx`, `pricing-comparison-table.tsx`, `pricing-faq.tsx`: размеры шрифтов обновлены под шкалу `18px` / `16px` / `14px`, в сетке карточек `gap-6` (`1.5rem`) уменьшен до `gap-4` (`1rem`).
+
+---
+
+## [2026-11-13] Замена дробных размеров шрифта `text-[13.5px]` на `text-[14px]`
+
+### Суть задачи
+
+Во всех компонентах и страницах `apps/web` убран дробный размер шрифта `text-[13.5px]` — заменён на целочисленный `text-[14px]` в соответствии со стилем проекта.
+
+### Измененные файлы
+
+- `apps/web/src/features/pricing/ui/pricing-card.tsx`, `pricing-comparison-table.tsx`, `pricing-faq.tsx`, `enterprise-contact-dialog.tsx`: `text-[13.5px]` → `text-[14px]`.
+- `apps/web/src/_pages/privacy/privacy-page.tsx`, `terms/terms-page.tsx`: `text-[13.5px]` → `text-[14px]`.
+
+---
+
+## [2026-11-13] Увеличение максимальной ширины шаблона страницы до `1400px`
+
+### Суть задачи
+
+Максимальная ширина основного контейнера контента (`max-w-content`) увеличена с `1200px` до `1400px` в конфигурации Tailwind CSS, а также убраны дублирующие ограничения `max-w-[1240px]` и `max-w-[1200px]` на страницах.
+
+### Измененные файлы
+
+- `apps/web/tailwind.config.ts`: `maxWidth.content` изменено с `'1200px'` на `'1400px'`.
+- `apps/web/src/_pages/pricing/pricing-page.tsx`, `api-docs/api-docs-page.tsx`, `admin/admin-page.tsx`: убрано ограничение `mx-auto max-w-[1240px]`.
+- `apps/web/src/_pages/account/account-page.tsx`: убрано ограничение `mx-auto max-w-[1200px]`.
+
+---
+
+## [2026-11-13] Доработка карточек тарифов и полная локализация страницы `/pricing` (`uk`, `ru`, `en`)
+
+### Суть задачи
+
+На странице тарифов (`PricingPage`) и в модуле `features/pricing`:
+- В `PricingCard` бейдж тарифа перенесён на отдельную строку под названием тарифа, а в карточке `Pro` добавлен скрытый слот высоты бейджа (`invisible`) для точного вертикального выравнивания контента.
+- Убрана подпись `"Конечная цена с учетом применимых налогов • ФОП, Украина"` из блока цены.
+- Выполнена локализация всей страницы тарифов (заголовки, переключатель периода, карточки, таблица сравнения лимитов, FAQ, блок гарантий и CTA) на `uk`, `ru` и `en` через `next-intl` и `getPricingData(locale)`.
+
+### Измененные файлы
+
+- `apps/web/src/features/pricing/ui/pricing-card.tsx`: Перенос `Badge` на новую строку, удаление налоговой приписки с ФОП, подключение `useTranslations('pricing.card')`.
+- `apps/web/src/features/pricing/ui/pricing-period-toggle.tsx`, `pricing-comparison-table.tsx`, `pricing-faq.tsx`: Подключение `useTranslations('pricing.*')`.
+- `apps/web/src/features/pricing/model/pricing-data-uk.ts`, `pricing-data-en.ts`, `pricing-data.ts`: Добавлены украинская и английская версии тарифов, таблицы лимитов и FAQ, а также хелпер `getPricingData(locale)`.
+- `apps/web/src/_pages/pricing/pricing-page.tsx`: Подключены `useLocale()`, `useTranslations('pricing.page')` и `getPricingData(locale)`.
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: Добавлены ключи `pricing.page`, `pricing.toggle`, `pricing.card`, `pricing.table`, `pricing.faq`.
+
+---
+
+## [2026-11-13] Унификация верхнего отступа (padding-top) только на уровне тега `<main>`
+
+### Суть задачи
+
+На всех страницах приложения (кроме страниц `auth/*`) убран верхний отступ (`pt-*` / верхняя часть `py-*`) у корневых контейнеров, чтобы вертикальный отступ сверху задавался централизованно только тегом `<main>` в [layout.tsx](file:///Applications/ServBay/www/files-converter/apps/web/app/[locale]/layout.tsx).
+
+### Измененные файлы
+
+- `apps/web/app/[locale]/page.tsx`: `py-4` → `pb-4`.
+- `apps/web/src/_pages/account/account-page.tsx`: `pt-28 md:pt-36 pb-20` → `pb-20`.
+- `apps/web/src/_pages/admin/admin-page.tsx`, `admin-login-page.tsx`: убраны `pt-28`/`pt-36` и `py-20` заменено на `pb-20`.
+- `apps/web/src/_pages/api-docs/api-docs-page.tsx`, `pricing/pricing-page.tsx`, `privacy/privacy-page.tsx`, `terms/terms-page.tsx`: `pt-28 md:pt-36 pb-24` → `pb-24`.
+- `apps/web/src/_pages/convert/convert-page.tsx`, `results/results-page.tsx`: `py-8 md:py-16` → `pb-8 md:pb-16`.
+- `apps/web/src/_pages/design-system/design-system-page.tsx`: `py-6` → `pb-6`.
+- `apps/web/src/_pages/errors/error-view.tsx`, `not-found-view.tsx`: `py-12` → `pb-12`.
+
+---
+
+## [2026-11-13] Исправление hover-эффекта в DirectionNav на мобильных устройствах
+
+### Суть задачи
+
+В компоненте `DirectionNav` hover-эффект (`hover:text-[#0f1012] hover:bg-white/60`) ограничен только десктопным брейкпоинтом (`md:hover:...`), чтобы на мобильных устройствах при тапе не появлялся промежуточный белый фон перед переходом в активное состояние.
+
+### Измененные файлы
+
+- `apps/web/src/features/conversion-directions/ui/direction-nav.tsx`: `hover:` классы заменены на `md:hover:`.
+
+---
+
+## [2026-11-13] Добавление мобильного burger-меню в шапку (Navbar)
+
+### Суть задачи
+
+В компонент `Navbar` добавлена адаптивная мобильная навигация в стиле дизайн-системы Augen Pro (zero-shadows, `0.5px` hairline-рамки, скругление `24px`, акцент Signal Blue `#0071e3`):
+- Добавлена кнопка-бургер с тремя равными линиями (`Menu` / `X` из `lucide-react`) для мобильных экранов (`md:hidden`).
+- Реализована полноэкранная мобильная панель навигации, выезжающая справа (`fixed inset-0`, `translate-x-full` → `translate-x-0`), с блокировкой прокрутки фона, отцентрированными ссылками (`PDF → DOCX`, `DOCX → PDF`, `Изображения → PDF`, `Тарифы`) и центрированной CTA-кнопкой входа/кабинета.
+- Настроено автоматическое закрытие меню при переходе по маршруту, клике вне шапки и нажатии `Escape`.
+- Добавлены ключи локализации `navigation.mobileMenu` в `ru.json`, `uk.json` и `en.json`.
+
+### Измененные файлы
+
+- `apps/web/src/shared/ui/navbar.tsx`: Вынесен общий массив `PRIMARY_NAV_LINKS`, добавлена кнопка burger и панель мобильной навигации.
+- `apps/web/src/shared/i18n/messages/ru.json`, `uk.json`, `en.json`: Добавлена секция `navigation.mobileMenu`.
+
+---
+
+## [2026-11-13] Обновление страницы конвертации (ConvertPage)
+
+### Суть задачи
+
+На странице направлений конвертации (`ConvertPage`):
+- Убран блок с `Badge` и подписью `ТЗ §2` над заголовком.
+- В блоке гарантий безопасности удалена вторая карточка о юрисдикции в ЕС, сетка адаптирована под две карточки (`sm:grid-cols-2`).
+- В словарях `uk.json`, `ru.json` и `en.json` из `convert.directions.pdfToDocx.subtitle` убрано упоминание собственных мощностей/серверов в ЕС.
+
+### Измененные файлы
+
+- `apps/web/src/_pages/convert/convert-page.tsx`: Удалены `Badge`, `ТЗ §2` и карточка «Юрисдикція ЄС»; обновлена сетка карточек гарантий безопасности.
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: Обновлён текст `convert.directions.pdfToDocx.subtitle`.
+
+---
+
+## [2026-11-13] Ограничение QuickConverter до одного режима PDF → DOCX
+
+### Суть задачи
+
+В компоненте `QuickConverter` на главной странице убрано переключение между режимами и направлениями конвертации — оставлена только конвертация **PDF → DOCX**:
+- Убран переключатель направлений (`PDF → DOCX (OCR)` / `DOCX → PDF`), вместо него отображается статичный бейдж `PDF → DOCX (OCR)`.
+- В дропзоне и валидации файлов оставлена поддержка только PDF (`.pdf`, `application/pdf`).
+- Из нижней панели удалён блок со ссылкой на специализированные режимы (`modes`).
+- Обновлены описания и подсказки `quickConverter` в словарях `ru.json`, `en.json` и `uk.json`, а также скорректированы тексты `home.subtitle` и `home.features.eu.title` для главной страницы.
+
+### Измененные файлы
+
+- `apps/web/src/features/quick-converter/ui/quick-converter.tsx`: Удалено переключение направлений, автоопределение DOCX и блок `modes` («Специализированные режимы»).
+- `apps/web/src/features/quick-converter/types.ts`: Тип `ConversionDirection` сужен до `'pdf-to-docx'`, удалено поле `isDocx` из `ConverterFile`.
+- `apps/web/src/shared/i18n/messages/ru.json`, `en.json`, `uk.json`: Актуализированы `quickConverter.description`, `quickConverter.dropzone.hint`, `home.subtitle` и `home.features.eu.title`.
+
+---
+
+## [2026-11-12] Оптимизация экрана подтверждения email (auth/verify-email)
+
+### Суть задачи
+
+Скрыто поле ввода email на странице `/[locale]/auth/verify-email`, если пользователь переходит на нее из формы регистрации (когда адрес передан через query-параметр `?email=...`):
+- Адрес электронной почты отображается в подзаголовке карточки (`AuthCard.subtitle`), не перегружая тело формы лишними полями.
+- Значение email передается через скрытый инпут (`<input type="hidden" />`), сохраняя валидацию формы Zod-схемой `verifyEmailSchema`.
+- Если пользователь переходит на страницу без параметров (прямой заход), поле ввода email остается доступным.
+- `AuthCardProps.subtitle` расширен до `React.ReactNode` для стилизации переданного email.
+
+### Измененные файлы
+
+- `apps/web/src/features/auth/ui/verify-email-form.tsx`: Скрытие поля ввода email при наличии параметра в URL и передача через hidden input.
+- `apps/web/src/features/auth/ui/auth-card.tsx`: Расширение типа `subtitle?: React.ReactNode`.
+
+---
+
+## [2026-11-08] Реализация отдельной витрины компонентов (Design System Showcase)
+
+### Суть задачи
+
+Создана интерактивная демонстрационная витрина компонентов и спецификация дизайн-системы **Augen Pro** («Apple keynote on surgical white») по роуту `/[locale]/design-system` в полном соответствии с проектными правилами ([`.agents/rules/design-system.md`](../.agents/rules/design-system.md)) и архитектурой Feature-Sliced Design:
+
+1. **Палитра цветов (Color Tokens):** интерактивные карточки всех 7 фирменных токенов (`Off-Black`, `Pure Black`, `Off-White`, `Pure White`, `Steel Gray`, `Ash Gray`, `Signal Blue`) с быстрым копированием HEX, CSS-переменными, классами Tailwind и показателями контрастности WCAG.
+2. **Типографика (Whisper-Weight):** наглядная демонстрация шкалы размеров (Display 44px, Heading 27px, Subheading 18px, Body 16px, Caption 12-13px) на базовом начертании 350 (Book), плотном трекинге `-0.02em` и интерлиньяже 1.15–1.2.
+3. **Геометрия и радиусы скругления:** интерактивная визуализация радиусов `rounded-pill` (9999px), `rounded-section` (63px), `rounded-card` (54px), `rounded-btn` (26px) и `rounded-nav` (10px).
+4. **Интерактивные компоненты UI-кита:**
+   - Кнопки (`Button`): все варианты (`floating-cta`, `secondary`, `outline`, `ghost`, `link`), размеры (`sm`, `default`, `lg`, `icon`), иконки и заблокированные состояния.
+   - Бейджи (`Badge`): `signal-chip`, `neutral`, `muted`, `success`, `error`.
+   - Поля ввода (`Input`) и флажки (`Checkbox`): стандартные, с ошибкой, заблокированные и интерактивные состояния с живым превью.
+   - Карточки (`Card`): эталонная структура карточки с внутренними отступами 69px и радиусом 54px.
+   - Модальное окно (`Dialog`): вызов интерактивного диалога с мягким оверлеем без теней, закрытием по Esc и клику на подложку.
+5. **Свод правил Do & Don't и Zero-Shadows:** наглядные матрицы сравнения допустимых и запрещенных дизайн-паттернов.
+6. **Навигация:** добавлена ссылка в футер подраздела «Сервис» с полной локализацией на украинский, русский и английский языки.
+
+### Измененные и созданные файлы
+
+- `apps/web/src/_pages/design-system/design-system-page.tsx`: Интерактивный клиентский компонент витрины дизайн-системы Augen Pro.
+- `apps/web/src/_pages/design-system/index.ts`: Реэкспорт компонента страницы.
+- `apps/web/src/_pages/index.ts`: Реэкспорт модуля `design-system` в слое `_pages`.
+- `apps/web/app/[locale]/design-system/page.tsx`: Страница App Router с поддержкой i18n и генерацией метаданных.
+- `apps/web/src/shared/ui/footer.tsx`: Добавлена ссылка на витрину дизайн-системы в блок «Сервис».
+- `apps/web/src/shared/ui/navbar.tsx`: Добавлена страница дизайн-системы в навигатор по страницам сервиса в шапке (категория «Главные»).
+- `apps/web/src/shared/i18n/messages/ru.json`, `en.json`, `uk.json`: Добавлены ключи `footer.service.designSystem` и `navigation.devMenu.items.designSystem`.
+
+---
+
+## [2026-11-06] Реализация Закрытой административной панели (Пункт 1.9)
+
+### Суть задачи
+
+Выполнен пункт 1.9 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.9) — полностью разработана закрытая административная панель управления сервисом (`/[locale]/admin/`, `/[locale]/admin/login/`, `/[locale]/admin/dashboard/`) в строгом соответствии с ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§5.6, 11.10, 12.6, 12.14, 12.15, 12.16, 12.17, 12.18, 12.19), дизайн-системой Augen Pro (zero-shadows, начертание 350, радиусы 40px/pill, акцент Signal Blue `#0071e3`, монохромный светлый фон `#f2f2f4`) и архитектурой Feature-Sliced Design (FSD):
+
+1. **Контракты и типизация Zod (`packages/contracts/src/admin.ts`, `index.ts`):**
+   - Описаны служебные роли персонала: `staffRoleSchema = z.enum(['admin', 'support'])` по ТЗ §12.15.
+   - Схема формы входа персонала `staffLoginSchema` с обязательным вторым фактором (6-значный TOTP-код приложения-аутентификатора либо служебный резервный код из набора 10 одноразовых кодов персонала).
+   - Схемы экстренных действий с обязательным обоснованием для журнала безопасности (минимум 10 символов): `emergencyGlobalPauseSchema`, `emergencyUserPauseSchema`, `emergencyRevokeApiKeySchema`.
+   - Схема повтора сбойного возврата средств Stripe `retryFailedRefundSchema` без изменения рассчитанной суммы (ТЗ §11.10, §12.16).
+   - Схема системных метрик сервиса `serviceMetricsSchema` (BullMQ, S3, ClamAV, Redis, PostgreSQL).
+2. **Экран служебного входа персонала с обязательным 2FA (`apps/web/src/features/admin/ui/staff-login-form.tsx`):**
+   - Ввод email, пароля и 6-значного кода TOTP (или служебного резервного кода восстановления).
+   - Защита от публичной регистрации: служебный доступ предоставляется только сотрудникам с назначенной ролью.
+   - Демонстрационные кнопки быстрого входа с предустановленными ролями «Администратор» и «Поддержка» для тестирования разграничения прав.
+   - Маршрут `/admin/login`.
+3. **Дашборд системных метрик в реальном времени (`apps/web/src/features/admin/ui/admin-metrics-section.tsx`):**
+   - **BullMQ Очереди и воркеры:** активные, ожидающие, завершенные и сбойные задачи за сутки, параллельность 3/5 (Global Concurrency 5), средняя длительность конвертации.
+   - **Amazon S3 EU (SSE-KMS):** учет входящего буфера (`temp/` с автоочисткой через 12ч) и постоянного хранилища (`results/` со сроком до 6 месяцев), активные объекты, очистка по TTL.
+   - **ClamAV:** онлайн-статус демона `clamd`, версия вирусных баз, количество проверенных входящих потоков (100% сканирование до обработки), блокировки угроз.
+   - **Инфраструктура:** статус приема задач, подключение и память Redis Cluster, пул соединений PostgreSQL.
+4. **Таблицы пользователей, квот и заданий конвертации (`apps/web/src/features/admin/ui/admin-users-section.tsx`, `admin-jobs-section.tsx`):**
+   - Просмотр пользователей, тарифов, квот документов и изображений, занятого постоянного дискового пространства S3.
+   - Разграничение прав: сотрудникам роли «Поддержка» доступен только просмотр (read-only), администратору доступны кнопки приостановки/возобновления конвертаций и отключения API-ключа.
+   - Журнал заданий конвертации: Job ID, направление, статус, длительность, машинный код диагностики ошибок. В строгом соответствии с ТЗ §12.6 категорически исключены имена файлов, содержимое документов и PII.
+   - Поиск по email/ID и фильтры по статусам.
+5. **Журнал платежей Stripe и подписок (`apps/web/src/features/admin/ui/admin-billing-section.tsx`):**
+   - Транзакции Stripe, суммы в EUR, периоды, статусы подписок.
+   - Механизм ручного повтора неуспешного возврата Stripe: администратор может повторить сбойную операцию возврата без изменения рассчитанной суммы (ТЗ §11.10, §12.16); поддержка право изменения не получает.
+6. **Панель экстренных действий и журнал аудита (`apps/web/src/features/admin/ui/admin-emergency-section.tsx`, `admin-audit-section.tsx`, `emergency-action-dialog.tsx`):**
+   - Глобальный переключатель приема новых конвертаций (сайт и REST API) с обязательным модальным окном ввода причины действия.
+   - Оперативное отключение пользовательских API-ключей без раскрытия значения ключа.
+   - Журнал аудита безопасности (Audit Log) со строгим сроком хранения 90 дней (ТЗ §12.14) без PII, паролей и секретов.
+7. **Интернационализация и навигация:**
+   - Добавлены полные словари `admin` во все три языка (`uk.json`, `ru.json`, `en.json`).
+   - Статусы ссылок `adminLogin` и `adminDashboard` в навигации `apps/web/src/shared/ui/navbar.tsx` переведены в `ready`.
+8. **Верификация качества:**
+   - `npm run typecheck` завершен успешно (код 0) по всему монорепозиторию.
+   - `npm run build -w @doc-converter/web` завершен успешно (код 0) со сборкой всех 72 статических страниц.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/admin.ts`: Zod-схемы служебных ролей, входа с 2FA, экстренных действий и метрик.
+- `packages/contracts/src/index.ts`: Реэкспорт контрактов администрирования.
+- `apps/web/src/features/admin/model/types.ts`: TypeScript-типы сессий, вкладок, пользователей, заданий, платежей и аудита.
+- `apps/web/src/features/admin/model/mock-data.ts`: Демонстрационные данные, согласованные с ТЗ (EU region, 5 потоков, clamd, 90 дней логов).
+- `apps/web/src/features/admin/model/use-admin-state.ts`: Реактивное состояние админ-панели (аутентификация, переключение ролей admin/support, экстренные действия, повтор возвратов).
+- `apps/web/src/features/admin/ui/emergency-action-dialog.tsx`: Модальное окно подтверждения экстренного действия с валидацией причины.
+- `apps/web/src/features/admin/ui/staff-login-form.tsx`: Форма входа персонала с поддержкой TOTP и резервных кодов.
+- `apps/web/src/features/admin/ui/admin-header.tsx`: Шапка панели со статусом 2FA, регионом ЕС, индикатором роли и кнопкой тестирования.
+- `apps/web/src/features/admin/ui/admin-nav-tabs.tsx`: Навигационные вкладки Augen Pro с бейджами ошибок и статуса.
+- `apps/web/src/features/admin/ui/admin-metrics-section.tsx`: Секция мониторинга BullMQ, S3 EU, ClamAV и инфраструктуры.
+- `apps/web/src/features/admin/ui/admin-users-section.tsx`: Секция пользователей, квот и управления конвертациями.
+- `apps/web/src/features/admin/ui/admin-jobs-section.tsx`: Секция журнала заданий без PII и содержимого документов.
+- `apps/web/src/features/admin/ui/admin-billing-section.tsx`: Секция платежей Stripe с повтором возврата без изменения суммы.
+- `apps/web/src/features/admin/ui/admin-emergency-section.tsx`: Панель экстренного глобального управления приемом задач.
+- `apps/web/src/features/admin/ui/admin-audit-section.tsx`: Журнал безопасности и действий операторов (90 дней хранения).
+- `apps/web/src/features/admin/index.ts`: Публичный API фичи административной панели.
+- `apps/web/src/_pages/admin/admin-page.tsx`: Презентационный компонент закрытой административной панели.
+- `apps/web/src/_pages/admin/admin-login-page.tsx`: Презентационный компонент страницы входа персонала.
+- `apps/web/src/_pages/admin/index.ts`: Публичный API слоя страниц admin.
+- `apps/web/src/_pages/index.ts`: Реэкспорт страниц admin.
+- `apps/web/app/[locale]/admin/page.tsx`: Серверный маршрут `/[locale]/admin/`.
+- `apps/web/app/[locale]/admin/login/page.tsx`: Серверный маршрут `/[locale]/admin/login/`.
+- `apps/web/app/[locale]/admin/dashboard/page.tsx`: Серверный маршрут `/[locale]/admin/dashboard/`.
+- `apps/web/src/shared/i18n/messages/ru.json`: Локализация панели администратора на русский язык.
+- `apps/web/src/shared/i18n/messages/uk.json`: Локализация панели администратора на украинский язык.
+- `apps/web/src/shared/i18n/messages/en.json`: Локализация панели администратора на английский язык.
+- `apps/web/src/shared/ui/navbar.tsx`: Обновление статусов ссылок админки на `ready`.
+- `docs/implementation-plan.md`: Отметка пунктов 1.9 как выполненных.
+- `docs/project-structure.md`: Актуализация структуры FSD-слоев `_pages/admin` и `features/admin`.
+- `docs/progress.md`: Документирование выполнения пункта 1.9.
+
+---
+
+
+
+## [2026-11-06] Реализация Служебных страниц (Пункт 1.10)
+
+### Суть задачи
+
+Выполнен пункт 1.10 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.10) — разработаны все служебные и юридические страницы сервиса, документация публичного API, а также экраны обработки ошибок и отсутствующих страниц в строгом соответствии с ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§3.2, 3.4, 3.6, 3.8, 7, 9.1–9.4, 10.1, 10.2, 11.1–11.3, 11.15, 12.17), дизайн-системой Augen Pro (zero-shadows, начертание 350, радиусы 44px/pill, акцент Signal Blue `#0071e3`) и полной поддержкой трёх языков (`uk`, `ru`, `en`):
+
+1. **Документация публичного REST API (`/api-docs`):**
+   - Разработана интерактивная документация в `apps/web/src/_pages/api-docs/api-docs-page.tsx`.
+   - Описаны спецификации заголовка авторизации `X-API-Key` (ТЗ §7), лимитов частоты запросов (10 созд/мин, 120 статус/мин, 10 скач/мин, минимальный интервал проверки одного задания 5 сек по ТЗ §3.8).
+   - Специфицированы эндпоинты: `POST /jobs` (выдача `202 Accepted`, `multipart/form-data`), `GET /jobs/:jobId`, `GET /jobs/:jobId/download/:fileId`, `GET /jobs/:jobId/zip` (потоковое скачивание архива по ТЗ §10.2), `GET /account/quota`.
+   - Внедрен интерактивный переключатель готовых примеров кода на cURL, JavaScript (Fetch/Node.js) и Python (requests) с функцией копирования в буфер обмена.
+   - Сводная таблица HTTP-статусов и кодов ошибок с форматом RFC 7807 без раскрытия внутренних путей и персональных данных.
+2. **Условия использования сервиса (`/terms`):**
+   - Разработана страница публичной оферты в `apps/web/src/_pages/terms/terms-page.tsx`.
+   - Зафиксированы сведения о поставщике (ФОП в Украине, ТЗ §3.2, §11.15), расчеты в EUR через Stripe, включение всех применимых налогов в стоимость подписки.
+   - Описаны правила подписки: автопродление выключено по умолчанию (ТЗ §11.1), право досрочной отмены с автоматическим пропорциональным возвратом средств за неиспользованные календарные дни периода (ТЗ §11.2).
+   - Закреплена политика допустимого использования (AUP): запрет вредоносного ПО, антивирусное сканирование ClamAV до допуска, ограничения декомпрессионных бомб (40 Мп, 12 000 px, 500 МБ распаковка DOCX, лимит ОЗУ 2 ГБ, таймаут 10 мин).
+   - Подтверждено сохранение 100% авторских прав за пользователем и запрет использования документов для обучения AI.
+   - Закреплены сроки хранения: 12 часов для гостей, 6 месяцев для аккаунтов (ТЗ §10.1).
+3. **Политика конфиденциальности GDPR (`/privacy`):**
+   - Разработана страница в `apps/web/src/_pages/privacy/privacy-page.tsx`.
+   - Закреплен базовый инвариант юрисдикции: серверы, БД, очереди и объектное хранилище S3 расположены строго в регионе ЕС (Германия, Франция).
+   - Закреплен отказ от внешних сервисов: категорический запрет передачи файлов во внешние API (OpenAI, Google и т.д.); обработка ведется исключительно на изолированных вычислительных мощностях сервиса.
+   - Описаны криптографические протоколы: S3 SSE-KMS (AES-256), TLS 1.3, scrypt для паролей и кодов, AES-256-GCM для API-ключей, исключение PII из логов.
+   - Зафиксирован регламент служебного доступа техподдержки (ТЗ §12.17): доступ только по явному подтверждению пользователем 6-значным email-кодом на срок до 24 часов с правом немедленного отзыва.
+   - Подробно описаны права субъектов данных по статьям 15–22 GDPR (доступ, исправление, удаление через Danger Zone, переносимость).
+4. **Экраны обработки ошибок `404` и `500`:**
+   - Компонент `NotFoundView` (`apps/web/src/_pages/errors/not-found-view.tsx`): оформление в стиле Augen Pro с понятным объяснением, ссылками на ключевые конвертеры и кнопками перехода на главную.
+   - Страницы `apps/web/app/[locale]/not-found.tsx` и `apps/web/app/not-found.tsx`: локализованный и корневой обработчики отсутствующих страниц.
+   - Компонент `ErrorView` (`apps/web/src/_pages/errors/error-view.tsx`): дружелюбный экран сбоя сервера без утечки стек-трейсов, с отображением digest, кнопкой повторной попытки (`reset()`), переходом на главную и контактом техподдержки.
+   - Обработчики `apps/web/app/[locale]/error.tsx` и `apps/web/app/global-error.tsx`: перехватчики runtime-ошибок App Router.
+5. **Интернационализация и навигация:**
+   - Добавлены разделы `apiDocs`, `terms`, `privacy` во все языковые словари (`uk.json`, `ru.json`, `en.json`).
+   - Статусы ссылок `apiDocs`, `terms`, `privacy` в выпадающем навигаторе `apps/web/src/shared/ui/navbar.tsx` обновлены на `ready`.
+6. **Верификация качества:**
+   - `npm run typecheck` завершен без ошибок по всему монорепозиторию.
+   - `npm run build -w @doc-converter/web` успешно собрал все 63 статически генерируемые страницы.
+
+### Измененные и созданные файлы
+
+- `apps/web/src/_pages/api-docs/api-docs-page.tsx`: Презентационный компонент документации REST API.
+- `apps/web/src/_pages/api-docs/index.ts`: Экспорт страницы документации API.
+- `apps/web/app/[locale]/api-docs/page.tsx`: Серверная страница маршрута `/api-docs`.
+- `apps/web/src/_pages/terms/terms-page.tsx`: Презентационный компонент условий использования сервиса.
+- `apps/web/src/_pages/terms/index.ts`: Экспорт страницы условий.
+- `apps/web/app/[locale]/terms/page.tsx`: Серверная страница маршрута `/terms`.
+- `apps/web/src/_pages/privacy/privacy-page.tsx`: Презентационный компонент политики конфиденциальности GDPR.
+- `apps/web/src/_pages/privacy/index.ts`: Экспорт страницы приватности.
+- `apps/web/app/[locale]/privacy/page.tsx`: Серверная страница маршрута `/privacy`.
+- `apps/web/src/_pages/errors/not-found-view.tsx`: UI-компонент страницы 404 (Not Found).
+- `apps/web/src/_pages/errors/error-view.tsx`: UI-компонент экрана 500 (Error).
+- `apps/web/src/_pages/errors/index.ts`: Экспорт компонентов ошибок.
+- `apps/web/src/_pages/index.ts`: Реэкспорт служебных страниц и экранов ошибок.
+- `apps/web/app/[locale]/not-found.tsx`: Локализованный 404-обработчик в `[locale]`.
+- `apps/web/app/not-found.tsx`: Корневой fallback-обработчик 404.
+- `apps/web/app/[locale]/error.tsx`: Клиентский Error Boundary для App Router `[locale]`.
+- `apps/web/app/global-error.tsx`: Глобальный перехватчик критических сбоев приложения.
+- `apps/web/src/shared/i18n/messages/ru.json`: Переводы метаданных служебных страниц на русский.
+- `apps/web/src/shared/i18n/messages/uk.json`: Переводы метаданных служебных страниц на украинский.
+- `apps/web/src/shared/i18n/messages/en.json`: Переводы метаданных служебных страниц на английский.
+- `apps/web/src/shared/ui/navbar.tsx`: Обновление статусов страниц `apiDocs`, `terms`, `privacy` на `ready`.
+- `docs/implementation-plan.md`: Отметка о выполнении пункта 1.10.
+- `docs/progress.md`: Фиксация результатов выполнения задачи в журнале прогресса.
+
+---
+
+
+
+## [2026-11-06] Реализация Страницы тарифов и шлюза оплаты (Пункт 1.8)
+
+### Суть задачи
+
+Выполнен пункт 1.8 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.8) — разработана страница тарифов и шлюз оплаты Stripe Checkout (`/[locale]/pricing/`) в строгом соответствии с ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§3.2, 3.3, 3.4, 3.6, 3.7, 3.8, 10.3, 11.1–11.3, 11.14), стандартами дизайн-системы Augen Pro (монохромный светлый фон, акцент Signal Blue `#0071e3`, начертание 350, радиусы 44px/pill, zero-shadows) и архитектурой Feature-Sliced Design (FSD):
+
+1. **Контракты и типизация цен и лимитов (`packages/contracts/src/pricing.ts`, `index.ts`):**
+   - Константа цен `TARIFF_PRICES_EUR` (Базовый 0 €, Pro 5 €/мес и 51 €/год с экономией 9 € и скидкой 15%, Максимальный 10 €/мес и 102 €/год с экономией 18 €, Enterprise договорная).
+   - Единая матрица лимитов `PLAN_LIMITS_MAP` для всех 4 тарифов (квоты документов/изображений, циклы восстановления 5ч/2ч, размеры файлов, пакеты, пиксельные лимиты 40 Мп/12000 px, память 2 ГБ, время 10 мин, точность OCR CER ≤ 2%).
+   - Схемы валидации сессий оплаты `createCheckoutSessionSchema`, `checkoutSessionResponseSchema` и формы обращения Enterprise `enterpriseInquirySchema`.
+2. **Слайс пользовательского интерфейса тарифов (`apps/web/src/features/pricing/`):**
+   - `model/types.ts`: типы тарифных карточек, матриц сравнения, FAQ и состояний модальных окон Stripe Checkout и Enterprise.
+   - `model/pricing-data.ts`: детальное наполнение всех 4 тарифов, структурированные группы параметров для матрицы лимитов (5 категорий) и расширенный блок часто задаваемых вопросов (FAQ).
+   - `ui/pricing-period-toggle.tsx`: переключатель периода «Месяц / Год» в стиле плавающей капсулы Augen Pro с бейджем «-15%» и индикатором годовой экономии до 18 €.
+   - `ui/pricing-card.tsx`: адаптивная карточка тарифа с динамическим расчетом цены (€/мес или €/мес* при оплате за год с суммой списания), отметкой «Все налоги включены, продавец ФОП в Украине», списком включенных опций и кнопками вызова целевого сценария.
+   - `ui/pricing-cards-grid.tsx`: адаптивная 4-колоночная сетка тарифов с визуальным выделением Pro («Популярный выбор»).
+   - `ui/pricing-comparison-table.tsx`: детальная сводная таблица технических параметров всех 4 тарифов с группировкой по категориям, подсказками и примечаниями.
+   - `ui/stripe-checkout-modal.tsx`: интерактивный модальный шлюз оплаты Stripe Checkout:
+     * Валидация статуса подтверждения email по ТЗ §11.1 (проверка гостя с предложением войти/зарегистрироваться, предупреждение для неподтвержденных email о необходимости ввода 6-значного кода, и полноценный шлюз для подтвержденных email);
+     * Форма защищенного ввода реквизитов банковской карты (номер, MM/ГГ, CVC, имя) с кнопкой быстрого автозаполнения тестовой картой Stripe;
+     * Расчет итоговой суммы, подтверждение включения налогов, отметка о выключенном по умолчанию автопродлении (ТЗ §11.1);
+     * Индикация безопасной обработки (PCI-DSS, 256-bit SSL, серверы строго в ЕС);
+     * Состояние успешной активации подписки с генерацией ID транзакции Stripe и переходом в Личный кабинет.
+   - `ui/enterprise-contact-dialog.tsx`: диалог обращения по индивидуальным условиям тарифа Enterprise (ТЗ §11.14) с формой заявки и прямой кнопкой `mailto:support@doc-converter.com`.
+   - `ui/pricing-faq.tsx`: интерактивный аккордеон с ответами на ключевые вопросы о налогах, цикле восстановления попыток, скидке и отмене подписки с возвратом.
+   - `index.ts`: Public API слайса.
+3. **Слайс композиции страниц (`apps/web/src/_pages/pricing/`):**
+   - `pricing-page.tsx`: сборка главной страницы тарифов со всеми блоками, Hero-секцией, информационным баннером юрисдикции ЕС и модальными шлюзами.
+   - `index.ts`: экспорт страницы и регистрация в `apps/web/src/_pages/index.ts`.
+4. **Маршрутизация App Router (`apps/web/app/[locale]/pricing/`):**
+   - `page.tsx`: серверный компонент страницы с динамическими метаданными `generateMetadata`, `setRequestLocale` и интеграцией `PricingPage`.
+5. **Интернационализация и навигация:**
+   - Добавлен раздел `"pricing"` в словари `ru.json`, `uk.json`, `en.json`.
+   - Статус страницы `pricing` в выпадающем DevMenu и навигации `apps/web/src/shared/ui/navbar.tsx` обновлен на `ready`.
+6. **Верификация качества:**
+   - `npm run typecheck` завершен с кодом 0 по всем воркспейсам.
+   - `npm run build -w @doc-converter/web` успешно собрал все 54 статически генерируемые страницы.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/pricing.ts`: Цены, матрицы лимитов тарифов и Zod-схемы Stripe Checkout / Enterprise.
+- `packages/contracts/src/index.ts`: Реэкспорт контрактов ценообразования.
+- `apps/web/src/features/pricing/model/types.ts`: Интерфейсы и типы данных для страницы тарифов.
+- `apps/web/src/features/pricing/model/pricing-data.ts`: Данные тарифов, сводной матрицы лимитов и FAQ по ТЗ.
+- `apps/web/src/features/pricing/ui/pricing-period-toggle.tsx`: Переключатель «Месяц / Год» со скидкой 15%.
+- `apps/web/src/features/pricing/ui/pricing-card.tsx`: Компонент карточки тарифа Augen Pro.
+- `apps/web/src/features/pricing/ui/pricing-cards-grid.tsx`: Сетка тарифов.
+- `apps/web/src/features/pricing/ui/pricing-comparison-table.tsx`: Сводная таблица параметров и лимитов.
+- `apps/web/src/features/pricing/ui/stripe-checkout-modal.tsx`: Модальный экран оплаты Stripe Checkout с проверкой подтверждения email.
+- `apps/web/src/features/pricing/ui/enterprise-contact-dialog.tsx`: Модальное окно обращения по Enterprise тарифу.
+- `apps/web/src/features/pricing/ui/pricing-faq.tsx`: Блок часто задаваемых вопросов.
+- `apps/web/src/features/pricing/index.ts`: Публичный API слайса `features/pricing`.
+- `apps/web/src/_pages/pricing/pricing-page.tsx`: Презентационный компонент страницы тарифов.
+- `apps/web/src/_pages/pricing/index.ts`: Экспорт страницы.
+- `apps/web/src/_pages/index.ts`: Реэкспорт `PricingPage`.
+- `apps/web/app/[locale]/pricing/page.tsx`: Серверная страница маршрута `/pricing`.
+- `apps/web/src/shared/i18n/messages/ru.json`: Локализация страницы тарифов на русский язык.
+- `apps/web/src/shared/i18n/messages/uk.json`: Локализация страницы тарифов на украинский язык.
+- `apps/web/src/shared/i18n/messages/en.json`: Локализация страницы тарифов на английский язык.
+- `apps/web/src/shared/ui/navbar.tsx`: Обновление статуса страницы в навигаторе на `ready`.
+- `docs/implementation-plan.md`: Отметка о выполнении пункта 1.8.
+- `docs/progress.md`: Фиксация результатов выполнения задачи в журнале прогресса.
+
+---
+
+
+
+## [2026-11-06] Реализация Личного кабинета пользователя (Пункт 1.7)
+
+### Суть задачи
+
+Выполнен пункт 1.7 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.7) — разработан полнофункциональный Личный кабинет пользователя (`/[locale]/account/`) в строгом соответствии с ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§5.4, 6.2, 6.3, 6.4, 6.5, 7, 10.1, 10.3, 11.1–11.3, 12.17), архитектурой Feature-Sliced Design (FSD), стандартами дизайна Augen Pro (zero-shadows, начертание 350, радиусы 54px/40px/28px/full, акцент Signal Blue) и полной поддержкой трёх языков (`uk`, `ru`, `en`):
+
+1. **Контракты и схемы Zod (`packages/contracts/src/account.ts`, `index.ts`):**
+   - Описаны строгие схемы валидации: `userProfileSchema`, `updateProfileSchema` (ФИО до 50 символов), `initEmailChangeSchema`, `verifyOldEmailStepSchema`, `completeEmailChangeSchema` (двухэтапная смена с чекбоксом завершения сессий), `changePasswordSchema` (scrypt, 8–128 символов), `apiKeyInfoSchema`, `rotateApiKeySchema`, `storageQuotaSchema` (квоты по тарифам 5/15/50 ГБ), `savedFileSchema` (срок 6 месяцев по ТЗ §10.1), `supportAccessRequestSchema` / `confirmSupportAccessSchema` / `revokeSupportAccessSchema` (ТЗ §12.17), `generateRecoveryCodesSchema` (ТЗ §6.5), `subscriptionDetailsSchema`, `changeSubscriptionPlanSchema`, `cancelSubscriptionSchema` (с расчетом возврата на карту по ТЗ §11.2), `deleteAccountSchema` (ТЗ §6.4).
+2. **Слайс пользовательских сценариев (`apps/web/src/features/account/`):**
+   - `model/types.ts`: типы навигационных вкладок, шагов flow-состояний смены email, пароля, ротации ключа, резервных кодов и отмены подписки.
+   - `model/use-account-state.ts`: хук управления состоянием личного кабинета с поддержкой:
+     * Профиля: сохранение ФИО, двухэтапная смена email с общим таймером 20 минут и чекбоксом отзыва сессий (ТЗ §6.2), смена пароля с подтверждением кодом и отзывом API-ключа (ТЗ §6.3);
+     * Хранилища: расчет занятого места (байт/МБ/ГБ), предупреждение при ≥75%, блокировка новых конвертаций при 100%, полная очистка хранилища (ТЗ §10.3);
+     * Сохраненных файлов: таблица результатов (сайт и API), поиск по имени, фильтрация по источнику, индивидуальное скачивание ZIP (ТЗ §10.2), пакетное скачивание архива выбранных файлов, удаление отдельных и выбранных файлов с мгновенным перерасчетом квоты;
+     * API-ключа: создание по запросу пользователя (по умолчанию до первого выпуска ключ отсутствует по ТЗ §7), скрытый просмотр (`••••••••`), копирование, перевыпуск с подтверждением email-кодом, запрет выпуска/замены при активных конвертациях;
+     * Подписки и оплаты: текущий статус (Stripe), переключатель автопродления (выключен по умолчанию по ТЗ §11.1), модальное окно смены тарифа (Pro ↔ Максимальный с доплатой/возвратом за оставшиеся дни периода по ТЗ §11.3), модальное окно немедленной отмены подписки с расчетом возврата на карту Stripe (ТЗ §11.2), история платежей и возвратов;
+     * Резервных кодов: выпуск/замена набора из 10 непредсказуемых кодов (ТЗ §6.5) с подтверждением кодом на email, модальное окно однократного показа, копирование всех кодов и скачивание текстового файла `.txt`;
+     * Служебного доступа: журнал запросов инженеров техподдержки к сбойным файлам с подтверждением 6-значным кодом на 24 часа и кнопкой досрочного отзыва (ТЗ §12.17);
+     * Удаления аккаунта: Danger Zone с предупреждением об удалении файлов и отсутствии возврата за оставшийся оплаченный срок подписки (ТЗ §6.4), подтверждение через 6-значный email-код.
+   - `ui/account-nav-tabs.tsx`: горизонтальные вкладки навигации Augen Pro с бейджами предупреждений квоты и входящих запросов.
+   - `ui/profile-section.tsx`: карточка профиля, диалоги двухэтапной смены email и пароля.
+   - `ui/storage-section.tsx`: шкала дискового пространства с порогом 75%, индикацией 100% блокировки и диалогом очистки.
+   - `ui/saved-files-table.tsx`: таблица результатов с мультиселектом, поиском и ZIP-скачиванием.
+   - `ui/api-key-section.tsx`: интерфейс API-ключа со скрытием, копированием и cURL-примером.
+   - `ui/subscription-section.tsx`: карточка тарифа, автопродление, диалоги апгрейда/даунгрейда и отмены с возвратом.
+   - `ui/security-codes-section.tsx`: карточка 10 резервных кодов с модалкой однократного показа и экспортом в файл.
+   - `ui/staff-access-section.tsx`: контроль доступа техподдержки к документам с подтверждением и отзывом.
+   - `ui/danger-zone-section.tsx`: зона необратимого удаления аккаунта.
+   - `index.ts`: Public API слайса `features/account`.
+3. **Слайс композиции страниц (`apps/web/src/_pages/account/`):**
+   - `account-page.tsx`: страница личного кабинета со sticky-меню Augen Pro и адаптивным лейаутом.
+   - `index.ts`: Public API слайса.
+   - Экспорт в `apps/web/src/_pages/index.ts`.
+4. **Маршрутизация Next.js App Router (`apps/web/app/[locale]/account/`):**
+   - `page.tsx`: серверный компонент с динамическими метаданными `generateMetadata`, `setRequestLocale` и рендерингом `AccountPage`.
+5. **Интернационализация и UI:**
+   - Добавлен раздел `"account"` во все языковые словари (`uk.json`, `ru.json`, `en.json`).
+   - В выпадающем меню `Navbar` статус маршрута `account` обновлен на `ready`.
+6. **Верификация качества:**
+   - Проверка типов TypeScript `npm run typecheck` пройдена без ошибок по всем воркспейсам монорепозитория.
+   - Продакшен-сборка `npm run build -w @doc-converter/web` успешно сгенерировала все 51 страницу приложения.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/account.ts`: Zod-схемы профиля, хранилища, файлов, подписок, API-ключей, резервных кодов и служебного доступа.
+- `packages/contracts/src/index.ts`: Экспорт контрактов аккаунта.
+- `apps/web/src/features/account/model/types.ts`: Типы данных и состояний слайса `features/account`.
+- `apps/web/src/features/account/model/use-account-state.ts`: Хук жизненного цикла личного кабинета со всей бизнес-логикой ТЗ.
+- `apps/web/src/features/account/ui/account-nav-tabs.tsx`: Навигационные вкладки разделов кабинета в стиле Augen Pro.
+- `apps/web/src/features/account/ui/profile-section.tsx`: Секция профиля, двухэтапная смена email и смена пароля.
+- `apps/web/src/features/account/ui/storage-section.tsx`: Секция хранилища с прогресс-баром, порогом 75% и очисткой.
+- `apps/web/src/features/account/ui/saved-files-table.tsx`: Таблица результатов (web/API) с мультивыбором и ZIP-скачиванием.
+- `apps/web/src/features/account/ui/api-key-section.tsx`: Секция API-ключа со скрытием, копированием и ротацией по email-коду.
+- `apps/web/src/features/account/ui/subscription-section.tsx`: Секция подписки, автопродление, смена тарифа и отмена с возвратом на карту.
+- `apps/web/src/features/account/ui/security-codes-section.tsx`: Секция 10 резервных кодов восстановления (однократный показ, скачивание .txt).
+- `apps/web/src/features/account/ui/staff-access-section.tsx`: Секция служебного доступа техподдержки к файлам по ТЗ §12.17.
+- `apps/web/src/features/account/ui/danger-zone-section.tsx`: Зона удаления аккаунта с подтверждением по email.
+- `apps/web/src/features/account/index.ts`: Public API слайса `features/account`.
+- `apps/web/src/_pages/account/account-page.tsx`: Композиция страницы Личного кабинета.
+- `apps/web/src/_pages/account/index.ts`: Public API слайса `_pages/account`.
+- `apps/web/src/_pages/index.ts`: Реэкспорт `AccountPage`.
+- `apps/web/app/[locale]/account/page.tsx`: Маршрут Next.js App Router с локализацией и метаданными.
+- `apps/web/src/shared/i18n/messages/uk.json`: Переводы раздела `"account"` на украинский.
+- `apps/web/src/shared/i18n/messages/ru.json`: Переводы раздела `"account"` на русский.
+- `apps/web/src/shared/i18n/messages/en.json`: Переводы раздела `"account"` на английский.
+- `apps/web/src/shared/ui/navbar.tsx`: Обновление статуса ссылки кабинета на `ready`.
+- `docs/implementation-plan.md`: Отметка о выполнении пункта 1.7.
+- `docs/project-structure.md`: Актуализация архитектурной структуры слайсов и контрактов.
+
+## [2026-11-05] Реализация страницы ожидания и результатов конвертации (Пункт 1.5)
+
+### Суть задачи
+
+Выполнен пункт 1.5 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.5) — разработана страница ожидания и скачивания результатов конвертации (`/[locale]/results/[jobId]/`) в соответствии со спецификацией ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§5.2, 9.1, 10.1, 10.2), правилами архитектуры Feature-Sliced Design (FSD), стандартами дизайна Augen Pro (zero-shadows, начертание 350, радиусы 54px/28px/24px/9999px, акцент Signal Blue) и полной мультиязычностью (`uk`, `ru`, `en`):
+
+1. **Контракты и схемы результатов конвертации (`packages/contracts/src/conversion.ts`):**
+   - Добавлены строгие схемы Zod: `JobStatusSchema` (`queued`, `processing`, `completed`, `partial`, `failed`), `FileConversionStatusSchema`, `OutputFileResultSchema`, `JobResultSchema`.
+2. **Слайс пользовательских сценариев (`apps/web/src/features/job-results/`):**
+   - `model/types.ts`: типы для представления задачи, файлов, обратного отсчета `CountdownState` и состояния генерации ZIP.
+   - `model/use-job-results.ts`: хук жизненного цикла задания с динамическим вычислением оставшегося срока доступности файлов (12 часов для гостя, ТЗ §10.1), симуляцией перехода из очереди/обработки в готовое состояние, скачиванием отдельных файлов и единого ZIP-архива.
+   - `ui/job-countdown-timer.tsx`: интерактивный блок обратного отсчета доступности файлов (ч:мин:сек), бейджи европейской юрисдикции хранения данных (ЕС, GDPR), предупреждение об автоматическом удалении через 12 часов и призыв зарегистрироваться/войти для бессрочного сохранения до 6 месяцев в Личном кабинете.
+   - `ui/job-status-card.tsx`: карточка статуса задачи в стиле Augen Pro (скругление 54px, hairline-рамка 0.5px, zero-shadows) с бейджами состояний, кнопкой копирования Job ID, сводными метриками (всего/готово/ошибок) и анимированным прогресс-баром при обработке.
+   - `ui/job-files-list.tsx`: список исходных и сконвертированных файлов с индикацией формата, форматированным размером (`useFormatFileSize`), кнопками индивидуального скачивания и выводом понятных причин отказов без раскрытия PII (`passwordProtected`, `unpackLimitExceeded`, `corruptedFile`, `ocrFailed`, `timeout`).
+   - `ui/job-results-view.tsx`: объединяющая карточка с кнопкой скачивания единого архива («Скачать все в едином ZIP»), кнопкой перехода к новой конвертации и ссылкой в кабинет.
+   - `index.ts`: Public API слайса.
+3. **Слайс композиции страниц (`apps/web/src/_pages/results/`):**
+   - `ResultsPage`: композиция страницы с бейджами безопасности `EU Region (GDPR)` и `ClamAV Clean`, центрированной сеткой и адаптивным контейнером.
+   - `index.ts`: Public API слайса страниц.
+4. **Маршрутизация Next.js App Router (`apps/web/app/[locale]/results/[jobId]/`):**
+   - `page.tsx`: серверный компонент с валидацией `jobId`, динамической генерацией заголовка вкладки `generateMetadata` и вызовом `setRequestLocale`.
+5. **Интернационализация и UI:**
+   - Добавлен раздел переводов `"results"` во все словари (`uk.json`, `ru.json`, `en.json`).
+   - В навигационном меню `Navbar` статус маршрута `results` обновлен с `planned` на `ready`.
+6. **Верификация качества:**
+   - Полная проверка типов `npm run typecheck` пройдена без ошибок по всем пакетам монорепозитория.
+   - Полная сборка `npm run build -w @doc-converter/web` завершилась успешно.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/conversion.ts`: добавлены Zod-схемы `JobStatusSchema`, `FileConversionStatusSchema`, `OutputFileResultSchema`, `JobResultSchema`.
+- `apps/web/src/features/job-results/model/types.ts`: типы для представления результатов конвертации.
+- `apps/web/src/features/job-results/model/use-job-results.ts`: хук управления состоянием задания, таймером и скачиванием.
+- `apps/web/src/features/job-results/ui/job-countdown-timer.tsx`: компонент обратного отсчета 12 часов с баннером сохранения в аккаунт.
+- `apps/web/src/features/job-results/ui/job-status-card.tsx`: карточка общего статуса задачи и метрик файлов.
+- `apps/web/src/features/job-results/ui/job-files-list.tsx`: интерактивный список файлов с кнопками скачивания и причинами ошибок.
+- `apps/web/src/features/job-results/ui/job-results-view.tsx`: объединяющий контейнер результатов с кнопкой единого ZIP.
+- `apps/web/src/features/job-results/index.ts`: Public API слайса `features/job-results`.
+- `apps/web/src/_pages/results/results-page.tsx`: страница результатов конвертации.
+- `apps/web/src/_pages/results/index.ts`: Public API слайса `_pages/results`.
+- `apps/web/src/_pages/index.ts`: реэкспорт `ResultsPage`.
+- `apps/web/app/[locale]/results/[jobId]/page.tsx`: маршрут Next.js App Router с динамическими метаданными.
+- `apps/web/src/shared/i18n/messages/uk.json`: переводы раздела `"results"` на украинский язык.
+- `apps/web/src/shared/i18n/messages/ru.json`: переводы раздела `"results"` на русский язык.
+- `apps/web/src/shared/i18n/messages/en.json`: переводы раздела `"results"` на английский язык.
+- `apps/web/src/shared/ui/navbar.tsx`: обновление статуса ссылки результатов в dev-меню.
+- `docs/implementation-plan.md`: отметка о выполнении пункта 1.5 плана.
+
+
+### Суть задачи
+
+Выполнен пункт 1.4 плана реализации ([`docs/implementation-plan.md`](file:///Applications/ServBay/www/files-converter/docs/implementation-plan.md) §1.4) — разработаны все специализированные страницы и формы направлений конвертации в соответствии со спецификацией ТЗ ([`docs/technical-specification-final.md`](file:///Applications/ServBay/www/files-converter/docs/technical-specification-final.md) §§2, 3.4–3.6), стандартами архитектуры FSD, дизайном Augen Pro (zero-shadows, начертание 350, радиусы 54px/26px/9999px, акцент Signal Blue) и полной поддержкой мультиязычности (`uk`, `ru`, `en`):
+
+1. **Контракты и схемы параметров конвертации (`packages/contracts/src/conversion.ts`, `index.ts`):**
+   - Описаны строгие схемы Zod: `ConversionDirectionSchema`, `OcrLanguageSchema` (`uk`, `ru`, `en`, `fr`, `de`, `pl`), `PdfRasterDpiSchema` (72, 150, 300 DPI), `ImageQualitySchema` (1–100, default 85), `ImageOutputFormatSchema` (`jpg`, `webp`), `PdfToDocxOptionsSchema`, `DocxToPdfOptionsSchema`, `ImagesToPdfOptionsSchema`, `PdfToImagesOptionsSchema`.
+2. **Слайс интерактивных сценариев (`apps/web/src/features/conversion-directions/`):**
+   - `DirectionNav`: адаптивное pill-меню быстрого переключения между направлениями конвертации.
+   - `PageThumbnailGrid`: интерактивная сетка миниатюр страниц PDF с мультивыбором чекбоксами, кнопками «Выбрать все» / «Снять выбор», визуализацией карточек формата A4 и счетчиком выбранных страниц.
+   - `PdfToDocxForm`: форма загрузки PDF, интерактивный выбор страниц для OCR, мультиселектор 6 языков распознавания текста (ТЗ §2.3), гарантии сохранения структуры (абзацы, заголовки, списки, таблицы по ТЗ §2.4, CER ≤ 2%).
+   - `DocxToPdfForm`: форма загрузки DOCX, инспектор проверки распаковки (до 500 МБ и 10 000 файлов по ТЗ §3.6), инфо о headless-движке LibreOffice в ЕС.
+   - `ImagesToPdfForm`: загрузка JPG, PNG, статического WebP, Drag-and-drop перетаскивание и кнопки перемещения порядка страниц, тумблер «Объединить в один PDF» (по умолчанию выключен по ТЗ §2.1) со спецификацией A4, полей 10 мм, белого фона и авто-ориентации.
+   - `PdfToImagesForm`: форма конвертации PDF в JPG / WebP, селектор разрешения (72 / 150 / 300 DPI), ползунок качества сжатия (1–100, default 85) с едиными параметрами операции и выбором страниц.
+3. **Слайс композиции страниц (`apps/web/src/_pages/convert/`):**
+   - `ConvertPage`: композиция выбранного направления, информационные карточки юрисдикции ЕС, ClamAV-сканирования и 12-часового TTL.
+4. **Маршрутизация Next.js App Router (`apps/web/app/[locale]/convert/`):**
+   - `app/[locale]/convert/page.tsx`: редирект на `/convert/pdf-to-docx`.
+   - `app/[locale]/convert/[direction]/page.tsx`: статическая генерация `generateStaticParams` для всех комбинаций локалей и направлений (48 страниц), динамические метаданные `generateMetadata` и строгая валидация маршрутов.
+5. **Интернационализация и навигация:**
+   - Добавлен раздел `"convert"` в словари `uk.json`, `ru.json`, `en.json`.
+   - В выпадающем dev-меню `Navbar` для всех направлений конвертации статус обновлен на `ready`.
+6. **Верификация качества:**
+   - Полная проверка типов `npm run typecheck` пройдена без ошибок по всему монорепозиторию.
+   - Линтинг `npm run lint` пройден без предупреждений.
+   - Продакшен-сборка `npm run build -w @doc-converter/web` завершилась успешно со всеми 48 SSG-страницами.
+
+### Измененные и созданные файлы
+
+- `packages/contracts/src/conversion.ts`: Zod-схемы и типы параметров направлений конвертации.
+- `packages/contracts/src/index.ts`: Экспорт схем конвертации.
+- `apps/web/src/features/conversion-directions/model/types.ts`: Модели данных, конфигурации лимитов и направлений.
+- `apps/web/src/features/conversion-directions/ui/direction-nav.tsx`: Навигационный переключатель направлений.
+- `apps/web/src/features/conversion-directions/ui/page-thumbnail-grid.tsx`: Интерактивная сетка миниатюр страниц PDF.
+- `apps/web/src/features/conversion-directions/ui/pdf-to-docx-form.tsx`: Форма PDF → DOCX с OCR и выбором страниц/языков.
+- `apps/web/src/features/conversion-directions/ui/docx-to-pdf-form.tsx`: Форма DOCX → PDF с инспектором лимита распаковки.
+- `apps/web/src/features/conversion-directions/ui/images-to-pdf-form.tsx`: Форма Images → PDF с сортировкой и тумблером объединения.
+- `apps/web/src/features/conversion-directions/ui/pdf-to-images-form.tsx`: Форма PDF → Images с селектором DPI/качества.
+- `apps/web/src/features/conversion-directions/index.ts`: Публичный API слайса features.
+- `apps/web/src/_pages/convert/convert-page.tsx`: Композиция страницы конвертации.
+- `apps/web/src/_pages/convert/index.ts`: Экспорт страницы конвертации.
+- `apps/web/src/_pages/index.ts`: Реэкспорт страниц конвертации.
+- `apps/web/app/[locale]/convert/page.tsx`: Редирект корневого маршрута `/convert`.
+- `apps/web/app/[locale]/convert/[direction]/page.tsx`: Локализованный динамический маршрут с SSG и метаданными.
+- `apps/web/src/shared/i18n/messages/uk.json`: Переводы раздела `"convert"` на украинский.
+- `apps/web/src/shared/i18n/messages/ru.json`: Переводы раздела `"convert"` на русский.
+- `apps/web/src/shared/i18n/messages/en.json`: Переводы раздела `"convert"` на английский.
+- `apps/web/src/shared/ui/navbar.tsx`: Обновление статусов пунктов конвертеров на `ready`.
+- `docs/implementation-plan.md`: Отметка о выполнении пункта 1.4.
+
 ## [2026-11-05] Добавление метаданных правил Antigravity (.agents/rules)
 
 ### Суть задачи
@@ -101,8 +779,6 @@
 - Не добавлялись.
 
 ---
-
-# Прогресс разработки doc-converter
 
 ## [2026-11-05] Интернационализация (i18n) на базе next-intl и словари переводов (Пункт 1.2)
 

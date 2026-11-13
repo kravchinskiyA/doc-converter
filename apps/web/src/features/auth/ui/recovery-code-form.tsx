@@ -79,22 +79,22 @@ export function RecoveryCodeForm() {
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-left">
         {/* Предупреждение о последствиях применения резервного кода (ТЗ §6.5) */}
-        <div className="flex items-start gap-3 rounded-[16px] bg-red-500/[0.04] border-[0.5px] border-red-500/25 p-4 text-[12px] font-book text-steel-gray leading-relaxed">
+        {/* <div className="flex items-start gap-3 rounded-[16px] bg-red-500/[0.04] border-[0.5px] border-red-500/25 p-4 text-[14px] font-book text-steel-gray leading-relaxed">
           <ShieldAlert className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <p className="font-regular text-off-black">{t('warning')}</p>
-            <p className="text-[11px] text-ash-gray">{t('attemptsLimit')}</p>
+            <p className="text-[14px] text-ash-gray">{t('attemptsLimit')}</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Секция 1: Резервный код */}
         <div className="space-y-2 pt-1">
-          <div className="flex items-center gap-1.5 text-[12px] font-regular text-ash-gray uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 text-[14px] font-regular text-ash-gray uppercase tracking-wider">
             <KeyRound className="h-3.5 w-3.5 text-signal-blue" />
             <span>{t('step1')}</span>
           </div>
           <div className="space-y-1.5">
-            <label className="text-[13px] font-regular text-off-black">
+            <label className="text-[14px] font-regular text-off-black">
               {t('codeLabel')}
             </label>
             <Input
@@ -105,11 +105,11 @@ export function RecoveryCodeForm() {
               className="font-mono text-[16px] tracking-wider uppercase"
               {...register('recoveryCode')}
             />
-            <p className="text-[11px] font-book text-steel-gray">
+            <p className="text-[14px] font-book text-steel-gray">
               {t('codeHint')}
             </p>
             {errors.recoveryCode?.message && (
-              <p className="text-[12px] font-book text-red-600">
+              <p className="text-[14px] font-book text-red-600">
                 {errors.recoveryCode.message}
               </p>
             )}
@@ -118,13 +118,13 @@ export function RecoveryCodeForm() {
 
         {/* Секция 2: Новый email и код подтверждения */}
         <div className="space-y-3 pt-2 border-t border-black/[0.06]">
-          <div className="flex items-center gap-1.5 text-[12px] font-regular text-ash-gray uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 text-[14px] font-regular text-ash-gray uppercase tracking-wider">
             <MailCheck className="h-3.5 w-3.5 text-signal-blue" />
             <span>{t('step2')}</span>
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[13px] font-regular text-off-black">
+            <label className="text-[14px] font-regular text-off-black">
               {t('newEmailLabel')}
             </label>
             <div className="flex gap-2">
@@ -141,7 +141,7 @@ export function RecoveryCodeForm() {
                 size="sm"
                 disabled={isSendingCode || !newEmailValue}
                 onClick={handleSendEmailCode}
-                className="shrink-0 text-[12px]"
+                className="h-[44px] shrink-0 rounded-nav text-[15px]"
               >
                 {isSendingCode ? (
                   <Loader2 className="h-3.5 w-3.5 animate-spin text-signal-blue" />
@@ -151,22 +151,22 @@ export function RecoveryCodeForm() {
               </Button>
             </div>
             {codeSentSuccess && (
-              <p className="text-[11px] font-book text-emerald-600">
+              <p className="text-[14px] font-book text-emerald-600">
                 Код надіслано на новий email
               </p>
             )}
-            <p className="text-[11px] font-book text-steel-gray">
+            <p className="text-[14px] font-book text-steel-gray">
               {t('newEmailHint')}
             </p>
             {errors.newEmail?.message && (
-              <p className="text-[12px] font-book text-red-600">
+              <p className="text-[14px] font-book text-red-600">
                 {errors.newEmail.message}
               </p>
             )}
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[13px] font-regular text-off-black">
+            <label className="text-[14px] font-regular text-off-black">
               {t('emailCodeLabel')}
             </label>
             <Input
@@ -180,7 +180,7 @@ export function RecoveryCodeForm() {
               {...register('newEmailCode')}
             />
             {errors.newEmailCode?.message && (
-              <p className="text-[12px] font-book text-red-600">
+              <p className="text-[14px] font-book text-red-600">
                 {errors.newEmailCode.message}
               </p>
             )}
@@ -189,13 +189,13 @@ export function RecoveryCodeForm() {
 
         {/* Секция 3: Новый пароль */}
         <div className="space-y-3 pt-2 border-t border-black/[0.06]">
-          <div className="flex items-center gap-1.5 text-[12px] font-regular text-ash-gray uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 text-[14px] font-regular text-ash-gray uppercase tracking-wider">
             <KeyRound className="h-3.5 w-3.5 text-signal-blue" />
             <span>{t('step3')}</span>
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[13px] font-regular text-off-black">
+            <label className="text-[14px] font-regular text-off-black">
               {t('newPasswordLabel')}
             </label>
             <div className="relative">
@@ -221,14 +221,14 @@ export function RecoveryCodeForm() {
               </button>
             </div>
             {errors.newPassword?.message && (
-              <p className="text-[12px] font-book text-red-600">
+              <p className="text-[14px] font-book text-red-600">
                 {errors.newPassword.message}
               </p>
             )}
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[13px] font-regular text-off-black">
+            <label className="text-[14px] font-regular text-off-black">
               {t('confirmPasswordLabel')}
             </label>
             <div className="relative">
@@ -254,7 +254,7 @@ export function RecoveryCodeForm() {
               </button>
             </div>
             {errors.confirmNewPassword?.message && (
-              <p className="text-[12px] font-book text-red-600">
+              <p className="text-[14px] font-book text-red-600">
                 {errors.confirmNewPassword.message}
               </p>
             )}
@@ -263,7 +263,7 @@ export function RecoveryCodeForm() {
 
         {/* Сообщение об успешном выполнении */}
         {feedbackMessage && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[13px] font-book text-emerald-700">
+          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {feedbackMessage}
           </div>
         )}
@@ -289,7 +289,7 @@ export function RecoveryCodeForm() {
         <div className="pt-4 border-t border-black/[0.06] text-center">
           <Link
             href="/auth/login"
-            className="text-[13px] font-book text-signal-blue hover:underline"
+            className="text-[14px] font-book text-signal-blue hover:underline"
           >
             {t('backToLogin')}
           </Link>
