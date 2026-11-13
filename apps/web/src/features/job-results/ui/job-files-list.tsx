@@ -72,7 +72,7 @@ export function JobFilesList({
             return (
               <div
                 key={file.id}
-                className="p-4 sm:p-5 rounded-[24px] border-[0.5px] border-black/[0.08] bg-pure-white transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                className="p-4 sm:p-5 rounded-[24px] border border-black/[0.08] bg-pure-white transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
               >
                 {/* Левая часть: Иконка и информация о файле */}
                 <div className="flex items-start sm:items-center gap-3.5 min-w-0">

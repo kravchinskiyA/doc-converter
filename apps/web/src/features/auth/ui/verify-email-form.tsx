@@ -210,14 +210,14 @@ export function VerifyEmailForm() {
 
         {/* Сообщения об ошибках или успехе */}
         {errorMessage && (
-          <div className="flex items-start gap-2 rounded-[12px] border-[0.5px] border-red-500/30 bg-red-500/[0.04] p-3 text-[14px] font-book text-red-600">
+          <div className="flex items-start gap-2 rounded-[12px] border border-red-500/30 bg-red-500/[0.04] p-3 text-[14px] font-book text-red-600">
             <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
             <span>{errorMessage}</span>
           </div>
         )}
 
         {feedbackMessage && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
+          <div className="rounded-[12px] border border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {feedbackMessage}
           </div>
         )}

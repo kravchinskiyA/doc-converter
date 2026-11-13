@@ -24,7 +24,7 @@ export function PricingPeriodToggle({
       <div
         role="group"
         aria-label={t('ariaLabel')}
-        className="inline-flex items-center rounded-nav border-[0.5px] border-black/10 bg-pure-white p-1"
+        className="inline-flex items-center rounded-nav border border-black/10 bg-pure-white p-1"
       >
         <button
           type="button"

@@ -19,7 +19,7 @@ export function AuthCard({
   return (
     <div
       className={cn(
-        'w-full max-w-[500px] mx-auto rounded-[32px] md:rounded-[44px] border-[0.5px] border-black/[0.06] bg-pure-white p-7 sm:p-10 transition-colors',
+        'w-full max-w-[500px] mx-auto rounded-[32px] md:rounded-[44px] border border-black/[0.06] bg-pure-white p-7 sm:p-10 transition-colors',
         className
       )}
       {...props}

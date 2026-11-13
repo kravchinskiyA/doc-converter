@@ -34,7 +34,7 @@ export function LocaleSwitcher({ className }: LocaleSwitcherProps) {
   return (
     <label
       className={cn(
-        'relative flex items-center gap-1 text-[14px] text-steel-gray pl-2 pr-1.5 py-1 rounded-[6px] border-[0.5px] border-black/5 bg-black/[0.02] hover:border-black/15 transition-colors focus-within:border-signal-blue/50',
+        'relative flex items-center gap-1 text-[14px] text-steel-gray pl-2 pr-1.5 py-1 rounded-[6px] border border-black/5 bg-black/[0.02] hover:border-black/15 transition-colors focus-within:border-signal-blue/50',
         isPending && 'opacity-60',
         className,
       )}

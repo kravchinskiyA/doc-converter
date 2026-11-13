@@ -40,7 +40,7 @@ export function StorageSection({
 
   return (
     <div className="space-y-6">
-      <Card className="rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-10">
+      <Card className="rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-10">
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -66,7 +66,7 @@ export function StorageSection({
         <CardContent className="pt-6 space-y-6">
           {/* Предупреждения по лимитам ТЗ §10.3 */}
           {storageQuota.isOver100 ? (
-            <div className="rounded-[24px] border-[0.5px] border-red-500/30 bg-red-500/[0.04] p-4 flex items-start gap-3">
+            <div className="rounded-[24px] border border-red-500/30 bg-red-500/[0.04] p-4 flex items-start gap-3">
               <AlertTriangle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
               <div>
                 <h4 className="text-[14px] font-medium text-red-700">
@@ -78,7 +78,7 @@ export function StorageSection({
               </div>
             </div>
           ) : storageQuota.isOver75 ? (
-            <div className="rounded-[24px] border-[0.5px] border-amber-500/30 bg-amber-500/[0.04] p-4 flex items-start gap-3">
+            <div className="rounded-[24px] border border-amber-500/30 bg-amber-500/[0.04] p-4 flex items-start gap-3">
               <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
               <div>
                 <h4 className="text-[14px] font-medium text-amber-700">
@@ -95,7 +95,7 @@ export function StorageSection({
           ) : null}
 
           {/* Интерактивная шкала заполнения */}
-          <div className="rounded-[28px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-6 space-y-4">
+          <div className="rounded-[28px] border border-black/5 bg-[#fdfdfd] p-6 space-y-4">
             <div className="flex items-center justify-between text-[14px]">
               <span className="font-book text-off-black">{t('usedLabel')}</span>
               <span className="font-regular text-steel-gray">
@@ -139,7 +139,7 @@ export function StorageSection({
 
           {/* Информационные правила хранения */}
           <div className="grid grid-cols-1 gap-3 pt-2">
-            <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
+            <div className="rounded-[22px] border border-black/5 bg-off-white/30 p-4">
               <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600" />
                 {t('rules.retentionTitle')}

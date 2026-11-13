@@ -199,7 +199,7 @@ export function DesignSystemPage() {
             <a
               key={item.href}
               href={item.href}
-              className="rounded-btn border-[0.5px] border-black/10 bg-pure-white px-3.5 py-1.5 text-[14px] font-regular tracking-tight text-off-black hover:border-signal-blue hover:text-signal-blue transition-colors"
+              className="rounded-btn border border-black/10 bg-pure-white px-3.5 py-1.5 text-[14px] font-regular tracking-tight text-off-black hover:border-signal-blue hover:text-signal-blue transition-colors"
             >
               {item.label}
             </a>
@@ -224,12 +224,12 @@ export function DesignSystemPage() {
           {COLOR_TOKENS.map((token) => (
             <div
               key={token.hex}
-              className="rounded-[24px] border-[0.5px] border-black/[0.06] bg-pure-white p-5 flex flex-col justify-between space-y-4"
+              className="rounded-[24px] border border-black/[0.06] bg-pure-white p-5 flex flex-col justify-between space-y-4"
             >
               <div>
                 <div
                   className={cn(
-                    'h-24 w-full rounded-[16px] flex items-end justify-between p-3 border-[0.5px]',
+                    'h-24 w-full rounded-[16px] flex items-end justify-between p-3 border',
                     token.bgPreview,
                     token.border
                   )}
@@ -273,7 +273,7 @@ export function DesignSystemPage() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t-[0.5px] border-black/5">
+              <div className="pt-3 border-t border-black/5">
                 <span className="text-[14px] font-book text-ash-gray">
                   {token.wcag}
                 </span>
@@ -298,9 +298,9 @@ export function DesignSystemPage() {
           </p>
         </div>
 
-        <div className="rounded-card border-[0.5px] border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-8">
+        <div className="rounded-card border border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-8">
           {/* Характеристики шрифта */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-6 border-b-[0.5px] border-black/[0.06]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-6 border-b border-black/[0.06]">
             <div>
               <span className="text-[14px] font-regular text-ash-gray block mb-1">Гарнитура</span>
               <p className="text-[16px] font-book text-off-black">
@@ -323,7 +323,7 @@ export function DesignSystemPage() {
 
           {/* Шкала размеров */}
           <div className="space-y-8">
-            <div className="space-y-2 pb-6 border-b-[0.5px] border-black/[0.06]">
+            <div className="space-y-2 pb-6 border-b border-black/[0.06]">
               <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                 <span>Display / Page Title</span>
                 <span className="font-mono">44px / LH 1.15 / LS -0.02em / Weight 350</span>
@@ -333,7 +333,7 @@ export function DesignSystemPage() {
               </p>
             </div>
 
-            <div className="space-y-2 pb-6 border-b-[0.5px] border-black/[0.06]">
+            <div className="space-y-2 pb-6 border-b border-black/[0.06]">
               <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                 <span>Heading</span>
                 <span className="font-mono">27px / LH 32.4px / LS -0.54px / Weight 350</span>
@@ -343,7 +343,7 @@ export function DesignSystemPage() {
               </h2>
             </div>
 
-            <div className="space-y-2 pb-6 border-b-[0.5px] border-black/[0.06]">
+            <div className="space-y-2 pb-6 border-b border-black/[0.06]">
               <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                 <span>Subheading</span>
                 <span className="font-mono">18px / LH 21.6px / LS -0.36px / Weight 350</span>
@@ -353,7 +353,7 @@ export function DesignSystemPage() {
               </h3>
             </div>
 
-            <div className="space-y-2 pb-6 border-b-[0.5px] border-black/[0.06]">
+            <div className="space-y-2 pb-6 border-b border-black/[0.06]">
               <div className="flex items-center justify-between text-[14px] font-regular text-ash-gray">
                 <span>Body / Основной текст</span>
                 <span className="font-mono">16px / LH 19.2px / LS -0.32px / Weight 350</span>
@@ -394,7 +394,7 @@ export function DesignSystemPage() {
           {RADII_ITEMS.map((item) => (
             <div
               key={item.name}
-              className="rounded-[24px] border-[0.5px] border-black/[0.06] bg-pure-white p-6 space-y-4 flex flex-col justify-between"
+              className="rounded-[24px] border border-black/[0.06] bg-pure-white p-6 space-y-4 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
@@ -410,7 +410,7 @@ export function DesignSystemPage() {
               <div className="h-28 rounded-[16px] bg-[#f2f2f4] flex items-center justify-center p-3">
                 <div
                   className={cn(
-                    'border-[0.5px] border-signal-blue/40 bg-pure-white flex items-center justify-center text-[14px] font-mono text-signal-blue',
+                    'border border-signal-blue/40 bg-pure-white flex items-center justify-center text-[14px] font-mono text-signal-blue',
                     item.exampleClass
                   )}
                 >
@@ -436,7 +436,7 @@ export function DesignSystemPage() {
           </p>
         </div>
 
-        <div className="rounded-card border-[0.5px] border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-10">
+        <div className="rounded-card border border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-10">
           {/* Сетка вариантов */}
           <div className="space-y-4">
             <h3 className="text-[18px] font-book text-off-black">Варианты стилизации (Variants)</h3>
@@ -521,7 +521,7 @@ export function DesignSystemPage() {
           </div>
 
           {/* Размеры */}
-          <div className="space-y-4 pt-6 border-t-[0.5px] border-black/[0.06]">
+          <div className="space-y-4 pt-6 border-t border-black/[0.06]">
             <h3 className="text-[18px] font-book text-off-black">Шкала размеров (Sizes)</h3>
             <div className="flex flex-wrap items-center gap-4">
               <Button size="sm" variant="floating-cta">
@@ -554,7 +554,7 @@ export function DesignSystemPage() {
           </p>
         </div>
 
-        <div className="rounded-card border-[0.5px] border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-6">
+        <div className="rounded-card border border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-2 p-4 rounded-[20px] bg-[#f2f2f4]/60">
               <span className="text-[14px] font-regular text-ash-gray block">variant="signal-chip"</span>
@@ -619,7 +619,7 @@ export function DesignSystemPage() {
           </p>
         </div>
 
-        <div className="rounded-card border-[0.5px] border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-8">
+        <div className="rounded-card border border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Интерактивный инпут */}
             <div className="space-y-2">
@@ -728,7 +728,7 @@ export function DesignSystemPage() {
           </Card>
 
           {/* Интерактивный диалог */}
-          <div className="rounded-card border-[0.5px] border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-6">
+          <div className="rounded-card border border-black/[0.06] bg-pure-white p-6 md:p-12 space-y-6">
             <h3 className="text-[20px] font-book text-off-black">
               Модальное окно (Dialog)
             </h3>
@@ -801,7 +801,7 @@ export function DesignSystemPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* DO */}
-          <div className="rounded-[32px] border-[0.5px] border-emerald-500/20 bg-pure-white p-7 space-y-5">
+          <div className="rounded-[32px] border border-emerald-500/20 bg-pure-white p-7 space-y-5">
             <div className="flex items-center gap-2 text-emerald-600 text-[18px] font-regular">
               <CheckCircle2 className="h-5 w-5" />
               <span>ОБЯЗАТЕЛЬНО (Do)</span>
@@ -831,7 +831,7 @@ export function DesignSystemPage() {
           </div>
 
           {/* DON'T */}
-          <div className="rounded-[32px] border-[0.5px] border-red-500/20 bg-pure-white p-7 space-y-5">
+          <div className="rounded-[32px] border border-red-500/20 bg-pure-white p-7 space-y-5">
             <div className="flex items-center gap-2 text-red-600 text-[18px] font-regular">
               <XCircle className="h-5 w-5" />
               <span>КАТЕГОРИЧЕСКИ ЗАПРЕЩЕНО (Don’t)</span>

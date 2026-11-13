@@ -1,5 +1,130 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-13] Ширина колонки навигации личного кабинета 220px
+
+### Суть задачи
+
+Ширина колонки вертикальной навигации в `AccountPage` и минимальная ширина мобильного выпадающего списка `AccountNavTabs` заданы равными `220px`. Для длинных названий вкладок разрешён перенос строк (`text-left leading-snug`) вместо `whitespace-nowrap`.
+
+### Изменённые файлы
+
+- `apps/web/src/_pages/account/account-page.tsx`: ширина `<aside>` изменена на `lg:w-[220px]`.
+- `apps/web/src/features/account/ui/account-nav-tabs.tsx`: обновлена минимальная ширина выпадающего списка до `min-w-[220px]`, в кнопках навигации `whitespace-nowrap` заменён на `text-left leading-snug`.
+- `docs/progress.md`: зафиксировано изменение.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
+## [2026-11-13] Замена дробных значений `border-[0.5px]` на целые `1px` (`border`)
+
+### Суть задачи
+
+Во всех страницах и UI-компонентах `apps/web/src` и `apps/web/app` удалены дробные толщины границ (`border-[0.5px]`, `border-t-[0.5px]`, `border-b-[0.5px]` — 152 вхождения в 44 файлах) и заменены на стандартные целочисленные классы Tailwind (`border`, `border-t`, `border-b` — `1px`).
+
+### Изменённые файлы
+
+- `apps/web/app/[locale]/page.tsx`: `border-[0.5px]` → `border`.
+- `apps/web/src/shared/ui/` (`badge.tsx`, `button.tsx`, `card.tsx`, `checkbox.tsx`, `dialog.tsx`, `footer.tsx`, `input.tsx`, `locale-switcher.tsx`, `navbar.tsx`): `border-[0.5px]` → `border`.
+- `apps/web/src/_pages/` (`api-docs-page.tsx`, `reset-password-page.tsx`, `verify-email-page.tsx`, `design-system-page.tsx`, `error-view.tsx`, `not-found-view.tsx`, `pricing-page.tsx`, `privacy-page.tsx`, `terms-page.tsx`): `border-[0.5px]`, `border-t-[0.5px]`, `border-b-[0.5px]` → `border`, `border-t`, `border-b`.
+- `apps/web/src/features/` (`account/ui/*`, `auth/ui/*`, `job-results/ui/*`, `pricing/ui/*`, `quick-converter/ui/quick-converter.tsx`): `border-[0.5px]` → `border`.
+- `docs/progress.md`: зафиксировано изменение.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
+## [2026-11-13] Адаптивные кнопки фильтрации в таблице сохранённых файлов (< 1200px)
+
+### Суть задачи
+
+В компоненте `SavedFilesTable` (`apps/web/src/features/account/ui/saved-files-table.tsx`) на экранах шириной менее `1200px` текст кнопок фильтрации по источнику (`all`, `web`, `api`) и метки `sourceLabel` скрывается (`hidden min-[1200px]:inline`), оставляя только иконки с `title`/`aria-label`.
+
+### Изменённые файлы
+
+- `apps/web/src/features/account/ui/saved-files-table.tsx`: добавлена иконка `Files` для кнопки «Все», текстовые подписи фильтрации скрыты на ширине `< 1200px`, добавлены `title` и `aria-label`.
+- `docs/progress.md`: зафиксировано изменение.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
+## [2026-11-13] Выпадающий список навигации по ширине кнопки на мобильных и планшетах
+
+### Суть задачи
+
+Мобильная/планшетная навигация в `AccountNavTabs` (`apps/web/src/features/account/ui/account-nav-tabs.tsx`) переделана с модального окна на компактный выпадающий список (dropdown), привязанный к кнопке-триггеру шириной по содержимому (`w-fit`), с закрытием по выбору пункта, клику вне меню и клавише `Escape`.
+
+### Изменённые файлы
+
+- `apps/web/src/features/account/ui/account-nav-tabs.tsx`: заменён `Dialog` на выпадающий `<nav>` под кнопкой (`inline-flex w-fit`), добавлено закрытие по `pointerdown` вне контейнера и `Escape`.
+- `docs/progress.md`: зафиксировано изменение.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
+## [2026-11-13] Мобильное меню-диалог и отступ 16px в двухколоночном макете личного кабинета
+
+### Суть задачи
+
+Уменьшен отступ между колонками личного кабинета до `16px` (`gap-4`), а на планшетах и мобильных устройствах (`< lg`) навигация `AccountNavTabs` свёрнута в кнопку с открытием модального окна (`Dialog`) для выбора раздела.
+
+### Изменённые файлы
+
+- `apps/web/src/_pages/account/account-page.tsx`: уменьшен `gap` между колонками до `gap-4` (`16px`).
+- `apps/web/src/features/account/ui/account-nav-tabs.tsx`: добавлена кнопка-триггер и модальное окно `Dialog` со списком вкладок для экранов `< lg`; десктопная вертикальная панель сохранена для `lg+`.
+- `docs/progress.md`: зафиксировано изменение.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
+## [2026-11-13] Двухколоночный макет личного кабинета с вертикальной навигацией
+
+### Суть задачи
+
+Страница личного кабинета (`AccountPage`) переведена на двухколоночную компоновку: первая колонка — вертикальная sticky-навигация (`AccountNavTabs`), вторая колонка — контент активной вкладки. На экранах меньше `lg` навигация сохраняет компактную горизонтальную прокрутку сверху.
+
+### Изменённые файлы
+
+- `apps/web/src/_pages/account/account-page.tsx`: добавлен двухколоночный layout (`flex-col lg:flex-row`) с колонкой навигации (`aside`) и областью контента (`flex-1 min-w-0`).
+- `apps/web/src/features/account/ui/account-nav-tabs.tsx`: добавлена вертикальная раскладка (`lg:flex-col`, `lg:rounded-[28px]`, `lg:w-full lg:justify-start`, `lg:ml-auto` для бейджей).
+- `docs/progress.md`: зафиксированы изменения.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
+## [2026-11-13] Центрирование и подгонка ширины навигации в личном кабинете
+
+### Суть задачи
+
+Контейнер навигационных вкладок `AccountNavTabs` (`apps/web/src/features/account/ui/account-nav-tabs.tsx`) изменён с `w-full` на `w-fit max-w-full mx-auto`, чтобы его ширина соответствовала суммарной ширине кнопок и панель располагалась по центру строки.
+
+### Изменённые файлы
+
+- `apps/web/src/features/account/ui/account-nav-tabs.tsx`: заменены классы `w-full` на `w-fit max-w-full mx-auto` у элемента `<nav>`.
+- `docs/progress.md`: зафиксировано изменение.
+
+### Новые переменные окружения (.env)
+
+- Не добавлялись.
+
+---
+
 ## [2026-11-13] Очистка бейджей и упоминаний ТЗ в страницах и секциях личного кабинета
 
 ### Суть задачи

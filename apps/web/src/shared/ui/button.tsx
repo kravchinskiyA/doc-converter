@@ -8,15 +8,15 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         'floating-cta':
-          'rounded-btn bg-[#0c0d0f]/[0.05] hover:bg-[#0c0d0f]/[0.09] active:bg-[#0c0d0f]/[0.12] text-pure-black font-regular text-[14px] tracking-tight border-[0.5px] border-black/5',
+          'rounded-btn bg-[#0c0d0f]/[0.05] hover:bg-[#0c0d0f]/[0.09] active:bg-[#0c0d0f]/[0.12] text-pure-black font-regular text-[14px] tracking-tight border border-black/5',
         ghost:
           'text-off-black hover:underline font-book text-[16px] tracking-tight bg-transparent',
         link:
           'text-signal-blue hover:underline font-book text-[16px] tracking-tight bg-transparent p-0',
         outline:
-          'rounded-btn border-[0.5px] border-signal-blue text-signal-blue hover:bg-signal-blue/5 font-regular text-[14px] tracking-tight',
+          'rounded-btn border border-signal-blue text-signal-blue hover:bg-signal-blue/5 font-regular text-[14px] tracking-tight',
         secondary:
-          'rounded-btn bg-pure-white border-[0.5px] border-black/10 hover:border-black/20 text-off-black font-regular text-[14px] tracking-tight',
+          'rounded-btn bg-pure-white border border-black/10 hover:border-black/20 text-off-black font-regular text-[14px] tracking-tight',
       },
       size: {
         default: 'h-[42px] px-5 py-2.5',

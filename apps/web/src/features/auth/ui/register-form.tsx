@@ -182,7 +182,7 @@ export function RegisterForm() {
 
         {/* Сообщение об успешной отправке */}
         {formSuccess && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
+          <div className="rounded-[12px] border border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {formSuccess}
           </div>
         )}

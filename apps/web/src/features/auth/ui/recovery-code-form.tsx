@@ -79,7 +79,7 @@ export function RecoveryCodeForm() {
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-left">
         {/* Предупреждение о последствиях применения резервного кода (ТЗ §6.5) */}
-        {/* <div className="flex items-start gap-3 rounded-[16px] bg-red-500/[0.04] border-[0.5px] border-red-500/25 p-4 text-[14px] font-book text-steel-gray leading-relaxed">
+        {/* <div className="flex items-start gap-3 rounded-[16px] bg-red-500/[0.04] border border-red-500/25 p-4 text-[14px] font-book text-steel-gray leading-relaxed">
           <ShieldAlert className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <p className="font-regular text-off-black">{t('warning')}</p>
@@ -263,7 +263,7 @@ export function RecoveryCodeForm() {
 
         {/* Сообщение об успешном выполнении */}
         {feedbackMessage && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
+          <div className="rounded-[12px] border border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {feedbackMessage}
           </div>
         )}

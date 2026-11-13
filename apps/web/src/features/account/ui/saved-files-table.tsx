@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useFormatter, useTranslations } from 'next-intl';
 import {
   FileText,
+  Files,
   Download,
   Trash2,
   Search,
@@ -75,8 +76,15 @@ export function SavedFilesTable({
     );
   };
 
+  const getFilterButtonClass = (isActive: boolean) =>
+    `px-2.5 min-[1200px]:px-3 py-1.5 min-[1200px]:py-1 text-[14px] rounded-full border transition-all flex items-center gap-1 ${
+      isActive
+        ? 'bg-pure-white text-off-black font-medium shadow-none border-black/10'
+        : 'border-transparent text-steel-gray hover:text-off-black'
+    }`;
+
   return (
-    <Card className="rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-10">
+    <Card className="rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-10">
       <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
@@ -91,7 +99,7 @@ export function SavedFilesTable({
 
         {/* Панель массовых действий */}
         {selectedFileIds.length > 0 && (
-          <div className="flex items-center gap-2 p-1.5 rounded-full bg-black/[0.04] border-[0.5px] border-black/10">
+          <div className="flex items-center gap-2 p-1.5 rounded-full bg-black/[0.04] border border-black/10">
             <span className="text-[14px] font-medium text-off-black px-3">
               {t('selectedCount', { count: selectedFileIds.length })}
             </span>
@@ -130,46 +138,49 @@ export function SavedFilesTable({
             />
           </div>
 
-          <div className="flex items-center gap-1.5 p-1 rounded-full bg-black/[0.03] border-[0.5px] border-black/5 self-start sm:self-auto">
+          <div className="flex items-center gap-1.5 p-1 rounded-full bg-black/[0.03] border border-black/5 self-start sm:self-auto">
             <span className="text-[14px] text-steel-gray px-2 flex items-center gap-1">
-              <Filter className="h-3 w-3" /> {t('sourceLabel')}
+              <Filter className="h-3.5 w-3.5" />
+              {t('sourceLabel')}
             </span>
             <button
+              type="button"
               onClick={() => setSourceFilter('all')}
-              className={`px-3 py-1 text-[14px] rounded-full transition-all ${
-                sourceFilter === 'all'
-                  ? 'bg-pure-white text-off-black font-medium shadow-none border-[0.5px] border-black/10'
-                  : 'text-steel-gray hover:text-off-black'
-              }`}
+              title={t('filterAll', { count: allFilesCount })}
+              aria-label={t('filterAll', { count: allFilesCount })}
+              className={getFilterButtonClass(sourceFilter === 'all')}
             >
-              {t('filterAll', { count: allFilesCount })}
+              <Files className="h-3.5 w-3.5 shrink-0" />
+              <span className="hidden min-[1200px]:inline">
+                {t('filterAll', { count: allFilesCount })}
+              </span>
             </button>
             <button
+              type="button"
               onClick={() => setSourceFilter('web')}
-              className={`px-3 py-1 text-[14px] rounded-full transition-all flex items-center gap-1 ${
-                sourceFilter === 'web'
-                  ? 'bg-pure-white text-off-black font-medium shadow-none border-[0.5px] border-black/10'
-                  : 'text-steel-gray hover:text-off-black'
-              }`}
+              title={t('filterWeb')}
+              aria-label={t('filterWeb')}
+              className={getFilterButtonClass(sourceFilter === 'web')}
             >
-              <Globe className="h-3 w-3" /> {t('filterWeb')}
+              <Globe className="h-3.5 w-3.5 shrink-0" />
+              <span className="hidden min-[1200px]:inline">{t('filterWeb')}</span>
             </button>
             <button
+              type="button"
               onClick={() => setSourceFilter('api')}
-              className={`px-3 py-1 text-[14px] rounded-full transition-all flex items-center gap-1 ${
-                sourceFilter === 'api'
-                  ? 'bg-pure-white text-off-black font-medium shadow-none border-[0.5px] border-black/10'
-                  : 'text-steel-gray hover:text-off-black'
-              }`}
+              title={t('filterApi')}
+              aria-label={t('filterApi')}
+              className={getFilterButtonClass(sourceFilter === 'api')}
             >
-              <Terminal className="h-3 w-3" /> {t('filterApi')}
+              <Terminal className="h-3.5 w-3.5 shrink-0" />
+              <span className="hidden min-[1200px]:inline">{t('filterApi')}</span>
             </button>
           </div>
         </div>
 
         {/* Таблица результатов */}
         {files.length === 0 ? (
-          <div className="rounded-[28px] border-[0.5px] border-dashed border-black/15 p-12 text-center space-y-3 bg-[#fdfdfd]">
+          <div className="rounded-[28px] border border-dashed border-black/15 p-12 text-center space-y-3 bg-[#fdfdfd]">
             <FileText className="h-8 w-8 text-steel-gray/60 mx-auto" />
             <h4 className="text-[16px] font-book text-off-black">{t('emptyTitle')}</h4>
             <p className="text-[14px] text-steel-gray max-w-sm mx-auto">
@@ -177,7 +188,7 @@ export function SavedFilesTable({
             </p>
           </div>
         ) : (
-          <div className="overflow-x-auto rounded-[24px] border-[0.5px] border-black/10 bg-[#fdfdfd]">
+          <div className="overflow-x-auto rounded-[24px] border border-black/10 bg-[#fdfdfd]">
             <table className="w-full text-left border-collapse text-[14px]">
               <thead>
                 <tr className="border-b border-black/5 bg-black/[0.02] text-steel-gray text-[14px] font-regular">
@@ -199,7 +210,14 @@ export function SavedFilesTable({
               <tbody className="divide-y divide-black/5">
                 {files.map((file) => {
                   const isSelected = selectedFileIds.includes(file.id);
-                  return (
+                  const getFilterButtonClass = (isActive: boolean) =>
+    `px-2.5 min-[1200px]:px-3 py-1.5 min-[1200px]:py-1 text-[14px] rounded-full border transition-all flex items-center gap-1 ${
+      isActive
+        ? 'bg-pure-white text-off-black font-medium shadow-none border-black/10'
+        : 'border-transparent text-steel-gray hover:text-off-black'
+    }`;
+
+  return (
                     <tr
                       key={file.id}
                       className={`hover:bg-black/[0.015] transition-colors ${

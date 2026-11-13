@@ -29,7 +29,7 @@ export function PricingFaq({ items, className }: PricingFaqProps) {
   return (
     <div
       className={cn(
-        'rounded-[36px] md:rounded-[44px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-10',
+        'rounded-[36px] md:rounded-[44px] border border-black/10 bg-pure-white p-6 md:p-10',
         className
       )}
     >
@@ -52,7 +52,7 @@ export function PricingFaq({ items, className }: PricingFaqProps) {
           return (
             <div
               key={item.id}
-              className="rounded-2xl border-[0.5px] border-black/[0.08] bg-[#fdfdfd] overflow-hidden transition-colors"
+              className="rounded-2xl border border-black/[0.08] bg-[#fdfdfd] overflow-hidden transition-colors"
             >
               <button
                 type="button"

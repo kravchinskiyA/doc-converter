@@ -43,7 +43,7 @@ export default async function HomePage({
         {FEATURES.map(({ key, Icon }) => (
           <div
             key={key}
-            className="rounded-[24px] border-[0.5px] border-black/[0.06] bg-pure-white p-7 space-y-3"
+            className="rounded-[24px] border border-black/[0.06] bg-pure-white p-7 space-y-3"
           >
             <div className="h-9 w-9 rounded-full bg-signal-blue/5 flex items-center justify-center text-signal-blue">
               <Icon className="h-5 w-5 stroke-[1.5]" />

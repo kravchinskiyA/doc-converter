@@ -71,7 +71,7 @@ export function SecurityCodesSection({
 
   return (
     <div className="space-y-6">
-      <Card className="rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-10">
+      <Card className="rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-10">
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -111,7 +111,7 @@ export function SecurityCodesSection({
         </CardHeader>
 
         <CardContent className="pt-6 space-y-6">
-          <div className="rounded-[28px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-6 space-y-3">
+          <div className="rounded-[28px] border border-black/5 bg-[#fdfdfd] p-6 space-y-3">
             <div className="flex items-center justify-between text-[14px]">
               <span className="font-book text-off-black">{t('statusTitle')}</span>
               <span className="text-[14px] text-steel-gray">
@@ -139,7 +139,7 @@ export function SecurityCodesSection({
 
           {/* Информационные правила ТЗ §6.5 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="rounded-[24px] border-[0.5px] border-black/5 bg-off-white/40 p-4 space-y-2">
+            <div className="rounded-[24px] border border-black/5 bg-off-white/40 p-4 space-y-2">
               <span className="text-[14px] font-medium text-off-black flex items-center gap-1.5">
                 <Info className="h-4 w-4 text-signal-blue" />
                 {t('howToUseTitle')}
@@ -149,7 +149,7 @@ export function SecurityCodesSection({
               </p>
             </div>
 
-            <div className="rounded-[24px] border-[0.5px] border-black/5 bg-off-white/40 p-4 space-y-2">
+            <div className="rounded-[24px] border border-black/5 bg-off-white/40 p-4 space-y-2">
               <span className="text-[14px] font-medium text-off-black flex items-center gap-1.5">
                 <AlertTriangle className="h-4 w-4 text-amber-600" />
                 {t('replaceRuleTitle')}
@@ -182,7 +182,7 @@ export function SecurityCodesSection({
             </h3>
 
             {recoveryCodesFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertTriangle className="h-4 w-4 shrink-0" />
                 <span>{recoveryCodesFlow.error}</span>
               </div>
@@ -228,7 +228,7 @@ export function SecurityCodesSection({
 
             {recoveryCodesFlow.step === 'display_codes' && (
               <div className="space-y-4 pt-1">
-                <div className="p-3 rounded-[20px] border-[0.5px] border-amber-500/30 bg-amber-500/[0.05] text-[14px] text-amber-800 flex items-start gap-2">
+                <div className="p-3 rounded-[20px] border border-amber-500/30 bg-amber-500/[0.05] text-[14px] text-amber-800 flex items-start gap-2">
                   <AlertTriangle className="h-4 w-4 shrink-0 text-amber-600 mt-0.5" />
                   <div>
                     <strong>{t('dialog.warningTitle')}</strong>
@@ -238,11 +238,11 @@ export function SecurityCodesSection({
                 </div>
 
                 {/* Сетка кодов */}
-                <div className="grid grid-cols-2 gap-2 p-3 rounded-[20px] bg-black/[0.03] border-[0.5px] border-black/5 font-mono text-[14px] text-off-black">
+                <div className="grid grid-cols-2 gap-2 p-3 rounded-[20px] bg-black/[0.03] border border-black/5 font-mono text-[14px] text-off-black">
                   {recoveryCodesFlow.codes.map((code, idx) => (
                     <div
                       key={idx}
-                      className="p-2 rounded-[12px] bg-pure-white border-[0.5px] border-black/5 text-center tracking-wider"
+                      className="p-2 rounded-[12px] bg-pure-white border border-black/5 text-center tracking-wider"
                     >
                       <span className="text-[14px] text-steel-gray mr-1.5">{idx + 1}.</span>
                       {code}

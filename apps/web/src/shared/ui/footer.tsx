@@ -20,7 +20,7 @@ export function Footer({ className }: FooterProps) {
       )}
     >
       <div className="mx-auto max-w-content">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b-[0.5px] border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
           {/* Колонка 1: О бренде */}
           <div className="space-y-3 md:col-span-1">
             <div className="flex items-center gap-2 text-[16px] font-regular tracking-tight text-pure-white">
@@ -107,7 +107,7 @@ export function Footer({ className }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <span className="text-[14px] text-ash-gray/80 inline-block border-[0.5px] border-white/10 rounded-pill px-2.5 py-0.5">
+                <span className="text-[14px] text-ash-gray/80 inline-block border border-white/10 rounded-pill px-2.5 py-0.5">
                   {t('security.euIsolation')}
                 </span>
               </li>

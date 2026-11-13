@@ -59,7 +59,7 @@ export function ProfileSection({
   return (
     <div className="space-y-6">
       {/* Главная карточка профиля */}
-      <Card className="rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-10">
+      <Card className="rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-10">
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -94,7 +94,7 @@ export function ProfileSection({
 
         <CardContent className="pt-6 space-y-6">
           {isEditingProfile ? (
-            <div className="rounded-[24px] border-[0.5px] border-black/10 bg-off-white/40 p-5 space-y-4 max-w-lg">
+            <div className="rounded-[24px] border border-black/10 bg-off-white/40 p-5 space-y-4 max-w-lg">
               <h4 className="text-[15px] font-medium text-off-black">{t('editFormTitle')}</h4>
               <div className="space-y-3">
                 <div>
@@ -139,7 +139,7 @@ export function ProfileSection({
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-[24px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-4 flex items-center gap-3">
+              <div className="rounded-[24px] border border-black/5 bg-[#fdfdfd] p-4 flex items-center gap-3">
                 <div className="h-10 w-10 rounded-full bg-black/[0.04] flex items-center justify-center shrink-0">
                   <User className="h-5 w-5 text-off-black" />
                 </div>
@@ -153,7 +153,7 @@ export function ProfileSection({
                 </div>
               </div>
 
-              <div className="rounded-[24px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-4 flex items-center justify-between gap-3">
+              <div className="rounded-[24px] border border-black/5 bg-[#fdfdfd] p-4 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 truncate">
                   <div className="h-10 w-10 rounded-full bg-black/[0.04] flex items-center justify-center shrink-0">
                     <Mail className="h-5 w-5 text-off-black" />
@@ -237,7 +237,7 @@ export function ProfileSection({
             </p>
 
             {emailChangeFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{emailChangeFlow.error}</span>
               </div>
@@ -392,7 +392,7 @@ export function ProfileSection({
             </p>
 
             {passwordChangeFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{passwordChangeFlow.error}</span>
               </div>

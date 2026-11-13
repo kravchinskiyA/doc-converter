@@ -8,15 +8,15 @@ export const badgeVariants = cva(
     variants: {
       variant: {
         'signal-chip':
-          'border-[0.5px] border-signal-blue text-signal-blue bg-transparent',
+          'border border-signal-blue text-signal-blue bg-transparent',
         neutral:
-          'border-[0.5px] border-black/10 text-off-black bg-pure-white',
+          'border border-black/10 text-off-black bg-pure-white',
         muted:
-          'border-[0.5px] border-black/5 text-steel-gray bg-black/[0.03]',
+          'border border-black/5 text-steel-gray bg-black/[0.03]',
         error:
-          'border-[0.5px] border-red-500/30 text-red-600 bg-red-500/[0.04]',
+          'border border-red-500/30 text-red-600 bg-red-500/[0.04]',
         success:
-          'border-[0.5px] border-emerald-500/30 text-emerald-600 bg-emerald-500/[0.04]',
+          'border border-emerald-500/30 text-emerald-600 bg-emerald-500/[0.04]',
       },
     },
     defaultVariants: {

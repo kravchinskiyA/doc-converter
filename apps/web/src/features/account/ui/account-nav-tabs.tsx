@@ -11,6 +11,7 @@ import {
   ShieldAlert,
   HelpCircle,
   AlertTriangle,
+  ChevronDown,
 } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
 import type { AccountTabKey } from '../model/types';
@@ -31,6 +32,31 @@ export function AccountNavTabs({
   fileCount = 0,
 }: AccountNavTabsProps) {
   const t = useTranslations('account.tabs');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
 
   const tabs: {
     id: AccountTabKey;
@@ -67,49 +93,109 @@ export function AccountNavTabs({
     { id: 'danger', label: t('danger'), icon: AlertTriangle },
   ];
 
-  return (
-    <nav className="flex w-full overflow-x-auto no-scrollbar gap-1.5 p-1.5 rounded-full border-[0.5px] border-black/10 bg-pure-white max-w-full">
-      {tabs.map((tab) => {
-        const Icon = tab.icon;
-        const isActive = activeTab === tab.id;
-        return (
-          <button
-            key={tab.id}
-            onClick={() => onTabChange(tab.id)}
+  const fallbackTab: (typeof tabs)[number] = {
+    id: 'profile',
+    label: t('profile'),
+    icon: User,
+  };
+  const currentTab = tabs.find((tab) => tab.id === activeTab) ?? fallbackTab;
+  const CurrentIcon = currentTab.icon;
+
+  const handleSelectTab = (tabId: AccountTabKey) => {
+    onTabChange(tabId);
+    setIsMobileMenuOpen(false);
+  };
+
+  const renderTabButtons = () =>
+    tabs.map((tab) => {
+      const Icon = tab.icon;
+      const isActive = activeTab === tab.id;
+      return (
+        <button
+          key={tab.id}
+          type="button"
+          onClick={() => handleSelectTab(tab.id)}
+          className={cn(
+            'group inline-flex w-full items-center justify-start gap-2.5 text-left leading-snug rounded-[20px] px-4 py-2.5 text-[14px] font-regular tracking-tight transition-all',
+            isActive
+              ? 'bg-[#0f1012] text-pure-white font-book'
+              : 'text-off-black hover:bg-black/[0.04]'
+          )}
+        >
+          <Icon
             className={cn(
-              'group inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-[14px] font-regular tracking-tight transition-all shrink-0',
-              isActive
-                ? 'bg-[#0f1012] text-pure-white font-book'
-                : 'text-off-black hover:bg-black/[0.04]'
+              'h-4 w-4 shrink-0 transition-colors',
+              isActive ? 'text-pure-white' : 'text-steel-gray group-hover:text-off-black'
             )}
-          >
-            <Icon
+          />
+          <span>{tab.label}</span>
+          {tab.badge && (
+            <span
               className={cn(
-                'h-3.5 w-3.5 transition-colors',
-                isActive ? 'text-pure-white' : 'text-steel-gray group-hover:text-off-black'
+                'ml-auto rounded-full px-1.5 py-0.5 text-[14px] font-regular leading-none',
+                tab.badgeVariant === 'warning'
+                  ? 'bg-amber-500/20 text-amber-700'
+                  : tab.badgeVariant === 'danger'
+                  ? 'bg-red-500/20 text-red-700'
+                  : isActive
+                  ? 'bg-white/20 text-pure-white'
+                  : 'bg-black/[0.06] text-steel-gray'
               )}
-            />
-            <span>{tab.label}</span>
-            {tab.badge && (
-              <span
-                className={cn(
-                  'ml-0.5 rounded-full px-1.5 py-0.2 text-[14px] font-regular leading-none',
-                  tab.badgeVariant === 'warning'
-                    ? 'bg-amber-500/20 text-amber-700'
-                    : tab.badgeVariant === 'danger'
-                    ? 'bg-red-500/20 text-red-700'
-                    : isActive
-                    ? 'bg-white/20 text-pure-white'
-                    : 'bg-black/[0.06] text-steel-gray'
-                )}
-              >
-                {tab.badge}
-              </span>
+            >
+              {tab.badge}
+            </span>
+          )}
+        </button>
+      );
+    });
+
+  return (
+    <>
+      {/* Мобильная и планшетная кнопка с выпадающим списком */}
+      <div ref={dropdownRef} className="relative inline-block lg:hidden">
+        <button
+          type="button"
+          aria-expanded={isMobileMenuOpen}
+          aria-haspopup="true"
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+          className="inline-flex w-fit items-center gap-2.5 rounded-full border border-black/10 bg-pure-white px-4 py-2.5 text-[14px] font-book text-off-black transition-colors hover:bg-black/[0.02]"
+        >
+          <CurrentIcon className="h-4 w-4 shrink-0 text-off-black" />
+          <span className="whitespace-nowrap">{currentTab.label}</span>
+          {currentTab.badge && (
+            <span
+              className={cn(
+                'rounded-full px-1.5 py-0.5 text-[14px] font-regular leading-none',
+                currentTab.badgeVariant === 'warning'
+                  ? 'bg-amber-500/20 text-amber-700'
+                  : currentTab.badgeVariant === 'danger'
+                  ? 'bg-red-500/20 text-red-700'
+                  : 'bg-black/[0.06] text-steel-gray'
+              )}
+            >
+              {currentTab.badge}
+            </span>
+          )}
+          <ChevronDown
+            className={cn(
+              'h-4 w-4 shrink-0 text-steel-gray transition-transform duration-200',
+              isMobileMenuOpen && 'rotate-180'
             )}
-          </button>
-        );
-      })}
-    </nav>
+          />
+        </button>
+
+        {isMobileMenuOpen && (
+          <nav className="absolute left-0 top-full z-30 mt-2 flex w-max min-w-[220px] max-w-[calc(100vw-2rem)] flex-col gap-1.5 rounded-[24px] border border-black/10 bg-pure-white p-2">
+            {renderTabButtons()}
+          </nav>
+        )}
+      </div>
+
+      {/* Десктопная вертикальная навигация */}
+      <nav className="hidden lg:flex lg:flex-col w-full gap-1.5 p-2 rounded-[28px] border border-black/10 bg-pure-white">
+        {renderTabButtons()}
+      </nav>
+    </>
   );
 }
 

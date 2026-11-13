@@ -35,7 +35,7 @@ export function TermsPage() {
         </div>
 
         {/* Секция 1: Стороны соглашения и поставщик услуг */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <Scale className="w-5 h-5 text-signal-blue" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">
@@ -53,7 +53,7 @@ export function TermsPage() {
         </div>
 
         {/* Секция 2: Тарифы, оплата и валюта */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <CreditCard className="w-5 h-5 text-signal-blue" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">
@@ -75,7 +75,7 @@ export function TermsPage() {
         </div>
 
         {/* Секция 3: Подписка, автопродление и возврат средств */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <RefreshCcw className="w-5 h-5 text-emerald-600" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">
@@ -98,7 +98,7 @@ export function TermsPage() {
         </div>
 
         {/* Секция 4: Правила допустимого использования */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <AlertTriangle className="w-5 h-5 text-amber-600" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">
@@ -121,7 +121,7 @@ export function TermsPage() {
         </div>
 
         {/* Секция 5: Интеллектуальная собственность */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <FileCheck2 className="w-5 h-5 text-signal-blue" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">
@@ -139,7 +139,7 @@ export function TermsPage() {
         </div>
 
         {/* Секция 6: Сроки хранения и удаление файлов */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <Trash2 className="w-5 h-5 text-off-black" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">

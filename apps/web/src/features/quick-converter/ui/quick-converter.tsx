@@ -308,7 +308,7 @@ export function QuickConverter() {
               {files.map((file, idx) => (
                 <div
                   key={file.id}
-                  className={`flex items-center justify-between p-3.5 rounded-[16px] border-[0.5px] transition-colors ${
+                  className={`flex items-center justify-between p-3.5 rounded-[16px] border transition-colors ${
                     file.isTooLarge || file.isInvalidFormat
                       ? 'border-red-300 bg-red-500/[0.02]'
                       : 'border-black/[0.08] bg-pure-white hover:border-black/20'

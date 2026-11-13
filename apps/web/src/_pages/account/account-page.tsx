@@ -32,29 +32,32 @@ export function AccountPage() {
           </p>
         </div>
 
-        {/* Навигационная панель вкладок Augen Pro */}
-        <div className="sticky top-20 z-20 pt-1 pb-2 bg-[#f2f2f4]/90 backdrop-blur-md">
-          <AccountNavTabs
-            activeTab={account.activeTab}
-            onTabChange={account.setActiveTab}
-            storageWarning={account.storageQuota.isOver75}
-            hasPendingSupportRequests={account.supportRequests.some(
-              (r) => r.status === 'pending'
-            )}
-            fileCount={account.files.length}
-          />
-        </div>
+        {/* Двухколоночная область: вертикальная навигация + контент активной вкладки */}
+        <div className="flex flex-col lg:flex-row lg:items-start gap-4">
+          {/* Первая колонка: навигационная панель вкладок Augen Pro */}
+          <aside className="w-full lg:w-[220px] shrink-0 sticky top-20 z-20 lg:top-24 bg-[#f2f2f4]/90 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none py-1 lg:py-0">
+            <AccountNavTabs
+              activeTab={account.activeTab}
+              onTabChange={account.setActiveTab}
+              storageWarning={account.storageQuota.isOver75}
+              hasPendingSupportRequests={account.supportRequests.some(
+                (r) => r.status === 'pending'
+              )}
+              fileCount={account.files.length}
+            />
+          </aside>
 
-        {/* Контент активной вкладки */}
-        <div className="pt-2">
-          {account.activeTab === 'profile' && <ProfileSection {...account} />}
-          {account.activeTab === 'storage' && <StorageSection {...account} />}
-          {account.activeTab === 'files' && <SavedFilesTable {...account} />}
-          {account.activeTab === 'apiKey' && <ApiKeySection {...account} />}
-          {account.activeTab === 'subscription' && <SubscriptionSection {...account} />}
-          {account.activeTab === 'recovery' && <SecurityCodesSection {...account} />}
-          {account.activeTab === 'support' && <StaffAccessSection {...account} />}
-          {account.activeTab === 'danger' && <DangerZoneSection {...account} />}
+          {/* Вторая колонка: контент активной вкладки */}
+          <div className="flex-1 min-w-0 w-full">
+            {account.activeTab === 'profile' && <ProfileSection {...account} />}
+            {account.activeTab === 'storage' && <StorageSection {...account} />}
+            {account.activeTab === 'files' && <SavedFilesTable {...account} />}
+            {account.activeTab === 'apiKey' && <ApiKeySection {...account} />}
+            {account.activeTab === 'subscription' && <SubscriptionSection {...account} />}
+            {account.activeTab === 'recovery' && <SecurityCodesSection {...account} />}
+            {account.activeTab === 'support' && <StaffAccessSection {...account} />}
+            {account.activeTab === 'danger' && <DangerZoneSection {...account} />}
+          </div>
         </div>
       </div>
     </div>

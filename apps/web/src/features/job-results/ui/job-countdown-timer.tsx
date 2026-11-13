@@ -17,7 +17,7 @@ export function JobCountdownTimer({ countdown, isGuest }: JobCountdownTimerProps
   const tActions = useTranslations('results.actions');
 
   return (
-    <div className="rounded-[28px] border-[0.5px] border-black/[0.06] bg-black/[0.02] p-5 sm:p-6 transition-colors">
+    <div className="rounded-[28px] border border-black/[0.06] bg-black/[0.02] p-5 sm:p-6 transition-colors">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* Левая часть: информация о сроке хранения и GDPR */}
         <div className="space-y-2 max-w-xl">
@@ -49,21 +49,21 @@ export function JobCountdownTimer({ countdown, isGuest }: JobCountdownTimerProps
             </div>
           ) : (
             <div className="flex items-baseline gap-2 font-mono text-[22px] sm:text-[26px] tracking-tight text-off-black">
-              <span className="bg-pure-white border-[0.5px] border-black/10 px-2.5 py-0.5 rounded-[10px]">
+              <span className="bg-pure-white border border-black/10 px-2.5 py-0.5 rounded-[10px]">
                 {String(countdown.hours).padStart(2, '0')}
                 <span className="text-[14px] font-sans text-steel-gray ml-1">
                   {t('hours')}
                 </span>
               </span>
               <span className="text-steel-gray/50">:</span>
-              <span className="bg-pure-white border-[0.5px] border-black/10 px-2.5 py-0.5 rounded-[10px]">
+              <span className="bg-pure-white border border-black/10 px-2.5 py-0.5 rounded-[10px]">
                 {String(countdown.minutes).padStart(2, '0')}
                 <span className="text-[14px] font-sans text-steel-gray ml-1">
                   {t('minutes')}
                 </span>
               </span>
               <span className="text-steel-gray/50">:</span>
-              <span className="bg-pure-white border-[0.5px] border-black/10 px-2.5 py-0.5 rounded-[10px]">
+              <span className="bg-pure-white border border-black/10 px-2.5 py-0.5 rounded-[10px]">
                 {String(countdown.seconds).padStart(2, '0')}
                 <span className="text-[14px] font-sans text-steel-gray ml-1">
                   {t('seconds')}

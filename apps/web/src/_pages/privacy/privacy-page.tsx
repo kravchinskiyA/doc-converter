@@ -35,7 +35,7 @@ export function PrivacyPage() {
         </div>
 
         {/* 1. Инвариант локализации и юрисдикция серверов */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <Server className="w-5 h-5 text-signal-blue" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">
@@ -54,7 +54,7 @@ export function PrivacyPage() {
         </div>
 
         {/* 2. Полный отказ от сторонних AI и OCR API */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <EyeOff className="w-5 h-5 text-emerald-600" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">
@@ -72,7 +72,7 @@ export function PrivacyPage() {
         </div>
 
         {/* 3. Шифрование и безопасность данных */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <Lock className="w-5 h-5 text-signal-blue" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">
@@ -100,7 +100,7 @@ export function PrivacyPage() {
         </div>
 
         {/* 4. Контролируемый служебный доступ техподдержки */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <FileKey className="w-5 h-5 text-off-black" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">
@@ -119,7 +119,7 @@ export function PrivacyPage() {
         </div>
 
         {/* 5. Права субъекта данных по GDPR */}
-        <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2.5">
             <UserCheck className="w-5 h-5 text-emerald-600" />
             <h2 className="text-[20px] font-regular tracking-tight text-off-black">

@@ -130,7 +130,7 @@ export function StripeCheckoutModal({
         </div>
 
         {/* Тестовый переключатель статуса авторизации (для валидации ТЗ §11.1) */}
-        <div className="mb-5 p-3 rounded-2xl bg-[#f2f2f4]/70 border-[0.5px] border-black/5 text-[14px]">
+        <div className="mb-5 p-3 rounded-2xl bg-[#f2f2f4]/70 border border-black/5 text-[14px]">
           <div className="flex items-center justify-between mb-1.5">
             <span className="font-regular text-steel-gray">Режим симуляции статуса:</span>
             <span className="text-[14px] text-steel-gray">ТЗ §11.1 проверка email</span>
@@ -178,7 +178,7 @@ export function StripeCheckoutModal({
         {/* Сценарий А: Гость (неавторизован) */}
         {authStatus === 'guest' && (
           <div className="space-y-4 py-2">
-            <div className="rounded-2xl border-[0.5px] border-amber-500/30 bg-amber-500/[0.05] p-4 text-off-black">
+            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/[0.05] p-4 text-off-black">
               <div className="flex items-start gap-3">
                 <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                 <div className="space-y-1">
@@ -214,7 +214,7 @@ export function StripeCheckoutModal({
         {/* Сценарий Б: Неподтвержденный email */}
         {authStatus === 'unverified' && (
           <div className="space-y-4 py-2">
-            <div className="rounded-2xl border-[0.5px] border-red-500/30 bg-red-500/[0.05] p-4 text-off-black">
+            <div className="rounded-2xl border border-red-500/30 bg-red-500/[0.05] p-4 text-off-black">
               <div className="flex items-start gap-3">
                 <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
                 <div className="space-y-1">
@@ -254,7 +254,7 @@ export function StripeCheckoutModal({
         {authStatus === 'verified' && !isSuccess && (
           <form onSubmit={handlePay} className="space-y-5">
             {/* Карточка заказа */}
-            <div className="rounded-2xl border-[0.5px] border-black/10 bg-[#fdfdfd] p-4">
+            <div className="rounded-2xl border border-black/10 bg-[#fdfdfd] p-4">
               <div className="flex items-center justify-between text-[14px] mb-2">
                 <span className="font-regular text-off-black">
                   Тариф {planName} ({isAnnual ? '12 месяцев' : '1 месяц'})
@@ -400,7 +400,7 @@ export function StripeCheckoutModal({
               </p>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-[#f2f2f4]/70 border-[0.5px] border-black/5 text-[14px] text-steel-gray font-mono text-left">
+            <div className="p-3.5 rounded-2xl bg-[#f2f2f4]/70 border border-black/5 text-[14px] text-steel-gray font-mono text-left">
               <div>ID транзакции: {transactionId}</div>
               <div>Сумма: €{totalAmount} (налоги включены)</div>
               <div>Статус: Succeeded • Stripe</div>

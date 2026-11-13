@@ -32,7 +32,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           />
           <span
             className={cn(
-              'h-[18px] w-[18px] rounded-[5px] border-[0.5px] border-black/20 bg-pure-white transition-colors',
+              'h-[18px] w-[18px] rounded-[5px] border border-black/20 bg-pure-white transition-colors',
               'peer-focus-visible:ring-1 peer-focus-visible:ring-signal-blue',
               'peer-checked:bg-off-black peer-checked:border-off-black'
             )}

@@ -145,7 +145,7 @@ export function EnterpriseContactDialog({
                 placeholder="Особые требования к SLA, форматам или REST API…"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full rounded-2xl border-[0.5px] border-black/10 bg-pure-white p-3 text-[14px] font-book text-off-black placeholder:text-steel-gray/60 focus:outline-none focus:ring-1 focus:ring-signal-blue"
+                className="w-full rounded-2xl border border-black/10 bg-pure-white p-3 text-[14px] font-book text-off-black placeholder:text-steel-gray/60 focus:outline-none focus:ring-1 focus:ring-signal-blue"
               />
             </div>
 

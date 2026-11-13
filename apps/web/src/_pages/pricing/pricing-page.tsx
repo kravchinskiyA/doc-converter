@@ -89,7 +89,7 @@ export function PricingPage() {
         </div>
 
         {/* Гарантия безопасности и юрисдикция ЕС */}
-        {/* <div className="rounded-[32px] md:rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8">
+        {/* <div className="rounded-[32px] md:rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex items-start gap-3.5">
               <div className="h-10 w-10 rounded-2xl bg-signal-blue/10 flex items-center justify-center shrink-0">

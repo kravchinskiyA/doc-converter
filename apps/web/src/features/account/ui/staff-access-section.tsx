@@ -78,7 +78,7 @@ export function StaffAccessSection({
 
   return (
     <div className="space-y-6">
-      <Card className="rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-10">
+      <Card className="rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-10">
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -94,7 +94,7 @@ export function StaffAccessSection({
         </CardHeader>
 
         <CardContent className="pt-6 space-y-6">
-          <div className="p-4 rounded-[24px] bg-black/[0.03] border-[0.5px] border-black/5 flex items-start gap-3 text-[14px] text-steel-gray leading-relaxed">
+          <div className="p-4 rounded-[24px] bg-black/[0.03] border border-black/5 flex items-start gap-3 text-[14px] text-steel-gray leading-relaxed">
             <ShieldCheck className="h-4 w-4 text-signal-blue shrink-0 mt-0.5" />
             <div>
               <span className="font-medium text-off-black block mb-0.5">
@@ -108,7 +108,7 @@ export function StaffAccessSection({
 
           {/* Список запросов */}
           {supportRequests.length === 0 ? (
-            <div className="rounded-[28px] border-[0.5px] border-dashed border-black/15 p-10 text-center space-y-2 bg-[#fdfdfd]">
+            <div className="rounded-[28px] border border-dashed border-black/15 p-10 text-center space-y-2 bg-[#fdfdfd]">
               <UserCheck className="h-7 w-7 text-steel-gray/60 mx-auto" />
               <h4 className="text-[15px] font-book text-off-black">{t('emptyTitle')}</h4>
               <p className="text-[14px] text-steel-gray max-w-sm mx-auto">
@@ -120,7 +120,7 @@ export function StaffAccessSection({
               {supportRequests.map((req) => (
                 <div
                   key={req.id}
-                  className="rounded-[28px] border-[0.5px] border-black/10 bg-[#fdfdfd] p-5 md:p-6 space-y-4"
+                  className="rounded-[28px] border border-black/10 bg-[#fdfdfd] p-5 md:p-6 space-y-4"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/5 pb-3">
                     <div className="flex items-center gap-2">
@@ -216,7 +216,7 @@ export function StaffAccessSection({
             </p>
 
             {supportApprovalFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{supportApprovalFlow.error}</span>
               </div>

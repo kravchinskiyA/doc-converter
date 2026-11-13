@@ -21,7 +21,7 @@ export function PricingComparisonTable({
   return (
     <div
       className={cn(
-        'rounded-[36px] md:rounded-[44px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-10 overflow-hidden',
+        'rounded-[36px] md:rounded-[44px] border border-black/10 bg-pure-white p-6 md:p-10 overflow-hidden',
         className
       )}
     >

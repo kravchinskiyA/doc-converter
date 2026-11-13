@@ -176,7 +176,7 @@ if res.status_code == 202:
 
         {/* Информационные плашки: Авторизация и Лимиты */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 space-y-2">
+          <div className="rounded-[32px] border border-black/10 bg-pure-white p-6 space-y-2">
             <div className="flex items-center gap-2 text-off-black font-regular text-[15px]">
               <Key className="w-4 h-4 text-signal-blue" />
               <span>Авторизация (ТЗ §7)</span>
@@ -187,7 +187,7 @@ if res.status_code == 202:
             </p>
           </div>
 
-          <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 space-y-2">
+          <div className="rounded-[32px] border border-black/10 bg-pure-white p-6 space-y-2">
             <div className="flex items-center gap-2 text-off-black font-regular text-[15px]">
               <Clock className="w-4 h-4 text-emerald-600" />
               <span>Частота запросов (ТЗ §3.8)</span>
@@ -198,7 +198,7 @@ if res.status_code == 202:
             </p>
           </div>
 
-          <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 space-y-2">
+          <div className="rounded-[32px] border border-black/10 bg-pure-white p-6 space-y-2">
             <div className="flex items-center gap-2 text-off-black font-regular text-[15px]">
               <ShieldCheck className="w-4 h-4 text-off-black" />
               <span>Статус 202 Accepted (ТЗ §9.1)</span>
@@ -211,7 +211,7 @@ if res.status_code == 202:
         </div>
 
         {/* Блок с примерами кода */}
-        <div className="rounded-[36px] md:rounded-[44px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-5">
+        <div className="rounded-[36px] md:rounded-[44px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-black/[0.06]">
             <div>
               <h3 className="text-[20px] font-regular tracking-tight text-off-black flex items-center gap-2">
@@ -224,7 +224,7 @@ if res.status_code == 202:
             </div>
 
             {/* Табы выбора языка */}
-            <div className="inline-flex rounded-nav border-[0.5px] border-black/10 bg-[#f2f2f4] p-1">
+            <div className="inline-flex rounded-nav border border-black/10 bg-[#f2f2f4] p-1">
               {(['curl', 'javascript', 'python'] as const).map((lang) => (
                 <button
                   key={lang}
@@ -273,10 +273,10 @@ if res.status_code == 202:
           </div>
 
           {/* 1. POST /jobs */}
-          <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+          <div className="rounded-[32px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-black/[0.06]">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-emerald-500/10 text-emerald-700 border-[0.5px] border-emerald-500/20">
+                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
                   POST
                 </span>
                 <code className="font-mono text-[15px] font-regular text-off-black">/jobs</code>
@@ -316,10 +316,10 @@ if res.status_code == 202:
           </div>
 
           {/* 2. GET /jobs/:jobId */}
-          <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+          <div className="rounded-[32px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-black/[0.06]">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border-[0.5px] border-signal-blue/20">
+                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border border-signal-blue/20">
                   GET
                 </span>
                 <code className="font-mono text-[15px] font-regular text-off-black">/jobs/:jobId</code>
@@ -354,10 +354,10 @@ if res.status_code == 202:
           </div>
 
           {/* 3. GET /jobs/:jobId/zip */}
-          <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+          <div className="rounded-[32px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-black/[0.06]">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border-[0.5px] border-signal-blue/20">
+                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border border-signal-blue/20">
                   GET
                 </span>
                 <code className="font-mono text-[15px] font-regular text-off-black">/jobs/:jobId/zip</code>
@@ -373,10 +373,10 @@ if res.status_code == 202:
           </div>
 
           {/* 4. GET /account/quota */}
-          <div className="rounded-[32px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+          <div className="rounded-[32px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-black/[0.06]">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border-[0.5px] border-signal-blue/20">
+                <span className="font-mono text-[14px] font-regular px-2.5 py-1 rounded-pill bg-signal-blue/10 text-signal-blue border border-signal-blue/20">
                   GET
                 </span>
                 <code className="font-mono text-[15px] font-regular text-off-black">/account/quota</code>
@@ -393,7 +393,7 @@ if res.status_code == 202:
         </div>
 
         {/* Коды ответов и ошибок */}
-        <div className="rounded-[36px] md:rounded-[44px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
+        <div className="rounded-[36px] md:rounded-[44px] border border-black/10 bg-pure-white p-6 md:p-8 space-y-4">
           <div className="flex items-center gap-2">
             <AlertCircle className="w-5 h-5 text-signal-blue" />
             <h3 className="text-[20px] font-regular tracking-tight text-off-black">

@@ -63,7 +63,7 @@ export function PricingCard({
   return (
     <div
       className={cn(
-        'relative flex flex-col justify-between rounded-[36px] md:rounded-[44px] border-[0.5px] p-6 md:p-8 bg-pure-white transition-all',
+        'relative flex flex-col justify-between rounded-[36px] md:rounded-[44px] border p-6 md:p-8 bg-pure-white transition-all',
         plan.isPopular
           ? 'border-signal-blue ring-1 ring-signal-blue/20 bg-pure-white'
           : 'border-black/10 hover:border-black/20',

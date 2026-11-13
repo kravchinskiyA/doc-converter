@@ -29,7 +29,7 @@ export function DangerZoneSection({
 
   return (
     <div className="space-y-6">
-      <Card className="rounded-[40px] border-[0.5px] border-red-500/30 bg-pure-white p-6 md:p-10">
+      <Card className="rounded-[40px] border border-red-500/30 bg-pure-white p-6 md:p-10">
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-red-500/10">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -63,7 +63,7 @@ export function DangerZoneSection({
         </CardHeader>
 
         <CardContent className="pt-6 space-y-4">
-          <div className="rounded-[24px] border-[0.5px] border-red-500/20 bg-red-500/[0.03] p-5 space-y-3 text-[14px] text-red-950/80 leading-relaxed">
+          <div className="rounded-[24px] border border-red-500/20 bg-red-500/[0.03] p-5 space-y-3 text-[14px] text-red-950/80 leading-relaxed">
             <h4 className="font-medium text-[15px] text-red-700 flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 shrink-0 text-red-600" />
               {t('consequencesTitle')}
@@ -101,7 +101,7 @@ export function DangerZoneSection({
             </p>
 
             {deleteAccountFlow.error && (
-              <div className="p-3 rounded-pill border-[0.5px] border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
+              <div className="p-3 rounded-pill border border-red-500/30 bg-red-500/[0.05] text-red-600 text-[14px] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{deleteAccountFlow.error}</span>
               </div>

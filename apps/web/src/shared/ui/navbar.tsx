@@ -165,7 +165,7 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
     >
       <nav
         aria-label={t('ariaLabel')}
-        className="pointer-events-auto relative mx-auto flex w-full md:w-auto md:max-w-fit items-center justify-between gap-3 md:gap-7 rounded-nav border-[0.5px] border-black/[0.08] bg-pure-white px-3.5 md:px-5 py-2"
+        className="pointer-events-auto relative mx-auto flex w-full md:w-auto md:max-w-fit items-center justify-between gap-3 md:gap-7 rounded-nav border border-black/[0.08] bg-pure-white px-3.5 md:px-5 py-2"
       >
         {/* Логотип */}
         <Link
@@ -216,7 +216,7 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
 
           {/* Выпадающий список страниц */}
           {isPagesOpen && (
-            <div className="absolute top-full mt-3.5 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:right-0 w-[310px] sm:w-[360px] max-h-[72vh] overflow-y-auto bg-pure-white border-[0.5px] border-black/[0.1] rounded-[20px] p-2.5 z-50 text-left">
+            <div className="absolute top-full mt-3.5 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:right-0 w-[310px] sm:w-[360px] max-h-[72vh] overflow-y-auto bg-pure-white border border-black/[0.1] rounded-[20px] p-2.5 z-50 text-left">
               <div className="px-2.5 py-1.5 mb-1 border-b border-black/[0.05] flex items-center justify-between">
                 <span className="text-[14px] font-regular text-ash-gray uppercase tracking-wider">
                   {t('devMenu.title')}
@@ -296,7 +296,7 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
             aria-controls="mobile-navigation"
             aria-label={isMobileOpen ? t('mobileMenu.close') : t('mobileMenu.open')}
             className={cn(
-              'md:hidden h-8 w-8 rounded-[10px] border-[0.5px] flex items-center justify-center transition-colors shrink-0',
+              'md:hidden h-8 w-8 rounded-[10px] border flex items-center justify-center transition-colors shrink-0',
               isMobileOpen
                 ? 'border-signal-blue/40 bg-signal-blue/[0.06] text-signal-blue'
                 : 'border-black/[0.08] bg-black/[0.02] text-off-black hover:border-black/20'
@@ -323,7 +323,7 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
         )}
       >
         {/* Верхняя панель мобильного меню */}
-        <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b-[0.5px] border-black/[0.06]">
+        <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-black/[0.06]">
           <Link
             href="/"
             onClick={() => setIsMobileOpen(false)}
@@ -337,7 +337,7 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
             type="button"
             onClick={() => setIsMobileOpen(false)}
             aria-label={t('mobileMenu.close')}
-            className="h-8 w-8 rounded-[10px] border-[0.5px] border-black/[0.08] bg-black/[0.02] text-off-black hover:border-black/20 flex items-center justify-center transition-colors"
+            className="h-8 w-8 rounded-[10px] border border-black/[0.08] bg-black/[0.02] text-off-black hover:border-black/20 flex items-center justify-center transition-colors"
           >
             <X className="h-4 w-4 stroke-[1.75]" />
           </button>
@@ -369,7 +369,7 @@ export function Navbar({ isLoggedIn = false, className }: NavbarProps) {
             })}
           </nav>
 
-          <div className="flex flex-col items-center gap-4 w-full max-w-[240px] pt-4 border-t-[0.5px] border-black/[0.06]">
+          <div className="flex flex-col items-center gap-4 w-full max-w-[240px] pt-4 border-t border-black/[0.06]">
             {isLoggedIn ? (
               <Link
                 href="/account"

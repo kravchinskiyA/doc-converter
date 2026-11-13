@@ -176,14 +176,14 @@ export function ResetPasswordForm() {
         </div>
 
         {/* Предупреждение безопасности по ТЗ §6.3 */}
-        <div className="flex items-start gap-2.5 rounded-[12px] bg-red-500/[0.04] border-[0.5px] border-red-500/20 p-3 text-[14px] font-book text-steel-gray leading-relaxed">
+        <div className="flex items-start gap-2.5 rounded-[12px] bg-red-500/[0.04] border border-red-500/20 p-3 text-[14px] font-book text-steel-gray leading-relaxed">
           <ShieldAlert className="h-4 w-4 text-red-600 shrink-0 mt-0.5" />
           <span>{t('securityNotice')}</span>
         </div>
 
         {/* Сообщение об успехе */}
         {feedbackMessage && (
-          <div className="rounded-[12px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
+          <div className="rounded-[12px] border border-emerald-500/30 bg-emerald-500/[0.04] p-3 text-[14px] font-book text-emerald-700">
             {feedbackMessage}
           </div>
         )}

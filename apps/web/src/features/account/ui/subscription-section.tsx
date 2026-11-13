@@ -53,7 +53,7 @@ export function SubscriptionSection({
   return (
     <div className="space-y-6">
       {/* Карточка текущей подписки */}
-      <Card className="rounded-[40px] border-[0.5px] border-black/10 bg-pure-white p-6 md:p-10">
+      <Card className="rounded-[40px] border border-black/10 bg-pure-white p-6 md:p-10">
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -110,7 +110,7 @@ export function SubscriptionSection({
 
         <CardContent className="pt-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="rounded-[24px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-4 space-y-1">
+            <div className="rounded-[24px] border border-black/5 bg-[#fdfdfd] p-4 space-y-1">
               <span className="text-[14px] text-steel-gray block">{t('planCostLabel')}</span>
               <div className="text-[20px] font-book text-off-black">
                 {subscription.priceEur.toFixed(2)} €
@@ -120,7 +120,7 @@ export function SubscriptionSection({
               </div>
             </div>
 
-            <div className="rounded-[24px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-4 space-y-1">
+            <div className="rounded-[24px] border border-black/5 bg-[#fdfdfd] p-4 space-y-1">
               <span className="text-[14px] text-steel-gray block">{t('paidUntilLabel')}</span>
               <div className="text-[17px] font-book text-off-black flex items-center gap-1.5">
                 <Calendar className="h-4 w-4 text-signal-blue" />
@@ -130,7 +130,7 @@ export function SubscriptionSection({
             </div>
 
             {/* Тумблер автопродления (ТЗ §11.1) */}
-            <div className="rounded-[24px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-4 flex items-center justify-between gap-3">
+            <div className="rounded-[24px] border border-black/5 bg-[#fdfdfd] p-4 flex items-center justify-between gap-3">
               <div>
                 <span className="text-[14px] text-steel-gray block">{t('autoRenewLabel')}</span>
                 <span className="text-[15px] font-book text-off-black">
@@ -161,7 +161,7 @@ export function SubscriptionSection({
           </div>
 
           {/* Информационный блок о возвратах */}
-          <div className="rounded-[24px] border-[0.5px] border-black/5 bg-off-white/40 p-4 flex items-start gap-3 text-[14px] text-steel-gray leading-relaxed">
+          <div className="rounded-[24px] border border-black/5 bg-off-white/40 p-4 flex items-start gap-3 text-[14px] text-steel-gray leading-relaxed">
             <HelpCircle className="h-4 w-4 text-signal-blue shrink-0 mt-0.5" />
             <div>
               <span className="font-medium text-off-black block mb-0.5">
@@ -178,7 +178,7 @@ export function SubscriptionSection({
               {t('historyTitle')}
             </h4>
 
-            <div className="rounded-[24px] border-[0.5px] border-black/10 overflow-hidden bg-[#fdfdfd]">
+            <div className="rounded-[24px] border border-black/10 overflow-hidden bg-[#fdfdfd]">
               <table className="w-full text-left border-collapse text-[14px]">
                 <thead>
                   <tr className="border-b border-black/5 bg-black/[0.02] text-steel-gray text-[14px]">
@@ -246,7 +246,7 @@ export function SubscriptionSection({
 
               <div
                 onClick={() => setSelectedNewPlan('pro')}
-                className={`p-4 rounded-[20px] border-[0.5px] cursor-pointer transition-all ${
+                className={`p-4 rounded-[20px] border cursor-pointer transition-all ${
                   selectedNewPlan === 'pro'
                     ? 'border-signal-blue bg-signal-blue/[0.04]'
                     : 'border-black/10 bg-[#fdfdfd] hover:bg-black/[0.02]'
@@ -263,7 +263,7 @@ export function SubscriptionSection({
 
               <div
                 onClick={() => setSelectedNewPlan('max')}
-                className={`p-4 rounded-[20px] border-[0.5px] cursor-pointer transition-all ${
+                className={`p-4 rounded-[20px] border cursor-pointer transition-all ${
                   selectedNewPlan === 'max'
                     ? 'border-signal-blue bg-signal-blue/[0.04]'
                     : 'border-black/10 bg-[#fdfdfd] hover:bg-black/[0.02]'
@@ -324,7 +324,7 @@ export function SubscriptionSection({
               })}
             </p>
 
-            <div className="p-4 rounded-[20px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] space-y-1">
+            <div className="p-4 rounded-[20px] border border-emerald-500/30 bg-emerald-500/[0.04] space-y-1">
               <span className="text-[14px] text-emerald-800 font-medium block">
                 {t('cancelDialog.refundBoxTitle')}
               </span>
