@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   User,
   Mail,
@@ -39,6 +40,7 @@ export function ProfileSection({
   handlePasswordInputSubmit,
   handleCompletePasswordChange,
 }: ProfileSectionProps) {
+  const t = useTranslations('account.profile');
   const [initEmailInput, setInitEmailInput] = React.useState('');
   const [oldEmailCodeInput, setOldEmailCodeInput] = React.useState('');
   const [newEmailCodeInput, setNewEmailCodeInput] = React.useState('');
@@ -61,15 +63,15 @@ export function ProfileSection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="signal-chip">EU Region (Frankfurt)</Badge>
+              <Badge variant="signal-chip">{t('euBadge')}</Badge>
               <Badge variant="success">
                 <CheckCircle2 className="h-3 w-3" />
-                Email подтверждён
+                {t('emailVerified')}
               </Badge>
             </div>
-            <CardTitle className="text-[22px] md:text-[26px]">Личный профиль</CardTitle>
+            <CardTitle className="text-[22px] md:text-[26px]">{t('title')}</CardTitle>
             <CardDescription className="text-steel-gray text-[14px]">
-              Управление персональными данными, контактным адресом и безопасностью доступа
+              {t('description')}
             </CardDescription>
           </div>
           {!isEditingProfile && (
@@ -86,7 +88,7 @@ export function ProfileSection({
               className="gap-2"
             >
               <Edit2 className="h-3.5 w-3.5" />
-              Редактировать ФИО
+              {t('editNameBtn')}
             </Button>
           )}
         </CardHeader>
@@ -94,11 +96,11 @@ export function ProfileSection({
         <CardContent className="pt-6 space-y-6">
           {isEditingProfile ? (
             <div className="rounded-[24px] border-[0.5px] border-black/10 bg-off-white/40 p-5 space-y-4 max-w-lg">
-              <h4 className="text-[15px] font-medium text-off-black">Редактирование имени и фамилии</h4>
+              <h4 className="text-[15px] font-medium text-off-black">{t('editFormTitle')}</h4>
               <div className="space-y-3">
                 <div>
                   <label className="text-[14px] font-regular text-steel-gray block mb-1">
-                    Имя (необязательно, макс. 50 символов)
+                    {t('firstNameLabel')}
                   </label>
                   <Input
                     value={profileForm.firstName}
@@ -106,12 +108,12 @@ export function ProfileSection({
                     onChange={(e) =>
                       setProfileForm((prev) => ({ ...prev, firstName: e.target.value }))
                     }
-                    placeholder="Например: Алексей"
+                    placeholder={t('firstNamePlaceholder')}
                   />
                 </div>
                 <div>
                   <label className="text-[14px] font-regular text-steel-gray block mb-1">
-                    Фамилия (необязательно, макс. 50 символов)
+                    {t('lastNameLabel')}
                   </label>
                   <Input
                     value={profileForm.lastName}
@@ -119,20 +121,20 @@ export function ProfileSection({
                     onChange={(e) =>
                       setProfileForm((prev) => ({ ...prev, lastName: e.target.value }))
                     }
-                    placeholder="Например: Коваленко"
+                    placeholder={t('lastNamePlaceholder')}
                   />
                 </div>
               </div>
               <div className="flex items-center gap-2 pt-2">
                 <Button size="sm" onClick={handleUpdateProfile}>
-                  Сохранить изменения
+                  {t('saveChanges')}
                 </Button>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsEditingProfile(false)}
                 >
-                  Отмена
+                  {t('cancel')}
                 </Button>
               </div>
             </div>
@@ -143,11 +145,11 @@ export function ProfileSection({
                   <User className="h-5 w-5 text-off-black" />
                 </div>
                 <div>
-                  <span className="text-[14px] text-steel-gray block">Владелец аккаунта</span>
+                  <span className="text-[14px] text-steel-gray block">{t('accountOwner')}</span>
                   <span className="text-[15px] font-book text-off-black">
                     {userProfile.firstName || userProfile.lastName
                       ? `${userProfile.firstName} ${userProfile.lastName}`.trim()
-                      : 'Имя не указано'}
+                      : t('nameNotSet')}
                   </span>
                 </div>
               </div>
@@ -158,7 +160,7 @@ export function ProfileSection({
                     <Mail className="h-5 w-5 text-off-black" />
                   </div>
                   <div className="truncate">
-                    <span className="text-[14px] text-steel-gray block">Основной email</span>
+                    <span className="text-[14px] text-steel-gray block">{t('primaryEmail')}</span>
                     <span className="text-[15px] font-book text-off-black truncate block">
                       {userProfile.email}
                     </span>
@@ -173,7 +175,7 @@ export function ProfileSection({
                   }}
                   className="shrink-0"
                 >
-                  Сменить
+                  {t('changeBtn')}
                 </Button>
               </div>
             </div>
@@ -186,9 +188,9 @@ export function ProfileSection({
                 <Lock className="h-5 w-5 text-off-black" />
               </div>
               <div>
-                <span className="text-[14px] font-book text-off-black block">Пароль учётной записи</span>
+                <span className="text-[14px] font-book text-off-black block">{t('passwordTitle')}</span>
                 <span className="text-[14px] text-steel-gray block">
-                  Защищён криптографическим хэшем scrypt. Смена пароля отзывает все сессии и API-ключ.
+                  {t('passwordHint')}
                 </span>
               </div>
             </div>
@@ -203,7 +205,7 @@ export function ProfileSection({
                 handleStartPasswordChange();
               }}
             >
-              Сменить пароль
+              {t('changePasswordBtn')}
             </Button>
           </div>
         </CardContent>
@@ -220,20 +222,19 @@ export function ProfileSection({
         >
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Badge variant="signal-chip">Двухэтапная процедура</Badge>
+              <Badge variant="signal-chip">{t('emailDialog.badge')}</Badge>
               {emailChangeFlow.step !== 'completed' && (
                 <div className="flex items-center gap-1.5 text-[14px] text-steel-gray">
                   <Clock className="h-3.5 w-3.5 text-signal-blue" />
-                  <span>Осталось: {formatTimer(emailChangeFlow.timeLeftSeconds)}</span>
+                  <span>{t('emailDialog.timeLeft', { time: formatTimer(emailChangeFlow.timeLeftSeconds) })}</span>
                 </div>
               )}
             </div>
 
-            <h3 className="text-[20px] font-book text-off-black">Смена адреса электронной почты</h3>
+            <h3 className="text-[20px] font-book text-off-black">{t('emailDialog.title')}</h3>
 
             <p className="text-[14px] text-steel-gray leading-relaxed">
-              По стандартам безопасности ТЗ §6.2 требуется подтверждение кодами из двух писем:
-              первый отправляется на ваш текущий адрес, второй — на новый. Общий срок операции — 20 минут.
+              {t('emailDialog.description')}
             </p>
 
             {emailChangeFlow.error && (
@@ -246,13 +247,13 @@ export function ProfileSection({
             {emailChangeFlow.step === 'init' && (
               <div className="space-y-3 pt-2">
                 <label className="text-[14px] font-regular text-off-black block">
-                  Введите новый адрес электронной почты:
+                  {t('emailDialog.newEmailLabel')}
                 </label>
                 <Input
                   type="email"
                   value={initEmailInput}
                   onChange={(e) => setInitEmailInput(e.target.value)}
-                  placeholder="new-email@example.com"
+                  placeholder={t('emailDialog.newEmailPlaceholder')}
                   autoFocus
                 />
                 <div className="pt-2 flex justify-end gap-2">
@@ -261,7 +262,7 @@ export function ProfileSection({
                     disabled={!initEmailInput.includes('@')}
                     onClick={() => handleInitEmailSubmit(initEmailInput)}
                   >
-                    Отправить первый код
+                    {t('emailDialog.sendFirstCode')}
                   </Button>
                 </div>
               </div>
@@ -270,10 +271,13 @@ export function ProfileSection({
             {emailChangeFlow.step === 'step1_old_email' && (
               <div className="space-y-3 pt-2">
                 <div className="p-3 rounded-[20px] bg-black/[0.03] text-[14px] text-off-black">
-                  Код №1 отправлен на старую почту: <strong>{userProfile.email}</strong>
+                  {t.rich('emailDialog.step1Sent', {
+                    email: userProfile.email,
+                    bold: (chunks) => <strong>{chunks}</strong>,
+                  })}
                 </div>
                 <label className="text-[14px] font-regular text-off-black block">
-                  Введите 6-значный код из письма на старую почту:
+                  {t('emailDialog.step1CodeLabel')}
                 </label>
                 <Input
                   type="text"
@@ -290,7 +294,7 @@ export function ProfileSection({
                     disabled={oldEmailCodeInput.length !== 6}
                     onClick={() => handleVerifyOldEmailCode(oldEmailCodeInput)}
                   >
-                    Подтвердить и выслать код №2
+                    {t('emailDialog.step1Submit')}
                   </Button>
                 </div>
               </div>
@@ -299,11 +303,14 @@ export function ProfileSection({
             {emailChangeFlow.step === 'step2_new_email' && (
               <div className="space-y-4 pt-2">
                 <div className="p-3 rounded-[20px] bg-black/[0.03] text-[14px] text-off-black">
-                  Код №2 отправлен на новый адрес: <strong>{emailChangeFlow.newEmail}</strong>
+                  {t.rich('emailDialog.step2Sent', {
+                    email: emailChangeFlow.newEmail,
+                    bold: (chunks) => <strong>{chunks}</strong>,
+                  })}
                 </div>
                 <div>
                   <label className="text-[14px] font-regular text-off-black block mb-1">
-                    Введите 6-значный код из письма на новую почту:
+                    {t('emailDialog.step2CodeLabel')}
                   </label>
                   <Input
                     type="text"
@@ -326,7 +333,7 @@ export function ProfileSection({
                         terminateSessionsAndApiKey: e.target.checked,
                       }))
                     }
-                    label="Выйти на всех устройствах и отключить API-ключ после смены email (ТЗ §6.2, рекомендуется)"
+                    label={t('emailDialog.terminateSessionsLabel')}
                   />
                 </div>
 
@@ -336,7 +343,7 @@ export function ProfileSection({
                     disabled={newEmailCodeInput.length !== 6}
                     onClick={() => handleCompleteEmailChange(newEmailCodeInput)}
                   >
-                    Завершить смену почты
+                    {t('emailDialog.step2Submit')}
                   </Button>
                 </div>
               </div>
@@ -345,16 +352,19 @@ export function ProfileSection({
             {emailChangeFlow.step === 'completed' && (
               <div className="text-center py-4 space-y-3">
                 <CheckCircle2 className="h-10 w-10 text-emerald-600 mx-auto" />
-                <h4 className="text-[18px] font-book text-off-black">Адрес почты успешно изменён!</h4>
+                <h4 className="text-[18px] font-book text-off-black">{t('emailDialog.completedTitle')}</h4>
                 <p className="text-[14px] text-steel-gray">
-                  Новый email <strong>{userProfile.email}</strong> теперь используется для входа и всех уведомлений.
+                  {t.rich('emailDialog.completedDesc', {
+                    email: userProfile.email,
+                    bold: (chunks) => <strong>{chunks}</strong>,
+                  })}
                 </p>
                 <div className="pt-2">
                   <Button
                     size="sm"
                     onClick={() => setEmailChangeFlow((prev) => ({ ...prev, isOpen: false }))}
                   >
-                    Понятно
+                    {t('emailDialog.doneBtn')}
                   </Button>
                 </div>
               </div>
@@ -375,12 +385,11 @@ export function ProfileSection({
           className="max-w-[480px]"
         >
           <div className="space-y-4">
-            <Badge variant="signal-chip">Безопасность scrypt</Badge>
-            <h3 className="text-[20px] font-book text-off-black">Смена пароля аккаунта</h3>
+            <Badge variant="signal-chip">{t('passwordDialog.badge')}</Badge>
+            <h3 className="text-[20px] font-book text-off-black">{t('passwordDialog.title')}</h3>
 
             <p className="text-[14px] text-steel-gray leading-relaxed">
-              По ТЗ §6.3 смена пароля подтверждается кодом на почту и немедленно завершает все активные сессии
-              на всех устройствах, а также отзывает действующий API-ключ.
+              {t('passwordDialog.description')}
             </p>
 
             {passwordChangeFlow.error && (
@@ -394,7 +403,7 @@ export function ProfileSection({
               <div className="space-y-3 pt-2">
                 <div>
                   <label className="text-[14px] font-regular text-steel-gray block mb-1">
-                    Текущий пароль
+                    {t('passwordDialog.currentPassword')}
                   </label>
                   <Input
                     type="password"
@@ -405,7 +414,7 @@ export function ProfileSection({
                 </div>
                 <div>
                   <label className="text-[14px] font-regular text-steel-gray block mb-1">
-                    Новый пароль (от 8 до 128 символов)
+                    {t('passwordDialog.newPassword')}
                   </label>
                   <Input
                     type="password"
@@ -416,7 +425,7 @@ export function ProfileSection({
                 </div>
                 <div>
                   <label className="text-[14px] font-regular text-steel-gray block mb-1">
-                    Повторите новый пароль
+                    {t('passwordDialog.confirmPassword')}
                   </label>
                   <Input
                     type="password"
@@ -433,7 +442,7 @@ export function ProfileSection({
                       handlePasswordInputSubmit(currentPass, newPass, confirmPass)
                     }
                   >
-                    Далее: выслать код
+                    {t('passwordDialog.nextSendCode')}
                   </Button>
                 </div>
               </div>
@@ -442,10 +451,13 @@ export function ProfileSection({
             {passwordChangeFlow.step === 'verify_code' && (
               <div className="space-y-3 pt-2">
                 <div className="p-3 rounded-[20px] bg-black/[0.03] text-[14px] text-off-black">
-                  6-значный проверочный код отправлен на <strong>{userProfile.email}</strong>
+                  {t.rich('passwordDialog.codeSent', {
+                    email: userProfile.email,
+                    bold: (chunks) => <strong>{chunks}</strong>,
+                  })}
                 </div>
                 <label className="text-[14px] font-regular text-off-black block">
-                  Введите 6-значный код:
+                  {t('passwordDialog.enterCode')}
                 </label>
                 <Input
                   type="text"
@@ -462,7 +474,7 @@ export function ProfileSection({
                     disabled={passEmailCode.length !== 6}
                     onClick={() => handleCompletePasswordChange(passEmailCode)}
                   >
-                    Подтвердить смену пароля
+                    {t('passwordDialog.submit')}
                   </Button>
                 </div>
               </div>
@@ -471,9 +483,9 @@ export function ProfileSection({
             {passwordChangeFlow.step === 'completed' && (
               <div className="text-center py-4 space-y-3">
                 <CheckCircle2 className="h-10 w-10 text-emerald-600 mx-auto" />
-                <h4 className="text-[18px] font-book text-off-black">Пароль успешно обновлён</h4>
+                <h4 className="text-[18px] font-book text-off-black">{t('passwordDialog.completedTitle')}</h4>
                 <p className="text-[14px] text-steel-gray">
-                  Все другие сессии завершены, API-ключ отозван по соображениям безопасности.
+                  {t('passwordDialog.completedDesc')}
                 </p>
                 <div className="pt-2">
                   <Button
@@ -482,7 +494,7 @@ export function ProfileSection({
                       setPasswordChangeFlow((prev) => ({ ...prev, isOpen: false }))
                     }
                   >
-                    Закрыть
+                    {t('passwordDialog.close')}
                   </Button>
                 </div>
               </div>

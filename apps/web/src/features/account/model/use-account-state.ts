@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import { useRouter } from '@/shared/i18n';
 import type {
   PlanTier,
@@ -115,11 +116,16 @@ const INITIAL_SUPPORT_REQUESTS: SupportAccessRequest[] = [
 ];
 
 export function useAccountState() {
+  const t = useTranslations('account');
   const router = useRouter();
   const [activeTab, setActiveTab] = React.useState<AccountTabKey>('profile');
 
   // Состояние пользователя
-  const [userProfile, setUserProfile] = React.useState<UserProfile>(INITIAL_PROFILE);
+  const [userProfile, setUserProfile] = React.useState<UserProfile>(() => ({
+    ...INITIAL_PROFILE,
+    firstName: t('demo.firstName'),
+    lastName: t('demo.lastName'),
+  }));
   const [isEditingProfile, setIsEditingProfile] = React.useState(false);
   const [profileForm, setProfileForm] = React.useState({
     firstName: userProfile.firstName || '',
@@ -136,8 +142,12 @@ export function useAccountState() {
     cancelAtPeriodEnd: false,
     status: 'active',
   });
-  const [transactions, setTransactions] =
-    React.useState<PaymentTransactionItem[]>(INITIAL_TRANSACTIONS);
+  const [transactions, setTransactions] = React.useState<PaymentTransactionItem[]>(() =>
+    INITIAL_TRANSACTIONS.map((tx) => ({
+      ...tx,
+      description: t('demo.txProMonthly'),
+    }))
+  );
 
   // Сохраненные файлы
   const [files, setFiles] = React.useState<SavedFile[]>(INITIAL_FILES);
@@ -158,8 +168,13 @@ export function useAccountState() {
   );
 
   // Служебный доступ поддержки (ТЗ §12.17)
-  const [supportRequests, setSupportRequests] =
-    React.useState<SupportAccessRequest[]>(INITIAL_SUPPORT_REQUESTS);
+  const [supportRequests, setSupportRequests] = React.useState<SupportAccessRequest[]>(() =>
+    INITIAL_SUPPORT_REQUESTS.map((req) => ({
+      ...req,
+      staffName: t('demo.supportStaffName'),
+      reason: t('demo.supportReason'),
+    }))
+  );
 
   // Резервные коды (ТЗ §6.5)
   const [recoveryCodesCount, setRecoveryCodesCount] = React.useState<number>(10);
@@ -187,7 +202,7 @@ export function useAccountState() {
             ...prev,
             isOpen: false,
             step: 'init',
-            error: 'Срок действия операции (20 минут) истек. Начните заново.',
+            error: t('errors.emailChangeExpired'),
           };
         }
         return { ...prev, timeLeftSeconds: prev.timeLeftSeconds - 1 };
@@ -315,7 +330,7 @@ export function useAccountState() {
     if (newEmail.toLowerCase() === userProfile.email.toLowerCase()) {
       setEmailChangeFlow((prev) => ({
         ...prev,
-        error: 'Новый адрес совпадает с текущим.',
+        error: t('errors.emailSameAsCurrent'),
       }));
       return;
     }
@@ -332,7 +347,7 @@ export function useAccountState() {
     if (code.length !== 6) {
       setEmailChangeFlow((prev) => ({
         ...prev,
-        error: 'Введите корректный 6-значный код.',
+        error: t('errors.invalidCode6'),
       }));
       return;
     }
@@ -349,7 +364,7 @@ export function useAccountState() {
     if (code.length !== 6) {
       setEmailChangeFlow((prev) => ({
         ...prev,
-        error: 'Введите корректный 6-значный код.',
+        error: t('errors.invalidCode6'),
       }));
       return;
     }
@@ -384,14 +399,14 @@ export function useAccountState() {
     if (newP.length < 8 || newP.length > 128) {
       setPasswordChangeFlow((prev) => ({
         ...prev,
-        error: 'Пароль должен содержать от 8 до 128 символов.',
+        error: t('errors.passwordLength'),
       }));
       return;
     }
     if (newP !== confP) {
       setPasswordChangeFlow((prev) => ({
         ...prev,
-        error: 'Пароли не совпадают.',
+        error: t('errors.passwordsMismatch'),
       }));
       return;
     }
@@ -409,7 +424,7 @@ export function useAccountState() {
     if (code.length !== 6) {
       setPasswordChangeFlow((prev) => ({
         ...prev,
-        error: 'Введите корректный 6-значный код.',
+        error: t('errors.invalidCode6'),
       }));
       return;
     }
@@ -440,7 +455,7 @@ export function useAccountState() {
     if (code.length !== 6) {
       setApiKeyRotateFlow((prev) => ({
         ...prev,
-        error: 'Введите корректный 6-значный код.',
+        error: t('errors.invalidCode6'),
       }));
       return;
     }
@@ -516,7 +531,9 @@ export function useAccountState() {
       {
         id: `tx_refund_${Date.now()}`,
         date: new Date().toISOString(),
-        description: `Возврат за неиспользованный остаток периода (${cancelSubscriptionFlow.calculatedRefundEur.toFixed(2)} €)`,
+        description: t('subscription.txRefundDescription', {
+          amount: cancelSubscriptionFlow.calculatedRefundEur.toFixed(2),
+        }),
         amountEur: -cancelSubscriptionFlow.calculatedRefundEur,
         type: 'refund',
         status: 'succeeded',
@@ -536,7 +553,7 @@ export function useAccountState() {
       {
         id: `tx_prorate_${Date.now()}`,
         date: new Date().toISOString(),
-        description: `Смена тарифа на ${newPlan.toUpperCase()} (доплата/перерасчет)`,
+        description: t('subscription.txPlanChangeDescription', { plan: newPlan.toUpperCase() }),
         amountEur: 2.5,
         type: 'upgrade_proration',
         status: 'succeeded',
@@ -551,7 +568,7 @@ export function useAccountState() {
     if (code.length !== 6) {
       setRecoveryCodesFlow((prev) => ({
         ...prev,
-        error: 'Введите корректный 6-значный код.',
+        error: t('errors.invalidCode6'),
       }));
       return;
     }
@@ -579,7 +596,7 @@ export function useAccountState() {
     if (code.length !== 6) {
       setSupportApprovalFlow((prev) => ({
         ...prev,
-        error: 'Введите корректный 6-значный код.',
+        error: t('errors.invalidCode6'),
       }));
       return;
     }
@@ -609,7 +626,7 @@ export function useAccountState() {
     if (code.length !== 6) {
       setDeleteAccountFlow((prev) => ({
         ...prev,
-        error: 'Введите корректный 6-значный код.',
+        error: t('errors.invalidCode6'),
       }));
       return;
     }

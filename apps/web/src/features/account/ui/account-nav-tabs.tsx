@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   User,
   HardDrive,
@@ -29,6 +30,8 @@ export function AccountNavTabs({
   hasPendingSupportRequests,
   fileCount = 0,
 }: AccountNavTabsProps) {
+  const t = useTranslations('account.tabs');
+
   const tabs: {
     id: AccountTabKey;
     label: string;
@@ -36,32 +39,32 @@ export function AccountNavTabs({
     badge?: string | number;
     badgeVariant?: 'warning' | 'info' | 'danger';
   }[] = [
-    { id: 'profile', label: 'Профиль', icon: User },
+    { id: 'profile', label: t('profile'), icon: User },
     {
       id: 'storage',
-      label: 'Хранилище',
+      label: t('storage'),
       icon: HardDrive,
       badge: storageWarning ? '≥75%' : undefined,
       badgeVariant: 'warning',
     },
     {
       id: 'files',
-      label: 'Файлы',
+      label: t('files'),
       icon: Files,
       badge: fileCount > 0 ? fileCount : undefined,
       badgeVariant: 'info',
     },
-    { id: 'apiKey', label: 'API-ключ', icon: KeyRound },
-    { id: 'subscription', label: 'Тариф и оплата', icon: CreditCard },
-    { id: 'recovery', label: 'Резервные коды', icon: ShieldAlert },
+    { id: 'apiKey', label: t('apiKey'), icon: KeyRound },
+    { id: 'subscription', label: t('subscription'), icon: CreditCard },
+    { id: 'recovery', label: t('recovery'), icon: ShieldAlert },
     {
       id: 'support',
-      label: 'Служебный доступ',
+      label: t('support'),
       icon: HelpCircle,
       badge: hasPendingSupportRequests ? '1' : undefined,
       badgeVariant: 'warning',
     },
-    { id: 'danger', label: 'Удаление', icon: AlertTriangle },
+    { id: 'danger', label: t('danger'), icon: AlertTriangle },
   ];
 
   return (

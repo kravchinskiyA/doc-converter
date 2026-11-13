@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useFormatter, useTranslations } from 'next-intl';
 import {
   FileCheck,
   CheckCircle2,
@@ -27,12 +28,13 @@ export function StaffAccessSection({
   handleApproveSupportAccess,
   handleRevokeSupportAccess,
 }: StaffAccessSectionProps) {
+  const t = useTranslations('account.support');
+  const format = useFormatter();
   const [approvalCodeInput, setApprovalCodeInput] = React.useState('');
 
   const formatDate = (isoString: string): string => {
     try {
-      const d = new Date(isoString);
-      return d.toLocaleDateString('ru-RU', {
+      return format.dateTime(new Date(isoString), {
         day: '2-digit',
         month: 'short',
         hour: '2-digit',
@@ -48,27 +50,27 @@ export function StaffAccessSection({
       case 'pending':
         return (
           <Badge variant="signal-chip" className="text-[14px]">
-            Ожидает подтверждения
+            {t('status.pending')}
           </Badge>
         );
       case 'active':
         return (
           <Badge variant="success" className="text-[14px]">
             <CheckCircle2 className="h-3 w-3" />
-            Доступ активен (до 24ч)
+            {t('status.active')}
           </Badge>
         );
       case 'revoked':
         return (
           <Badge variant="muted" className="text-[14px]">
             <XCircle className="h-3 w-3" />
-            Отозван пользователем
+            {t('status.revoked')}
           </Badge>
         );
       case 'expired':
         return (
           <Badge variant="neutral" className="text-[14px]">
-            Истёк срок
+            {t('status.expired')}
           </Badge>
         );
     }
@@ -80,14 +82,14 @@ export function StaffAccessSection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="signal-chip">GDPR Privacy</Badge>
-              <Badge variant="neutral">ТЗ §12.17</Badge>
+              <Badge variant="signal-chip">{t('gdprBadge')}</Badge>
+              <Badge variant="neutral">{t('specBadge')}</Badge>
             </div>
             <CardTitle className="text-[22px] md:text-[26px]">
-              Служебный доступ техподдержки
+              {t('title')}
             </CardTitle>
             <CardDescription className="text-steel-gray text-[14px]">
-              Контроль доступа сотрудников поддержки к конкретным файлам для разбора инцидентов и сбоев
+              {t('description')}
             </CardDescription>
           </div>
         </CardHeader>
@@ -97,11 +99,11 @@ export function StaffAccessSection({
             <ShieldCheck className="h-4 w-4 text-signal-blue shrink-0 mt-0.5" />
             <div>
               <span className="font-medium text-off-black block mb-0.5">
-                Инвариант конфиденциальности:
+                {t('privacyTitle')}
               </span>
-              Сотрудники сервиса <strong>не имеют прямого доступа</strong> к содержимому ваших документов.
-              Доступ может быть предоставлен только по вашему прямому подтверждению кодом из письма
-              к конкретным файлам на срок не более 24 часов и может быть отозван вами в любую секунду.
+              {t.rich('privacyDesc', {
+                bold: (chunks) => <strong>{chunks}</strong>,
+              })}
             </div>
           </div>
 
@@ -109,9 +111,9 @@ export function StaffAccessSection({
           {supportRequests.length === 0 ? (
             <div className="rounded-[28px] border-[0.5px] border-dashed border-black/15 p-10 text-center space-y-2 bg-[#fdfdfd]">
               <UserCheck className="h-7 w-7 text-steel-gray/60 mx-auto" />
-              <h4 className="text-[15px] font-book text-off-black">Запросов на доступ нет</h4>
+              <h4 className="text-[15px] font-book text-off-black">{t('emptyTitle')}</h4>
               <p className="text-[14px] text-steel-gray max-w-sm mx-auto">
-                Когда инженер поддержки запросит просмотр сбойного файла по вашему тикету, запрос появится здесь.
+                {t('emptyDesc')}
               </p>
             </div>
           ) : (
@@ -131,12 +133,12 @@ export function StaffAccessSection({
 
                   <div className="space-y-2 text-[14px]">
                     <div>
-                      <span className="text-steel-gray block text-[14px]">Причина запроса:</span>
+                      <span className="text-steel-gray block text-[14px]">{t('reasonLabel')}</span>
                       <p className="text-off-black font-book">{req.reason}</p>
                     </div>
 
                     <div>
-                      <span className="text-steel-gray block text-[14px]">Запрашиваемые файлы:</span>
+                      <span className="text-steel-gray block text-[14px]">{t('filesLabel')}</span>
                       <div className="flex flex-wrap gap-1.5 pt-1">
                         {req.fileNames.map((fn, idx) => (
                           <Badge key={idx} variant="neutral" className="text-[14px] py-0.5">
@@ -148,8 +150,8 @@ export function StaffAccessSection({
                     </div>
 
                     <div className="flex items-center gap-4 text-[14px] text-steel-gray pt-1">
-                      <span>Запрошен: {formatDate(req.requestedAt)}</span>
-                      <span>Действует до: {formatDate(req.expiresAt)}</span>
+                      <span>{t('requestedAt', { date: formatDate(req.requestedAt) })}</span>
+                      <span>{t('expiresAt', { date: formatDate(req.expiresAt) })}</span>
                     </div>
                   </div>
 
@@ -169,7 +171,7 @@ export function StaffAccessSection({
                         }}
                         className="text-[14px] h-[34px]"
                       >
-                        Подтвердить кодом на email
+                        {t('approveBtn')}
                       </Button>
                     )}
 
@@ -180,7 +182,7 @@ export function StaffAccessSection({
                         onClick={() => handleRevokeSupportAccess(req.id)}
                         className="border-red-500/30 text-red-600 hover:bg-red-500/5 text-[14px] h-[34px]"
                       >
-                        Отозвать доступ немедленно
+                        {t('revokeBtn')}
                       </Button>
                     )}
                   </div>
@@ -203,12 +205,15 @@ export function StaffAccessSection({
           className="max-w-[480px]"
         >
           <div className="space-y-4">
-            <Badge variant="signal-chip">Подтверждение ТЗ §12.17</Badge>
-            <h3 className="text-[20px] font-book text-off-black">Предоставление доступа инженеру</h3>
+            <Badge variant="signal-chip">{t('dialog.badge')}</Badge>
+            <h3 className="text-[20px] font-book text-off-black">{t('dialog.title')}</h3>
 
             <p className="text-[14px] text-steel-gray leading-relaxed">
-              Вы разрешаете инженеру <strong>{supportApprovalFlow.request?.staffName}</strong> просмотр указанных файлов
-              на срок до 24 часов. Код подтверждения отправлен на вашу почту (<strong>{userProfile.email}</strong>).
+              {t.rich('dialog.description', {
+                staffName: supportApprovalFlow.request?.staffName ?? '',
+                email: userProfile.email,
+                bold: (chunks) => <strong>{chunks}</strong>,
+              })}
             </p>
 
             {supportApprovalFlow.error && (
@@ -220,7 +225,7 @@ export function StaffAccessSection({
 
             <div className="space-y-3 pt-2">
               <label className="text-[14px] font-regular text-off-black block">
-                Введите 6-значный проверочный код:
+                {t('dialog.codeLabel')}
               </label>
               <Input
                 type="text"
@@ -239,7 +244,7 @@ export function StaffAccessSection({
                     setSupportApprovalFlow((prev) => ({ ...prev, isOpen: false }))
                   }
                 >
-                  Отмена
+                  {t('dialog.cancel')}
                 </Button>
                 <Button
                   size="sm"
@@ -252,7 +257,7 @@ export function StaffAccessSection({
                     )
                   }
                 >
-                  Разрешить просмотр
+                  {t('dialog.submit')}
                 </Button>
               </div>
             </div>

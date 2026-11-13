@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useFormatter, useTranslations } from 'next-intl';
 import {
   KeyRound,
   Eye,
@@ -34,6 +35,8 @@ export function ApiKeySection({
   setApiKeyRotateFlow,
   handleRotateApiKeySubmit,
 }: ApiKeySectionProps) {
+  const t = useTranslations('account.apiKey');
+  const format = useFormatter();
   const [copied, setCopied] = React.useState(false);
   const [rotateCodeInput, setRotateCodeInput] = React.useState('');
 
@@ -45,10 +48,9 @@ export function ApiKeySection({
   };
 
   const formatDate = (isoString?: string): string => {
-    if (!isoString) return 'Неизвестно';
+    if (!isoString) return t('unknownDate');
     try {
-      const d = new Date(isoString);
-      return d.toLocaleDateString('ru-RU', {
+      return format.dateTime(new Date(isoString), {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
@@ -64,14 +66,14 @@ export function ApiKeySection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="signal-chip">REST API v1</Badge>
+              <Badge variant="signal-chip">{t('restBadge')}</Badge>
               <Badge variant={apiKey.hasKey ? 'success' : 'neutral'}>
-                {apiKey.hasKey ? 'Ключ активен' : 'Ключ не выпущен'}
+                {apiKey.hasKey ? t('activeBadge') : t('notIssuedBadge')}
               </Badge>
             </div>
-            <CardTitle className="text-[22px] md:text-[26px]">Пользовательский API-ключ</CardTitle>
+            <CardTitle className="text-[22px] md:text-[26px]">{t('title')}</CardTitle>
             <CardDescription className="text-steel-gray text-[14px]">
-              Ключ для программного доступа к конвертации через заголовок <code>X-API-Key</code>
+              {t.rich('description', { code: (chunks) => <code>{chunks}</code> })}
             </CardDescription>
           </div>
           {apiKey.hasKey ? (
@@ -91,12 +93,12 @@ export function ApiKeySection({
               className="gap-2 shrink-0"
               title={
                 apiKey.hasActiveConversions
-                  ? 'Замена ключа запрещена при активных конвертациях (ТЗ §7)'
-                  : 'Перевыпуск ключа с кодом на почту'
+                  ? t('rotateDisabledTitle')
+                  : t('rotateTitle')
               }
             >
               <RefreshCw className="h-3.5 w-3.5" />
-              Перевыпустить ключ
+              {t('rotateBtn')}
             </Button>
           ) : (
             <Button
@@ -106,7 +108,7 @@ export function ApiKeySection({
               className="gap-2 shrink-0"
             >
               <PlusCircle className="h-3.5 w-3.5" />
-              Создать API-ключ
+              {t('createBtn')}
             </Button>
           )}
         </CardHeader>
@@ -117,10 +119,10 @@ export function ApiKeySection({
               <AlertCircle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
               <div>
                 <h4 className="text-[14px] font-medium text-amber-700">
-                  Активные задания конвертации в очереди
+                  {t('activeConversionsTitle')}
                 </h4>
                 <p className="text-[14px] text-amber-700/80 mt-1 leading-relaxed">
-                  По правилам ТЗ §7 генерация и замена API-ключа строго запрещены до завершения текущих конвертаций.
+                  {t('activeConversionsDesc')}
                 </p>
               </div>
             </div>
@@ -130,9 +132,9 @@ export function ApiKeySection({
             <div className="space-y-4">
               <div className="rounded-[28px] border-[0.5px] border-black/10 bg-[#fdfdfd] p-5 space-y-3">
                 <div className="flex items-center justify-between text-[14px] text-steel-gray">
-                  <span>Действующий секретный ключ (выпущен {formatDate(apiKey.createdAt)})</span>
+                  <span>{t('currentKeyIssued', { date: formatDate(apiKey.createdAt) })}</span>
                   <span className="text-[14px] text-emerald-600 flex items-center gap-1">
-                    <ShieldCheck className="h-3.5 w-3.5" /> Авторизация включена
+                    <ShieldCheck className="h-3.5 w-3.5" /> {t('authEnabled')}
                   </span>
                 </div>
 
@@ -148,7 +150,7 @@ export function ApiKeySection({
                       type="button"
                       onClick={() => setIsApiKeyRevealed(!isApiKeyRevealed)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-steel-gray hover:text-off-black transition-colors"
-                      title={isApiKeyRevealed ? 'Скрыть значение' : 'Показать полный ключ'}
+                      title={isApiKeyRevealed ? t('hideKeyTitle') : t('showKeyTitle')}
                     >
                       {isApiKeyRevealed ? (
                         <EyeOff className="h-4 w-4" />
@@ -167,19 +169,19 @@ export function ApiKeySection({
                     {copied ? (
                       <>
                         <Check className="h-4 w-4 text-emerald-600" />
-                        Скопировано
+                        {t('copied')}
                       </>
                     ) : (
                       <>
                         <Copy className="h-4 w-4" />
-                        Копировать
+                        {t('copy')}
                       </>
                     )}
                   </Button>
                 </div>
 
                 <p className="text-[14px] text-steel-gray pt-1">
-                  Никогда не передавайте ключ третьим лицам и не публикуйте в клиентских репозиториях.
+                  {t('securityWarning')}
                 </p>
               </div>
 
@@ -188,7 +190,7 @@ export function ApiKeySection({
                 <div className="flex items-center justify-between text-[14px] text-pure-white/70">
                   <span className="flex items-center gap-1.5">
                     <Terminal className="h-3.5 w-3.5 text-signal-blue" />
-                    Пример вызова REST API (cURL)
+                    {t('curlTitle')}
                   </span>
                   <span className="text-[14px] font-mono text-pure-white/50">bash</span>
                 </div>
@@ -203,10 +205,9 @@ export function ApiKeySection({
           ) : (
             <div className="rounded-[28px] border-[0.5px] border-dashed border-black/15 p-10 text-center space-y-3 bg-[#fdfdfd]">
               <KeyRound className="h-8 w-8 text-steel-gray/60 mx-auto" />
-              <h4 className="text-[16px] font-book text-off-black">API-ключ ещё не выпущен</h4>
+              <h4 className="text-[16px] font-book text-off-black">{t('emptyTitle')}</h4>
               <p className="text-[14px] text-steel-gray max-w-md mx-auto">
-                По ТЗ §7 до первого ручного создания ключ отсутствует. Нажмите кнопку создания выше,
-                чтобы получить ключ для интеграции с API или Telegram-ботом.
+                {t('emptyDesc')}
               </p>
             </div>
           )}
@@ -215,16 +216,10 @@ export function ApiKeySection({
           <div className="p-4 rounded-[22px] bg-black/[0.03] border-[0.5px] border-black/5 flex items-start gap-3 text-[14px] text-steel-gray">
             <Info className="h-4 w-4 text-signal-blue shrink-0 mt-0.5" />
             <div className="space-y-1">
-              <span className="font-medium text-off-black block">Правила безопасности ключа (ТЗ §7):</span>
-              <p>
-                - Замена ключа требует ввода 6-значного кода с почты; старый ключ немедленно деактивируется.
-              </p>
-              <p>
-                - При смене пароля действующий ключ автоматически отзывается ради защиты от перехвата.
-              </p>
-              <p>
-                - Отключение ключа не прерывает уже принятые в обработку API-задания.
-              </p>
+              <span className="font-medium text-off-black block">{t('rulesTitle')}</span>
+              <p>{t('rule1')}</p>
+              <p>{t('rule2')}</p>
+              <p>{t('rule3')}</p>
             </div>
           </div>
         </CardContent>
@@ -242,12 +237,14 @@ export function ApiKeySection({
           className="max-w-[480px]"
         >
           <div className="space-y-4">
-            <Badge variant="signal-chip">Подтверждение по email</Badge>
-            <h3 className="text-[20px] font-book text-off-black">Перевыпуск API-ключа</h3>
+            <Badge variant="signal-chip">{t('rotateDialog.badge')}</Badge>
+            <h3 className="text-[20px] font-book text-off-black">{t('rotateDialog.title')}</h3>
 
             <p className="text-[14px] text-steel-gray leading-relaxed">
-              По ТЗ §7 замена ключа требует подтверждения кодом на ваш email (<strong>{userProfile.email}</strong>).
-              После генерации нового ключа старый ключ <strong>немедленно потеряет силу</strong>.
+              {t.rich('rotateDialog.description', {
+                email: userProfile.email,
+                bold: (chunks) => <strong>{chunks}</strong>,
+              })}
             </p>
 
             {apiKeyRotateFlow.error && (
@@ -259,7 +256,7 @@ export function ApiKeySection({
 
             <div className="space-y-3 pt-2">
               <label className="text-[14px] font-regular text-off-black block">
-                Введите 6-значный код подтверждения:
+                {t('rotateDialog.codeLabel')}
               </label>
               <Input
                 type="text"
@@ -278,14 +275,14 @@ export function ApiKeySection({
                     setApiKeyRotateFlow((prev) => ({ ...prev, isOpen: false }))
                   }
                 >
-                  Отмена
+                  {t('rotateDialog.cancel')}
                 </Button>
                 <Button
                   size="sm"
                   disabled={rotateCodeInput.length !== 6}
                   onClick={() => handleRotateApiKeySubmit(rotateCodeInput)}
                 >
-                  Выпустить новый ключ
+                  {t('rotateDialog.submit')}
                 </Button>
               </div>
             </div>

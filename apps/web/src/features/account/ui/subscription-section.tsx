@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useFormatter, useTranslations } from 'next-intl';
 import {
   Calendar,
   HelpCircle,
@@ -26,12 +27,13 @@ export function SubscriptionSection({
   setChangePlanFlow,
   handleChangePlanSubmit,
 }: SubscriptionSectionProps) {
+  const t = useTranslations('account.subscription');
+  const format = useFormatter();
   const [selectedNewPlan, setSelectedNewPlan] = React.useState<PlanTier>('max');
 
   const formatDate = (isoString: string): string => {
     try {
-      const d = new Date(isoString);
-      return d.toLocaleDateString('ru-RU', {
+      return format.dateTime(new Date(isoString), {
         day: '2-digit',
         month: 'long',
         year: 'numeric',
@@ -42,10 +44,10 @@ export function SubscriptionSection({
   };
 
   const planTitles: Record<PlanTier, string> = {
-    basic: 'Базовый',
-    pro: 'Pro (Профессиональный)',
-    max: 'Максимальный',
-    enterprise: 'Enterprise',
+    basic: t('plans.basic'),
+    pro: t('plans.pro'),
+    max: t('plans.max'),
+    enterprise: t('plans.enterprise'),
   };
 
   return (
@@ -55,16 +57,16 @@ export function SubscriptionSection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="signal-chip">Stripe Billing</Badge>
+              <Badge variant="signal-chip">{t('stripeBadge')}</Badge>
               <Badge variant={subscription.status === 'active' ? 'success' : 'neutral'}>
-                {subscription.status === 'active' ? 'Подписка активна' : 'Базовый режим'}
+                {subscription.status === 'active' ? t('statusActive') : t('statusBasic')}
               </Badge>
             </div>
             <CardTitle className="text-[22px] md:text-[26px]">
-              Тариф: {planTitles[subscription.plan]}
+              {t('title', { plan: planTitles[subscription.plan] })}
             </CardTitle>
             <CardDescription className="text-steel-gray text-[14px]">
-              Управление подпиской, смена тарифного плана и прозрачный возврат средств за неиспользованные дни
+              {t('description')}
             </CardDescription>
           </div>
 
@@ -83,7 +85,7 @@ export function SubscriptionSection({
                 }
                 className="border-red-500/30 text-red-600 hover:bg-red-500/5 text-[14px]"
               >
-                Отменить подписку
+                {t('cancelBtn')}
               </Button>
             )}
 
@@ -102,7 +104,7 @@ export function SubscriptionSection({
               }}
               className="gap-1.5 text-[14px]"
             >
-              Сменить тариф
+              {t('changePlanBtn')}
             </Button>
           </div>
         </CardHeader>
@@ -110,35 +112,35 @@ export function SubscriptionSection({
         <CardContent className="pt-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="rounded-[24px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-4 space-y-1">
-              <span className="text-[14px] text-steel-gray block">Стоимость плана</span>
+              <span className="text-[14px] text-steel-gray block">{t('planCostLabel')}</span>
               <div className="text-[20px] font-book text-off-black">
                 {subscription.priceEur.toFixed(2)} €
                 <span className="text-[14px] text-steel-gray font-regular ml-1">
-                  / {subscription.billingPeriod === 'monthly' ? 'месяц' : 'год'}
+                  / {subscription.billingPeriod === 'monthly' ? t('perMonth') : t('perYear')}
                 </span>
               </div>
             </div>
 
             <div className="rounded-[24px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-4 space-y-1">
-              <span className="text-[14px] text-steel-gray block">Оплаченный период до</span>
+              <span className="text-[14px] text-steel-gray block">{t('paidUntilLabel')}</span>
               <div className="text-[17px] font-book text-off-black flex items-center gap-1.5">
                 <Calendar className="h-4 w-4 text-signal-blue" />
                 {formatDate(subscription.currentPeriodEnd)}
               </div>
-              <span className="text-[14px] text-steel-gray block">Время в UTC (ТЗ §11.4)</span>
+              <span className="text-[14px] text-steel-gray block">{t('utcNote')}</span>
             </div>
 
             {/* Тумблер автопродления (ТЗ §11.1) */}
             <div className="rounded-[24px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-4 flex items-center justify-between gap-3">
               <div>
-                <span className="text-[14px] text-steel-gray block">Автопродление</span>
+                <span className="text-[14px] text-steel-gray block">{t('autoRenewLabel')}</span>
                 <span className="text-[15px] font-book text-off-black">
-                  {subscription.autoRenew ? 'Включено' : 'Выключено'}
+                  {subscription.autoRenew ? t('autoRenewOn') : t('autoRenewOff')}
                 </span>
                 <span className="text-[14px] text-steel-gray block">
                   {subscription.autoRenew
-                    ? 'Списание в конце периода'
-                    : 'Переход на базовый тариф'}
+                    ? t('autoRenewOnHint')
+                    : t('autoRenewOffHint')}
                 </span>
               </div>
 
@@ -148,7 +150,7 @@ export function SubscriptionSection({
                 className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
                   subscription.autoRenew ? 'bg-signal-blue' : 'bg-black/20'
                 }`}
-                title="Переключить автопродление (ТЗ §11.1)"
+                title={t('autoRenewToggleTitle')}
               >
                 <span
                   className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-pure-white shadow-none transition duration-200 ease-in-out ${
@@ -164,11 +166,9 @@ export function SubscriptionSection({
             <HelpCircle className="h-4 w-4 text-signal-blue shrink-0 mt-0.5" />
             <div>
               <span className="font-medium text-off-black block mb-0.5">
-                Европейский стандарт прозрачных расчетов (ТЗ §11.2, §11.3):
+                {t('refundInfoTitle')}
               </span>
-              При отмене подписки или немедленном понижении тарифа сервис автоматически рассчитывает
-              сумму за неиспользованный остаток дней и возвращает деньги непосредственно на банковскую карту Stripe,
-              а не на внутренний виртуальный баланс.
+              {t('refundInfoDesc')}
             </div>
           </div>
 
@@ -176,17 +176,17 @@ export function SubscriptionSection({
           <div className="space-y-3 pt-2">
             <h4 className="text-[16px] font-book text-off-black flex items-center gap-2">
               <Receipt className="h-4 w-4 text-steel-gray" />
-              История оплат и возвратов Stripe
+              {t('historyTitle')}
             </h4>
 
             <div className="rounded-[24px] border-[0.5px] border-black/10 overflow-hidden bg-[#fdfdfd]">
               <table className="w-full text-left border-collapse text-[14px]">
                 <thead>
                   <tr className="border-b border-black/5 bg-black/[0.02] text-steel-gray text-[14px]">
-                    <th className="py-3 px-4">Дата</th>
-                    <th className="py-3 px-3">Описание операции</th>
-                    <th className="py-3 px-3">Статус</th>
-                    <th className="py-3 px-4 text-right">Сумма (EUR)</th>
+                    <th className="py-3 px-4">{t('columns.date')}</th>
+                    <th className="py-3 px-3">{t('columns.description')}</th>
+                    <th className="py-3 px-3">{t('columns.status')}</th>
+                    <th className="py-3 px-4 text-right">{t('columns.amount')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-black/5">
@@ -201,7 +201,7 @@ export function SubscriptionSection({
                           variant={tx.type === 'refund' ? 'signal-chip' : 'success'}
                           className="text-[14px] py-0.5"
                         >
-                          {tx.type === 'refund' ? 'Возврат на карту' : 'Оплачено'}
+                          {tx.type === 'refund' ? t('statusRefund') : t('statusPaid')}
                         </Badge>
                       </td>
                       <td
@@ -230,17 +230,19 @@ export function SubscriptionSection({
           className="max-w-[500px]"
         >
           <div className="space-y-4">
-            <Badge variant="signal-chip">Перерасчет по дням (ТЗ §11.3)</Badge>
-            <h3 className="text-[20px] font-book text-off-black">Смена тарифного плана</h3>
+            <Badge variant="signal-chip">{t('changeDialog.badge')}</Badge>
+            <h3 className="text-[20px] font-book text-off-black">{t('changeDialog.title')}</h3>
 
             <p className="text-[14px] text-steel-gray leading-relaxed">
-              Дата окончания текущего периода (<strong>{formatDate(subscription.currentPeriodEnd)}</strong>) сохраняется.
-              Сумма доплаты или возврата рассчитывается пропорционально оставшимся дням.
+              {t.rich('changeDialog.description', {
+                date: formatDate(subscription.currentPeriodEnd),
+                bold: (chunks) => <strong>{chunks}</strong>,
+              })}
             </p>
 
             <div className="space-y-2 pt-2">
               <label className="text-[14px] font-regular text-off-black block">
-                Выберите целевой тариф:
+                {t('changeDialog.selectLabel')}
               </label>
 
               <div
@@ -252,11 +254,11 @@ export function SubscriptionSection({
                 }`}
               >
                 <div className="flex justify-between items-center">
-                  <span className="font-book text-[15px] text-off-black">Pro (15 ГБ)</span>
-                  <span className="font-mono text-[14px]">5.00 €/мес</span>
+                  <span className="font-book text-[15px] text-off-black">{t('changeDialog.proTitle')}</span>
+                  <span className="font-mono text-[14px]">{t('changeDialog.proPrice')}</span>
                 </div>
                 <span className="text-[14px] text-steel-gray">
-                  Пакетная загрузка до 5 файлов, хранилище 15 ГБ, таймер попыток 2 часа
+                  {t('changeDialog.proDesc')}
                 </span>
               </div>
 
@@ -269,19 +271,19 @@ export function SubscriptionSection({
                 }`}
               >
                 <div className="flex justify-between items-center">
-                  <span className="font-book text-[15px] text-off-black">Максимальный (50 ГБ)</span>
-                  <span className="font-mono text-[14px]">10.00 €/мес</span>
+                  <span className="font-book text-[15px] text-off-black">{t('changeDialog.maxTitle')}</span>
+                  <span className="font-mono text-[14px]">{t('changeDialog.maxPrice')}</span>
                 </div>
                 <span className="text-[14px] text-steel-gray">
-                  Максимальный приоритет, квота 50 ГБ, таймер попыток 2 часа
+                  {t('changeDialog.maxDesc')}
                 </span>
               </div>
             </div>
 
             <div className="p-3.5 rounded-[18px] bg-black/[0.03] text-[14px] text-off-black flex justify-between items-center">
-              <span>Расчетная сумма к списанию/возврату:</span>
+              <span>{t('changeDialog.estimatedLabel')}</span>
               <strong className="font-mono text-[14px] text-signal-blue">
-                {selectedNewPlan === 'max' ? '+2.50 € (доплата)' : '-2.50 € (возврат на карту)'}
+                {selectedNewPlan === 'max' ? t('changeDialog.estimatedUpgrade') : t('changeDialog.estimatedDowngrade')}
               </strong>
             </div>
 
@@ -291,10 +293,10 @@ export function SubscriptionSection({
                 size="sm"
                 onClick={() => setChangePlanFlow((prev) => ({ ...prev, isOpen: false }))}
               >
-                Отмена
+                {t('changeDialog.cancel')}
               </Button>
               <Button size="sm" onClick={() => handleChangePlanSubmit(selectedNewPlan)}>
-                Подтвердить смену тарифа
+                {t('changeDialog.confirm')}
               </Button>
             </div>
           </div>
@@ -313,29 +315,30 @@ export function SubscriptionSection({
           className="max-w-[480px]"
         >
           <div className="space-y-4">
-            <Badge variant="error">Немедленная отмена</Badge>
-            <h3 className="text-[20px] font-book text-off-black">Отмена платной подписки</h3>
+            <Badge variant="error">{t('cancelDialog.badge')}</Badge>
+            <h3 className="text-[20px] font-book text-off-black">{t('cancelDialog.title')}</h3>
 
             <p className="text-[14px] text-steel-gray leading-relaxed">
-              По правилам ТЗ §11.2 действие «Отменить подписку» прекращает платные возможности немедленно
-              с возвратом части средств за неиспользованные <strong>{cancelSubscriptionFlow.daysRemaining} дней</strong>.
+              {t.rich('cancelDialog.description', {
+                days: cancelSubscriptionFlow.daysRemaining,
+                bold: (chunks) => <strong>{chunks}</strong>,
+              })}
             </p>
 
             <div className="p-4 rounded-[20px] border-[0.5px] border-emerald-500/30 bg-emerald-500/[0.04] space-y-1">
               <span className="text-[14px] text-emerald-800 font-medium block">
-                Сумма возврата на карту Stripe:
+                {t('cancelDialog.refundBoxTitle')}
               </span>
               <div className="text-[22px] font-mono text-emerald-700">
                 {cancelSubscriptionFlow.calculatedRefundEur.toFixed(2)} €
               </div>
               <span className="text-[14px] text-emerald-800/80 block">
-                Будет возвращено непосредственно на исходную карту без удержания комиссий
+                {t('cancelDialog.refundBoxNote')}
               </span>
             </div>
 
             <p className="text-[14px] text-steel-gray">
-              Если вы просто хотите избежать следующего списания, достаточно выключить «Автопродление»
-              — тогда оплаченный период сохранится в полном объёме до {formatDate(subscription.currentPeriodEnd)}.
+              {t('cancelDialog.autoRenewHint', { date: formatDate(subscription.currentPeriodEnd) })}
             </p>
 
             <div className="flex justify-end gap-2 pt-2 border-t border-black/5">
@@ -346,14 +349,16 @@ export function SubscriptionSection({
                   setCancelSubscriptionFlow((prev) => ({ ...prev, isOpen: false }))
                 }
               >
-                Оставить подписку
+                {t('cancelDialog.keepBtn')}
               </Button>
               <Button
                 size="sm"
                 className="bg-red-600 hover:bg-red-700 text-white border-0"
                 onClick={handleCancelSubscriptionSubmit}
               >
-                Да, отменить и вернуть {cancelSubscriptionFlow.calculatedRefundEur.toFixed(2)} €
+                {t('cancelDialog.confirmBtn', {
+                  amount: cancelSubscriptionFlow.calculatedRefundEur.toFixed(2),
+                })}
               </Button>
             </div>
           </div>

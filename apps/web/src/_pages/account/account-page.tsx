@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   AccountNavTabs,
   ProfileSection,
@@ -16,6 +17,7 @@ import {
 import { Badge } from '@/shared/ui/badge';
 
 export function AccountPage() {
+  const t = useTranslations('account.header');
   const account = useAccountState();
 
   return (
@@ -24,16 +26,15 @@ export function AccountPage() {
         {/* Заголовок страницы */}
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="signal-chip">Личный кабинет</Badge>
-            <Badge variant="neutral">GDPR & ISO/IEC 27001</Badge>
-            <Badge variant="muted">ЕС Юрисдикция</Badge>
+            <Badge variant="signal-chip">{t('badge')}</Badge>
+            <Badge variant="neutral">{t('gdprBadge')}</Badge>
+            <Badge variant="muted">{t('euBadge')}</Badge>
           </div>
           <h1 className="text-[28px] md:text-[38px] font-book tracking-tight text-off-black">
-            Управление аккаунтом и хранилищем
+            {t('title')}
           </h1>
           <p className="text-[15px] md:text-[16px] text-steel-gray font-book max-w-2xl leading-relaxed">
-            Настройки безопасности, мониторинг квоты дискового пространства, скачивание результатов
-            конвертации и управление подпиской.
+            {t('description')}
           </p>
         </div>
 

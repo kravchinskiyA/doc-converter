@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   Key,
   Copy,
@@ -27,6 +28,7 @@ export function SecurityCodesSection({
   setRecoveryCodesFlow,
   handleGenerateRecoveryCodes,
 }: SecurityCodesSectionProps) {
+  const t = useTranslations('account.recovery');
   const [copiedAll, setCopiedAll] = React.useState(false);
   const [requestCodeInput, setRequestCodeInput] = React.useState('');
   const [savedCheckbox, setSavedCheckbox] = React.useState(false);
@@ -34,10 +36,10 @@ export function SecurityCodesSection({
   const handleCopyCodes = () => {
     if (recoveryCodesFlow.codes.length === 0) return;
     const text = [
-      '# Резервные коды восстановления Doc-Converter (ТЗ §6.5)',
-      `# Аккаунт: ${userProfile.email}`,
-      `# Дата выпуска: ${new Date().toISOString()}`,
-      '# Каждый код одноразовый. Храните в защищенном месте.',
+      t('exportHeader'),
+      t('exportAccount', { email: userProfile.email }),
+      t('exportIssuedAt', { date: new Date().toISOString() }),
+      t('exportNoteCopy'),
       '',
       ...recoveryCodesFlow.codes.map((c, i) => `${i + 1}. ${c}`),
     ].join('\n');
@@ -49,10 +51,10 @@ export function SecurityCodesSection({
   const handleDownloadTxt = () => {
     if (recoveryCodesFlow.codes.length === 0) return;
     const text = [
-      '# Резервные коды восстановления Doc-Converter (ТЗ §6.5)',
-      `# Аккаунт: ${userProfile.email}`,
-      `# Дата выпуска: ${new Date().toISOString()}`,
-      '# Внимание: каждый код одноразовый. При утере почты позволяет задать новый пароль.',
+      t('exportHeader'),
+      t('exportAccount', { email: userProfile.email }),
+      t('exportIssuedAt', { date: new Date().toISOString() }),
+      t('exportNoteDownload'),
       '',
       ...recoveryCodesFlow.codes.map((c, i) => `${i + 1}. ${c}`),
     ].join('\n');
@@ -73,18 +75,18 @@ export function SecurityCodesSection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="signal-chip">OWASP CheatSheet</Badge>
+              <Badge variant="signal-chip">{t('owaspBadge')}</Badge>
               <Badge variant={recoveryCodesCount > 0 ? 'success' : 'error'}>
                 {recoveryCodesCount > 0
-                  ? `Доступно кодов: ${recoveryCodesCount}`
-                  : 'Коды не сгенерированы'}
+                  ? t('availableBadge', { count: recoveryCodesCount })
+                  : t('emptyBadge')}
               </Badge>
             </div>
             <CardTitle className="text-[22px] md:text-[26px]">
-              Резервные коды восстановления
+              {t('title')}
             </CardTitle>
             <CardDescription className="text-steel-gray text-[14px]">
-              Набор из 10 одноразовых кодов для восстановления доступа к аккаунту при утере почты (ТЗ §6.5)
+              {t('description')}
             </CardDescription>
           </div>
 
@@ -104,16 +106,16 @@ export function SecurityCodesSection({
             className="gap-2 shrink-0"
           >
             <Key className="h-3.5 w-3.5" />
-            {recoveryCodesCount > 0 ? 'Заменить набор кодов' : 'Выпустить 10 кодов'}
+            {recoveryCodesCount > 0 ? t('replaceBtn') : t('issueBtn')}
           </Button>
         </CardHeader>
 
         <CardContent className="pt-6 space-y-6">
           <div className="rounded-[28px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-6 space-y-3">
             <div className="flex items-center justify-between text-[14px]">
-              <span className="font-book text-off-black">Статус резервных ключей</span>
+              <span className="font-book text-off-black">{t('statusTitle')}</span>
               <span className="text-[14px] text-steel-gray">
-                Хэши scrypt, защищённое хранение на сервере
+                {t('statusHint')}
               </span>
             </div>
 
@@ -123,11 +125,13 @@ export function SecurityCodesSection({
               </div>
               <div>
                 <p className="text-[14px] text-off-black font-book">
-                  В наборе сохранено: <strong>{recoveryCodesCount} из 10 одноразовых ключей</strong>
+                  {t.rich('savedCount', {
+                    count: recoveryCodesCount,
+                    bold: (chunks) => <strong>{chunks}</strong>,
+                  })}
                 </p>
                 <p className="text-[14px] text-steel-gray">
-                  По ТЗ §6.5 коды показываются только один раз при выпуске. Повторное раскрытие значений
-                  сервером категорически запрещено.
+                  {t('oneTimeNote')}
                 </p>
               </div>
             </div>
@@ -138,22 +142,20 @@ export function SecurityCodesSection({
             <div className="rounded-[24px] border-[0.5px] border-black/5 bg-off-white/40 p-4 space-y-2">
               <span className="text-[14px] font-medium text-off-black flex items-center gap-1.5">
                 <Info className="h-4 w-4 text-signal-blue" />
-                Как использовать при утере email:
+                {t('howToUseTitle')}
               </span>
               <p className="text-[14px] text-steel-gray leading-relaxed">
-                На экране входа выберите «Нет доступа к почте», введите один из этих 10 кодов и укажите
-                новый адрес. Код одноразовый и после использования сгорает.
+                {t('howToUseDesc')}
               </p>
             </div>
 
             <div className="rounded-[24px] border-[0.5px] border-black/5 bg-off-white/40 p-4 space-y-2">
               <span className="text-[14px] font-medium text-off-black flex items-center gap-1.5">
                 <AlertTriangle className="h-4 w-4 text-amber-600" />
-                Правило замены набора:
+                {t('replaceRuleTitle')}
               </span>
               <p className="text-[14px] text-steel-gray leading-relaxed">
-                При выпуске нового набора все оставшиеся старые коды немедленно отзываются. Не забудьте
-                сохранить свежий файл или распечатку.
+                {t('replaceRuleDesc')}
               </p>
             </div>
           </div>
@@ -172,11 +174,11 @@ export function SecurityCodesSection({
           className="max-w-[540px]"
         >
           <div className="space-y-4">
-            <Badge variant="signal-chip">ТЗ §6.5 Однократный показ</Badge>
+            <Badge variant="signal-chip">{t('dialog.badge')}</Badge>
             <h3 className="text-[20px] font-book text-off-black">
               {recoveryCodesFlow.step === 'request_code'
-                ? 'Подтверждение выпуска кодов'
-                : 'Ваши 10 резервных кодов'}
+                ? t('dialog.titleRequest')
+                : t('dialog.titleDisplay')}
             </h3>
 
             {recoveryCodesFlow.error && (
@@ -189,8 +191,10 @@ export function SecurityCodesSection({
             {recoveryCodesFlow.step === 'request_code' && (
               <div className="space-y-3 pt-2">
                 <p className="text-[14px] text-steel-gray leading-relaxed">
-                  Для генерации набора из 10 резервных кодов введите 6-значный проверочный код,
-                  отправленный на вашу текущую почту <strong>{userProfile.email}</strong>.
+                  {t.rich('dialog.requestDesc', {
+                    email: userProfile.email,
+                    bold: (chunks) => <strong>{chunks}</strong>,
+                  })}
                 </p>
                 <Input
                   type="text"
@@ -209,14 +213,14 @@ export function SecurityCodesSection({
                       setRecoveryCodesFlow((prev) => ({ ...prev, isOpen: false }))
                     }
                   >
-                    Отмена
+                    {t('dialog.cancel')}
                   </Button>
                   <Button
                     size="sm"
                     disabled={requestCodeInput.length !== 6}
                     onClick={() => handleGenerateRecoveryCodes(requestCodeInput)}
                   >
-                    Подтвердить и сгенерировать
+                    {t('dialog.generateBtn')}
                   </Button>
                 </div>
               </div>
@@ -227,9 +231,9 @@ export function SecurityCodesSection({
                 <div className="p-3 rounded-[20px] border-[0.5px] border-amber-500/30 bg-amber-500/[0.05] text-[14px] text-amber-800 flex items-start gap-2">
                   <AlertTriangle className="h-4 w-4 shrink-0 text-amber-600 mt-0.5" />
                   <div>
-                    <strong>Внимание: это единственный раз, когда эти коды отображаются!</strong>
+                    <strong>{t('dialog.warningTitle')}</strong>
                     <br />
-                    Сохраните их прямо сейчас. После закрытия этого окна вы больше не сможете увидеть эти значения.
+                    {t('dialog.warningDesc')}
                   </div>
                 </div>
 
@@ -255,11 +259,11 @@ export function SecurityCodesSection({
                   >
                     {copiedAll ? (
                       <>
-                        <Check className="h-4 w-4 text-emerald-600" /> Скопировано
+                        <Check className="h-4 w-4 text-emerald-600" /> {t('dialog.copied')}
                       </>
                     ) : (
                       <>
-                        <Copy className="h-4 w-4" /> Скопировать все
+                        <Copy className="h-4 w-4" /> {t('dialog.copyAll')}
                       </>
                     )}
                   </Button>
@@ -269,7 +273,7 @@ export function SecurityCodesSection({
                     onClick={handleDownloadTxt}
                     className="gap-2 flex-1"
                   >
-                    <Download className="h-4 w-4" /> Скачать .txt
+                    <Download className="h-4 w-4" /> {t('dialog.downloadTxt')}
                   </Button>
                 </div>
 
@@ -278,7 +282,7 @@ export function SecurityCodesSection({
                     id="saved-codes-confirm"
                     checked={savedCheckbox}
                     onChange={(e) => setSavedCheckbox(e.target.checked)}
-                    label="Я надежно сохранил эти 10 кодов отдельно от почты"
+                    label={t('dialog.confirmCheckbox')}
                   />
                 </div>
 
@@ -291,7 +295,7 @@ export function SecurityCodesSection({
                       setRecoveryCodesFlow((prev) => ({ ...prev, isOpen: false }));
                     }}
                   >
-                    Готово, закрыть окно
+                    {t('dialog.closeBtn')}
                   </Button>
                 </div>
               </div>

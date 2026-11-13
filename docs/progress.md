@@ -1,5 +1,20 @@
 # Прогресс разработки doc-converter
 
+## [2026-11-13] Локализация (i18n) страниц и секций личного кабинета
+
+### Суть задачи
+
+Все страницы, вкладки, формы, модальные окна, сообщения валидации и форматирование дат/размеров в личном кабинете (`AccountPage` и `features/account`) переведены на `next-intl` (`useTranslations`, `useFormatter`) с полным набором переводов для локалей `uk`, `ru`, `en`.
+
+### Изменённые файлы
+
+- `apps/web/src/shared/i18n/messages/uk.json`, `ru.json`, `en.json`: расширена секция `account` переводами для заголовка, ошибок валидации, демо-данных, единиц измерения и всех 8 вкладок (`profile`, `storage`, `files`, `apiKey`, `subscription`, `recovery`, `support`, `danger`).
+- `apps/web/src/_pages/account/account-page.tsx`: заголовок и бейджи страницы переведены через `useTranslations('account.header')`.
+- `apps/web/src/features/account/model/use-account-state.ts`: тексты ошибок валидации, демо-данных и описаний транзакций переведены через `useTranslations('account')`.
+- `apps/web/src/features/account/ui/`: локализованы все 9 компонентов (`account-nav-tabs.tsx`, `profile-section.tsx`, `storage-section.tsx`, `saved-files-table.tsx`, `api-key-section.tsx`, `subscription-section.tsx`, `security-codes-section.tsx`, `staff-access-section.tsx`, `danger-zone-section.tsx`), а `toLocaleDateString('ru-RU')` заменено на `useFormatter().dateTime(...)`.
+
+---
+
 ## [2026-11-13] Замена всех размеров шрифта менее `14px` на `14px` во всех страницах и компонентах
 
 ### Суть задачи

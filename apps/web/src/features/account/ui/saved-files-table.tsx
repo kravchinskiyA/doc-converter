@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useFormatter, useTranslations } from 'next-intl';
 import {
   FileText,
   Download,
@@ -34,18 +35,21 @@ export function SavedFilesTable({
   handleDownloadSingleFileZip,
   handleDownloadSelectedZip,
 }: SavedFilesTableProps) {
+  const t = useTranslations('account.files');
+  const tUnits = useTranslations('account.units');
+  const format = useFormatter();
+
   const formatBytes = (bytes: number): string => {
-    if (bytes === 0) return '0 МБ';
+    if (bytes === 0) return `0 ${tUnits('mb')}`;
     const mb = bytes / (1024 * 1024);
-    if (mb < 1024) return `${mb.toFixed(1)} МБ`;
+    if (mb < 1024) return `${mb.toFixed(1)} ${tUnits('mb')}`;
     const gb = mb / 1024;
-    return `${gb.toFixed(2)} ГБ`;
+    return `${gb.toFixed(2)} ${tUnits('gb')}`;
   };
 
   const formatDate = (isoString: string): string => {
     try {
-      const d = new Date(isoString);
-      return d.toLocaleDateString('ru-RU', {
+      return format.dateTime(new Date(isoString), {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
@@ -76,12 +80,12 @@ export function SavedFilesTable({
       <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <Badge variant="signal-chip">Хранение 6 месяцев</Badge>
-            <Badge variant="neutral">Всего файлов: {allFilesCount}</Badge>
+            <Badge variant="signal-chip">{t('retentionBadge')}</Badge>
+            <Badge variant="neutral">{t('totalBadge', { count: allFilesCount })}</Badge>
           </div>
-          <CardTitle className="text-[22px] md:text-[26px]">Сохранённые результаты</CardTitle>
+          <CardTitle className="text-[22px] md:text-[26px]">{t('title')}</CardTitle>
           <CardDescription className="text-steel-gray text-[14px]">
-            Результаты конвертации через сайт и API с индивидуальным и пакетным ZIP-скачиванием
+            {t('description')}
           </CardDescription>
         </div>
 
@@ -89,7 +93,7 @@ export function SavedFilesTable({
         {selectedFileIds.length > 0 && (
           <div className="flex items-center gap-2 p-1.5 rounded-full bg-black/[0.04] border-[0.5px] border-black/10">
             <span className="text-[14px] font-medium text-off-black px-3">
-              Выбрано: {selectedFileIds.length}
+              {t('selectedCount', { count: selectedFileIds.length })}
             </span>
             <Button
               variant="secondary"
@@ -98,7 +102,7 @@ export function SavedFilesTable({
               className="gap-1.5 text-[14px] h-[32px] px-3"
             >
               <Download className="h-3 w-3" />
-              Скачать ZIP
+              {t('downloadZip')}
             </Button>
             <Button
               variant="outline"
@@ -107,7 +111,7 @@ export function SavedFilesTable({
               className="gap-1.5 text-[14px] h-[32px] px-3 border-red-500/30 text-red-600 hover:bg-red-500/5"
             >
               <Trash2 className="h-3 w-3" />
-              Удалить
+              {t('deleteSelected')}
             </Button>
           </div>
         )}
@@ -121,14 +125,14 @@ export function SavedFilesTable({
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Поиск по имени файла..."
+              placeholder={t('searchPlaceholder')}
               className="pl-9 h-[38px] text-[14px] rounded-full"
             />
           </div>
 
           <div className="flex items-center gap-1.5 p-1 rounded-full bg-black/[0.03] border-[0.5px] border-black/5 self-start sm:self-auto">
             <span className="text-[14px] text-steel-gray px-2 flex items-center gap-1">
-              <Filter className="h-3 w-3" /> Источник:
+              <Filter className="h-3 w-3" /> {t('sourceLabel')}
             </span>
             <button
               onClick={() => setSourceFilter('all')}
@@ -138,7 +142,7 @@ export function SavedFilesTable({
                   : 'text-steel-gray hover:text-off-black'
               }`}
             >
-              Все ({allFilesCount})
+              {t('filterAll', { count: allFilesCount })}
             </button>
             <button
               onClick={() => setSourceFilter('web')}
@@ -148,7 +152,7 @@ export function SavedFilesTable({
                   : 'text-steel-gray hover:text-off-black'
               }`}
             >
-              <Globe className="h-3 w-3" /> Сайт
+              <Globe className="h-3 w-3" /> {t('filterWeb')}
             </button>
             <button
               onClick={() => setSourceFilter('api')}
@@ -158,7 +162,7 @@ export function SavedFilesTable({
                   : 'text-steel-gray hover:text-off-black'
               }`}
             >
-              <Terminal className="h-3 w-3" /> API
+              <Terminal className="h-3 w-3" /> {t('filterApi')}
             </button>
           </div>
         </div>
@@ -167,9 +171,9 @@ export function SavedFilesTable({
         {files.length === 0 ? (
           <div className="rounded-[28px] border-[0.5px] border-dashed border-black/15 p-12 text-center space-y-3 bg-[#fdfdfd]">
             <FileText className="h-8 w-8 text-steel-gray/60 mx-auto" />
-            <h4 className="text-[16px] font-book text-off-black">Нет сохранённых документов</h4>
+            <h4 className="text-[16px] font-book text-off-black">{t('emptyTitle')}</h4>
             <p className="text-[14px] text-steel-gray max-w-sm mx-auto">
-              Здесь будут автоматически отображаться все результаты ваших конвертаций через сайт или API.
+              {t('emptyDesc')}
             </p>
           </div>
         ) : (
@@ -184,12 +188,12 @@ export function SavedFilesTable({
                       onChange={toggleSelectAll}
                     />
                   </th>
-                  <th className="py-3.5 px-3">Имя файла</th>
-                  <th className="py-3.5 px-3">Формат</th>
-                  <th className="py-3.5 px-3">Размер</th>
-                  <th className="py-3.5 px-3">Источник</th>
-                  <th className="py-3.5 px-3">Доступен до</th>
-                  <th className="py-3.5 pr-4 pl-3 text-right">Действия</th>
+                  <th className="py-3.5 px-3">{t('columns.name')}</th>
+                  <th className="py-3.5 px-3">{t('columns.format')}</th>
+                  <th className="py-3.5 px-3">{t('columns.size')}</th>
+                  <th className="py-3.5 px-3">{t('columns.source')}</th>
+                  <th className="py-3.5 px-3">{t('columns.expiresAt')}</th>
+                  <th className="py-3.5 pr-4 pl-3 text-right">{t('columns.actions')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-black/5">
@@ -249,17 +253,17 @@ export function SavedFilesTable({
                             size="sm"
                             onClick={() => handleDownloadSingleFileZip(file)}
                             className="h-[30px] px-2.5 text-[14px] gap-1"
-                            title="Скачать ZIP архив этого файла (ТЗ §10.2)"
+                            title={t('downloadSingleTitle')}
                           >
                             <Download className="h-3 w-3" />
-                            ZIP
+                            {t('downloadZipShort')}
                           </Button>
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => handleDeleteFile(file.id)}
                             className="h-[30px] w-[30px] p-0 text-steel-gray hover:text-red-600"
-                            title="Удалить файл"
+                            title={t('deleteFileTitle')}
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </Button>

@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   AlertTriangle,
   Trash2,
@@ -23,12 +24,15 @@ export function StorageSection({
   setIsClearStorageOpen,
   handleClearAllStorage,
 }: StorageSectionProps) {
+  const t = useTranslations('account.storage');
+  const tUnits = useTranslations('account.units');
+
   const formatBytes = (bytes: number): string => {
-    if (bytes === 0) return '0 МБ';
+    if (bytes === 0) return `0 ${tUnits('mb')}`;
     const mb = bytes / (1024 * 1024);
-    if (mb < 1024) return `${mb.toFixed(1)} МБ`;
+    if (mb < 1024) return `${mb.toFixed(1)} ${tUnits('mb')}`;
     const gb = mb / 1024;
-    return `${gb.toFixed(2)} ГБ`;
+    return `${gb.toFixed(2)} ${tUnits('gb')}`;
   };
 
   const percentUsed = Math.min(
@@ -42,12 +46,12 @@ export function StorageSection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-black/5">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="signal-chip">Amazon S3 EU (SSE-KMS)</Badge>
-              <Badge variant="neutral">Тариф: {storageQuota.plan.toUpperCase()}</Badge>
+              <Badge variant="signal-chip">{t('s3Badge')}</Badge>
+              <Badge variant="neutral">{t('planBadge', { plan: storageQuota.plan.toUpperCase() })}</Badge>
             </div>
-            <CardTitle className="text-[22px] md:text-[26px]">Хранилище результатов</CardTitle>
+            <CardTitle className="text-[22px] md:text-[26px]">{t('title')}</CardTitle>
             <CardDescription className="text-steel-gray text-[14px]">
-              Квота постоянного хранения сконвертированных документов (срок 6 месяцев от готовности)
+              {t('description')}
             </CardDescription>
           </div>
           <Button
@@ -58,7 +62,7 @@ export function StorageSection({
             className="gap-2 border-red-500/30 text-red-600 hover:bg-red-500/5 shrink-0"
           >
             <Trash2 className="h-3.5 w-3.5" />
-            Очистить всё хранилище
+            {t('clearAllBtn')}
           </Button>
         </CardHeader>
 
@@ -69,11 +73,10 @@ export function StorageSection({
               <AlertTriangle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
               <div>
                 <h4 className="text-[14px] font-medium text-red-700">
-                  Хранилище заполнено (100%) — новые конвертации заблокированы
+                  {t('over100Title')}
                 </h4>
                 <p className="text-[14px] text-red-600/90 mt-1 leading-relaxed">
-                  По правилам ТЗ §10.3 при исчерпании лимита приём новых задач сайта и API прекращается.
-                  Удалите ненужные файлы вручную либо очистите всё хранилище для возобновления работы.
+                  {t('over100Desc')}
                 </p>
               </div>
             </div>
@@ -82,11 +85,13 @@ export function StorageSection({
               <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
               <div>
                 <h4 className="text-[14px] font-medium text-amber-700">
-                  Внимание: занято более 75% дискового пространства
+                  {t('over75Title')}
                 </h4>
                 <p className="text-[14px] text-amber-700/80 mt-1 leading-relaxed">
-                  Место в хранилище скоро закончится ({formatBytes(storageQuota.usedBytes)} из {formatBytes(storageQuota.totalBytes)}).
-                  Рекомендуется удалить неактуальные документы или перейти на тариф «Максимальный» (50 ГБ).
+                  {t('over75Desc', {
+                    used: formatBytes(storageQuota.usedBytes),
+                    total: formatBytes(storageQuota.totalBytes),
+                  })}
                 </p>
               </div>
             </div>
@@ -95,10 +100,14 @@ export function StorageSection({
           {/* Интерактивная шкала заполнения */}
           <div className="rounded-[28px] border-[0.5px] border-black/5 bg-[#fdfdfd] p-6 space-y-4">
             <div className="flex items-center justify-between text-[14px]">
-              <span className="font-book text-off-black">Занято пространства</span>
+              <span className="font-book text-off-black">{t('usedLabel')}</span>
               <span className="font-regular text-steel-gray">
-                <strong className="text-off-black font-medium">{formatBytes(storageQuota.usedBytes)}</strong> из{' '}
-                {formatBytes(storageQuota.totalBytes)} ({percentUsed}%)
+                {t.rich('usedOf', {
+                  used: formatBytes(storageQuota.usedBytes),
+                  total: formatBytes(storageQuota.totalBytes),
+                  percent: percentUsed,
+                  bold: (chunks) => <strong className="text-off-black font-medium">{chunks}</strong>,
+                })}
               </span>
             </div>
 
@@ -118,17 +127,17 @@ export function StorageSection({
               <div
                 className="absolute top-0 bottom-0 w-[1.5px] bg-black/30 z-10"
                 style={{ left: '75%' }}
-                title="Порог предупреждения 75%"
+                title={t('thresholdTitle')}
               />
             </div>
 
             <div className="flex items-center justify-between text-[14px] text-steel-gray pt-1">
-              <span>0 ГБ</span>
+              <span>{t('zeroGb')}</span>
               <span className="flex items-center gap-1">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500" />
-                Порог 75% ({formatBytes(storageQuota.warningThresholdBytes)})
+                {t('thresholdLabel', { size: formatBytes(storageQuota.warningThresholdBytes) })}
               </span>
-              <span>Лимит: {formatBytes(storageQuota.totalBytes)}</span>
+              <span>{t('limitLabel', { size: formatBytes(storageQuota.totalBytes) })}</span>
             </div>
           </div>
 
@@ -137,30 +146,30 @@ export function StorageSection({
             <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
               <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
                 <Server className="h-4 w-4 text-signal-blue" />
-                Безопасность в ЕС
+                {t('rules.euTitle')}
               </div>
               <p className="text-[14px] text-steel-gray leading-relaxed">
-                Все файлы зашифрованы ключами KMS и хранятся исключительно в дата-центрах ЕС (Германия/Франкфурт).
+                {t('rules.euDesc')}
               </p>
             </div>
 
             <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
               <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                Срок 6 месяцев
+                {t('rules.retentionTitle')}
               </div>
               <p className="text-[14px] text-steel-gray leading-relaxed">
-                Результаты принятых заданий хранятся 6 календарных месяцев от готовности (ТЗ §10.1).
+                {t('rules.retentionDesc')}
               </p>
             </div>
 
             <div className="rounded-[22px] border-[0.5px] border-black/5 bg-off-white/30 p-4">
               <div className="flex items-center gap-2 text-off-black font-book text-[14px] mb-1">
                 <Info className="h-4 w-4 text-signal-blue" />
-                Правило пакета
+                {t('rules.batchTitle')}
               </div>
               <p className="text-[14px] text-steel-gray leading-relaxed">
-                Если результат принятой задачи превышает остаток, он сохраняется сверх квоты (ТЗ §10.3).
+                {t('rules.batchDesc')}
               </p>
             </div>
           </div>
@@ -171,23 +180,25 @@ export function StorageSection({
       <Dialog open={isClearStorageOpen} onOpenChange={setIsClearStorageOpen}>
         <DialogContent onClose={() => setIsClearStorageOpen(false)} className="max-w-[480px]">
           <div className="space-y-4">
-            <Badge variant="error">Необратимое действие</Badge>
-            <h3 className="text-[20px] font-book text-off-black">Полная очистка хранилища?</h3>
+            <Badge variant="error">{t('clearDialog.badge')}</Badge>
+            <h3 className="text-[20px] font-book text-off-black">{t('clearDialog.title')}</h3>
             <p className="text-[14px] text-steel-gray leading-relaxed">
-              Вы собираетесь безвозвратно удалить <strong>{files.length} файлов</strong> общим объёмом{' '}
-              <strong>{formatBytes(storageQuota.usedBytes)}</strong>. Все файлы будут немедленно исключены из квоты
-              и физически удалены из S3 в течение 1 часа (ТЗ §10.4).
+              {t.rich('clearDialog.description', {
+                count: files.length,
+                size: formatBytes(storageQuota.usedBytes),
+                bold: (chunks) => <strong>{chunks}</strong>,
+              })}
             </p>
             <div className="flex justify-end gap-2 pt-3 border-t border-black/5">
               <Button variant="ghost" size="sm" onClick={() => setIsClearStorageOpen(false)}>
-                Отмена
+                {t('clearDialog.cancel')}
               </Button>
               <Button
                 size="sm"
                 className="bg-red-600 hover:bg-red-700 text-white border-0"
                 onClick={handleClearAllStorage}
               >
-                Да, очистить всё
+                {t('clearDialog.confirm')}
               </Button>
             </div>
           </div>

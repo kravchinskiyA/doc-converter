@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   AlertTriangle,
   Trash2,
@@ -22,6 +23,7 @@ export function DangerZoneSection({
   setDeleteAccountFlow,
   handleDeleteAccountSubmit,
 }: DangerZoneSectionProps) {
+  const t = useTranslations('account.danger');
   const [deleteCodeInput, setDeleteCodeInput] = React.useState('');
   const [confirmedLoss, setConfirmedLoss] = React.useState(false);
 
@@ -31,14 +33,14 @@ export function DangerZoneSection({
         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-red-500/10">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Badge variant="error">Опасная зона (Danger Zone)</Badge>
-              <Badge variant="neutral">ТЗ §6.4</Badge>
+              <Badge variant="error">{t('badge')}</Badge>
+              <Badge variant="neutral">{t('specBadge')}</Badge>
             </div>
             <CardTitle className="text-[22px] md:text-[26px] text-red-600">
-              Удаление аккаунта
+              {t('title')}
             </CardTitle>
             <CardDescription className="text-steel-gray text-[14px]">
-              Полное прекращение обслуживания, удаление файлов и аннулирование подписки
+              {t('description')}
             </CardDescription>
           </div>
 
@@ -57,7 +59,7 @@ export function DangerZoneSection({
             className="bg-red-600 hover:bg-red-700 text-white border-0 gap-2 shrink-0"
           >
             <Trash2 className="h-3.5 w-3.5" />
-            Удалить аккаунт навсегда
+            {t('deleteBtn')}
           </Button>
         </CardHeader>
 
@@ -65,24 +67,13 @@ export function DangerZoneSection({
           <div className="rounded-[24px] border-[0.5px] border-red-500/20 bg-red-500/[0.03] p-5 space-y-3 text-[14px] text-red-950/80 leading-relaxed">
             <h4 className="font-medium text-[15px] text-red-700 flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 shrink-0 text-red-600" />
-              Последствия подтверждения удаления по ТЗ §6.4:
+              {t('consequencesTitle')}
             </h4>
             <ul className="space-y-1.5 list-disc pl-5 text-[14px] text-red-900/90">
-              <li>
-                <strong>Все сохранённые документы и результаты:</strong> будут немедленно заблокированы
-                и безвозвратно удалены из облачного хранилища S3 в течение 1 часа.
-              </li>
-              <li>
-                <strong>Платная подписка:</strong> немедленно прекращается. Внимание: в отличие от самостоятельной
-                отмены подписки, <strong>при удалении аккаунта возврат средств за оставшийся оплаченный период не производится</strong> (ТЗ §6.4, §11.3).
-              </li>
-              <li>
-                <strong>Сессии и API-ключ:</strong> все сеансы входа на всех устройствах немедленно завершаются,
-                API-ключ аннулируется, незавершённые задания в очереди останавливаются.
-              </li>
-              <li>
-                <strong>Резервные копии:</strong> очищаются в соответствии с 30-дневным регламентом шифрованных бэкапов.
-              </li>
+              <li>{t.rich('item1', { bold: (chunks) => <strong>{chunks}</strong> })}</li>
+              <li>{t.rich('item2', { bold: (chunks) => <strong>{chunks}</strong> })}</li>
+              <li>{t.rich('item3', { bold: (chunks) => <strong>{chunks}</strong> })}</li>
+              <li>{t.rich('item4', { bold: (chunks) => <strong>{chunks}</strong> })}</li>
             </ul>
           </div>
         </CardContent>
@@ -100,12 +91,14 @@ export function DangerZoneSection({
           className="max-w-[500px]"
         >
           <div className="space-y-4">
-            <Badge variant="error">Подтверждение удаления аккаунта</Badge>
-            <h3 className="text-[20px] font-book text-off-black">Вы уверены, что хотите удалить аккаунт?</h3>
+            <Badge variant="error">{t('dialog.badge')}</Badge>
+            <h3 className="text-[20px] font-book text-off-black">{t('dialog.title')}</h3>
 
             <p className="text-[14px] text-steel-gray leading-relaxed">
-              Это действие необратимо. Для подтверждения мы выслали 6-значный проверочный код на ваш email{' '}
-              <strong>{userProfile.email}</strong>.
+              {t.rich('dialog.description', {
+                email: userProfile.email,
+                bold: (chunks) => <strong>{chunks}</strong>,
+              })}
             </p>
 
             {deleteAccountFlow.error && (
@@ -117,7 +110,7 @@ export function DangerZoneSection({
 
             <div className="space-y-3 pt-2">
               <label className="text-[14px] font-regular text-off-black block">
-                Введите 6-значный код из письма:
+                {t('dialog.codeLabel')}
               </label>
               <Input
                 type="text"
@@ -134,7 +127,7 @@ export function DangerZoneSection({
                   id="delete-loss-checkbox"
                   checked={confirmedLoss}
                   onChange={(e) => setConfirmedLoss(e.target.checked)}
-                  label="Я понимаю, что все файлы будут удалены, а остаток оплаты за подписку не возвращается"
+                  label={t('dialog.confirmCheckbox')}
                 />
               </div>
 
@@ -146,7 +139,7 @@ export function DangerZoneSection({
                     setDeleteAccountFlow((prev) => ({ ...prev, isOpen: false }))
                   }
                 >
-                  Отмена
+                  {t('dialog.cancel')}
                 </Button>
                 <Button
                   size="sm"
@@ -154,7 +147,7 @@ export function DangerZoneSection({
                   className="bg-red-600 hover:bg-red-700 text-white border-0"
                   onClick={() => handleDeleteAccountSubmit(deleteCodeInput)}
                 >
-                  Подтвердить удаление
+                  {t('dialog.confirm')}
                 </Button>
               </div>
             </div>
