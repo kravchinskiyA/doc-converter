@@ -114,10 +114,10 @@
   "home": {
     "badge": "Augen Pro • 100% EU data jurisdiction",
     "title": "Private document and image conversion",
-    "subtitle": "Accurate OCR for printed text, DOCX to PDF export and image processing on our own isolated servers in the EU.",
+    "subtitle": "Accurate OCR for printed text, DOCX to PDF export and image processing.",
     "features": {
       "eu": {
-        "title": "100% isolation in the EU",
+        "title": "100% isolation",
         "text": "Files are never sent to third-party AI services. All processing runs on our own hardware in EU data centres."
       },
       "ocr": {
